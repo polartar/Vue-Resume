@@ -1,0 +1,143 @@
+@mixin heading-font-light {
+    font-family: $heading-font, $heading-fallback;
+    font-style: normal;
+    font-weight: 300;
+}
+
+@mixin heading-font-regular {
+    font-family: $heading-font, $heading-fallback;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@mixin heading-font-regular-italic {
+    font-family: $heading-font, $heading-fallback;
+    font-style: italic;
+    font-weight: 400;
+}
+
+@mixin heading-font-bold {
+    font-family: $heading-font, $heading-fallback;
+    font-style: normal;
+    font-weight: 600;
+}
+
+@mixin heading-font-bold-italic {
+    font-family: $heading-font, $heading-fallback;
+    font-style: italic;
+    font-weight: 600;
+}
+
+@mixin body-font-light {
+    font-family: $body-font, $body-fallback;
+    font-style: normal;
+    font-weight: 200;
+}
+
+@mixin body-font-regular {
+    font-family: $body-font, $body-fallback;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@mixin body-font-italic {
+    font-family: $body-font, $body-fallback;
+    font-style: italic;
+    font-weight: 400;
+}
+
+@mixin body-font-bold {
+    font-family: $body-font, $body-fallback;
+    font-style: normal;
+    font-weight: 700;
+}
+
+@mixin linear-gradient($from-color, $to-color) {
+    background-image: linear-gradient(to left, $from-color, $to-color);
+}
+
+@mixin radial-gradient($from-color, $to-color) {
+    background-image: radial-gradient(ellipse at center, $from-color, $to-color);
+}
+
+@mixin single-transition($property: all, $speed: .125s, $ease: linear) {
+    transition: $property $speed $ease;
+}
+
+@mixin double-transition($property: background, $property2: color, $speed: .125s, $ease: linear) {
+    transition: $property $speed $ease, $property2 $speed $ease;
+}
+
+// https://codepen.io/maxakohler/pen/mAxHz?editors=1100
+@mixin long-shadow($type, $color, $length, $fadeout: true, $skew: false, $direction: right) {
+    $shadow: '';
+    @if $skew == false or $type == text {
+        @if $direction == right {
+            @for $i from 0 to $length - 1 {
+                $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' + $color + ',';
+            }
+        }
+        @if $direction == left {
+            @for $i from 0 to $length - 1 {
+                $shadow: $shadow + $i * -1 + 'px ' + $i + 'px 0 ' + $color + ',';
+            }
+        }
+    }
+    @if $fadeout == true {
+        @for $i from 1 to $length - 1 {
+            @if $type == text or $skew == false {
+                @if $direction == right {
+                    $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' + rgba($color, 1 - $i / $length) + ',';
+                }
+                @if $direction == left {
+                    $shadow: $shadow + $i * -1 + 'px ' + $i + 'px 0 ' + rgba($color, 1 - $i / $length) + ',';
+                }
+            }
+            @if ($type == box) and $skew == true {
+                @if $direction == right {
+                    $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' + $i * .2 + 'px ' + rgba($color, 1 - $i / $length) + ',';
+                }
+                @if $direction == left {
+                    $shadow: $shadow + $i * -1 + 'px ' + $i + 'px 0 ' + $i * .2 + 'px ' + rgba($color, 1 - $i / $length) + ',';
+                }
+            }
+        }
+        $shadow: $shadow + $length + 'px ' + $length + 'px 0 ' + rgba($color, 0);
+    }
+    @if $fadeout == false {
+        @if $skew == true and ($type == box) {
+            @for $i from 0 to $length - 1 {
+                $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' + $i * .1 + 'px ' + $color + ',';
+            }
+        }
+        $shadow: $shadow + $length + 'px ' + $length + 'px 0 ' + rgba(0,0,0,0);
+    }
+    $shadow: unquote($shadow);
+
+    @if $type == 'box' {
+        box-shadow: $shadow;
+    }
+
+    @if $type == 'text' {
+        text-shadow: $shadow;
+    }
+}
+
+
+@mixin aspect-ratio($width, $height) {
+    // background: $gray-color;
+    // padding-bottom:  calc(#{$height / $width  * 100%} - 2px);
+    // position: relative;
+    //
+    // img,
+    // video,
+    // iframe,
+    // object,
+    // embed {
+    //     bottom: 0;
+    //     left: 0;
+    //     // position: absolute;
+    //     right: 0;
+    //     top: 0;
+    // }
+}

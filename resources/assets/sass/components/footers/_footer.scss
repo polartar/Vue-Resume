@@ -1,0 +1,111 @@
+.primary-footer {
+    background: $primary-blue;
+    padding: 1.5rem 0 1rem;
+}
+
+.footer-text-callout {
+    @include heading-font-regular;
+    color: $white;
+    margin: 2rem 0;
+    padding: 2rem;
+    position: relative;
+
+    @include breakpoint(medium) {
+        margin: 2rem 0;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    &::before,
+    &::after {
+        background: $white;
+        border-radius: 2px;
+        content: '';
+        display: inline-block;
+        height: 1px;
+        left: 25%;
+        min-width: 100px;
+        position: absolute;
+        width: 45%;
+    }
+
+    &::before {
+        top: 0;
+    }
+
+    &::after {
+        bottom: 0;
+    }
+}
+
+.footer-heading {
+    color: $white;
+    letter-spacing: .05em;
+    margin: 0 0 1rem;
+    text-align: center;
+}
+
+
+.footer-logo-section {
+    padding: 1rem 0 2rem;
+}
+
+.footer-logo {
+    border: 0;
+    display: block;
+    margin: 0 0 1rem;
+    padding: 0 1rem;
+    text-decoration: none;
+
+    @include breakpoint(medium) {
+        margin-bottom: 0;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto .75rem;
+        max-width: 150px;
+    }
+
+    p {
+        @include heading-font-regular;
+        color: $primary-blue-100;
+        font-size: 1rem;
+        line-height: 1.25;
+        margin: 0;
+    }
+}
+
+
+.legal-footer {
+    @include heading-font-regular;
+    background: darken($primary-blue, 5%);
+    color: $white;
+    font-size: .75rem;
+    padding: .5rem 0;
+    text-align: center;
+
+    @include breakpoint(medium) {
+        text-align: left;
+    }
+
+    .legal-footer-copyright-text {
+        display: inline-block;
+        padding-top: .25rem;
+
+        @include breakpoint(medium) {
+            padding-right: .5rem;
+        }
+
+    }
+}
+
+.footer-location-address {
+    @include heading-font-regular;
+    color: $primary-blue-100;
+    font-size: .875rem;
+    margin: 0;
+    text-align: center;
+}

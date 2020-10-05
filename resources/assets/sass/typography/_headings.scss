@@ -1,0 +1,130 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $primary-blue;
+    margin: 2rem 0 .75rem;
+}
+
+h1 {
+    @include heading-font-bold;
+
+    font-size: 2.25rem;
+    line-height: 1.125;
+    margin: 0 0 1rem;
+
+    @include breakpoint(medium) {
+        font-size: 3rem * $font-size-multiplier;
+        line-height: 1.125;
+    }
+    @include breakpoint(large) {
+        font-size: 3.75rem * $font-size-multiplier;
+        line-height: 1.125;
+    }
+    @media print {
+        font-size: 36pt;
+        line-height: 1.25;
+    }
+}
+
+h2 {
+    @include heading-font-bold;
+
+    font-size: 1.625rem;
+    line-height: 1.125;
+
+    @include breakpoint(medium) {
+        font-size: 2.5rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @include breakpoint(large) {
+        font-size: 3rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @media print {
+        font-size: 24pt;
+        line-height: 1.25;
+    }
+}
+
+h3 {
+    @include heading-font-bold;
+
+    font-size: 1.375rem * $font-size-multiplier;
+    line-height: 1.125;
+
+    @include breakpoint(medium) {
+        font-size: 1.75rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @include breakpoint(large) {
+        font-size: 2rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @media print {
+        font-size: 18pt * $font-size-multiplier;
+        line-height: 1.25;
+    }
+}
+
+h4 {
+    @include heading-font-regular;
+
+    font-size: 1.125rem * $font-size-multiplier;
+    line-height: 1.125;
+
+    @include breakpoint(medium) {
+        font-size: 1.125rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @include breakpoint(large) {
+        font-size: 1.1875rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @media print {
+        font-size: 14pt;
+        line-height: 1.25;
+    }
+}
+
+h5 {
+    @include heading-font-bold;
+
+    font-size: 1.0625rem * $font-size-multiplier;
+    line-height: 1.125;
+
+    @include breakpoint(medium) {
+        font-size: 1.125rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @include breakpoint(large) {
+        font-size: 1.125rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @media print {
+        font-size: 13pt;
+        line-height: 1.25;
+    }
+}
+
+h6 {
+    @include heading-font-bold;
+
+    font-size: 1rem * $font-size-multiplier;
+    line-height: 1.125;
+
+    // @include breakpoint(medium) {
+    //     font-size: 1.25em;
+    //     line-height: 1.25em;
+    // }
+    @include breakpoint(large) {
+        font-size: 1.0625rem * $font-size-multiplier;
+        line-height: 1.25;
+    }
+    @media print {
+        font-size: 12pt;
+        line-height: 1;
+    }
+}

@@ -1,0 +1,75 @@
+body {
+    @include body-font-regular;
+}
+
+p {
+    font-size: 1.125rem;
+    line-height: 1.375;
+    margin: 0 0 1rem;
+
+    @include breakpoint(large) {
+        font-size: 1.375rem;
+        line-height: 1.625;
+        margin: 0 0 1.25rem;
+    }
+}
+
+a {
+
+    border-bottom: 1px dotted rgba($primary-gray, .5);
+    color: #4294d2;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+        border-bottom-color: rgba($primary-blue, .5);
+        border-bottom-style: solid;
+        text-decoration: none;
+    }
+}
+
+blockquote {
+    font-size: 1.375rem;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
+    padding: 1rem 3rem;
+    position: relative;
+
+    @include breakpoint(large) {
+        font-size: 1.5rem;
+    }
+
+    p {
+        color: $primary-gray;
+        font-size: 1.375rem;
+        line-height: 1.25;
+
+        @include breakpoint(large) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &::before,
+    &::after {
+        color: $primary-gray;
+        content: '"';
+        font-size: 3.5rem;
+        line-height: 1;
+        position: absolute;
+    }
+
+    &::after {
+        content: '\201C';
+        left: 0;
+        top: .5rem;
+    }
+
+    &::before {
+        bottom: 2rem;
+        content: '\201E';
+        right: 0;
+
+    }
+}

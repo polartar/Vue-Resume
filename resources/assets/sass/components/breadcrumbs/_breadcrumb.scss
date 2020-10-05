@@ -1,0 +1,74 @@
+.breadcrumbs {
+    background: #eee;
+    // display: none;
+    // float: left;
+    padding: 0 1rem;
+    width: 100%;
+    // width: calc(100% + .625rem);
+
+    @include breakpoint(medium) {
+        display: block;
+    }
+
+    ol,
+    ul {
+        display: block;
+        margin: 0 auto;
+        max-width: 78.125em;
+        padding: 0;
+        width: 100%;
+    }
+
+    li {
+        @include heading-font-bold;
+
+        color: #555;
+        display: inline-block;
+        font-size: .75rem;
+        margin: 0;
+        padding: 0;
+        position: relative;
+
+
+        @include breakpoint(small only) {
+            display: none;
+
+            &:nth-last-of-type(1),
+            &:nth-last-of-type(2),
+            &:nth-last-of-type(3) {
+                display: block;
+            }
+        }
+
+        @include breakpoint(medium) {
+            font-size: .75rem;
+        }
+
+
+        &:last-of-type {
+            &::after {
+                display: none;
+            }
+        }
+
+        .breadcrumb-separator {
+            color: #ccc;
+            display: inline-block;
+            padding: 0 .5rem;
+        }
+    }
+
+    a {
+        @include heading-font-regular;
+
+        border: 0;
+        color: $off-black;
+        text-decoration: none;
+
+        &:focus,
+        &:hover,
+        &:active {
+            color: $secondary-blue;
+        }
+    }
+}

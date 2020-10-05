@@ -1,0 +1,13 @@
+.resume-preview-container {
+    //background: #efefef;
+    background-color: ghostwhite;
+    height: 1000px;
+    padding: 1rem;
+}
+
+.resume-preview {
+    background: $white;
+    border: 2px solid rgba($gray-color, .5);
+    border-radius: $global-radius;
+    height: 600px;
+}

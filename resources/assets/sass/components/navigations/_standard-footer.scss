@@ -1,0 +1,118 @@
+.footer-nav-list-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.footer-nav-list {
+    @include heading-font-regular;
+    color: $white;
+    display: block;
+    flex: 1 0 50%;
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+
+    @include breakpoint(medium) {
+        flex: 1 1 auto;
+    }
+
+    li {
+        color: $primary-blue-100;
+        display: block;
+        font-size: 1rem;
+        line-height: 1;
+        margin: 0 0 .75rem;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    a {
+        border-bottom: 0;
+        color: $primary-blue-100;
+        font-size: 1rem;
+        text-decoration: none;
+    }
+
+    .footer-nav-list-heading {
+        color: $white;
+        font-weight: 700;
+    }
+}
+
+
+
+.social-links {
+    margin-bottom: 1rem;
+
+    ul {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+        flex: 0 0 auto;
+        margin: 0;
+        padding: .25rem;
+
+        @include breakpoint(medium) {
+            padding: .375rem;
+        }
+    }
+
+    a {
+        @include single-transition;
+        align-items: center;
+        background: $white;
+        border: 0;
+        border-radius: 50%;
+        color: $primary-blue;
+        display: inline-flex;
+        font-size: 1.5rem;
+        height: 2.75rem;
+        justify-content: center;
+        text-decoration: none;
+        width: 2.75rem;
+
+        .no-touchevents & {
+            &:focus,
+            &:hover,
+            &:active {
+                color: $secondary-orange;
+            }
+        }
+    }
+}
+
+
+.legal-nav-menu {
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    @include breakpoint(medium) {
+        display: inline-block;
+        text-align: left;
+    }
+
+    li {
+        display: inline-block;
+        margin: 0;
+        padding: 0 0 0 .5rem;
+    }
+
+    a {
+        border-bottom: 0;
+        color: $primary-blue-100;
+        font-size: .75rem;
+        text-decoration: none;
+    }
+}

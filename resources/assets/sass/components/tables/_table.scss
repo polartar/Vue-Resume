@@ -1,0 +1,99 @@
+table {
+    border-bottom: 2px solid $primary-blue;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+    width: 100%;
+
+    &.vertical-align-middle {
+        td {
+            vertical-align: middle;
+        }
+    }
+
+    &.table-auto-layout {
+        table-layout: auto;
+    }
+
+    td,
+    th {
+        background: $white;
+        padding: .75rem;
+    }
+
+    thead {
+        tr {
+            // border-bottom: 2px solid $primary-blue;
+        }
+
+        th {
+            @include heading-font-bold;
+            background: $primary-blue;
+            color: $white;
+            font-size: .875rem;
+            line-height: 1.375;
+            padding: .75rem;
+            text-transform: uppercase;
+        }
+    }
+
+    tbody {
+        > tr {
+            border-bottom: 1px solid $gray-color;
+
+            &:last-of-type {
+                border-bottom: 0;
+            }
+        }
+
+        td {
+            border-left: 1px solid $gray-color;
+            font-size: .875rem;
+            line-height: 1.375;
+            vertical-align: top;
+
+            &:last-of-type {
+                border-right: 1px solid $gray-color;
+            }
+        }
+    }
+
+    .primary-table-footer {
+        // border-top: 2px solid $primary-blue;
+
+        td {
+            background: $primary-blue;
+            border-left: 1px solid $gray-color;
+            color: #fff;
+            font-size: .875rem;
+            font-weight: 700;
+            line-height: 1.375;
+            vertical-align: top;
+
+            &:last-of-type {
+                border-right: 1px solid $gray-color;
+            }
+        }
+    }
+
+}
+
+
+.table-overflow {
+    margin-left: -.625rem;
+    overflow: auto;
+    padding-left: .625rem;
+    width: calc(100% + 1.25rem);
+
+    @include breakpoint(medium) {
+        margin-left: -.9375rem;
+        padding-left: .9375rem;
+        width: calc(100% + 1.875rem);
+    }
+
+    @include breakpoint(xlarge) {
+        margin-left: 0;
+        padding-left: 0;
+        width: 100%;
+    }
+}

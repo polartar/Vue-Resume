@@ -1,0 +1,191 @@
+.primary-nav {
+    @include heading-font-regular;
+    background: $primary-gray;
+    display: none;
+
+    @include breakpoint(medium) {
+        display: block;
+    }
+
+    a {
+        letter-spacing: .025em;
+    }
+
+    .primary-nav-container {
+        margin: 0 auto;
+        max-width: $global-width;
+    }
+}
+
+.primary-nav-menu {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint(medium) {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    li {
+        display: block;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        @include breakpoint(medium) {
+            display: inline-block;
+            flex: 1 1 auto;
+            max-width: 250px;
+            width: auto;
+        }
+
+        &.current-menu-item {
+            a {
+                background: $secondary-orange;
+            }
+        }
+    }
+
+    a {
+        @include single-transition;
+        border: 0;
+        color: $white;
+        display: block;
+        font-size: 1.125rem;
+        padding: .625rem 1rem;
+        text-decoration: none;
+
+        .no-touchevents & {
+            &:focus,
+            &:hover,
+            &:active {
+                background: $secondary-orange;
+            }
+        }
+
+        @include breakpoint(medium) {
+            padding: 1rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        @include breakpoint(large) {
+            // padding: 1rem 1.125rem;
+        }
+
+        @include breakpoint(xlarge) {
+            padding: 1rem 1.25rem;
+        }
+    }
+}
+
+.secondary-nav-menu {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint(medium) {
+        align-items: center;
+        cursor: pointer;
+        display: inline-flex;
+    }
+
+    li {
+        color: $white;
+        display: inline-block;
+        margin: 0;
+        padding: 0 0 0 .75rem;
+
+        &::after {
+            border-right: 1px solid $primary-blue-100;
+            content: '';
+            display: inline-block;
+            height: 1.25rem;
+            padding-left: .75rem;
+            position: relative;
+            right: 0;
+            top: .25rem;
+        }
+
+        &:last-of-type {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    .header-search-toggle {
+        @include single-transition;
+        font-size: .75rem;
+
+
+        &.show-header-search-form {
+            color: $secondary-orange;
+        }
+    }
+
+    a {
+        @include heading-font-regular;
+        border: 0;
+        color: $white;
+        font-size: .875rem;
+        text-decoration: none;
+    }
+}
+
+.secondary-nav-menu-collapsed {
+    background: $primary-gray-shade;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint(medium) {
+        display: none;
+    }
+
+    li {
+        color: $white;
+        flex: 1 1 auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: $white;
+        display: block;
+        font-size: 1.125rem;
+        padding: .5rem .75rem;
+        text-align: center;
+    }
+}
+
+
+.main-menu-toggle {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    left: -.5rem;
+    margin: .5rem 1rem 0 0;
+    position: relative;
+
+    @include breakpoint(medium) {
+        display: none;
+    }
+
+    .main-menu-toggle-text {
+        @include heading-font-regular;
+        color: $primary-blue-100;
+        display: inline-block;
+        font-size: .875rem;
+        left: -3px;
+        letter-spacing: .05em;
+        position: absolute;
+        text-transform: uppercase;
+        transform: rotate(-90deg);
+    }
+}

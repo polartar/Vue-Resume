@@ -1,0 +1,20 @@
+%noselect {
+    user-select: none;
+}
+
+%clearfix {
+    &::after,
+    &::before {
+        content: ' ';
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+%nowrap,
+.no-wrap {
+    white-space: nowrap;
+}

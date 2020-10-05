@@ -1,0 +1,270 @@
+import 'es6-promise/auto'
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import axios from 'axios'
+
+// Docs: https://github.com/shakee93/vue-toasted#readme
+import Toasted from 'vue-toasted';
+Vue.use(Toasted);
+
+Vue.use(VueRouter);
+Vue.use(Vuex);
+Vue.prototype.$axios = axios;
+
+const store = new Vuex.Store({
+    state: {
+        resume: {},
+        firstName : '',
+        lastName : '',
+        user: {
+            email: '',
+        },
+        email: '',
+        phone: '',
+        country: '',
+        street_1: '',
+        street_2: '',
+        city: '',
+        province: '',
+        zip: '',
+        userEmailIds: [],
+        userAddressIds: [],
+        userPhoneIds: [],
+        summary: {},
+        resumeDesigns: [],
+    },
+    mutations: {
+        updateResume (state, payload) {
+            state.resume = payload;
+        },
+        updateResumeName (state, payload) {
+            state.resume.name = payload;
+        },
+        updateSummary (state, payload) {
+            state.summary = payload;
+        },
+        updateFirstName (state, payload) {
+            state.firstName = payload;
+        },
+        updateLastName (state, payload) {
+            state.lastName = payload;
+        },
+        updateUserEmail (state, payload) {
+            state.user.email = payload;
+            if (state.userEmailIds.length === 0) {
+                state.email = payload;
+            }
+        },
+        updateResumeDesigns (state, payload) {
+            state.resumeDesigns = payload;
+        },
+
+
+        updateUserEmailIds (state, payload) {
+            if (payload == null) {
+                state.userEmailIds = [];
+            } else {
+                state.userEmailIds = payload;
+            }
+        },
+        addUserEmailId (state, payload) {
+            let userEmailIds = state.userEmailIds;
+            if (userEmailIds.length === 0) {
+                this.commit('updateUserEmailIds', [payload]);
+            } else {
+                if (userEmailIds.indexOf(payload) === -1) {
+                    userEmailIds.push(payload);
+                    this.updateUserEmailIds(userEmailIds);
+                }
+            }
+        },
+
+
+        updateUserAddressIds (state, payload) {
+            if (payload == null) {
+                state.userAddressIds = [];
+            } else {
+                state.userAddressIds = payload;
+            }
+        },
+        addUserAddressId (state, payload) {
+            let userAddressIds = state.userAddressIds;
+            if (userAddressIds.length === 0) {
+                this.commit('updateUserAddressIds', [payload]);
+            } else {
+                if (userAddressIds.indexOf(payload) === -1) {
+                    userAddressIds.unshift(payload);
+                    this.commit('updateUserAddressIds', userAddressIds);
+                }
+            }
+        },
+
+
+        updateUserPhoneIds (state, payload) {
+            if (payload == null) {
+                state.userPhoneIds = [];
+            } else {
+                state.userPhoneIds = payload;
+            }
+        },
+        // Only adding if it doesn't already exist.
+        addUserPhoneId (state, payload) {
+            let userPhoneIds = state.userPhoneIds;
+            if (userPhoneIds.length === 0) {
+                this.commit('updateUserPhoneIds', [payload]);
+            } else {
+                if (userPhoneIds.indexOf(payload) === -1) {
+                    userPhoneIds.push(payload);
+                    this.commit('updateUserPhoneIds', userPhoneIds);
+                }
+            }
+        },
+
+
+        updatePhone (state, payload) {
+            state.phone = payload;
+        },
+        updateCountry (state, payload) {
+            state.country = payload;
+        },
+        updateStreet1 (state, payload) {
+            state.street_1 = payload
+        },
+        updateStreet2 (state, payload) {
+            state.street_2 = payload
+        },
+        updateCity (state, payload) {
+            state.city = payload
+        },
+        updateProvince (state, payload) {
+            state.province = payload
+        },
+        updateZip (state, payload) {
+            state.zip = payload
+        },
+        updateAddress (state, payload) {
+            this.commit('updateStreet1', payload.street_1);
+            this.commit('updateStreet2', payload.street_2);
+            this.commit('updateCity', payload.city);
+            this.commit('updateProvince', payload.province);
+            this.commit('updateCountry', payload.country);
+            this.commit('updateZip', payload.postal_code);
+        },
+        reloadResume (state) {
+            axios
+                .get('/resume/' + state.resume.id)
+                .then(response => {
+                    console.log(response.data.resume);
+                    state.resume = response.data.resume;
+                })
+                .catch(error => {
+                    console.log('error reloading resume: ', error);
+                });
+        }
+    },
+    getters: {
+        resumeName: state => {
+            return state.resume.name;
+        },
+        resumeSummary: state => {
+            return state.summary.name;
+        },
+        resumeId: state => {
+            return state.resume.id
+        },
+        fullName: state => {
+            return capitalize(state.firstName) + ' ' + capitalize(state.lastName);
+        }
+    }
+});
+
+import App from './views/App'
+import Home from './views/Home'
+import SelectDesign from './views/steps/SelectDesign'
+import ContactInformation from './views/steps/ContactInformation'
+import ResumeSummary from './views/steps/ResumeSummary'
+import WorkExperience from './views/steps/WorkExperience'
+import Education from './views/steps/Education'
+import Skills from './views/steps/Skills'
+import CustomizeDesign from './views/steps/CustomizeDesign'
+import FullPagePreview from './views/steps/FullPagePreview'
+
+const base_path = '/resume-builder/'
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: base_path + '/',
+            name: 'home',
+            component: Home,
+            children: [
+                {
+                    path: 'select-design',
+                    name: 'select-design',
+                    component: SelectDesign,
+                },
+                {
+                    path: 'contact-information',
+                    name: 'contact-information',
+                    component: ContactInformation,
+                },
+                {
+                    path: 'resume-summary',
+                    name: 'resume-summary',
+                    component: ResumeSummary,
+                },
+                {
+                    path: 'work-experience',
+                    name: 'work-experience',
+                    component: WorkExperience,
+                },
+                {
+                    path: 'education',
+                    name: 'education',
+                    component: Education,
+                },
+                {
+                    path: 'skills',
+                    name: 'skills',
+                    component: Skills,
+                },
+                {
+                    path: 'customize-design',
+                    name: 'customize-design',
+                    component: CustomizeDesign,
+                },
+                {
+                    path: 'full-page-preview',
+                    name: 'full-page-preview',
+                    component: FullPagePreview,
+                },
+            ]
+        },
+    ],
+});
+
+function hasQueryParams(route) {
+    return !!Object.keys(route.query).length
+}
+
+router.beforeEach((to, from, next) => {
+    if(!hasQueryParams(to) && hasQueryParams(from)){
+        next({name: to.name, query: from.query});
+    } else {
+        next()
+    }
+})
+
+const app = new Vue({
+    el: '#app',
+    components: { App },
+    router,
+    store,
+});
+
+function capitalize(s) {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+}

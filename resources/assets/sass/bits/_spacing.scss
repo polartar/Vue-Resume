@@ -1,0 +1,50 @@
+$sizes: xxs .5, xs .75, s 1, m 1.25, l 1.5, xl 1.75, xxl 2;
+$postions: t top, r right, b bottom, l left;
+$multiplier: 1;
+$base-value: 1rem;
+
+@each $size in $sizes {
+    $key: nth($size, 1);
+    $value: nth($size, 2);
+
+    .m-#{$key} {
+        margin: $value * $multiplier * $base-value;
+    }
+
+    .p-#{$key} {
+        padding: $value * $multiplier * $base-value;
+    }
+    @each $postion in $postions {
+        $key2: nth($postion, 1);
+        $value2: nth($postion, 2);
+
+        .m-#{$key2}-#{$key} {
+            margin-#{$value2}: $value * $multiplier * $base-value;
+        }
+
+        .p-#{$key2}-#{$key} {
+            padding-#{$value2}: $value * $multiplier * $base-value;
+        }
+    }
+}
+
+@each $postion in $postions {
+    $key2: nth($postion, 1);
+    $value2: nth($postion, 2);
+
+    .m-#{$key2}-n {
+        margin-#{$value2}: 0;
+    }
+
+    .p-#{$key2}-n {
+        padding-#{$value2}: 0;
+    }
+}
+
+.m-n {
+    margin: 0;
+}
+
+.p-n {
+    padding: 0;
+}

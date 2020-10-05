@@ -1,0 +1,42 @@
+$tertiary-color: rgb(42, 84, 109);
+$tertiary-color-shade: rgb(35, 72, 94);
+$tertiary-color-tint: rgb(65, 114, 140);
+
+$alert-color: #f04124;
+$alert-color-shade: darken(#f04124, 5%);
+$alert-color-tint: lighten(#f04124, 5%);
+
+$success-color: #27c30e;
+$success-color-shade: darken(#27c30e, 5%);
+$success-color-tint: lighten(#27c30e, 5%);
+
+$warning-color: #f08a24;
+$info-color: #a0d3e8;
+$header-font-color: #ccc;
+$button-color: #27ac27;
+
+$white: #fff;
+$off-white: #bebfc2;
+
+$black: #262626;
+$off-black: #888;
+
+$font-color: #454647;
+$font-color-shade: #111;
+$font-color-tint: #555;
+
+$primary-blue: #002b49;
+$primary-blue-100: #cee9fb;
+$primary-gray: #8c8c8a;
+$primary-gray-shade: darken(#8c8c8a, 5%);
+
+$primary-black: #000;
+$secondary-green: #006853;
+$secondary-green-100: #c6f0e7;
+$secondary-orange: #ff6b00;
+$secondary-orange-shade: darken($secondary-orange, 10%);
+$secondary-yellow: #ffb600;
+$secondary-blue: #005cb9;
+
+
+$gray-color: #ddd;

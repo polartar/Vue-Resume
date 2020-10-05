@@ -1,0 +1,86 @@
+/*!
+    Theme Name: Cheeky Scientist
+    Text Domain: cheekyscientist
+    Version: 0.0.0
+    Author: Cheeky Scientist
+    Bitbucket Theme URI: https://bitbucket.org/cheeky-scientist/cheeky-scientist-master
+	Bitbucket Branch: master
+*/
+
+/*!
+    Theme Name: Cheeky Scientist
+    Text Domain: cheekyscientist
+    Version: 0.0.0
+    Author: Cheeky Scientist
+    Bitbucket Theme URI: https://bitbucket.org/cheeky-scientist/cheeky-scientist
+	Bitbucket Branch: master
+*/
+
+/*!
+    Theme Name: Cheeky Scientist Expert
+    Text Domain: cheekyscientistexpert
+    Version: 0.0.0
+    Author: Cheeky Scientist
+    Bitbucket Theme URI: https://bitbucket.org/cheeky-scientist/cheeky-scientist-expert
+    Bitbucket Branch: master
+*/
+
+@import '~foundation-sites/scss/foundation';
+@import 'foundation/settings';
+@import 'foundation/adjustments';
+
+@import '~foundation-sites/scss/foundation';
+
+@include foundation-global-styles;
+@include foundation-xy-grid-classes(
+    $vertical-grid: false,
+    $frame-grid: false,
+    $block-grid: false,
+);
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-flex-classes;
+@include foundation-form-error;
+
+@import 'fonts/cheeky-fonts';
+@import 'bits/colors';
+@import 'bits/setup';
+@import 'bits/mixins';
+@import 'bits/extends';
+@import 'bits/spacing';
+
+@import 'layout/general';
+@import 'layout/resume-preview';
+
+
+@import 'typography/utility';
+@import 'typography/headings';
+@import 'typography/lists';
+@import 'typography/type';
+
+@import 'components/social/social';
+
+@import 'components/breadcrumbs/breadcrumb';
+
+@import 'components/buttons/button';
+
+@import 'components/forms/form-elements';
+@import 'components/forms/flash-message';
+
+@import 'components/cards/card';;
+
+@import 'components/footers/footer';
+@import 'components/footers/legal-footer';
+
+@import 'components/headers/header';
+
+@import 'components/navigations/standard-header';
+@import 'components/navigations/standard-footer';
+
+@import 'components/pagination/pagination';
+
+@import 'components/sliders/sliders';
+
+@import 'components/tables/table';
+@import 'components/tables/responsive';
+@import 'components/tables/zebra';

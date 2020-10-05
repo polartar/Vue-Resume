@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreResumeRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'user_id' => 'required|uuid',
+            'name' => 'required|string',
+            'resume_design_id' => 'nullable|uuid',
+            'pdf_url' => 'nullable|url',
+            'user_address_ids' => 'nullable|array',
+            'user_phone_ids' => 'nullable|array',
+            'user_email_ids' => 'nullable|array',
+        ];
+    }
+}

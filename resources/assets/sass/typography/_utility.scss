@@ -1,0 +1,84 @@
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-uppercase {
+    letter-spacing: .0375em;
+    text-transform: uppercase;
+}
+
+.text-white {
+    color: $white;
+}
+
+.text-black {
+    color: $black;
+}
+
+.text-success {
+    color: $success-color;
+}
+
+.text-alert {
+    color: $alert-color;
+}
+
+.icon-white {
+    color: $white;
+}
+
+.heading-font {
+    @include heading-font-bold;
+}
+
+.heading-font-regular {
+    @include heading-font-regular;
+}
+
+.text-small {
+    font-size: .875rem;
+}
+
+.text-xsmall {
+    font-size: .75rem;
+}
+
+.see-all-link {
+    @include heading-font-bold;
+    color: $primary-gray;
+    display: inline-block;
+    font-size: .875rem;
+    letter-spacing: .05em;
+    margin: 2rem 0 0;
+    position: relative;
+    text-transform: uppercase;
+    .no-touchevents & {
+        &:focus,
+        &:hover,
+        &:active {
+            border-bottom-color: $secondary-orange;
+            color: $secondary-orange;
+        }
+    }
+}
+
+.text-primary-blue-100 {
+    color: $primary-blue-100;
+}
+
+.text-primary-blue {
+    color: $primary-blue;
+}
+
+.super-script-small {
+    font-size: .875rem;
+    top: -.5em;
+}

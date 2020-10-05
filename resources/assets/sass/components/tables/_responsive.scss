@@ -1,0 +1,67 @@
+@include breakpoint(medium down) {
+    .responsive-table {
+        border: 0;
+        margin-top: .5rem;
+
+        table,
+        tbody,
+        tr,
+        td,
+        th,
+        tfoot {
+            display: block;
+        }
+
+        thead {
+            display: none;
+        }
+
+
+        tbody {
+
+            tr {
+                //border: 0;
+                border-bottom: 2px solid $primary-blue;
+                border-top: 2px solid $primary-blue;
+                margin-bottom: 2rem;
+
+                &:last-of-type {
+                    border-bottom: 2px solid $primary-blue;
+                    margin-bottom: 0;
+                }
+
+                td {
+
+                    &:last-of-type {
+                        border-bottom: 0;
+                    }
+                }
+            }
+
+            td {
+                border-bottom: 1px solid $primary-gray;
+                border-right: 1px solid $primary-gray;
+                padding: 1rem 1rem 1rem 40%;
+                position: relative;
+
+                &::before {
+                    @include heading-font-bold;
+
+                    content: attr(data-heading);
+                    display: block;
+                    left: .5rem;
+                    position: absolute;
+                    width: calc(40% - 1rem);
+                }
+
+                &.responsive-full-width {
+                    padding-left: .5rem;
+
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

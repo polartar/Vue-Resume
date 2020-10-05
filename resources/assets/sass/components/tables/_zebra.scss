@@ -1,0 +1,45 @@
+table.zebra-stripe-table {
+    > tbody {
+        > tr {
+            border-bottom: 0;
+
+
+            &:nth-of-type(even) {
+                background: #eee;
+
+                > td { // sass-lint:disableline nesting-depth
+                    background: #eee;
+
+                }
+            }
+        }
+    }
+
+    &.zebra-stripe-table-double {
+        > tbody {
+            > tr {
+                border-bottom: 0;
+
+                &:nth-child(even){
+                    background: #fff;
+
+                    > td { // sass-lint:disableline nesting-depth
+                        background: #fff;
+
+                    }
+                }
+
+
+                &:nth-child(4n),
+                &:nth-child(4n-1) {
+                    background: #eee;
+
+                    > td { // sass-lint:disableline nesting-depth
+                        background: #eee;
+
+                    }
+                }
+            }
+        }
+    }
+}
