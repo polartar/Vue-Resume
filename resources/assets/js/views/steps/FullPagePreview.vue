@@ -1,6 +1,6 @@
 <template>
     <div v-if="resume.resume_design" class="resume-container">
-        <golden-standard v-if="resume.resume_design.name === 'Gold Standard'"></golden-standard>
+        <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
         <functional v-if="resume.resume_design.name === 'Functional'"></functional>
         <combination v-if="resume.resume_design.name === 'Combination'"></combination>
         <recruiter v-if="resume.resume_design.name === 'Recruiter'"></recruiter>
