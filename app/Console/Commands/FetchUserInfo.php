@@ -39,15 +39,21 @@ class FetchUserInfo extends Command
     public function handle()
     {
         // I want to show all users, their emails, a count of their resumes
-        $users = User::all();
-        $output_string = "Name\t\tEmail\t\t\tResumes\n";
+        while(true) {
+            $headers = ['Name', 'Email', 'Resumes', 'Joined'];
+            $users = User::with('resumes')->orderBy('first_name')->get();
+            $userArray = [];
+    
+            foreach ($users as $user) {
+                array_push($userArray, [$user->fullName, $user->email, count($user->resumes), $user->created_at]);
+            }
 
-        foreach ($users as $user) {
-            $output_string .= $user->report_information . "\n";
+            system('clear');
+            $this->table($headers, $userArray);
+            $this->info('Press ctrl + c to quit');
+
+            sleep(5);
         }
-
-
-        $this->output->write($output_string);
 
         return 0;
     }

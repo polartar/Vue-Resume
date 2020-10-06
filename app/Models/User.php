@@ -66,6 +66,14 @@ class User extends Authenticatable
         return $this->hasMany(Resume::class);
     }
 
+    public function getResumeCountAttribute() {
+        return count($this->resumes);
+    }
+
+    public function getFullNameAttribute() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function user_addresses() {
         return $this->hasMany(UserAddress::class);
     }
