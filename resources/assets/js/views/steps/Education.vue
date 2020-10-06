@@ -91,6 +91,7 @@
                 </div>
             </div>
         </div>
+        <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
         <router-link tag="button" class="button" to="skills">Next</router-link>
     </div>
 </template>

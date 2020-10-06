@@ -17,6 +17,7 @@
                             </option>
                         </select>
                     </div>
+                    <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
                     <router-link to="contact-information" tag="button" class="button">Next</router-link>
                 </div>
             </div>

@@ -10,8 +10,9 @@
                         <textarea v-model="name" required name="summary" rows="8" cols="80" />
                     </div>
                 </div>
-                <div class="cell medium-6">
+                <div class="cell medium">
                     <div class="form-group">
+                        <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
                         <router-link tag="button" class="button" v-on:click.native="saveSummary" to="work-experience">Save and Next</router-link>
                     </div>
                 </div>

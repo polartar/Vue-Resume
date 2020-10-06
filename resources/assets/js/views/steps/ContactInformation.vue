@@ -378,8 +378,9 @@
                             <input type="text" name="postal_code" :value="zip" @input="updateZip">
                         </div>
                     </div>
-                    <div class="cell medium-6">
+                    <div class="cell">
                         <div class="form-group">
+                            <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
                             <router-link tag="button" class="button" v-on:click.native="saveContactInfo" to="resume-summary">Save and Next</router-link>
                         </div>
                     </div>
