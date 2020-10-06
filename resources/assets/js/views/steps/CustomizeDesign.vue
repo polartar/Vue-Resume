@@ -12,16 +12,10 @@
                 </div>
             </div>
         </div>
-        <button class="button" @click="next">Preview</button>
+        <router-link tag="button" class="button" to="full-page-preview">See Preview</router-link>
     </div>
 </template>
 
 <script>
-    export default {
-        methods: {
-            next: function () {
-                this.$router.push({name: 'full-page-preview'});
-            }
-        }
-    }
+    export default {}
 </script>

@@ -17,7 +17,7 @@
                             </option>
                         </select>
                     </div>
-                    <button class="button" @click="nextView">Save and Next</button>
+                    <router-link to="contact-information" tag="button" class="button">Next</router-link>
                 </div>
             </div>
         </div>
@@ -61,9 +61,6 @@
                         });
                     });
             },
-            nextView: function () {
-                this.$router.push({ name: 'contact-information'})
-            }
         }
     }
 </script>

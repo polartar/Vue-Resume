@@ -12,15 +12,9 @@
                 </div>
             </div>
         </div>
-        <button class="button" @click="next">Next</button>
+        <router-link tag="button" class="button" to="customize-design">Save and Next</router-link>
     </div>
 </template>
 <script>
-    export default {
-        methods: {
-            next: function () {
-                this.$router.push({name: 'customize-design'});
-            }
-        }
-    }
+    export default {}
 </script>

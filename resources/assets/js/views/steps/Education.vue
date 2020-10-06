@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <button class="button" @click="next">Next</button>
+        <router-link tag="button" class="button" to="skills">Next</router-link>
     </div>
 </template>
 
@@ -196,9 +196,6 @@
                 this.endDate = null;
                 this.currentlyStudying = false;
             },
-            next: function () {
-                this.$router.push({name: 'skills'});
-            }
         }
     }
 </script>

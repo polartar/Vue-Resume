@@ -4,7 +4,7 @@
             <div class="form-group" v-if="this.$route.name === 'home'">
                 <label>Resume Name</label>
                 <input :placeholder="resumeName" type="text" @change="updateResumeName">
-                <button class="button" @click="saveResumeName">Save and Next</button>
+                <router-link tag="button" class="button" v-on:click.native="saveResumeName" to="select-design">Save and Next</router-link>
             </div>
             <router-view></router-view>
         </div>
@@ -134,8 +134,6 @@
                             fullWidth: true,
                             type: 'success',
                         });
-                        // This has to be updated if the order of the steps changes.
-                        this.$router.push({ name: 'select-design'})
                     }).catch(response => {
                     this.$toasted.show('Uh oh, we had some trouble with that.', {
                         position: 'bottom-center',

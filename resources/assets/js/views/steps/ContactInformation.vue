@@ -380,7 +380,7 @@
                     </div>
                     <div class="cell medium-6">
                         <div class="form-group">
-                            <button class="button" @click="saveContactInfo">Save and Next</button>
+                            <router-link tag="button" class="button" v-on:click.native="saveContactInfo" to="resume-summary">Save and Next</router-link>
                         </div>
                     </div>
                 </div>
@@ -458,9 +458,6 @@
 
                 // Update resume via post w/all info (probably going to create new address)
                 //this.saveResume();
-
-                // Move on to the next page
-                this.$router.push({ name: 'resume-summary'});
             },
             createUserPhone: function () {
                 this.$axios

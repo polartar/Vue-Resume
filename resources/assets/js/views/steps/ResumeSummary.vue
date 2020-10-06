@@ -12,7 +12,7 @@
                 </div>
                 <div class="cell medium-6">
                     <div class="form-group">
-                        <button class="button" @click="saveSummary">Save and Next</button>
+                        <router-link tag="button" class="button" v-on:click.native="saveSummary" to="work-experience">Save and Next</router-link>
                     </div>
                 </div>
             </div>
@@ -41,14 +41,13 @@
                         'name': this.name,
                     })
                     .then(response => {
-                        this.$toasted.show('Successfully updated the resume name', {
+                        this.$toasted.show('Successfully updated the resume summary', {
                             position: 'bottom-center',
                             duration: 3000,
                             fullWidth: true,
                             type: 'success',
                         });
                         this.$store.commit('reloadResume');
-                        this.$router.push({ name: 'work-experience'});
                     })
                     .catch(error => {
                         this.$toasted.show('Uh oh, we had some trouble with that.', {
