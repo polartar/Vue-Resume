@@ -506,9 +506,21 @@
                             this.saveResume();
                         }
                         console.log(this.$store.state.userEmailIds);
+                        this.$toasted.show('Successfully saved your contact information', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'success',
+                        });
                     })
                     .catch(error => {
                         console.log('failed to create address:', error);
+                        this.$toasted.show('Uh oh, we had an issue with that', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'error',
+                        });
                         return null;
                     });
             },
