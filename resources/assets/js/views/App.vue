@@ -64,7 +64,7 @@
                     {
                         link: 'education',
                         title: 'Education',
-                        icon: 'el-icon-school',
+                        icon: 'el-icon-collection',
                     },
                     {
                         link: 'skills',
