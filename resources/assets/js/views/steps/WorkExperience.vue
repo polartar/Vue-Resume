@@ -64,6 +64,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="button" @click="next">Next</button>
             </div>
         </div>
     </div>
@@ -171,6 +172,9 @@
                 this.endDate = '';
                 this.description = '';
                 this.currentEmployer = false;
+            },
+            next: function () {
+                this.$router.push({name: 'education'});
             }
         }
     }

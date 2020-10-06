@@ -12,11 +12,12 @@
                             class="fancy-select fancy-select-full-width"
                         >
                             <option disabled selected>-- Pick a Design --</option>
-                            <option v-for="design in resumeDesigns" :value="design.id">
+                            <option v-for="design in resumeDesigns" :value="design.id" :key="design.id">
                                 {{ design.name }}
                             </option>
                         </select>
                     </div>
+                    <button class="button" @click="nextView">Save and Next</button>
                 </div>
             </div>
         </div>
@@ -59,6 +60,9 @@
                             type: 'error',
                         });
                     });
+            },
+            nextView: function () {
+                this.$router.push({ name: 'contact-information'})
             }
         }
     }

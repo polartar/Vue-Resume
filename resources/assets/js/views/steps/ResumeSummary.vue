@@ -12,7 +12,7 @@
                 </div>
                 <div class="cell medium-6">
                     <div class="form-group">
-                        <button class="button" @click="saveSummary">Save</button>
+                        <button class="button" @click="saveSummary">Save and Next</button>
                     </div>
                 </div>
             </div>
@@ -48,6 +48,7 @@
                             type: 'success',
                         });
                         this.$store.commit('reloadResume');
+                        this.$router.push({ name: 'work-experience'});
                     })
                     .catch(error => {
                         this.$toasted.show('Uh oh, we had some trouble with that.', {

@@ -12,5 +12,15 @@
                 </div>
             </div>
         </div>
+        <button class="button" @click="next">Next</button>
     </div>
 </template>
+<script>
+    export default {
+        methods: {
+            next: function () {
+                this.$router.push({name: 'customize-design'});
+            }
+        }
+    }
+</script>
