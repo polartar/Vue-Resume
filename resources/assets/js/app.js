@@ -9,7 +9,12 @@ import axios from 'axios'
 import Toasted from 'vue-toasted';
 Vue.use(Toasted);
 
+// Docs: https://element.eleme.io/#/en-US/component/quickstart
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.use(VueRouter);
+Vue.use(ElementUI);
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
 

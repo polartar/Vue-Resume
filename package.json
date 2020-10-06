@@ -30,6 +30,7 @@
         "@fortawesome/pro-regular-svg-icons": "^5.14.0",
         "@fortawesome/pro-solid-svg-icons": "^5.14.0",
         "cleave.js": "^1.6.0",
+        "element-ui": "^2.13.2",
         "es6-promise": "^4.2.8",
         "foundation-sites": "^6.6.3",
         "moment": "^2.27.0",
