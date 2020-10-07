@@ -80,19 +80,17 @@
                                 </em>
                                 <br/>
                                 {{ education.degree_received }} in {{ education.field_of_study }}
-<!--                                <span v-if="education.resume_descriptions.length > 0">-->
-<!--                                    <br/>-->
-<!--                                    {{ education.resume_descriptions[0].description }}-->
-<!--                                </span>-->
                             </p>
                             <button class="button close-button float-right" @click="removeEducation(education.id)">X</button>
                         </div>
                     </div>
                 </div>
+                <div class="cell">
+                    <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
+                    <router-link tag="button" class="button" to="skills">Next</router-link>
+                </div>
             </div>
         </div>
-        <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
-        <router-link tag="button" class="button" to="skills">Next</router-link>
     </div>
 </template>
 
