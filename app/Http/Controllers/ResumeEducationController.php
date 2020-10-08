@@ -39,12 +39,12 @@ class ResumeEducationController extends Controller
         $validated = $request->validated();
 
         try {
-            ResumeEducation::create($validated);
+            $resumeEducation = ResumeEducation::create($validated);
         } catch (\Exception $e) {
             return response(['success' => 'false', 'message' => $e], 400);
         }
 
-        return response(['success' => 'true'], 201);
+        return response(['success' => 'true', 'id' => $resumeEducation->id], 201);
     }
 
     /**

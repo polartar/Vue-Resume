@@ -40,4 +40,9 @@ class ResumeEducation extends Model
     {
         $this->belongsTo(Resume::class);
     }
+
+    public function educationDescriptions()
+    {
+        return $this->hasMany(EducationDescription::class);
+    }
 }
