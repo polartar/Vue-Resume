@@ -18,6 +18,7 @@ Vue.use(ElementUI);
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
 
+/* #region(collapsed) Store */
 const store = new Vuex.Store({
     state: {
         resume: {},
@@ -184,6 +185,7 @@ const store = new Vuex.Store({
         }
     }
 });
+/* #endregion */
 
 import App from './views/App'
 import Home from './views/Home'
