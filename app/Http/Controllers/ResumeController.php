@@ -69,7 +69,7 @@ class ResumeController extends Controller
             'user.user_phones',
             'resumeSummaries',
             'resumeWorkExperiences.resumeDescriptions',
-            'resumeEducations',
+            'resumeEducations.educationDescriptions',
             'resumeDesign'
         ])->find($resume->id);
 
