@@ -41,8 +41,8 @@
 
                 <div class="cell">
                     <div class="form-group">
-                        <label>Description (temporarily out of order)</label>
-                        <textarea required name="summary" rows="8" cols="80"></textarea>
+                        <label>Description</label>
+                        <textarea required v-model="summary" rows="8" cols="80"></textarea>
                     </div>
                 </div>
                 <div class="cell medium-6">
@@ -123,7 +123,10 @@
                 startDate: null,
                 endDate: null,
                 currentlyStudying: false,
+                
                 show: false,
+
+                summary: '',
             }
         },
 
@@ -132,7 +135,7 @@
         },
 
         methods: {
-            createEducationExperience: function () {
+            createEducationExperience: async function () {
                 this.$axios
                     .post('/resume-education', {
                         resume_id: this.resumeId,
@@ -147,14 +150,8 @@
                     })
                     .then(response => {
                         this.show = false;
+                        this.createEducationDescription(response.data.id);
                         this.formReset();
-                        this.$toasted.show('Successfully added education!', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
-                        });
-                        this.$store.commit('reloadResume');
                     })
                     .catch(error => {
                         this.$toasted.show('Uh oh, we had some trouble with that.', {
@@ -183,6 +180,32 @@
                             fullWidth: true,
                             type: 'error',
                         });
+                    });
+            },
+            createEducationDescription: function (resumeEducationId) {
+                this.$axios
+                    .post('/education-description', {
+                        resume_education_id: resumeEducationId,
+                        description: this.summary,
+                    })
+                    .then(response => {
+                        this.$store.commit('reloadResume');
+                        this.$toasted.show('Successfully added education!', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'success',
+                        });
+                    })
+                    .catch(error => {
+                        this.$toasted.show('Uh oh, we had some trouble with that.', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'error',
+                        });
+                        console.log(error);
+                        return;
                     });
             },
             formReset: function () {

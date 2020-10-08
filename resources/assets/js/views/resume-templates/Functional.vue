@@ -35,10 +35,10 @@
         <div v-for="education in resume.resume_educations">
             <span class="education-experience-title float-left">{{ education.school_name }}</span>
             <span class="education-experience-dates float-right">{{ education.start_date}} to {{ education.end_date ? education.end_date : 'present' }}</span>
-<!--            <br/>-->
-<!--            <span v-if="education.resume_descriptions.length > 0">-->
-<!--                {{ education.resume_descriptions[0].description }}-->
-<!--            </span>-->
+           <br/>
+           <span v-if="education.education_descriptions && education.education_descriptions.length > 0">
+               {{ education.education_descriptions[0].description }}
+           </span>
             <br/>
         </div>
 
