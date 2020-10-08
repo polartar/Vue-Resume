@@ -28,14 +28,16 @@ Route::middleware(['auth:sanctum'])->get('/resume-builder/{any?}', 'App\Http\Con
 
 Route::middleware(['auth:sanctum'])->get('/new-resume', 'App\Http\Controllers\ResumeController@create')->name('new-resume');
 
-Route::resource('resume', \App\Http\Controllers\ResumeController::class)->middleware('auth:sanctum');
-Route::resource('user-phone', \App\Http\Controllers\UserPhoneController::class)->middleware('auth:sanctum');
-Route::resource('user-email', \App\Http\Controllers\UserEmailController::class)->middleware('auth:sanctum');
-Route::resource('user-address', \App\Http\Controllers\UserAddressController::class)->middleware('auth:sanctum');
-Route::resource('resume-summary', \App\Http\Controllers\ResumeSummaryController::class)->middleware('auth:sanctum');
-Route::resource('resume-description', \App\Http\Controllers\ResumeDescriptionController::class)->middleware('auth:sanctum');
-Route::resource('resume-work-experience', \App\Http\Controllers\ResumeWorkExperienceController::class)->middleware('auth:sanctum');
-Route::resource('resume-education', \App\Http\Controllers\ResumeEducationController::class)->middleware('auth:sanctum');
-Route::resource('resume-design', \App\Http\Controllers\ResumeDesignController::class)->middleware('auth:sanctum');
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::resource('resume', \App\Http\Controllers\ResumeController::class);
+    Route::resource('user-phone', \App\Http\Controllers\UserPhoneController::class);
+    Route::resource('user-email', \App\Http\Controllers\UserEmailController::class);
+    Route::resource('user-address', \App\Http\Controllers\UserAddressController::class);
+    Route::resource('resume-summary', \App\Http\Controllers\ResumeSummaryController::class);
+    Route::resource('resume-description', \App\Http\Controllers\ResumeDescriptionController::class);
+    Route::resource('resume-work-experience', \App\Http\Controllers\ResumeWorkExperienceController::class);
+    Route::resource('resume-education', \App\Http\Controllers\ResumeEducationController::class);
+    Route::resource('resume-design', \App\Http\Controllers\ResumeDesignController::class);
+    Route::resource('education-description', \App\Http\Controllers\EducationDescriptionController::class);
+});
 
