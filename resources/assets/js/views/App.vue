@@ -10,7 +10,7 @@
                 :key="step.link"
                 :title="step.title" 
                 :icon="step.icon"
-                v-on:click.native="$router.push({name: step.link, query: $route.query})"
+                v-on:click.native="step.link === $route.name ? null : $router.push({name: step.link, query: $route.query})"
                 >
             </el-step>
         </el-steps>
