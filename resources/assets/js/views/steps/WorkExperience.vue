@@ -44,7 +44,8 @@
                     </div>
                 </div>
             </div>
-            <button class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
+            <button v-if="edit" class='button' type='button' @click='updateWorkExperience'>Update Work Experience</button>
+            <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
         <div class='resume-step-form' v-if="!show">
             <div class='grid-x grid-margin-x'>
@@ -52,7 +53,8 @@
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
-                                {{ workExperience.position_title }} at {{ workExperience.position_company }},
+                                {{ workExperience.position_title }} at {{ workExperience.position_company }}
+                                <br/>
                                 <em>{{ workExperience.position_start_date }} to
                                     {{ workExperience.position_end_date ? workExperience.position_end_date : "present" }}</em>
                                 <span v-if="workExperience.resume_descriptions.length > 0">
@@ -60,7 +62,8 @@
                                     {{ workExperience.resume_descriptions[0].description }}
                                 </span>
                             </p>
-                            <button class="button close-button float-right" @click="removeWorkExperience(workExperience.id)">X</button>
+                            <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeWorkExperience(workExperience.id)"></el-button>
+                            <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editWorkExperience(workExperience)"></el-button>
                         </div>
                     </div>
                 </div>
@@ -90,6 +93,8 @@
                 'description': '',
                 'currentEmployer': false,
                 'show': false,
+                'edit': false,
+                'editId': null,
             }
         },
 
@@ -148,6 +153,49 @@
                     });
                 return id;
             },
+            editWorkExperience: function (workExperience) {
+                console.log(workExperience);
+                this.editId = workExperience.id
+                this.title = workExperience.position_title
+                this.company = workExperience.position_company
+                this.startDate = workExperience.position_start_date
+                this.endDate = workExperience.position_end_date
+                if (workExperience.resume_descriptions.length > 0)
+                    this.description = workExperience.resume_descriptions[0].description
+                this.currentEmployer = workExperience.current_employer
+                this.show = true
+                this.edit = true
+            },
+            updateWorkExperience: function () {
+                this.$axios
+                    .put('/resume-work-experience/' + this.editId, {
+                        'position_title': this.title,
+                        'position_company': this.company,
+                        'position_start_date': this.startDate,
+                        'position_end_date': this.endDate,
+                        'current_employer': this.currentEmployer,
+                    })
+                    .then(response => {
+                        this.resetForm();
+                        this.show = false;
+                        this.edit = false;
+                        this.$store.commit('reloadResume');
+                        this.$toasted.show('Successfully updated work experience!', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'success',
+                        });
+                    })
+                    .catch(error => {
+                        this.$toasted.show('Uh oh, we had some trouble with that.', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'error',
+                        });
+                    });
+            },
             removeWorkExperience: function (workExperienceId) {
                 this.$axios.delete('/resume-work-experience/' + workExperienceId)
                     .then(response => {
@@ -179,3 +227,8 @@
         }
     }
 </script>
+<style scoped>
+    .el-button {
+        margin-right: 10px;
+    }
+</style>
