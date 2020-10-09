@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreResumeWorkExperienceRequest;
+use App\Http\Requests\UpdateResumeWorkExperienceRequest;
 use App\Models\ResumeWorkExperience;
 use Illuminate\Http\Request;
 
@@ -76,7 +77,7 @@ class ResumeWorkExperienceController extends Controller
      * @param  \App\Models\ResumeWorkExperience  $resumeWorkExperience
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreResumeWorkExperienceRequest $request, ResumeWorkExperience $resumeWorkExperience)
+    public function update(UpdateResumeWorkExperienceRequest $request, ResumeWorkExperience $resumeWorkExperience)
     {
         $validated = $request->validated();
 
