@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreResumeSummaryRequest;
+use App\Http\Requests\UpdateResumeSummaryRequest;
 use App\Models\ResumeSummary;
 use Illuminate\Http\Request;
 
@@ -76,7 +77,7 @@ class ResumeSummaryController extends Controller
      * @param  \App\Models\ResumeSummary  $resumeSummary
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreResumeSummaryRequest $request, ResumeSummary $resumeSummary)
+    public function update(UpdateResumeSummaryRequest $request, ResumeSummary $resumeSummary)
     {
         $validated = $request->validated();
 

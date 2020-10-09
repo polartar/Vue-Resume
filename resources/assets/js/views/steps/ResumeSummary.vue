@@ -16,7 +16,8 @@
                     </div>
                 </div>
             </div>
-            <button class='button' type='button' @click='saveSummary'>Add Summary</button>
+            <button v-if="edit" class='button' type='button' @click='updateSummary'>Update Summary</button>
+            <button v-else class='button' type='button' @click='saveSummary'>Add Summary</button>
         </div>
         <div class='resume-step-form' v-if="!show">
             <div class='grid-x grid-margin-x'>
@@ -26,7 +27,8 @@
                             <p class="float-left" style="margin-bottom: 0;">
                                 {{ summary.name }}
                             </p>
-                            <button class="button close-button float-right" @click="removeSummary(summary.id)">X</button>
+                            <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeSummary(summary.id)"></el-button>
+                            <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editSummary(summary.id)"></el-button>
                         </div>
                     </div>
                 </div>
@@ -51,6 +53,8 @@
             return {
                 'name': '',
                 'show': false,
+                'edit': false,
+                'editId': '',
             }
         },
         methods: {
@@ -62,7 +66,7 @@
                         'name': this.name,
                     })
                     .then(response => {
-                        this.$toasted.show('Successfully updated the resume summary', {
+                        this.$toasted.show('Successfully added the resume summary', {
                             position: 'bottom-center',
                             duration: 3000,
                             fullWidth: true,
@@ -79,6 +83,39 @@
                             type: 'error',
                         });
                     });
+            },
+            updateSummary: function () {
+                this.show = false;
+                this.$axios
+                    .put('/resume-summary/' + this.editId, {
+                        'name': this.name,
+                    })
+                    .then(response => {
+                        this.$toasted.show('Successfully updated the resume summary', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'success',
+                        });
+                        this.$store.commit('reloadResume');
+                        this.name = '';
+                        this.edit = false;
+                    })
+                    .catch(error => {
+                        this.$toasted.show('Uh oh, we had some trouble with that.', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'error',
+                        });
+                    });
+            },
+            editSummary: function (summaryId) {
+                console.log(this.resume.resume_summaries.find(obj => obj.id === summaryId));
+                this.name = this.resume.resume_summaries.find(obj => obj.id === summaryId).name;
+                this.edit = true;
+                this.editId = summaryId;
+                this.show = true;
             },
             removeSummary: function (summaryId) {
                 this.$axios
@@ -104,3 +141,8 @@
         }
     }
 </script>
+<style scoped>
+    .el-button {
+        margin-right: 10px;
+    }
+</style>
