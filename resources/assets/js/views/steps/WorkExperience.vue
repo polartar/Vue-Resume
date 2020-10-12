@@ -2,7 +2,7 @@
     <div>
         <h3>
             Work Experience
-            <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
+            <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
                 <span v-if="!show">Create</span><span v-else>See All Experience</span>
             </small>
         </h3>
@@ -44,6 +44,7 @@
                     </div>
                 </div>
             </div>
+            <button v-if="edit" class="button" @click="toggleView" style="background-color: grey!important;">Cancel</button>
             <button v-if="edit" class='button' type='button' @click='updateWorkExperience'>Update Work Experience</button>
             <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
@@ -95,6 +96,7 @@
                 'show': false,
                 'edit': false,
                 'editId': null,
+                'editDescriptionId': null,
             }
         },
 
@@ -116,7 +118,21 @@
                         'type': 'paragraph',
                     })
                     .then(response => {
-                        console.log(response);
+                        //
+                    })
+                    .catch(error => {
+                        console.log('error create resume description', error);
+                    });
+            },
+            updateResumeDescription: function (resumeDescriptionId, workExperienceId) {
+                this.$axios
+                    .put(`/resume-description/${resumeDescriptionId}`, {
+                        'resume_work_experience_id': workExperienceId,
+                        'description': this.description,
+                        'type': 'paragraph',
+                    })
+                    .then(response => {
+                        //
                     })
                     .catch(error => {
                         console.log('error create resume description', error);
@@ -154,17 +170,12 @@
                 return id;
             },
             editWorkExperience: function (workExperience) {
-                console.log(workExperience);
-                this.editId = workExperience.id
-                this.title = workExperience.position_title
-                this.company = workExperience.position_company
-                this.startDate = workExperience.position_start_date
-                this.endDate = workExperience.position_end_date
-                if (workExperience.resume_descriptions.length > 0)
-                    this.description = workExperience.resume_descriptions[0].description
-                this.currentEmployer = workExperience.current_employer
-                this.show = true
-                this.edit = true
+                this.setupEditing(workExperience);
+                this.show = true;
+                this.edit = true;
+                this.editId = workExperience.id;
+                if (!! workExperience.resume_descriptions.length > 0)
+                    this.editDescriptionId = workExperience.resume_descriptions[0].id;
             },
             updateWorkExperience: function () {
                 this.$axios
@@ -176,9 +187,12 @@
                         'current_employer': this.currentEmployer,
                     })
                     .then(response => {
+                        this.updateResumeDescription(this.editDescriptionId, this.editId);
                         this.resetForm();
                         this.show = false;
                         this.edit = false;
+                        this.editId = null;
+                        this.editDescriptionId = null;
                         this.$store.commit('reloadResume');
                         this.$toasted.show('Successfully updated work experience!', {
                             position: 'bottom-center',
@@ -216,6 +230,16 @@
                         });
                     });
             },
+            setupEditing: function (workExperience) {
+                this.editId = workExperience.id;
+                this.title = workExperience.position_title;
+                this.company = workExperience.position_company;
+                this.startDate = workExperience.position_start_date;
+                this.endDate = workExperience.position_end_date;
+                if (workExperience.resume_descriptions.length > 0)
+                    this.description = workExperience.resume_descriptions[0].description;
+                this.currentEmployer = workExperience.current_employer;
+            },
             resetForm: function () {
                 this.title = '';
                 this.company = '';
@@ -223,7 +247,17 @@
                 this.endDate = '';
                 this.description = '';
                 this.currentEmployer = false;
-            }
+            },
+            resetEditing: function () {
+                this.edit = false;
+                this.editId = null;
+                this.editDescriptionId = null;
+                this.resetForm();
+            },
+            toggleView: function () {
+                this.show = !this.show;
+                this.resetEditing();
+            },
         }
     }
 </script>
