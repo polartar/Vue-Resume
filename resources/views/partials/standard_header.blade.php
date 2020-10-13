@@ -9,7 +9,7 @@
 				</svg>
 				<span class="main-menu-toggle-text">Menu</span>
 			</span>
-			<a class="header-logo" href="/">
+			<a class="header-logo" href="{{ route('home') }}">
 				<img width="250" height="72" src="/assets/images/logos/cheeky-scientist-logo-white.png"
 				 	srcset="/assets/images/logos/cheeky-scientist-logo-white.svg" alt="Cheeky Scientist Logo">
 			</a>
@@ -18,6 +18,7 @@
 
 			<ul class="secondary-nav-menu">
 				<li><a rel="noopener" target="_blank" href="https://cheekyscientist.com/contact/">Contact Us</a></li>
+				<li><a href="{{ route('account.logout') }}">Logout</a></li>
 			</ul>
 		</div>
 		<div class="header-search-form">
@@ -28,30 +29,4 @@
 			</div>
 		</div>
 	</div>
-
-	<nav class="primary-nav">
-		<div class="primary-nav-container">
-            <ul class="primary-nav-menu">
-                <li
-                    @if(Route::currentRouteName() == 'home')
-                        class="current-menu-item"
-                    @endif
-                >
-                    <a href="{{ route('home') }}">Home</a>
-                </li>
-
-                <li
-                    @if(Route::currentRouteName() == 'resume-builder')
-                        class="current-menu-item"
-                    @endif
-                >
-                    <a href="{{ route('resume-builder') }}">Resume Builder</a>
-                </li>
-
-                <li>
-                    <a href="{{ route('account.logout') }}">Logout</a>
-                </li>
-            </ul>
-		</div>
-	</nav>
 </header>

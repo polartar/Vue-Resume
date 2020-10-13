@@ -1,37 +1,48 @@
 @extends('layouts.user')
 
 @section('content')
-    <div class="grid-container">
-        <div class="grid-x grid-margin-x">
+    <section class="page-section page-section-slim page-section-white">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
 
-            <div class="cell">
-                @if(count($resumes) == 0)
-                    <h3>Welcome, you don't have any resumes yet.</h3>
-                @else
-                    <h3>Welcome back, choose a resume or create a new one.</h3>
-                @endif
-            </div>
-
-            <div class="cell">
-                <ul>
-                    @foreach($resumes as $resume)
-                        <li>
-                            <a href="{{ route('resume-builder', ['resume' => $resume->id]) }}">{{ $resume->name }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-
-
-            <div class="cell">
-                @if(count($resumes) == 0)
-                    <h3>Let's fix that!</h3>
-                @endif
-                <a href="{{ route('new-resume') }}" class="button">Build a new resume!</a>
+                <div class="cell">
+                    @if(count($resumes) == 0)
+                        <h1 class="m-b-n">Welcome, You Don't Have Any Resumes Yet</h1>
+                    @else
+                        <h1 class="m-b-n">Welcome Back, Choose a Resume or Create a New One</h1>
+                    @endif
+                </div>
             </div>
         </div>
-    </div>
-
+    </section>
+    <section class="page-section page-section-light-gray">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                @foreach($resumes as $resume)
+                    <div class="cell medium-6 large-4">
+                        <div class="card">
+                            <h3 class="card-heading">{{ $resume->name }}</h3>
+                            <div class="card-conent">
+                                Created on: {{ $resume->created_at->timezone('America/New_York')->format('F j, Y') }}
+                            </div>
+                            <div class="card-button">
+                                <a href="{{ route('resume-builder', ['resume' => $resume->id]) }}" class="button">Edit Resume</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <section class="page-section page-section-slim  page-section-secondary-blue">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                <div class="cell text-center">
+                    <a href="{{ route('new-resume') }}" class="button button-no-margin">Build a new resume!</a>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')

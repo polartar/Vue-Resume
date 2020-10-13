@@ -20,7 +20,7 @@ h1 {
         line-height: 1.125;
     }
     @include breakpoint(large) {
-        font-size: 3.75rem * $font-size-multiplier;
+        font-size: 3.25rem * $font-size-multiplier;
         line-height: 1.125;
     }
     @media print {
