@@ -12,7 +12,8 @@ npm-debug.log
 yarn-error.log
 .idea/*
 
-public/assets/*
-public/css/app.css
+public/assets/
+public/css/
 public/mix-manifest.json
-public/js/app.js
+public/js/
+resources/views/vendor/mail/html/themes/default.css
