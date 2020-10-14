@@ -40,16 +40,21 @@ class FetchUserInfo extends Command
     {
         // I want to show all users, their emails, a count of their resumes
         while(true) {
-            $headers = ['Name', 'Email', 'Resumes', 'Joined'];
-            $users = User::with('resumes')->orderBy('first_name')->get();
+            $headers = ['Name', 'Email', 'Resumes', 'Joined', 'Last Active'];
             $userArray = [];
-    
-            foreach ($users as $user) {
-                array_push($userArray, [$user->fullName, $user->email, count($user->resumes), $user->created_at]);
+
+            foreach (User::with('resumes')->cursor() as $user) {
+                array_push($userArray, [$user->fullName, $user->email, count($user->resumes), $user->created_at, $user->lastActiveTimestamp]);
             }
 
             system('clear');
-            $this->table($headers, $userArray);
+            
+            $this->table($headers, 
+                collect($userArray)->sortBy(function($user) {
+                    return $user[4]; // order by last active timestamp attribute
+                })
+            );
+
             $this->info('Press ctrl + c to quit');
 
             sleep(5);

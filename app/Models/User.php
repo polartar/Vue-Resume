@@ -10,6 +10,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
 use App\Models\Concerns\UsesUuid;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -88,5 +90,21 @@ class User extends Authenticatable
 
     public function getReportInformationAttribute() {
         return $this->first_name . " " . $this->last_name . "\t" . $this->email . "\t" . count($this->resumes);
+    }
+
+    public function getLastActiveTimestampAttribute() {
+        $timestamp = DB::table('sessions')
+            ->select('last_activity')
+            ->where('user_id', $this->id)
+            ->orderBy('last_activity', 'desc')
+            ->first();
+
+        // dd($timestamp);
+        
+        if (!$timestamp) {
+            return null;
+        }
+
+        return Carbon::createFromTimestamp($timestamp->last_activity);
     }
 }
