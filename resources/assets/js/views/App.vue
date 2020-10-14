@@ -91,4 +91,10 @@
     .el-step {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     }
+
+    @media print {
+        body *, .el-steps * {
+            visibility: hidden;
+        }
+    }
 </style>
