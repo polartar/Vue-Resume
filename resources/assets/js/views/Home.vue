@@ -4,7 +4,7 @@
             <div class="form-group" v-if="this.$route.name === 'home'">
                 <label>Resume Name</label>
                 <input :placeholder="resumeName" type="text" @change="updateResumeName">
-                <router-link tag="button" class="button" v-on:click.native="saveResumeName" to="select-design">Save and Next</router-link>
+                <button class="button" @click="saveResumeName" to="select-design">Save and Next</button>
             </div>
             <router-view></router-view>
         </div>
@@ -134,13 +134,15 @@
                             fullWidth: true,
                             type: 'success',
                         });
+                        this.$router.push({name: 'select-design', query: this.$route.query});
                     }).catch(response => {
-                    this.$toasted.show('Uh oh, we had some trouble with that.', {
-                        position: 'bottom-center',
-                        duration: 3000,
-                        fullWidth: true,
-                        type: 'error',
-                    });
+                        this.$toasted.show('Uh oh, we had some trouble with that.', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'error',
+                        });
+                        console.log(response);
                 });
             }
         }
