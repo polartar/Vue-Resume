@@ -80,8 +80,9 @@
                                 </em>
                                 <br/>
                                 {{ education.degree_received }} in {{ education.field_of_study }}
-                            </p>
-                            <button class="button close-button float-right" @click="removeEducation(education.id)">X</button>
+                            </p>                            
+                            <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeEducation(education.id)"></el-button>
+                            <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editEducation(education)"></el-button>
                         </div>
                     </div>
                 </div>
@@ -125,6 +126,9 @@
                 currentlyStudying: false,
                 
                 show: false,
+                edit: false,
+                editId: null,
+                editDescriptionId: null,
 
                 summary: '',
             }
@@ -161,6 +165,26 @@
                             type: 'error',
                         });
                     });
+            },
+            editEducation: function (education) {
+                this.setupEditing(education);
+                this.show = true;
+                this.edit = true;
+                this.editId = education.id;
+                if (!! education.education_descriptions.length > 0)
+                    this.editDescriptionId = education.education_descriptions[0].id;
+            },
+            setupEditing: function (education) {
+                this.schoolName         = education.school_name
+                this.type               = education.type
+                this.degreeReceived     = education.degree_received
+                this.fieldOfStudy       = education.field_of_study
+                this.completed          = education.completed
+                this.startDate          = education.start_date
+                this.endDate            = education.end_date
+                this.currentlyStudying  = education.currently_studying
+                if (!! education.education_descriptions.length > 0)
+                    this.summary = education.education_descriptions[0].description;
             },
             removeEducation: function (educationId) {
                 this.$axios.delete('/resume-education/' + educationId)
