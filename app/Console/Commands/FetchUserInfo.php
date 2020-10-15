@@ -44,7 +44,7 @@ class FetchUserInfo extends Command
             $userArray = [];
 
             foreach (User::with('resumes')->cursor() as $user) {
-                array_push($userArray, [$user->fullName, $user->email, count($user->resumes), $user->created_at, $user->lastActiveTimestamp]);
+                array_push($userArray, [$user->fullName, $user->email, count($user->resumes), $user->created_at, $user->last_active_timestamp]);
             }
 
             system('clear');

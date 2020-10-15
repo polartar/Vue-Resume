@@ -62,6 +62,7 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'last_active_timestamp',
     ];
 
     public function resumes() {
