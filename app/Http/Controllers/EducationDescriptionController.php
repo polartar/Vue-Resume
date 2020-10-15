@@ -76,9 +76,17 @@ class EducationDescriptionController extends Controller
      * @param  \App\Models\EducationDescription  $educationDescription
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EducationDescription $educationDescription)
+    public function update(StoreEducationDescription $request, EducationDescription $educationDescription)
     {
-        //
+        $validated = $request->validated();
+
+        try {
+            $educationDescription->update($validated);
+        } catch (\Exception $e) {
+            return response(['success' => 'false', 'message' => $e], 400);
+        }
+
+        return response(['success' => 'true', 'id' => $educationDescription->id], 201);
     }
 
     /**
