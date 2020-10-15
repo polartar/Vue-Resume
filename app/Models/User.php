@@ -103,9 +103,9 @@ class User extends Authenticatable
         // dd($timestamp);
         
         if (!$timestamp) {
-            return null;
+            return 'No active session';
         }
 
-        return Carbon::createFromTimestamp($timestamp->last_activity);
+        return Carbon::createFromTimestamp($timestamp->last_activity)->diffForHumans();
     }
 }
