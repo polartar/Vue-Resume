@@ -10,10 +10,7 @@ class GenerateResumePdfController extends Controller
 {
     public function __invoke(Resume $resume)
     {
-        dd($resume);
-        //return view('templates.golden-standard');
-        $pdf = PDF::loadView('templates.golden-standard');
-        
+        $pdf = PDF::loadView('templates.golden-standard', compact('resume'));   
         return $pdf->download('resume.pdf');
     }
 }
