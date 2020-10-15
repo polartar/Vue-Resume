@@ -76,7 +76,7 @@ class ResumeEducationController extends Controller
      * @param  \App\Models\ResumeEducation  $resumeEducation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ResumeEducation $resumeEducation)
+    public function update(StoreResumeEducationRequest $request, ResumeEducation $resumeEducation)
     {
         $validated = $request->validated();
 
