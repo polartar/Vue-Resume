@@ -2,6 +2,7 @@
     <div class="grid-x grid-margin-x">
         <div class="cell medium-6" v-if="this.$route.name !== 'full-page-preview'">
             <div class="form-group" v-if="this.$route.name === 'home'">
+                <h3>Home</h3>
                 <label>Resume Name</label>
                 <input :placeholder="resumeName" type="text" @change="updateResumeName">
                 <button class="button" @click="saveResumeName" to="select-design">Save and Next</button>
