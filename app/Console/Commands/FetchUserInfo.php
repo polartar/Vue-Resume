@@ -52,7 +52,7 @@ class FetchUserInfo extends Command
             $this->table($headers, 
                 collect($userArray)->sortBy(function($user) {
                     return $user[4]; // order by last active timestamp attribute
-                }, SORT_ASC)
+                }, SORT_DESC)
             );
 
             $this->info('Press ctrl + c to quit');
