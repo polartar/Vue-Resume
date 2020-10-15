@@ -64,7 +64,9 @@
                     </div>
                 </div>
             </div>
-            <button class="button" type="button" @click="createEducationExperience">Add Education</button>
+            <button v-if="edit" class="button" @click="toggleView" style="background-color: grey!important;">Cancel</button>
+            <button v-if="edit" class='button' type='button' @click='updateEducation'>Update Education</button>
+            <button v-else class="button" type="button" @click="createEducationExperience">Add Education</button>
         </div>
         <div class='resume-step-form' v-if="!show">
             <div class='grid-x grid-margin-x'>
@@ -174,6 +176,63 @@
                 if (!! education.education_descriptions.length > 0)
                     this.editDescriptionId = education.education_descriptions[0].id;
             },
+            updateEducation: async function () {
+                this.$axios
+                    .put('/resume-education/' + this.editId, {
+                        'resume_id'                 : this.resume.id,
+                        'school_name'               : this.schoolName,
+                        'type'                      : this.type,
+                        'degree_received'           : this.degreeReceived,
+                        'field_of_study'            : this.fieldOfStudy,
+                        'completed'                 : this.completed,
+                        'start_date'                : this.startDate,
+                        'end_date'                  : this.endDate,
+                        'currently_studying'        : this.currentlyStudying,
+                    })
+                    .then(response =>  {
+                        this.updateEducationDescription();
+                    })
+                    .catch(error => {
+                        this.$toasted.show('Uh oh, we had some trouble with that.', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'error',
+                        });
+                    });
+            },
+            updateEducationDescription: function () {
+                this.$axios
+                    .put(`/education-description/${this.editDescriptionId}`, {
+                        'resume_education_id': this.editId,
+                        'description': this.summary,
+                        'type': 'paragraph',
+                    })
+                    .then(response => {
+                        this.formReset();
+                        this.show = false;
+                        this.edit = false;
+                        this.editId = null;
+                        this.editDescriptionId = null;
+                        this.$store.commit('reloadResume');
+                        
+                        this.$toasted.show('Successfully updated education experience!', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'success',
+                        });
+                    })
+                    .catch(error => {
+                        this.$toasted.show('Uh oh, we had some trouble with that.', {
+                            position: 'bottom-center',
+                            duration: 3000,
+                            fullWidth: true,
+                            type: 'error',
+                        });
+                        console.log('error create education description', error);
+                    });
+            },
             setupEditing: function (education) {
                 this.schoolName         = education.school_name
                 this.type               = education.type
@@ -241,6 +300,16 @@
                 this.startDate = null;
                 this.endDate = null;
                 this.currentlyStudying = false;
+            },
+            resetEditing: function () {
+                this.edit = false;
+                this.editId = null;
+                this.editDescriptionId = null;
+                this.formReset();
+            },
+            toggleView: function () {
+                this.show = !this.show;
+                this.resetEditing();
             },
         }
     }
