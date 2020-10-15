@@ -506,7 +506,7 @@
                         if (saveResume) {
                             this.saveResume();
                         }
-                        console.log(this.$store.state.userEmailIds);
+                        
                         this.$toasted.show('Successfully saved your contact information', {
                             position: 'bottom-center',
                             duration: 3000,
@@ -533,11 +533,9 @@
                 updateData['user_email_ids'] = this.$store.state.userEmailIds;
                 updateData['user_address_ids'] = this.$store.state.userAddressIds;
                 updateData['user_phone_ids'] = this.$store.state.userPhoneIds;
-                console.log(updateData, this.$store.state);
                 this.$axios
                     .put('/resume/' + this.resume.id, updateData)
                     .then(response => {
-                        console.log(response);
                         return true;
                     })
                     .catch(error => {
