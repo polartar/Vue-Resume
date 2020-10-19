@@ -16,9 +16,7 @@
              v-if="this.$route.name !== 'full-page-preview'">
             <h4>Preview of {{ resumeName }}</h4>
             <div class="resume-preview-container">
-                <full-page-preview
-                    style="transform: scale(.6); transform-origin: top;"
-                ></full-page-preview>
+                <full-page-preview></full-page-preview>
             </div>
         </div>
     </div>

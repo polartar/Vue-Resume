@@ -112,8 +112,8 @@
     }
 
     .print-paper {
-        width: 794px;
-        /*min-height: 100%;*/
+        /* width: 794px; */
+        min-height: 100%;
         padding: 72px 72px 0 72px;
         background-color: white;
         font-family: Arial, sans-serif;
@@ -162,4 +162,3 @@
         display: block;
     }
 </style>
-

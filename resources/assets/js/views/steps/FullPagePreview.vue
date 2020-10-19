@@ -1,21 +1,20 @@
 <template>
     <div>
-        <div style="display: block;">
-            <el-link type="success" 
-                icon="el-icon-download" 
-                :href="'/generate-resume-pdf/' + resume.id" 
+        <div class="resume-preview-action-links">
+            <el-link type="success"
+                :href="'/generate-resume-pdf/' + resume.id"
                 :underline="false">
                 Download as PDF
             </el-link>
         </div>
-        <div v-if="resume.resume_design" class="resume-container">
+        <div v-if="resume.resume_design" class="resume-container" :style="scaleStylesObject">
             <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
             <functional v-if="resume.resume_design.name === 'Functional'"></functional>
             <combination v-if="resume.resume_design.name === 'Combination'"></combination>
             <recruiter v-if="resume.resume_design.name === 'Recruiter'"></recruiter>
             <sidebar v-if="resume.resume_design.name === 'Sidebar'"></sidebar>
         </div>
-    </div>  
+    </div>
 </template>
 
 <script>
@@ -28,6 +27,14 @@
 
     export default {
         components: {Recruiter, Functional, GoldenStandard, Combination, Sidebar},
+        data() {
+            return {
+                scaleStylesObject: {
+                    transform: "translate(-50%, -50%) "  + "scale(.5)",
+                    transformOrigin: "100% 100%"
+                }
+            }
+        },
         computed: {
             ...mapState([
                 'resume',
@@ -38,7 +45,12 @@
             ])
         },
 
-        mounted() {},
+        mounted() {
+            this.doResize()
+
+            // https://stackoverflow.com/questions/45437827/how-to-use-listeners-in-vue-js-for-events-like-scroll-and-windows-resizing
+            window.addEventListener('resize', this.doResize)
+        },
 
         methods: {
             downloadResume: function () {
@@ -47,24 +59,19 @@
                         FileDownload(response.data, 'resume.pdf');
                     })
                     .catch();
+            },
+
+            // based on  https://css-tricks.com/scaled-proportional-blocks-with-css-and-javascript/
+            doResize: function() {
+                let container = document.querySelector('.resume-preview-container').offsetWidth - 32
+                let resume = 850
+                let scale = (container / resume).toFixed(2)
+                let translate = ((1 - container / resume) * 100).toFixed(0)
+                console.log(this.scaleStylesObject.transform )
+                this.scaleStylesObject.transform = "translate(-" + translate + "%, -" + translate + "%) " + "scale(" + scale + ")"
+                console.log(this.scaleStylesObject.transform )
+
             }
         }
     }
 </script>
-
-<style>
-    div.resume-container {
-        background-color: ghostwhite;
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-flow: row;
-        justify-content: space-around;
-        padding-top: 15px;
-    }
-
-    .el-link {
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    }
-</style>
-

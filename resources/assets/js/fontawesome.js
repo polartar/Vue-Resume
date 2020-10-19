@@ -1,6 +1,7 @@
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import {
     faCaretDown,
+    faCheckSquare
 } from '@fortawesome/pro-solid-svg-icons';
 
 // import {
@@ -13,6 +14,7 @@ import {
 
 library.add(
     faCaretDown,
+    faCheckSquare
 );
 
 

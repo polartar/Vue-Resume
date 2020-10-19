@@ -95,9 +95,9 @@
     }
 
     .print-paper {
-        width: 794px;
+        /* width: 794px; */
         min-height: 100%;
-        padding: 72px 72px 0 72px;
+        padding: 75px;
         background-color: white;
         font-family: "Helvetica Neue", sans-serif;
         font-size: 12pt;

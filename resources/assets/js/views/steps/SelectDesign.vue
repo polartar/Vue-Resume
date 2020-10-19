@@ -4,22 +4,22 @@
 
         <div class="resume-step-form">
             <div class="grid-x grid-margin-x">
-                <div class="cell medium-6">
-                    <div class="form-group">
-                        <div class="fancy-select fancy-select-full-width">
-                            <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
-                            <select
-                                v-model="resume.resume_design_id"
-                                @change="applyDesign"
-                                class="fancy-select fancy-select-full-width"
-                            >
-                                <option disabled selected>-- Pick a Design --</option>
-                                <option v-for="design in resumeDesigns" :value="design.id" :key="design.id">
-                                    {{ design.name }}
-                                </option>
-                            </select>
+                <div class="cell small-6" v-for="design in resumeDesigns">
+                    <div class="card">
+                        <h3 class="card-heading">{{ design.name }}</h3>
+                        <div class="card-image">
+                            <img width="85" height="110" src="https://via.placeholder.com/85x110" alt="">
                         </div>
+                        <label class="button text-center" :class="{
+                                'button-no-fill' : resume.resume_design_id != design.id
+                            }">
+
+                            <input class="hide" type="radio" v-model="resume.resume_design_id" @change="applyDesign" :value="design.id">
+                            <font-awesome-icon v-if="resume.resume_design_id === design.id" aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'check-square']"></font-awesome-icon> Use Design
+                        </label>
                     </div>
+                </div>
+                <div class="cell">
                     <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
                     <router-link to="contact-information" tag="button" class="button">Next</router-link>
                 </div>
