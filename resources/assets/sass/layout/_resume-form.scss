@@ -1,0 +1,26 @@
+.resume-step-heading-container {
+    background: $primary-blue-100;
+    border-radius: $global-radius;
+    margin-bottom: 1rem;
+    padding: .75rem;
+}
+
+.resume-step-heading {
+    font-size: 1.5rem;
+    line-height: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.resume-step-form {
+    background: $white;
+    border-radius: $global-radius;
+    box-shadow: 0 1px 3px rgba($off-black, .5);
+    margin-bottom: 2rem;
+    padding: .75rem;
+}
+
+.resume-form-nav-buttons {
+    display: flex;
+    justify-content: space-around;
+}

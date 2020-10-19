@@ -66,9 +66,9 @@
                 let container = document.querySelector('.resume-preview-container').offsetWidth - 32
                 let resume = 850
                 let scale = (container / resume).toFixed(2)
-                let translate = ((1 - container / resume) * 100).toFixed(0)
+                let translate = ((1 - container / resume) * 100 * -1).toFixed(0)
                 console.log(this.scaleStylesObject.transform )
-                this.scaleStylesObject.transform = "translate(-" + translate + "%, -" + translate + "%) " + "scale(" + scale + ")"
+                this.scaleStylesObject.transform = "translate(" + translate + "%, " + translate + "%) " + "scale(" + scale + ")"
                 console.log(this.scaleStylesObject.transform )
 
             }

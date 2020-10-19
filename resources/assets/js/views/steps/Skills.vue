@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h3>Skills</h3>
+
+        <div class="resume-step-heading-container">
+            <h3 class="resume-step-heading">Skills</h3>
+        </div>
 
         <div class="resume-step-form">
             <div class="grid-x grid-margin-x">

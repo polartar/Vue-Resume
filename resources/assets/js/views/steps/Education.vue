@@ -1,13 +1,15 @@
 <template>
     <div>
-        <h3>
-            Education
-            <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
-                <span v-if="!show">Create</span><span v-else>See All Experience</span>
-            </small>
-        </h3>
+        <div class="resume-step-heading-container">
+            <h3 class="resume-step-heading">
+                Education
+                <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
+                    <span v-if="!show || resume.resume_educations.length == 0">Create</span><span v-else>Cancel</span>
+                </small>
+            </h3>
+        </div>
 
-        <div class="resume-step-form" v-if="show">
+        <div class="resume-step-form" v-if="show || resume.resume_educations.length == 0">
             <div class="grid-x grid-margin-x">
                 <div class="cell medium-6">
                     <div class="form-group">
@@ -18,12 +20,15 @@
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>School Type</label>
-                        <select v-model="type" class="fancy-select">
-                            <option disabled selected>--Choose--</option>
-                            <option v-for="schoolType in types" :value="schoolType">
-                                {{ schoolType }}
-                            </option>
-                        </select>
+                        <div class="fancy-select fancy-select-full-width">
+                            <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
+                            <select v-model="type" class="fancy-select">
+                                <option disabled selected>--Choose--</option>
+                                <option v-for="schoolType in types" :value="schoolType">
+                                    {{ schoolType }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="cell medium-6">
@@ -68,7 +73,7 @@
             <button v-if="edit" class='button' type='button' @click='updateEducation'>Update Education</button>
             <button v-else class="button" type="button" @click="createEducationExperience">Add Education</button>
         </div>
-        <div class='resume-step-form' v-if="!show">
+        <div v-if="resume.resume_educations.length > 0">
             <div class='grid-x grid-margin-x'>
                 <div class="cell" v-for="education in resume.resume_educations">
                     <div class="card">
@@ -82,17 +87,17 @@
                                 </em>
                                 <br/>
                                 {{ education.degree_received }} in {{ education.field_of_study }}
-                            </p>                            
+                            </p>
                             <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeEducation(education.id)"></el-button>
                             <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editEducation(education)"></el-button>
                         </div>
                     </div>
                 </div>
-                <div class="cell">
-                    <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
-                    <router-link tag="button" class="button" to="skills">Next</router-link>
-                </div>
             </div>
+        </div>
+        <div class="resume-form-nav-buttons">
+            <button class="button secondary-button" @click="$router.go(-1)">Back</button>
+            <router-link tag="button" class="button" to="skills">Save &amp; Continue</router-link>
         </div>
     </div>
 </template>
@@ -126,7 +131,7 @@
                 startDate: null,
                 endDate: null,
                 currentlyStudying: false,
-                
+
                 show: false,
                 edit: false,
                 editId: null,
@@ -215,7 +220,7 @@
                         this.editId = null;
                         this.editDescriptionId = null;
                         this.$store.commit('reloadResume');
-                        
+
                         this.$toasted.show('Successfully updated education experience!', {
                             position: 'bottom-center',
                             duration: 3000,

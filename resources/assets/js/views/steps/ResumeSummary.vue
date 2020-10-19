@@ -1,11 +1,13 @@
 <template>
     <div>
-        <h3>
-            Resume Summary
-            <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
-                <span v-if="!show">Create</span><span v-else>See All Summaries</span>
-            </small>
-        </h3>
+        <div class="resume-step-heading-container">
+            <h3 class="resume-step-heading">
+                Resume Summary
+                <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
+                    <span v-if="!show">Create</span><span v-else>Cancel</span>
+                </small>
+            </h3>
+        </div>
 
         <div class='resume-step-form' v-if="show">
             <div class='grid-x grid-margin-x'>
@@ -19,7 +21,7 @@
             <button v-if="edit" class='button' type='button' @click='updateSummary'>Update Summary</button>
             <button v-else class='button' type='button' @click='saveSummary'>Add Summary</button>
         </div>
-        <div class='resume-step-form' v-if="!show">
+        <div v-if="!show">
             <div class='grid-x grid-margin-x'>
                 <div class="cell" v-for="summary in resume.resume_summaries" :key="summary.id">
                     <div class="card">
@@ -32,11 +34,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="cell">
-                    <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
-                    <router-link tag="button" class="button" to="work-experience">Next</router-link>
-                </div>
             </div>
+        </div>
+
+        <div class="resume-form-nav-buttons">
+            <button class="button secondary-button" @click="$router.go(-1)">Back</button>
+            <router-link tag="button" class="button" to="work-experience">Save &amp; Continue</router-link>
         </div>
     </div>
 </template>

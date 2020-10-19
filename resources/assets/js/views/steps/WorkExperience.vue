@@ -1,13 +1,15 @@
 <template>
     <div>
-        <h3>
-            Work Experience
-            <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
-                <span v-if="!show">Create</span><span v-else>See All Experience</span>
-            </small>
-        </h3>
+        <div class="resume-step-heading-container">
+            <h3 class="resume-step-heading">
+                Work Experience
+                <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
+                    <span v-if="!show || resume.resume_work_experiences.length === 0">Create</span><span v-else>Cancel</span>
+                </small>
+            </h3>
+        </div>
 
-        <div class='resume-step-form' v-if="show">
+        <div class='resume-step-form' v-if="show || resume.resume_work_experiences.length === 0">
             <div class='grid-x grid-margin-x'>
                 <div class='cell medium-6'>
                     <div class='form-group'>
@@ -48,7 +50,7 @@
             <button v-if="edit" class='button' type='button' @click='updateWorkExperience'>Update Work Experience</button>
             <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
-        <div class='resume-step-form' v-if="!show">
+        <div v-if="resume.resume_work_experiences.length > 0">
             <div class='grid-x grid-margin-x'>
                 <div class="cell" v-for="workExperience in resume.resume_work_experiences">
                     <div class="card">
@@ -68,12 +70,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="cell">
-                    <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
-                    <router-link tag="button" class="button" to="education">Next</router-link>
-                </div>
             </div>
         </div>
+        <div class="resume-form-nav-buttons">
+            <button class="button secondary-button" @click="$router.go(-1)">Back</button>
+            <router-link tag="button" class="button" to="education">Save &amp; Continue</router-link>
+        </div>
+    </div>
     </div>
 </template>
 
