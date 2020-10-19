@@ -1,11 +1,21 @@
 <template>
-    <div v-if="resume.resume_design" class="resume-container">
-        <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
-        <functional v-if="resume.resume_design.name === 'Functional'"></functional>
-        <combination v-if="resume.resume_design.name === 'Combination'"></combination>
-        <recruiter v-if="resume.resume_design.name === 'Recruiter'"></recruiter>
-        <sidebar v-if="resume.resume_design.name === 'Sidebar'"></sidebar>
-    </div>
+    <div>
+        <div style="display: block;">
+            <el-link type="success" 
+                icon="el-icon-download" 
+                :href="'/generate-resume-pdf/' + resume.id" 
+                :underline="false">
+                Download as PDF
+            </el-link>
+        </div>
+        <div v-if="resume.resume_design" class="resume-container">
+            <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
+            <functional v-if="resume.resume_design.name === 'Functional'"></functional>
+            <combination v-if="resume.resume_design.name === 'Combination'"></combination>
+            <recruiter v-if="resume.resume_design.name === 'Recruiter'"></recruiter>
+            <sidebar v-if="resume.resume_design.name === 'Sidebar'"></sidebar>
+        </div>
+    </div>  
 </template>
 
 <script>
@@ -30,7 +40,15 @@
 
         mounted() {},
 
-        methods: {}
+        methods: {
+            downloadResume: function () {
+                this.$axios.get(`/generate-resume-pdf/${this.resume.id}`)
+                    .then(response => {
+                        FileDownload(response.data, 'resume.pdf');
+                    })
+                    .catch();
+            }
+        }
     }
 </script>
 
@@ -43,6 +61,10 @@
         flex-flow: row;
         justify-content: space-around;
         padding-top: 15px;
+    }
+
+    .el-link {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     }
 </style>
 

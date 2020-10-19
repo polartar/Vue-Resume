@@ -70,4 +70,14 @@ class Resume extends Model
     {
         return $this->hasMany(ResumeSkill::class);
     }
+
+    public function getFirstAddressAttribute()
+    {
+        return UserAddress::find($this->user_address_ids[0]);
+    }
+
+    public function getFirstResumeSummaryAttribute()
+    {
+        return ResumeSummary::find($this->resume_summaries[0]);
+    }
 }
