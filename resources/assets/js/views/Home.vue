@@ -24,6 +24,7 @@
     </div>
 </template>
 
+
 <script>
     import {mapState, mapGetters} from 'vuex'
     import FullPagePreview from "./steps/FullPagePreview";
