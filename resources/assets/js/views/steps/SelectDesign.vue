@@ -6,16 +6,19 @@
             <div class="grid-x grid-margin-x">
                 <div class="cell medium-6">
                     <div class="form-group">
-                        <select
-                            v-model="resume.resume_design_id"
-                            @change="applyDesign"
-                            class="fancy-select fancy-select-full-width"
-                        >
-                            <option disabled selected>-- Pick a Design --</option>
-                            <option v-for="design in resumeDesigns" :value="design.id" :key="design.id">
-                                {{ design.name }}
-                            </option>
-                        </select>
+                        <div class="fancy-select fancy-select-full-width">
+                            <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
+                            <select
+                                v-model="resume.resume_design_id"
+                                @change="applyDesign"
+                                class="fancy-select fancy-select-full-width"
+                            >
+                                <option disabled selected>-- Pick a Design --</option>
+                                <option v-for="design in resumeDesigns" :value="design.id" :key="design.id">
+                                    {{ design.name }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
                     <router-link to="contact-information" tag="button" class="button">Next</router-link>

@@ -77,8 +77,8 @@ label {
     //     font-size: .75rem;
     // }
 
-    .optional-text {
-        color: $primary-blue;
+    .label-optional-text {
+        color: #aaa;
         font-size: .875rem;
         font-weight: 400;
     }
@@ -133,13 +133,17 @@ select option {
 
     &.fancy-select-full-width {
         width: 100%;
+
+        select {
+            width: 100%;
+        }
     }
 
     &.fancy-select-text-center {
         text-align: center;
     }
 
-    svg {
+    .fancy-select-icon {
         color: $off-black;
         display: inline-block;
         pointer-events: none;

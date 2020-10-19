@@ -198,6 +198,12 @@ import Skills from './views/steps/Skills'
 import CustomizeDesign from './views/steps/CustomizeDesign'
 import FullPagePreview from './views/steps/FullPagePreview'
 
+
+require('./fontawesome');
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+
 const base_path = '/resume-builder/'
 const router = new VueRouter({
     mode: 'history',
