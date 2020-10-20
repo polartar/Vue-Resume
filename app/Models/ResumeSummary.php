@@ -16,6 +16,7 @@ class ResumeSummary extends Model
     protected $fillable = [
         'resume_id',
         'name',
+        'bullet_point',
         'transferable_skill_ids',
     ];
 

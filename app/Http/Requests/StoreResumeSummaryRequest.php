@@ -26,6 +26,7 @@ class StoreResumeSummaryRequest extends FormRequest
         return [
             'resume_id'              => 'uuid|required',
             'name'                   => 'string|required',
+            'bullet_point'           => 'boolean',
             'transferable_skill_ids' => 'array|nullable',
         ];
     }
