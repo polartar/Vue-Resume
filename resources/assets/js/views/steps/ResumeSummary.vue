@@ -27,6 +27,7 @@
                 </div>
             </div>
             <button v-if="edit" class='button' type='button' @click='updateSummary'>Update Summary</button>
+            <button v-if="edit" class='button' type='button' @click='show = !show'>Cancel</button>
             <button v-else class='button' type='button' @click='saveSummary'>Add Summary</button>
         </div>
         <div v-if="!show">
@@ -98,7 +99,6 @@
                     });
             },
             updateSummary: function () {
-                console.log(this.bulleted);
                 this.show = false;
                 this.$axios
                     .put('/resume-summary/' + this.editId, {
@@ -126,7 +126,6 @@
                     });
             },
             editSummary: function (summaryId) {
-                console.log(this.resume.resume_summaries.find(obj => obj.id === summaryId));
                 this.name = this.resume.resume_summaries.find(obj => obj.id === summaryId).name;
                 this.bulleted = this.resume.resume_summaries.find(obj => obj.id === summaryId).bullet_point;
                 this.edit = true;

@@ -14,8 +14,10 @@
 
         <div v-if="resume.resume_summaries[0]">
             <span class="heading">Summary</span>
-            <span>{{ resume.resume_summaries[0].name }}</span>
-            <br/>
+            <ul v-if="isBullet">
+                <li class="summary-list-item" v-for="point in summaryAsArray">{{ point }}</li>
+            </ul>
+            <span v-else>{{ resume.resume_summaries[0].name }}</span>
         </div>
 
         <span class="heading">Work Experience</span>
@@ -70,7 +72,19 @@
                 'resumeName',
                 'resumeSummary',
                 'fullName',
-            ])
+            ]),
+            summaryAsArray: function () {
+                if (this.resume.resume_summaries.length > 0)
+                    return this.resume.resume_summaries[0].name.split(/\r?\n/)
+                
+                return [];
+            },
+            isBullet: function () {
+                if (this.resume.resume_summaries.length > 0)
+                    return this.resume.resume_summaries[0].bullet_point
+                
+                return false;
+            }
         },
 
         mounted() {},
@@ -129,7 +143,7 @@
         display: block;
     }
 
-    .work-experience-description {
+    .work-experience-description, .summary-list-item {
         font-family: "Helvetica Neue", sans-serif;
         font-size: 12pt;
     }
