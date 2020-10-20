@@ -26,6 +26,7 @@ class UpdateResumeSummaryRequest extends FormRequest
         return [
             'resume_id'              => 'uuid',
             'name'                   => 'string|required',
+            'bullet_point'           => 'boolean',
             'transferable_skill_ids' => 'array|nullable',
         ];
     }

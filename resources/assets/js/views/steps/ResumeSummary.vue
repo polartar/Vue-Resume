@@ -16,6 +16,14 @@
                         <label>Summary</label>
                         <textarea rows='8' cols='80' v-model='name' />
                     </div>
+                    <div class='form-group'>
+                        <label>
+                            <input type='checkbox' v-model='bulleted' />
+                            Bullet Point?
+                        </label>
+                        <br/>
+                        <em class='text-small'>Each new line will be an item in a list if <strong>Bullet Point</strong> is checked.</em>
+                    </div>
                 </div>
             </div>
             <button v-if="edit" class='button' type='button' @click='updateSummary'>Update Summary</button>
@@ -57,6 +65,7 @@
         data: function () {
             return {
                 'name': '',
+                'bulleted': false,
                 'show': false,
                 'edit': false,
                 'editId': '',
@@ -69,6 +78,7 @@
                     .post('/resume-summary', {
                         'resume_id': this.$store.state.resume.id,
                         'name': this.name,
+                        'bullet_point': this.bulleted,
                     })
                     .then(response => {
                         this.$toasted.show('Successfully added the resume summary', {
@@ -90,10 +100,12 @@
                     });
             },
             updateSummary: function () {
+                console.log(this.bulleted);
                 this.show = false;
                 this.$axios
                     .put('/resume-summary/' + this.editId, {
                         'name': this.name,
+                        'bullet_point': this.bulleted,
                     })
                     .then(response => {
                         this.$toasted.show('Successfully updated the resume summary', {
@@ -121,6 +133,7 @@
             editSummary: function (summaryId) {
                 console.log(this.resume.resume_summaries.find(obj => obj.id === summaryId));
                 this.name = this.resume.resume_summaries.find(obj => obj.id === summaryId).name;
+                this.bulleted = this.resume.resume_summaries.find(obj => obj.id === summaryId).bullet_point;
                 this.edit = true;
                 this.editId = summaryId;
                 this.show = true;
