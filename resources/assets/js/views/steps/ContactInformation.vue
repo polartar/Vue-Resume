@@ -400,7 +400,8 @@
             </div>
         </div>
         <div class="resume-form-nav-buttons">
-            <button class="button secondary-button" @click="$router.go(-1)">Back</button>
+            <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
+            <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
             <router-link tag="button" class="button" v-on:click.native="saveContactInfo" to="resume-summary">Save &amp; Continue</router-link>
         </div>
     </div>
@@ -427,6 +428,7 @@
             'userEmailIds',
             'userAddressIds',
             'userPhoneIds',
+            'toggleResumePreview',
         ]),
         methods: {
             ...mapMutations([
@@ -459,6 +461,9 @@
             },
             updateZip: function (event) {
                 this.$store.commit('updateZip', event.target.value);
+            },
+            updateToggleResumePreview: function (event) {
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
 
 

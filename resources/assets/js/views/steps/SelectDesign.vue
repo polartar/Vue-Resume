@@ -25,7 +25,8 @@
             </div>
         </div>
         <div class="resume-form-nav-buttons">
-            <button class="button secondary-button" @click="$router.go(-1)">Back</button>
+            <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
+            <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
             <router-link to="contact-information" tag="button" class="button">Save &amp; Continue</router-link>
         </div>
     </div>
@@ -39,6 +40,7 @@
             ...mapState([
                 'resume',
                 'resumeDesigns',
+                'toggleResumePreview',
             ]),
         },
 
@@ -67,6 +69,9 @@
                             type: 'error',
                         });
                     });
+            },
+            updateToggleResumePreview: function (event) {
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
         }
     }

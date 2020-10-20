@@ -15,8 +15,11 @@
                 </div>
             </div>
         </div>
-        <button class="button" @click="$router.go(-1)" style="background-color: grey!important;">Back</button>
-        <router-link tag="button" class="button" to="customize-design">Save and Next</router-link>
+        <div class="resume-form-nav-buttons">
+            <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
+            <button class="button preview-button">Preview</button>
+            <router-link tag="button" class="button" to="customize-design">Save and Next</router-link>
+        </div>    
     </div>
 </template>
 <script>

@@ -73,7 +73,8 @@
             </div>
         </div>
         <div class="resume-form-nav-buttons">
-            <button class="button secondary-button" @click="$router.go(-1)">Back</button>
+            <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
+            <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
             <router-link tag="button" class="button" to="education">Save &amp; Continue</router-link>
         </div>
     </div>
@@ -86,6 +87,7 @@
     export default {
         computed: mapState([
             'resume',
+            'toggleResumePreview',
         ]),
 
         data: function () {
@@ -140,6 +142,9 @@
                     .catch(error => {
                         console.log('error create resume description', error);
                     });
+            },
+            updateToggleResumePreview: function (event) {
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             createWorkExperience: async function () {
                 let id;

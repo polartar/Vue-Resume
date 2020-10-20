@@ -1,19 +1,26 @@
 <template>
     <div>
-        <el-steps :active="activeStep" 
-            align-center 
-            style="padding-top: 10px; cursor: pointer;"
-            process-status="finish"
-            finish-status="success"
-            >
-            <el-step v-for="step in steps"
-                :key="step.link"
-                :title="step.title" 
-                :icon="step.icon"
-                v-on:click.native="step.link === $route.name ? null : $router.push({name: step.link, query: $route.query})"
-                >
-            </el-step>
-        </el-steps>
+        <div class="resume-steps-container">
+            <div class="grid-container">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell">
+                        <el-steps :active="activeStep"
+                            align-center
+                            process-status="finish"
+                            finish-status="success"
+                            >
+                            <el-step v-for="step in steps"
+                                :key="step.link"
+                                :title="step.title"
+                                :icon="step.icon"
+                                v-on:click.native="step.link === $route.name ? null : $router.push({name: step.link, query: $route.query})"
+                                >
+                            </el-step>
+                        </el-steps>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="grid-container">
             <router-view></router-view>
@@ -35,6 +42,7 @@
         },
         data: function () {
             return {
+                widowWidth : window.outerWidth,
                 steps: [
                     {
                         link: 'home',
@@ -83,6 +91,16 @@
                     },
 
                 ],
+            }
+        },
+        mounted() {
+            this.doResize()
+            window.addEventListener('resize', this.doResize)
+        },
+        methods: {
+            doResize: function() {
+                this.widowWidt = window.outerWidth
+
             }
         }
     }

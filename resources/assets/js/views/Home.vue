@@ -5,7 +5,11 @@
                 <h3>Home</h3>
                 <label>Resume Name</label>
                 <input :placeholder="resumeName" type="text" @change="updateResumeName">
-                <button class="button" @click="saveResumeName" to="select-design">Save and Next</button>
+
+            </div>
+            <div class="resume-form-nav-buttons" v-if="this.$route.name === 'home'">
+                <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
+                <button class="button" @click="saveResumeName" to="select-design">Save &amp; Continue</button>
             </div>
             <router-view></router-view>
         </div>
@@ -15,6 +19,10 @@
             </div>
         </div>
         <div class="cell medium-6 large-7 resume-preview-cell"
+            :class="{
+                'hide-for-small-only': !toggleResumePreview,
+                'full-page-resume-preview': toggleResumePreview
+            }"
              v-if="this.$route.name !== 'full-page-preview'">
             <h4>Preview of {{ resumeName }}</h4>
             <div class="resume-preview-container">
@@ -45,6 +53,7 @@
                 'country',
                 'summary',
                 'resume',
+                'toggleResumePreview',
             ]),
             ...mapGetters([
                 'resumeName',
@@ -124,6 +133,9 @@
             },
             updateResumeName: function (event) {
                 this.$store.commit('updateResumeName', event.target.value);
+            },
+            updateToggleResumePreview: function (event) {
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             saveResumeName: function () {
                 console.log(this.resume);
