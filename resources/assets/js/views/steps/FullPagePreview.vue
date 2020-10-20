@@ -38,6 +38,7 @@
         computed: {
             ...mapState([
                 'resume',
+                'toggleResumePreview',
             ]),
             ...mapGetters([
                 'resumeName',
@@ -71,6 +72,11 @@
                 this.scaleStylesObject.transform = "translate(" + translate + "%, " + translate + "%) " + "scale(" + scale + ")"
                 // console.log(this.scaleStylesObject.transform )
 
+            }
+        },
+        watch: {
+            toggleResumePreview: function() {
+                this.doResize()
             }
         }
     }

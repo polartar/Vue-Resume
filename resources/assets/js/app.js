@@ -11,7 +11,7 @@ Vue.use(Toasted);
 
 // Docs: https://element.eleme.io/#/en-US/component/quickstart
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+// import 'element-ui/lib/theme-chalk/index.css'; // in main scss file
 
 Vue.use(VueRouter);
 Vue.use(ElementUI);
@@ -40,8 +40,12 @@ const store = new Vuex.Store({
         userPhoneIds: [],
         summary: {},
         resumeDesigns: [],
+        toggleResumePreview: false
     },
     mutations: {
+        updateToggleResumePreview (state, payload) {
+            state.toggleResumePreview = payload;
+        },
         updateResume (state, payload) {
             state.resume = payload;
         },
