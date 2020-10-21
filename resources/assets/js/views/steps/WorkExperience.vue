@@ -32,17 +32,30 @@
                 <div class='cell medium-6'>
                     <div class='form-group'>
                         <label>Start Date</label>
-                        <input type='date' name='start_date' v-model='startDate'>
+                        <el-date-picker
+                            v-model="startDate"
+                            type="date"
+                            format="yyyy/MM/dd"
+                            value-format="yyyy-MM-dd"
+                            placeholder="Pick a day">
+                        </el-date-picker>
+                    </div>
+                    <br/>
+                    <div class='form-group'>
+                        <label><input type='checkbox' name='end_date_currently' v-model='currentEmployer'> Current
+                            Employer</label>
                     </div>
                 </div>
                 <div class='cell medium-6'>
                     <div class='form-group'>
                         <label>End Date</label>
-                        <input type='date' name='end_date' v-model='endDate'>
-                    </div>
-                    <div class='form-group'>
-                        <label><input type='checkbox' name='end_date_currently' v-model='currentEmployer'> Current
-                            Employer</label>
+                        <el-date-picker
+                            v-model="endDate"
+                            type="date"
+                            format="yyyy/MM/dd"
+                            value-format="yyyy-MM-dd"
+                            placeholder="Pick a day">
+                        </el-date-picker>
                     </div>
                 </div>
             </div>
@@ -273,4 +286,8 @@
     .el-button {
         margin-right: 10px;
     }
+    .el-input__inner {
+        margin-bottom: 0!important;
+    }
 </style>
+

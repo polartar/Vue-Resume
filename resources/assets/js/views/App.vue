@@ -116,3 +116,11 @@
         }
     }
 </style>
+
+<style>
+    /* need this to override _form-elements.scss */
+    /* _form-elements was causing the calendar icon to be forced down 1.5rem */
+    .el-input__inner {
+        margin-bottom: 0!important;
+    }
+</style>

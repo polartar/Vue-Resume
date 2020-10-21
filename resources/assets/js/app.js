@@ -11,10 +11,11 @@ Vue.use(Toasted);
 
 // Docs: https://element.eleme.io/#/en-US/component/quickstart
 import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/en'
 // import 'element-ui/lib/theme-chalk/index.css'; // in main scss file
 
 Vue.use(VueRouter);
-Vue.use(ElementUI);
+Vue.use(ElementUI, {locale});
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
 
