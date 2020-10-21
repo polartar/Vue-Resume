@@ -13,8 +13,10 @@ class GenerateResumePdfController extends Controller
     {
         $template = Str::slug($resume->resumeDesign->name, '-');
         $pdf = PDF::loadView('templates.' . $template, compact('resume'));
+
         if ($request->get('page')) {
-            return view('templates.golden-standard', compact('resume'));
+            dump($template);
+            return view('templates.' . $template, compact('resume'));
         }
         $pdf->setPaper('A4', 'portrait');
         return $pdf->download('resume.pdf');

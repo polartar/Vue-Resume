@@ -1,0 +1,37 @@
+.resume-pdf {
+    @include body-font-regular;
+
+    .print-paper {
+        // height: 1100px;
+
+        width: 100%;
+    }
+
+    .full-width-table {
+        width: 100%;
+
+        td {
+            vertical-align: top;
+        }
+    }
+}
+
+.resume-html {
+    .print-paper {
+        width: 100%;
+    }
+}
+
+@media print {
+    body.resume-pdf  * {
+        visibility: hidden;
+    }
+    .print-paper, .print-paper * {
+        visibility: visible;
+    }
+    .print-paper {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

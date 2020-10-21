@@ -24,6 +24,11 @@ mix
     .copy('resources/assets/fonts', 'public/assets/fonts')
     .copy('resources/assets/images', 'public/assets/images')
 
+    .sass('resources/assets/sass/combination.scss', 'public/assets/css/resumes')
+    .sass('resources/assets/sass/functional.scss', 'public/assets/css/resumes')
+    .sass('resources/assets/sass/gold-standard.scss', 'public/assets/css/resumes')
+    .sass('resources/assets/sass/recruiter.scss', 'public/assets/css/resumes')
+    .sass('resources/assets/sass/sidebar.scss', 'public/assets/css/resumes')
 
 if (!mix.inProduction() && !process.env.SKIP_BROWSER_SYNC) {
     mix.browserSync({

@@ -1,0 +1,65 @@
+.resume-sidebar {
+    &.resume-pdf {
+        .left {
+            width: 100%;
+        }
+
+        .right {
+            width: 100%;
+        }
+    }
+    .print-paper {
+        padding: 72px 72px 0 72px;
+        background-color: white;
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        font-weight: normal;
+    }
+
+    .name {
+        font-size: 36pt;
+        display: block;
+        text-align: center;
+    }
+
+    .resume-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .left {
+        width: 40%;
+        padding-right: 15px;
+        border-right: black 2px solid;
+        text-align: right;
+
+
+    }
+
+    .right {
+        width: 60%;
+        padding-left: 30px;
+        text-align: left;
+
+        .resume-pdf & {
+            width: 100%;
+        }
+    }
+
+    .header {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    .sub-header {
+        font-size: 15pt;
+        font-weight: bold;
+        display: block;
+    }
+
+    .sub-sub-header {
+        font-weight: bold;
+        display: block;
+    }
+}

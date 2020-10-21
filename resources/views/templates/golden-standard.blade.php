@@ -1,69 +1,19 @@
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
-            .print-paper {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
-
-            .print-paper {
-                /* original setting
-                width: 794px;
-                */
-                width: 550px;
-                min-height: 100%;
-                padding: 72px;
-                background-color: white;
-                font-family: "Helvetica Neue", sans-serif;
-                font-size: 12pt;
-                font-weight: normal;
-            }
-
-            .section {
-                padding-bottom: 15px;
-            }
-
-            .resume-title {
-                font-size: 20pt;
-                font-weight: lighter;
-                display: block;
-            }
-
-            .contact-info {
-                font-size: 9pt;
-                text-align: right;
-                display: block;
-            }
-
-            .heading {
-                font-size: 14pt;
-                margin-top: 40px;
-                display: block;
-            }
-
-            .work-experience-company {
-                display: block;
-            }
-
-            .work-experience-description {
-                font-family: "Helvetica Neue", sans-serif;
-                font-size: 12pt;
-            }
-
-            .work-experience-description-list {
-                margin-bottom: 0;
-                margin-top: 10px;
-            }
+            {!! file_get_contents(asset('assets/css/resumes/gold-standard.css')) !!}
         </style>
     </head>
-    <body>
+    <body class="resume-pdf resume-gold-standard">
         <div class="print-paper">
             <span class="resume-title">{{ $resume->user->full_name }}</span>
             <span class="contact-info">
                 {{ $resume->first_address->city }}, {{ $resume->first_address->province }}
                 <br/>
-                Phone Number
+                @if($resume->user->user_phones->first())
+                    {{ $resume->user->user_phones->first()->phone_number }}
+                @endif
                 <br/>
                 {{ $resume->user->email }}
                 <br/>
@@ -78,7 +28,7 @@
                 <br/>
             </div>
             @endif
-            
+
             <span class="heading">Work Experience</span>
             @if(count($resume->resumeWorkExperiences) > 0)
                 @foreach( $resume->resumeWorkExperiences as $work )

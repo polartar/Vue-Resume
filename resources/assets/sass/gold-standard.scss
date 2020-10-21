@@ -1,0 +1,19 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+@import 'fonts/cheeky-fonts';
+@import 'bits/colors';
+@import 'bits/setup';
+@import 'bits/mixins';
+@import 'bits/extends';
+@import 'bits/spacing';
+
+@import 'resumes/base';
+@import 'resumes/gold-standard';
