@@ -64,7 +64,7 @@
             <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
         <div v-if="workExperienceList.length > 0">
-            <draggable v-model="workExperienceList" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x">
+            <draggable v-model="workExperienceList" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x" :sort="true">
                 <div class="cell" v-for="workExperience in workExperienceList" :key="workExperience.order">
                     <div class="card">
                         <div class="card-section">
@@ -110,8 +110,8 @@
                 get() {
                     return this.$store.state.resume.resume_work_experiences;
                 },
-                set(value) {
-                    // this.$store.commit('updateResumeWorkExperienceOrder', value)
+                async set(value) {
+                    await this.$store.dispatch('updateResumeWorkExperienceOrder', value);
                 }
             }
         },
