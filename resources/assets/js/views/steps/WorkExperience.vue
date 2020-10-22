@@ -63,9 +63,9 @@
             <button v-if="edit" class='button' type='button' @click='updateWorkExperience'>Update Work Experience</button>
             <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
-        <div v-if="resume.resume_work_experiences.length > 0">
-            <draggable v-model="resume.resume_work_experiences" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x">
-                <div class="cell" v-for="workExperience in resume.resume_work_experiences" :key="workExperience.id">
+        <div v-if="workExperienceList.length > 0">
+            <draggable v-model="workExperienceList" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x">
+                <div class="cell" v-for="workExperience in workExperienceList" :key="workExperience.order">
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
@@ -101,10 +101,20 @@
     export default {
         components: {draggable},
 
-        computed: mapState([
-            'resume',
-            'toggleResumePreview',
-        ]),
+        computed: {
+            ...mapState([
+                'resume',
+                'toggleResumePreview',
+            ]),
+            workExperienceList: {
+                get() {
+                    return this.$store.state.resume.resume_work_experiences;
+                },
+                set(value) {
+                    // this.$store.commit('updateResumeWorkExperienceOrder', value)
+                }
+            }
+        },
 
         data: function () {
             return {
