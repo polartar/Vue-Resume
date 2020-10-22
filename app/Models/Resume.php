@@ -42,7 +42,7 @@ class Resume extends Model
      */
     public function resumeWorkExperiences()
     {
-        return $this->hasMany(ResumeWorkExperience::class)->orderBy('position_start_date', 'desc');
+        return $this->hasMany(ResumeWorkExperience::class)->orderBy('order');
     }
 
     /**
