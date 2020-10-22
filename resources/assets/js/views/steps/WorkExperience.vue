@@ -64,8 +64,8 @@
             <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
         <div v-if="resume.resume_work_experiences.length > 0">
-            <div class='grid-x grid-margin-x'>
-                <div class="cell" v-for="workExperience in resume.resume_work_experiences">
+            <draggable v-model="resume.resume_work_experiences" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x">
+                <div class="cell" v-for="workExperience in resume.resume_work_experiences" :key="workExperience.id">
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </draggable>
         </div>
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
@@ -95,9 +95,12 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapState} from 'vuex';
+    import draggable from 'vuedraggable';
 
     export default {
+        components: {draggable},
+
         computed: mapState([
             'resume',
             'toggleResumePreview',
