@@ -9,13 +9,13 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div>
-                <x-jet-label value="first_name" />
+            <div class="mt-4">
+                <x-jet-label value="First Name" />
                 <x-jet-input class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required/>
             </div>
 
-            <div>
-                <x-jet-label value="last_name" />
+            <div class="mt-4">
+                <x-jet-label value="Last Name" />
                 <x-jet-input class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required/>
             </div>
 
