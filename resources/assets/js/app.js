@@ -173,6 +173,10 @@ const store = new Vuex.Store({
                 .catch(error => {
                     console.log('error reloading resume: ', error);
                 });
+        },
+        updateResumeWorkExperiences (state, payload) {
+            state.resume.resume_work_experiences = payload;
+            axios.put('/resume-work-experiences', {'work-experiences': payload});
         }
     },
     getters: {
@@ -188,6 +192,15 @@ const store = new Vuex.Store({
         fullName: state => {
             return capitalize(state.firstName) + ' ' + capitalize(state.lastName);
         }
+    },
+    actions: {
+        updateResumeWorkExperienceOrder: (context, resumeWorkExperiences) => {
+            resumeWorkExperiences.forEach( (workExperience, index) => {
+                workExperience.order = index + 1;
+            })
+
+            context.commit('updateResumeWorkExperiences', resumeWorkExperiences);
+        },
     }
 });
 /* #endregion */
