@@ -20,6 +20,7 @@ class ResumeWorkExperience extends Model
         'position_end_date',
         'resume_description_ids',
         'current_employer',
+        'order',
     ];
 
 
