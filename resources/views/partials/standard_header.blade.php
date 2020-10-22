@@ -10,8 +10,9 @@
 				<span class="main-menu-toggle-text">Menu</span>
 			</span>
 			<a class="header-logo" href="{{ route('home') }}">
-				<img width="250" height="72" src="/assets/images/logos/cheeky-scientist-logo-white.png"
-				 	srcset="/assets/images/logos/cheeky-scientist-logo-white.svg" alt="Cheeky Scientist Logo">
+				<!-- <img width="250" height="72" src="/assets/images/logos/cheeky-scientist-logo-white.png"
+					 srcset="/assets/images/logos/cheeky-scientist-logo-white.svg" alt="Cheeky Scientist Logo"> -->
+				<img width="250" height="72" src="/assets/images/logos/cheeky-scientist-logo-white-beta.png" alt="Cheeky Scientist Logo">
 			</a>
 
 			<span class="flex-spacer"></span>
