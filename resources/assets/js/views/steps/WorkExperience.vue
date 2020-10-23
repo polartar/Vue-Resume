@@ -138,6 +138,7 @@
                 // Need to create a new resume description
                 const workExperienceId = await this.createWorkExperience();
                 await this.createResumeDescription(workExperienceId);
+                this.resetForm();
                 this.show = false;
                 this.$store.commit('reloadResume');
             },
@@ -185,7 +186,6 @@
                     })
                     .then(response => {
                         id = response.data.id;
-                        this.resetForm();
                         this.$toasted.show('Successfully added work experience!', {
                             position: 'bottom-center',
                             duration: 3000,
