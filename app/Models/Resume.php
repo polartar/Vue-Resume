@@ -50,7 +50,7 @@ class Resume extends Model
      */
     public function resumeEducations()
     {
-        return $this->hasMany(ResumeEducation::class);
+        return $this->hasMany(ResumeEducation::class)->orderBy('order');
     }
 
     /**
