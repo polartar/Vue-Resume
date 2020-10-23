@@ -4,12 +4,12 @@
             <h3 class="resume-step-heading">
                 Education
                 <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
-                    <span v-if="!show || resume.resume_educations.length == 0">Create</span><span v-else>Cancel</span>
+                    <span v-if="!show || (resume.resume_educations && resume.resume_educations.length == 0)">Create</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
 
-        <div class="resume-step-form" v-if="show || resume.resume_educations.length == 0">
+        <div class="resume-step-form" v-if="show || (resume.resume_educations && resume.resume_educations.length) == 0">
             <div class="grid-x grid-margin-x">
                 <div class="cell medium-6">
                     <div class="form-group">
@@ -87,7 +87,7 @@
             <button v-if="edit" class='button' type='button' @click='updateEducation'>Update Education</button>
             <button v-else class="button" type="button" @click="createEducationExperience">Add Education</button>
         </div>
-        <div v-if="educationList.length > 0">
+        <div v-if="educationList && educationList.length > 0">
             <draggable v-model="educationList" group="work-experiences" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
                 <div class="cell" v-for="education in educationList" :key="education.id">
                     <div class="card">
