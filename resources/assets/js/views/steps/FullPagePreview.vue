@@ -85,10 +85,10 @@
 
                 // console.log('refresh')
 
-                setTimeout(() => {
-                    this.refreshiFrame()
-                    // console.log('refresh')
-                }, 2000)
+                // setTimeout(() => {
+                //     this.refreshiFrame()
+                //     // console.log('refresh')
+                // }, 2000)
             }
         },
         watch: {
