@@ -12,8 +12,15 @@
 }
 
 .resume-container {
-    height: 1100px;
-    width: 850px;
+    // height: 1100px;
+    // width: 850px;
+    width: 100%;
+
+    iframe {
+        background: $white;
+        border: 2px solid $gray-color;
+        width: 100%;
+    }
 }
 
 
@@ -49,4 +56,25 @@
 
 .resume-preview-cell {
     // display: none;
+}
+
+.full-page-resume-preview {
+    .resume-preview-container {
+        @include breakpoint(medium down) {
+            height: 100%;
+            left: 0;
+            overflow: auto;
+            padding-bottom: 3rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    }
+
+    .resume-container {
+        @include breakpoint(medium down) {
+            // height: auto;
+        }
+    }
 }

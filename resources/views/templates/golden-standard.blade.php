@@ -21,13 +21,18 @@
             </span>
             <br/>
 
-            @if(isset($resume->resume_summaries))
             <div>
                 <span class="heading">Summary</span>
-                <span>{{ $resume->first_resume_summary->name }}</span>
+                @if(isset($resume->resumeSummaries))
+                    <ul>
+                        @foreach ($resume->resumeSummaries as $summary)
+                            <li>{{ $summary->name }}</li>
+                        @endforeach
+                    </ul>
+                @endif
                 <br/>
             </div>
-            @endif
+
 
             <span class="heading">Work Experience</span>
             @if(count($resume->resumeWorkExperiences) > 0)

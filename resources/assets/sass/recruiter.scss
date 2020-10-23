@@ -17,3 +17,7 @@ html {
 
 @import 'resumes/base';
 @import 'resumes/recruiter';
+
+#__bs_notify__ {
+    display: none !important;
+}

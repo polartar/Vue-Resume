@@ -24,7 +24,7 @@
                 'full-page-resume-preview': toggleResumePreview
             }"
              v-if="this.$route.name !== 'full-page-preview'">
-            <h4>Preview of {{ resumeName }}</h4>
+            <h4 class="m-t-n">Preview of {{ resumeName }}</h4>
             <div class="resume-preview-container">
                 <full-page-preview></full-page-preview>
             </div>

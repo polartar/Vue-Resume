@@ -7,12 +7,15 @@
                 Download as PDF
             </el-link>
         </div>
-        <div v-if="resume.resume_design" class="resume-container" :style="scaleStylesObject">
+        <!-- <div v-if="resume.resume_design" class="resume-container" :style="scaleStylesObject">
             <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
             <functional v-if="resume.resume_design.name === 'Functional'"></functional>
             <combination v-if="resume.resume_design.name === 'Combination'"></combination>
             <recruiter v-if="resume.resume_design.name === 'Recruiter'"></recruiter>
             <sidebar v-if="resume.resume_design.name === 'Sidebar'"></sidebar>
+        </div> -->
+        <div class="resume-container">
+            <iframe v-if="resume.id" id="iframe-resume-preview" width="880" height="1100" :src="'/generate-resume-pdf/' + resume.id + '?page=true'"></iframe>
         </div>
     </div>
 </template>
@@ -39,6 +42,7 @@
             ...mapState([
                 'resume',
                 'toggleResumePreview',
+                'refreshPreview',
             ]),
             ...mapGetters([
                 'resumeName',
@@ -48,7 +52,7 @@
 
         mounted() {
             this.doResize()
-
+            this.refreshiFrame()
             // https://stackoverflow.com/questions/45437827/how-to-use-listeners-in-vue-js-for-events-like-scroll-and-windows-resizing
             window.addEventListener('resize', this.doResize)
         },
@@ -68,16 +72,33 @@
                 let resume = 850
                 let scale = (container / resume).toFixed(2)
                 let translate = ((1 - container / resume) * 100 * -1).toFixed(0)
-                // console.log(this.scaleStylesObject.transform )
-                this.scaleStylesObject.transform = "translate(" + translate + "%, " + translate + "%) " + "scale(" + scale + ")"
-                // console.log(this.scaleStylesObject.transform )
 
+                this.scaleStylesObject.transform = "translate(" + translate + "%, " + translate + "%) " + "scale(" + scale + ")"
+                let baseHeight = document.querySelector('.resume-preview-action-links').offsetHeight + 1100 + 48
+                document.querySelector('.resume-preview-container').style.height = (baseHeight * scale) + 'px';
+            },
+
+            refreshiFrame: function() {
+                if( document.querySelector('#iframe-resume-preview') ) {
+                    document.querySelector('#iframe-resume-preview').src += ''
+                }
+
+                // console.log('refresh')
+
+                setTimeout(() => {
+                    this.refreshiFrame()
+                    // console.log('refresh')
+                }, 2000)
             }
         },
         watch: {
             toggleResumePreview: function() {
                 this.doResize()
-            }
+            },
+
+            // refreshPreview: function() {
+            //     this.refreshiFrame()
+            // }
         }
     }
 </script>

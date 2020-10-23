@@ -15,10 +15,15 @@ class GenerateResumePdfController extends Controller
         $pdf = PDF::loadView('templates.' . $template, compact('resume'));
 
         if ($request->get('page')) {
-            dump($template);
+            // dump($template);
             return view('templates.' . $template, compact('resume'));
         }
         $pdf->setPaper('A4', 'portrait');
+
+        if ($request->get('preview')) {
+            return $pdf->stream();
+        }
+
         return $pdf->download('resume.pdf');
     }
 }

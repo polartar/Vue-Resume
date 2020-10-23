@@ -51,22 +51,22 @@
                     },
                     {
                         link: 'select-design',
-                        title: "Select Design",
+                        title: "Select\nDesign",
                         icon: 'el-icon-picture'
                     },
                     {
                         link: 'contact-information',
-                        title: 'Contact Information',
+                        title: "Contact\nInformation",
                         icon: 'el-icon-wallet',
                     },
                     {
                         link: 'resume-summary',
-                        title: 'Resume Summary',
+                        title: "Resume\nSummary",
                         icon: 'el-icon-s-order',
                     },
                     {
                         link: 'work-experience',
-                        title: 'Work Experience',
+                        title: "Work\nExperience",
                         icon: 'el-icon-office-building',
                     },
                     {
