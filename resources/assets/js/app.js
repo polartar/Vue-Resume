@@ -50,6 +50,15 @@ const store = new Vuex.Store({
         updateResume (state, payload) {
             state.resume = payload;
         },
+        updateResumeDateFormat (state, payload) {
+            state.resume.date_format = payload;
+            axios.put('/resume/' + state.resume.id, {
+                'date_format': payload,
+                'user_id': state.resume.user_id,
+                'name': state.resume.name,
+            }).then((response) => this.commit('reloadResume'));
+        },
+
         updateResumeName (state, payload) {
             state.resume.name = payload;
         },
@@ -212,6 +221,9 @@ const store = new Vuex.Store({
 
             context.commit('updateResumeEducations', resumeEducations);
         },
+        updateResumeDateFormat: (context, dateFormat) => {
+            context.commit('updateResumeDateFormat', dateFormat);
+        }
     }
 });
 /* #endregion */
