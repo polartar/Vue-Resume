@@ -21,6 +21,7 @@ class Resume extends Model
         'user_address_ids',
         'user_phone_ids',
         'user_email_ids',
+        'date_format',
     ];
 
     protected $casts = [

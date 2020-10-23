@@ -31,6 +31,7 @@ class StoreResumeRequest extends FormRequest
             'user_address_ids' => 'nullable|array',
             'user_phone_ids' => 'nullable|array',
             'user_email_ids' => 'nullable|array',
+            'date_format' => 'integer',
         ];
     }
 }
