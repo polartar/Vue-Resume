@@ -87,9 +87,9 @@
             <button v-if="edit" class='button' type='button' @click='updateEducation'>Update Education</button>
             <button v-else class="button" type="button" @click="createEducationExperience">Add Education</button>
         </div>
-        <div v-if="resume.resume_educations.length > 0">
-            <draggable v-model="resume.resume_educations" group="work-experiences" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
-                <div class="cell" v-for="education in resume.resume_educations" :key="education.id">
+        <div v-if="educationList.length > 0">
+            <draggable v-model="educationList" group="work-experiences" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
+                <div class="cell" v-for="education in educationList" :key="education.id">
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
@@ -133,7 +133,15 @@
             ...mapState([
                 'resume',
                 'toggleResumePreview',
-            ])
+            ]),
+            educationList: {
+                get() {
+                    return this.$store.state.resume.resume_educations;
+                },
+                async set(value) {
+                    await this.$store.dispatch('updateResumeEducationOrder', value);
+                }
+            }
         },
 
         data: function () {

@@ -177,6 +177,10 @@ const store = new Vuex.Store({
         updateResumeWorkExperiences (state, payload) {
             state.resume.resume_work_experiences = payload;
             axios.put('/resume-work-experiences', {'work-experiences': payload});
+        },
+        updateResumeEducations (state, payload) {
+            state.resume.resume_educations = payload;
+            axios.put('/resume-educations', {'educations': payload});
         }
     },
     getters: {
@@ -200,6 +204,13 @@ const store = new Vuex.Store({
             })
 
             context.commit('updateResumeWorkExperiences', resumeWorkExperiences);
+        },
+        updateResumeEducationOrder: (context, resumeEducations) => {
+            resumeEducations.forEach( (education, index) => {
+                education.order = index + 1;
+            })
+
+            context.commit('updateResumeEducations', resumeEducations);
         },
     }
 });
