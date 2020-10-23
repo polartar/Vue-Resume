@@ -4,12 +4,12 @@
             <h3 class="resume-step-heading">
                 Work Experience
                 <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
-                    <span v-if="!show || resume.resume_work_experiences.length === 0">Create</span><span v-else>Cancel</span>
+                    <span v-if="!show || esume.resume_work_experiences.length === 0">Create</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
 
-        <div class='resume-step-form' v-if="show || resume.resume_work_experiences.length === 0">
+        <div class='resume-step-form' v-if="show || (resume.resume_work_experiences && resume.resume_work_experiences.length === 0)">
             <div class='grid-x grid-margin-x'>
                 <div class='cell medium-6'>
                     <div class='form-group'>
@@ -63,7 +63,7 @@
             <button v-if="edit" class='button' type='button' @click='updateWorkExperience'>Update Work Experience</button>
             <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
-        <div v-if="workExperienceList.length > 0">
+        <div v-if="workExperienceList && workExperienceList.length > 0">
             <draggable v-model="workExperienceList" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x" :sort="true">
                 <div class="cell" v-for="workExperience in workExperienceList" :key="workExperience.order">
                     <div class="card">
@@ -73,7 +73,7 @@
                                 <br/>
                                 <em>{{ workExperience.position_start_date }} to
                                     {{ workExperience.position_end_date ? workExperience.position_end_date : "present" }}</em>
-                                <span v-if="workExperience.resume_descriptions.length > 0">
+                                <span v-if="workExperience.resume_descriptions && workExperience.resume_descriptions.length > 0">
                                     <br/>
                                     {{ workExperience.resume_descriptions[0].description }}
                                 </span>
