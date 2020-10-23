@@ -40,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/resume-work-experiences', \App\Http\Controllers\UpdateResumeWorkExperiencesOrderController::class);
     
     Route::resource('resume-education', \App\Http\Controllers\ResumeEducationController::class);
+    Route::put('/resume-educations', \App\Http\Controllers\UpdateResumeEducationsOrderController::class);
+
     Route::resource('resume-design', \App\Http\Controllers\ResumeDesignController::class);
     Route::resource('education-description', \App\Http\Controllers\EducationDescriptionController::class);
     
