@@ -4,7 +4,7 @@
             <h3 class="resume-step-heading">
                 Work Experience
                 <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
-                    <span v-if="!show || resume.resume_work_experiences.length === 0">Create</span><span v-else>Cancel</span>
+                    <span v-if="!show || (resume.resume_work_experiences && resume.resume_work_experiences.length === 0)">Create</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
