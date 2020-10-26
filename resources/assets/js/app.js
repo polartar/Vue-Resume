@@ -5,10 +5,6 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-// Docs: https://github.com/shakee93/vue-toasted#readme
-import Toasted from 'vue-toasted';
-Vue.use(Toasted);
-
 // Docs: https://element.eleme.io/#/en-US/component/quickstart
 import ElementUI from 'element-ui';
 import {Notification} from 'element-ui'
@@ -57,7 +53,13 @@ const store = new Vuex.Store({
                 'date_format': payload,
                 'user_id': state.resume.user_id,
                 'name': state.resume.name,
-            }).then((response) => this.commit('reloadResume'));
+            }).then((response) => {
+                this.commit('reloadResume');
+                Notification.success({
+                    title: 'Success',
+                    message: 'Successfully updated date format!',
+                });
+            });
         },
 
         updateResumeName (state, payload) {
