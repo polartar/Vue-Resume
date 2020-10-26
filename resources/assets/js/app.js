@@ -244,7 +244,7 @@ const store = new Vuex.Store({
                             store.commit(pCommit, response.data.id);
                         });
                     if (payload.successMessage)
-                        Notification.success({ message: payload.successMessage });
+                        Notification.success({ title: 'Success', message: payload.successMessage });
                     return true;
                 })
                 .catch(error => {
