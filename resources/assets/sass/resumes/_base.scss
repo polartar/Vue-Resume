@@ -1,5 +1,5 @@
 .resume-pdf {
-    @include body-font-regular;
+    //@include body-font-regular;
     margin: 0;
 
     .print-paper {
@@ -38,4 +38,17 @@
         left: 0;
         top: 0;
     }
+}
+
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
 }

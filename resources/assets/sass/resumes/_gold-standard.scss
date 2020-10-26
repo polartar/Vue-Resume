@@ -1,38 +1,64 @@
 .resume-gold-standard {
+    font-family: 'Helvetica Neue', sans-serif;
+
     .print-paper {
-        position: absolute;
+        background-color: #fff;
+        font-size: 12pt;
+        line-height: 16pt;
+        font-weight: normal;
         left: 0;
+        padding: 50px;
+        position: absolute;
         top: 0;
     }
 
-    .print-paper {
-        padding: 72px;
-        background-color: white;
-        font-family: "Helvetica Neue", sans-serif;
-        font-size: 12pt;
-        font-weight: normal;
-    }
-
-    .section {
-        padding-bottom: 15px;
+    .resume-section {
+        margin-bottom: 32px;
     }
 
     .resume-title {
-        font-size: 20pt;
-        font-weight: lighter;
         display: block;
+        font-size: 24pt;
+        font-weight: 400;
     }
 
     .contact-info {
-        font-size: 9pt;
-        text-align: right;
         display: block;
+        font-size: 10pt;
+        text-align: right;
     }
 
-    .heading {
-        font-size: 14pt;
-        margin-top: 40px;
+    .section-heading {
         display: block;
+        font-size: 18pt;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .section-title {
+        display: block;
+        font-size: 14pt;
+        font-weight: 400;
+        margin-bottom: 4px;
+    }
+
+    .section-group {
+        padding-bottom: 16px;
+    }
+
+    .section-summary {
+        p,
+        li {
+            margin-bottom: 10px;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+
+        li {
+            list-style: square;
+        }
     }
 
     .work-experience-company {
