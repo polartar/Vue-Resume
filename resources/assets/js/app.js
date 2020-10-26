@@ -229,7 +229,7 @@ const store = new Vuex.Store({
          * Globally available put request
          * 
          * Parameters:
-         *  payload: must contain route, payload, and a successMessage
+         *  payload: must contain route, payload, successMessage, and commits
          * 
          * Returns:
          *  true/false depending on success
@@ -237,7 +237,12 @@ const store = new Vuex.Store({
         axiosPutRequest: async (context, payload) => {
             return await axios.put(payload.route, payload.payload)
                 .then(response => {
-                    Notification.success({ message: payload.successMessage });
+                    if (payload.commits)
+                        payload.commits.forEach( (pCommit) => {
+                            store.commit(pCommit, response.data.id);
+                        });
+                    if (payload.successMessage)
+                        Notification.success({ message: payload.successMessage });
                     return true;
                 })
                 .catch(error => {
@@ -249,7 +254,7 @@ const store = new Vuex.Store({
          * Globally available post request
          * 
          * Parameters:
-         *  payload: must contain route, payload, and a successMessage
+         *  payload: must contain route, payload, successMessage, and commits
          * 
          * Returns:
          *  true/false depending on success
@@ -257,12 +262,37 @@ const store = new Vuex.Store({
         axiosPostRequest: async (context, payload) => {
             return await axios.post(payload.route, payload.payload)
                 .then(response => {
-                    if (payload.successMessage)
-                        Notification.success({ message: payload.successMessage });
                     if (payload.commits)
                         payload.commits.forEach( (pCommit) => {
                             store.commit(pCommit, response.data.id);
-                        })
+                        });
+                    if (payload.successMessage)
+                        Notification.success({ message: payload.successMessage });
+                    return true;
+                })
+                .catch(error => {
+                    Notification.error({message: 'Uh oh, we had some trouble with that'});
+                    return false;
+                });
+        },
+        /**
+         * Globally available delete request
+         * 
+         * Parameters:
+         *  payload: must contain route, payload, successMessage, and commits
+         * 
+         * Returns:
+         *  true/false depending on success
+         */
+        axiosDeleteRequest: async (context, payload) => {
+            return await axios.delete(payload.route)
+                .then(response => {
+                    if (payload.commits)
+                        payload.commits.forEach( (pCommit) => {
+                            store.commit(pCommit, response.data.id);
+                        });
+                    if (payload.successMessage)
+                        Notification.success({ message: payload.successMessage });
                     return true;
                 })
                 .catch(error => {
