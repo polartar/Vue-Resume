@@ -230,6 +230,9 @@ const store = new Vuex.Store({
          * 
          * Parameters:
          *  payload: must contain route, payload, and a successMessage
+         * 
+         * Returns:
+         *  true/false depending on success
          */
         axiosPutRequest: async (context, payload) => {
             return await axios.put(payload.route, payload.payload)
