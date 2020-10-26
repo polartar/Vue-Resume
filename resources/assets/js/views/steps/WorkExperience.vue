@@ -153,7 +153,7 @@
                         //
                     })
                     .catch(error => {
-                        console.log('error create resume description', error);
+                        //
                     });
             },
             updateResumeDescription: function (resumeDescriptionId, workExperienceId) {
@@ -186,19 +186,15 @@
                     })
                     .then(response => {
                         id = response.data.id;
-                        this.$toasted.show('Successfully added work experience!', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully added work experience!',
                         });
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
                     });
                 return id;
@@ -228,39 +224,31 @@
                         this.editId = null;
                         this.editDescriptionId = null;
                         this.$store.commit('reloadResume');
-                        this.$toasted.show('Successfully updated work experience!', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully updated work experience!',
                         });
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
                     });
             },
             removeWorkExperience: function (workExperienceId) {
                 this.$axios.delete('/resume-work-experience/' + workExperienceId)
                     .then(response => {
-                        this.$toasted.show('Successfully removed work experience!', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully removed work experience!',
                         });
                         this.$store.commit('reloadResume');
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
                     });
             },
