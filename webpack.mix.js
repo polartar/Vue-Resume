@@ -22,6 +22,7 @@ mix
     .sass('resources/assets/sass/app.scss', 'public/assets/css')
     .sass('resources/assets/sass/emails.scss', '../resources/views/vendor/mail/html/themes/default.css')
     .copy('resources/assets/fonts', 'public/assets/fonts')
+    .copy('resources/assets/fonts', 'storage/fonts')
     .copy('resources/assets/images', 'public/assets/images')
 
     .sass('resources/assets/sass/combination.scss', 'public/assets/css/resumes')

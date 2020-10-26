@@ -2,6 +2,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" href="{{ asset('assets/css/resumes/gold-standard.css') }}">
+        <style media="screen">
+        </style>
     </head>
     <body class="resume-pdf resume-gold-standard">
         <div class="print-paper">
@@ -9,20 +11,37 @@
                 <tbody>
                     <tr>
                         <td>
-                            <span class="resume-title">{{ $resume->user->full_name }}</span>
+                            <p class="resume-title">{{ $resume->user->full_name }}</p>
                         </td>
                         <td>
-                            <span class="contact-info">
-                                {{ $resume->first_address->city }}, {{ $resume->first_address->province }}
-                                <br/>
-                                @if($resume->user->user_phones->first())
-                                    {{ $resume->user->user_phones->first()->phone_number }}
-                                @endif
-                                <br/>
-                                {{ $resume->user->email }}
-                                <br/>
-                                LinkedIn URL (todo)
-                            </span>
+                            <table class="full-width-table header-contact-info" align="center" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p class="contact-info">{{ $resume->first_address->city }}, {{ $resume->first_address->province }}</p>
+                                        </td>
+                                    </tr>
+
+                                    @if($resume->user->user_phones->first())
+                                    <tr>
+                                        <td>
+                                            <p class="contact-info">{{ $resume->user->user_phones->first()->phone_number }}</p>
+                                        </td>
+                                    </tr>
+                                    @endif
+
+                                    <tr>
+                                        <td>
+                                            <p class="contact-info">{{ $resume->user->email }}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p class="contact-info">LinkedIn URL (todo)</p>
+                                        </td>
+                                    </tr>
+
+                            </table>
                         </td>
                     </tr>
                 </tbody>

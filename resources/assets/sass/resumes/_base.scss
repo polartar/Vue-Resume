@@ -1,3 +1,11 @@
+@page {
+    margin: 0px;
+}
+
+body {
+    margin: 0px; 
+}
+
 .resume-pdf {
     //@include body-font-regular;
     margin: 0;
@@ -51,4 +59,25 @@
 
 .text-center {
     text-align: center;
+}
+
+@font-face {
+    font-family: 'OpenSans300';
+    src: url('/assets/fonts/open-sans/Open-Sans-300.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans600';
+    src: url('/assets/fonts/open-sans/Open-Sans-600.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans800';
+    src: url('/assets/fonts/open-sans/Open-Sans-800.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

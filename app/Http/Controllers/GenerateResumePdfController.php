@@ -18,7 +18,7 @@ class GenerateResumePdfController extends Controller
             // dump($template);
             return view('templates.' . $template, compact('resume'));
         }
-        $pdf->setPaper('A4', 'portrait');
+        $pdf->setPaper('letter', 'portrait');
 
         if ($request->get('preview')) {
             return $pdf->stream();
