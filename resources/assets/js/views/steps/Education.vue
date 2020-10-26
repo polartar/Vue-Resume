@@ -194,11 +194,9 @@
                         this.formReset();
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
                     });
             },
@@ -227,11 +225,9 @@
                         this.updateEducationDescription();
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
                     });
             },
@@ -250,21 +246,16 @@
                         this.editDescriptionId = null;
                         this.$store.commit('reloadResume');
 
-                        this.$toasted.show('Successfully updated education experience!', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully updated education experience!',
                         });
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
-                        console.log('error create education description', error);
                     });
             },
             updateToggleResumePreview: function (event) {
@@ -285,20 +276,16 @@
             removeEducation: function (educationId) {
                 this.$axios.delete('/resume-education/' + educationId)
                     .then(response => {
-                        this.$toasted.show('Successfully removed education!', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully removed education experience',
                         });
                         this.$store.commit('reloadResume');
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
                     });
             },
@@ -310,21 +297,16 @@
                     })
                     .then(response => {
                         this.$store.commit('reloadResume');
-                        this.$toasted.show('Successfully added education!', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully added education experience!',
                         });
                     })
                     .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Uh oh, we had some trouble with that'
                         });
-                        console.log(error);
                         return;
                     });
             },
