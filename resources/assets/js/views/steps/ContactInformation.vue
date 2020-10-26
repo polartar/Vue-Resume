@@ -467,52 +467,45 @@
             },
 
 
-            saveContactInfo: function () {
+            saveContactInfo: async function () {
                 // Need to create a userPhone, then add it to the list of ids
-                this.createUserPhone();
+                await this.createUserPhone();
 
                 // Need to create a userEmail
-                this.createUserEmail();
+                await this.createUserEmail();
 
                 // Need to create a userAddress
-                this.createUserAddress(true);
+                await this.createUserAddress(true);
 
                 // Update resume via post w/all info (probably going to create new address)
                 //this.saveResume();
             },
-            createUserPhone: function () {
-                this.$axios
-                    .post('/user-phone', {
+            createUserPhone: async function () {
+                await this.$store.dispatch('axiosPostRequest', {
+                    route: '/user-phone',
+                    payload: {
                         'user_id': this.resume.user.id,
                         'phone_number': this.phone
-                    })
-                    .then(response => {
-                        this.$store.commit('addUserPhoneId', response.data.id);
-                        console.log(this.$store.state.userPhoneIds);
-                    })
-                    .catch(error => {
-                        console.log('failed to create phone:', error);
-                        return null;
-                    });
+                    },
+                    successMessage: null,
+                    commits: ['addUserPhoneId'],
+                });
             },
-            createUserEmail: function () {
-                this.$axios
-                    .post('/user-email', {
+            createUserEmail: async function () {
+                await this.$store.dispatch('axiosPostRequest', {
+                    route: '/user-email',
+                    payload: {
                         'user_id': this.resume.user.id,
                         'email': this.email
-                    })
-                    .then(response => {
-                        this.$store.commit('addUserEmailId', response.data.id);
-                        console.log(this.$store.state.userEmailIds);
-                    })
-                    .catch(error => {
-                        console.log('failed to create email:', error);
-                        return null;
-                    });
+                    },
+                    successMessage: null,
+                    commits: ['addUserEmailId'],
+                });
             },
-            createUserAddress: function (saveResume = false) {
-                this.$axios
-                    .post('/user-address', {
+            createUserAddress: async function (saveResume = false) {
+                await this.$store.dispatch('axiosPostRequest', {
+                    route: '/user-address',
+                    payload: {
                         'user_id': this.resume.user.id,
                         'street_1': this.street_1,
                         'street_2': this.street_2,
@@ -520,48 +513,30 @@
                         'province': this.province,
                         'country': this.country,
                         'postal_code': this.zip,
-                    })
-                    .then(response => {
-                        this.$store.commit('addUserAddressId', response.data.id);
-                        if (saveResume) {
-                            this.saveResume();
-                        }
+                    },
+                    successMessage: null,
+                    commits: ['addUserAddressId'],
+                });
 
-                        this.$toasted.show('Successfully saved your contact information', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
-                        });
-                    })
-                    .catch(error => {
-                        console.log('failed to create address:', error);
-                        this.$toasted.show('Uh oh, we had an issue with that', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
-                        });
-                        return null;
-                    });
+                if (saveResume) 
+                    await this.saveResume();
             },
 
-            saveResume: function () {
+            saveResume: async function () {
                 // Eager loading needs a little love on the way back
                 let updateData = this.resume;
                 updateData['user_id'] = this.resume.user.id;
                 updateData['user_email_ids'] = this.$store.state.userEmailIds;
                 updateData['user_address_ids'] = this.$store.state.userAddressIds;
                 updateData['user_phone_ids'] = this.$store.state.userPhoneIds;
-                this.$axios
-                    .put('/resume/' + this.resume.id, updateData)
-                    .then(response => {
-                        return true;
-                    })
-                    .catch(error => {
-                        console.log('error updating resume:', error);
-                        return false;
-                    });
+                
+                const success = await this.$store.dispatch('axiosPutRequest', {
+                    route: '/resume/' + this.resume.id,
+                    payload: updateData,
+                    successMessage: 'Successfully saved contact information',
+                });
+
+                return success;
             },
         }
     }
