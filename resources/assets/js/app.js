@@ -244,6 +244,31 @@ const store = new Vuex.Store({
                     Notification.error({message: 'Uh oh, we had some trouble with that'});
                     return false;
                 });
+        },
+        /**
+         * Globally available post request
+         * 
+         * Parameters:
+         *  payload: must contain route, payload, and a successMessage
+         * 
+         * Returns:
+         *  true/false depending on success
+         */
+        axiosPostRequest: async (context, payload) => {
+            return await axios.post(payload.route, payload.payload)
+                .then(response => {
+                    if (payload.successMessage)
+                        Notification.success({ message: payload.successMessage });
+                    if (payload.commits)
+                        payload.commits.forEach( (pCommit) => {
+                            store.commit(pCommit, response.data.id);
+                        })
+                    return true;
+                })
+                .catch(error => {
+                    Notification.error({message: 'Uh oh, we had some trouble with that'});
+                    return false;
+                });
         }
     }
 });
