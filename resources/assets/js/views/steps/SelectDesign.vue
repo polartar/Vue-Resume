@@ -27,7 +27,7 @@
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <router-link to="contact-information" tag="button" class="button">Save &amp; Continue</router-link>
+            <router-link to="contact-information" tag="button" class="button">Continue</router-link>
         </div>
     </div>
 </template>
@@ -49,26 +49,15 @@
         },
 
         methods: {
-            applyDesign: function () {
-                this.$axios
-                    .put('/resume/' + this.resume.id, this.resume)
-                    .then(response => {
-                        this.$store.commit('reloadResume');
-                        this.$toasted.show('Successfully changed resume design', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
-                        });
-                    })
-                    .catch(error => {
-                        this.$toasted.show('Uh oh, we had an issue with that', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
-                        });
-                    });
+            applyDesign: async function () {
+                const success = await this.$store.dispatch('axiosPutRequest', {
+                    route: '/resume/' + this.resume.id,
+                    payload: this.resume,
+                    successMessage: 'Successfully changed resume design',
+                });
+
+                if (success)
+                    this.$store.commit('reloadResume');
             },
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
