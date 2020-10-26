@@ -63,6 +63,7 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
         'last_active_timestamp',
+        'last_active_date',
     ];
 
     public function resumes() {
@@ -93,7 +94,7 @@ class User extends Authenticatable
         return $this->first_name . " " . $this->last_name . "\t" . $this->email . "\t" . count($this->resumes);
     }
 
-    public function getLastActiveTimestampAttribute() {
+    public function getLastActiveDateAttribute() {
         $timestamp = DB::table('sessions')
             ->select('last_activity')
             ->where('user_id', $this->id)
@@ -107,5 +108,19 @@ class User extends Authenticatable
         }
 
         return Carbon::createFromTimestamp($timestamp->last_activity)->diffForHumans();
+    }
+
+    public function getLastActiveTimestampAttribute() {
+        $timestamp = DB::table('sessions')
+            ->select('last_activity')
+            ->where('user_id', $this->id)
+            ->orderBy('last_activity', 'desc')
+            ->first();
+        
+        if (!$timestamp) {
+            return '0';
+        }
+
+        return $timestamp->last_activity;
     }
 }
