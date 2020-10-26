@@ -47,6 +47,7 @@
                         <div class="fancy-select fancy-select-full-width">
                             <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
                             <select required class="fancy-select" :value="country" name="country" @change="updateCountry">
+                                <!-- #region(collapsed) Countries -->
                                 <option value="" selected disabled>--- Choose a country ---</option>
                                 <option value="United States">United States</option>
                                 <option value="Australia">Australia</option>
@@ -304,6 +305,7 @@
                                 <option value="Yemen">Yemen</option>
                                 <option value="Zambia">Zambia</option>
                                 <option value="Zimbabwe">Zimbabwe</option>
+                                <!-- #endregion -->
                             </select>
                         </div>
                     </div>
@@ -332,6 +334,7 @@
                         <div class="fancy-select fancy-select-full-width" v-if="country == 'United States'">
                             <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
                             <select required class="fancy-select" :value="province" name="province" @input="updateProvince">
+                                <!-- #region(collapsed) States -->
                                 <option value="">Select State</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -384,6 +387,7 @@
                                 <option value="WV">West Virginia</option>
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
+                                <!-- #endregion -->
                             </select>
                         </div>
                         <div v-else>
