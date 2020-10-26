@@ -137,27 +137,15 @@
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
-            saveResumeName: function () {
-                console.log(this.resume);
-                this.$axios
-                    .put('/resume/' + this.resume.id, this.resume)
-                    .then(response => {
-                        this.$toasted.show('Successfully updated the resume name', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
-                        });
-                        this.$router.push({name: 'select-design', query: this.$route.query});
-                    }).catch(response => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
-                        });
-                        console.log(response);
+            saveResumeName: async function () {
+                const success = await this.$store.dispatch('axiosPutRequest', {
+                    route: '/resume/' + this.resume.id,
+                    payload: this.resume,
+                    successMessage: 'Successfully updated the resume name',
                 });
+                
+                if (success)
+                    this.$router.push({name: 'select-design', query: this.$route.query});
             }
         }
     }
