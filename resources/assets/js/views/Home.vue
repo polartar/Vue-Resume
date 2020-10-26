@@ -150,3 +150,12 @@
         }
     }
 </script>
+<style>
+    .el-notification__content p {
+        text-align: left!important;
+    }
+
+    .el-notification__content, .el-notification__title {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+</style>
