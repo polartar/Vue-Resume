@@ -1,9 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <style>
-            {!! file_get_contents(asset('assets/css/resumes/gold-standard.css')) !!}
-        </style>
+        <link rel="stylesheet" href="{{ asset('assets/css/resumes/gold-standard.css') }}" />
     </head>
     <body class="resume-pdf resume-gold-standard">
         <div class="print-paper">
