@@ -73,59 +73,40 @@
             }
         },
         methods: {
-            saveSummary: function () {
+            saveSummary: async function () {
                 this.show = false;
-                this.$axios
-                    .post('/resume-summary', {
+
+                const success = await this.$store.dispatch('axiosPostRequest', {
+                    route: '/resume-summary',
+                    payload: {
                         'resume_id': this.$store.state.resume.id,
                         'name': this.name,
                         'bullet_point': this.bulleted,
-                    })
-                    .then(response => {
-                        this.$toasted.show('Successfully added the resume summary', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
-                        });
-                        this.$store.commit('reloadResume');
-                        this.name = '';
-                    })
-                    .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
-                        });
-                    });
+                    },
+                    successMessage: 'Successfully added the resume summary',
+                    commits: ['reloadResume'],
+                });
+
+                if (success)
+                    this.name = '';
             },
-            updateSummary: function () {
+            updateSummary: async function () {
                 this.show = false;
-                this.$axios
-                    .put('/resume-summary/' + this.editId, {
+
+                const success = await this.$store.dispatch('axiosPutRequest', {
+                    route: '/resume-summary/' + this.editId,
+                    payload: {
                         'name': this.name,
                         'bullet_point': this.bulleted,
-                    })
-                    .then(response => {
-                        this.$toasted.show('Successfully updated the resume summary', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
-                        });
-                        this.$store.commit('reloadResume');
-                        this.name = '';
-                        this.edit = false;
-                    })
-                    .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
-                        });
-                    });
+                    },
+                    successMessage: 'Successfully updated the resume summary',
+                    commits: ['reloadResume'],
+                });
+
+                if (success) {
+                    this.name = '';
+                    this.edit = false;
+                }
             },
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
@@ -137,26 +118,13 @@
                 this.editId = summaryId;
                 this.show = true;
             },
-            removeSummary: function (summaryId) {
-                this.$axios
-                    .delete('/resume-summary/' + summaryId)
-                    .then(response => {
-                        this.$toasted.show('Successfully updated the resume summary', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'success',
-                        });
-                        this.$store.commit('reloadResume');
-                    })
-                    .catch(error => {
-                        this.$toasted.show('Uh oh, we had some trouble with that.', {
-                            position: 'bottom-center',
-                            duration: 3000,
-                            fullWidth: true,
-                            type: 'error',
-                        });
-                    });
+            removeSummary: async function (summaryId) {
+                const success = await this.$store.dispatch('axiosDeleteRequest', {
+                    route: '/resume-summary/' + summaryId,
+                    payload: {},
+                    successMessage: 'Successfully removed the resume summary',
+                    commits: ['reloadResume'],
+                });
             }
         }
     }
