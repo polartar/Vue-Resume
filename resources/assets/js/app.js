@@ -11,6 +11,7 @@ Vue.use(Toasted);
 
 // Docs: https://element.eleme.io/#/en-US/component/quickstart
 import ElementUI from 'element-ui';
+import {Notification} from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/en'
 // import 'element-ui/lib/theme-chalk/index.css'; // in main scss file
 
@@ -223,6 +224,23 @@ const store = new Vuex.Store({
         },
         updateResumeDateFormat: (context, dateFormat) => {
             context.commit('updateResumeDateFormat', dateFormat);
+        },
+        /**
+         * Globally available put request
+         * 
+         * Parameters:
+         *  payload: must contain route, payload, and a successMessage
+         */
+        axiosPutRequest: async (context, payload) => {
+            return await axios.put(payload.route, payload.payload)
+                .then(response => {
+                    Notification.success({ message: payload.successMessage });
+                    return true;
+                })
+                .catch(error => {
+                    Notification.error({message: 'Uh oh, we had some trouble with that'});
+                    return false;
+                });
         }
     }
 });
