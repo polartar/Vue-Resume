@@ -22,7 +22,7 @@
                     <!-- make select with saved emails and option to add new -->
                     <div class="form-group">
                         <label>Email</label>
-                        <input required type="email" name="email" :value="email">
+                        <input required type="email" name="email" :value="email" disabled>
                     </div>
                 </div>
                 <div class="cell medium-6">
@@ -472,6 +472,22 @@
 
 
             saveContactInfo: async function () {
+                // Update User Info
+                let updatedUser = this.$store.state.resume.user;
+                updatedUser.first_name = this.firstName;
+                updatedUser.last_name = this.lastName;
+                this.$store.dispatch('axiosPutRequest', {
+                    route: '/update-user/' + updatedUser.id,
+                    payload: updatedUser,
+                    successMessage: 'You updated your name!', // TODO: Remove this notification
+                    commits: [],
+                });
+                
+                /* 
+                    No updating the email address, this is a bad idea. 
+                    TODO: Add an email field to the resume, so that the user can display a different email if they want.
+                */
+
                 // Need to create a userPhone, then add it to the list of ids
                 await this.createUserPhone();
 
