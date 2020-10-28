@@ -2,7 +2,8 @@
     <div>
         <div class="resume-preview-action-links">
             <el-link type="success"
-                :href="'/generate-resume-pdf/' + resume.id"
+                :href="'/generate-resume-pdf/' + resume.id + '?preview=true'"
+                target="_blank"
                 :underline="false">
                 Download as PDF
             </el-link>
