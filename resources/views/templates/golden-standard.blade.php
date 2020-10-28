@@ -100,7 +100,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                
+                                <!-- This line will cleanly break a page -->
                             </td>
                         </tr>
                     @endforeach
