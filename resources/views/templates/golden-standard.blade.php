@@ -4,6 +4,11 @@
         <link rel="stylesheet" href="{{ asset('assets/css/resumes/gold-standard.css') }}">
         <style media="screen">
         </style>
+        <style>
+            .page-break {
+                page-break-after: always;
+            }
+        </style>
     </head>
     <body class="resume-pdf resume-gold-standard">
         <div class="print-paper">
@@ -95,6 +100,7 @@
                                         </td>
                                     </tr>
                                 </table>
+                                
                             </td>
                         </tr>
                     @endforeach
