@@ -134,6 +134,7 @@
         mounted() {},
 
         methods: {
+            /* Work Experiences */
             addWorkExperience: async function () {
                 // Need to create a new resume description
                 const workExperienceId = await this.createWorkExperience();
@@ -141,37 +142,6 @@
                 this.resetForm();
                 this.show = false;
                 this.$store.commit('reloadResume');
-            },
-            createResumeDescription: async function (workExperienceId) {
-                await this.$axios
-                    .post('/resume-description', {
-                        'resume_work_experience_id': workExperienceId,
-                        'description': this.description,
-                        'type': 'paragraph',
-                    })
-                    .then(response => {
-                        //
-                    })
-                    .catch(error => {
-                        //
-                    });
-            },
-            updateResumeDescription: function (resumeDescriptionId, workExperienceId) {
-                this.$axios
-                    .put(`/resume-description/${resumeDescriptionId}`, {
-                        'resume_work_experience_id': workExperienceId,
-                        'description': this.description,
-                        'type': 'paragraph',
-                    })
-                    .then(response => {
-                        //
-                    })
-                    .catch(error => {
-                        console.log('error create resume description', error);
-                    });
-            },
-            updateToggleResumePreview: function (event) {
-                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             createWorkExperience: async function () {
                 let id;
@@ -199,15 +169,8 @@
                     });
                 return id;
             },
-            editWorkExperience: function (workExperience) {
-                this.setupEditing(workExperience);
-                this.show = true;
-                this.edit = true;
-                this.editId = workExperience.id;
-                if (!! workExperience.resume_descriptions.length > 0)
-                    this.editDescriptionId = workExperience.resume_descriptions[0].id;
-            },
             updateWorkExperience: function () {
+                this.updateResumeDescription(this.editDescriptionId, this.editId);
                 this.$axios
                     .put('/resume-work-experience/' + this.editId, {
                         'position_title': this.title,
@@ -217,7 +180,6 @@
                         'current_employer': this.currentEmployer,
                     })
                     .then(response => {
-                        this.updateResumeDescription(this.editDescriptionId, this.editId);
                         this.resetForm();
                         this.show = false;
                         this.edit = false;
@@ -252,6 +214,51 @@
                         });
                     });
             },
+
+            /* Resume Descriptions for Work Experience */
+            createResumeDescription: async function (workExperienceId) {
+                await this.$axios
+                    .post('/resume-description', {
+                        'resume_work_experience_id': workExperienceId,
+                        'description': this.description,
+                        'type': 'paragraph',
+                    })
+                    .then(response => {
+                        //
+                    })
+                    .catch(error => {
+                        //
+                    });
+            },
+            updateResumeDescription: function (resumeDescriptionId, workExperienceId) {
+                if (!resumeDescriptionId) { // Need to create a new resume description in this case
+                    this.createResumeDescription(workExperienceId);
+                    return;
+                }
+                
+                this.$axios
+                    .put(`/resume-description/${resumeDescriptionId}`, {
+                        'resume_work_experience_id': workExperienceId,
+                        'description': this.description,
+                        'type': 'paragraph',
+                    })
+                    .then(response => {
+                        //
+                    })
+                    .catch(error => {
+                        console.log('error create resume description', error);
+                    });
+            },
+           
+            /* Actions */
+            editWorkExperience: function (workExperience) {
+                this.setupEditing(workExperience);
+                this.show = true;
+                this.edit = true;
+                this.editId = workExperience.id;
+                if (!! workExperience.resume_descriptions.length > 0)
+                    this.editDescriptionId = workExperience.resume_descriptions[0].id;
+            },
             setupEditing: function (workExperience) {
                 this.editId = workExperience.id;
                 this.title = workExperience.position_title;
@@ -279,6 +286,9 @@
             toggleView: function () {
                 this.show = !this.show;
                 this.resetEditing();
+            },
+            updateToggleResumePreview: function (event) {
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
         }
     }
