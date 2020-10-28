@@ -77,7 +77,7 @@
                         <td><span class="section-heading">Work Experience</span></td>
                     </tr>
 
-                    @foreach( $resume->resumeWorkExperiences as $work )
+                    @foreach( $resume->resumeWorkExperiences as $key=>$work )
                         <tr>
                             <td class="section-group">
                                 <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
