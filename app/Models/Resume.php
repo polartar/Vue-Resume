@@ -81,4 +81,9 @@ class Resume extends Model
     {
         return ResumeSummary::find($this->resume_summaries[0]);
     }
+
+    public function hobbies()
+    {
+        return $this->hasMany(Hobby::class);
+    }
 }
