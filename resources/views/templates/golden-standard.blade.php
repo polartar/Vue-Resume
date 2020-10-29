@@ -70,7 +70,10 @@
                     </tr>
                 </tbody>
             </table>
-
+            @if ($workExperienceSectionBreak)
+                <div class="page-break"></div>
+                <div style="padding-top: 70px;">&nbsp;</div>
+            @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
@@ -80,6 +83,11 @@
                     @foreach( $resume->resumeWorkExperiences as $key=>$work )
                         <tr>
                             <td class="section-group">
+                                <!-- This line will cleanly break a page -->
+                                @if(in_array($key, $workExperienceIndexBreaks))
+                                    <div class="page-break"></div>
+                                    <div style="padding-top: 70px;">&nbsp;</div>
+                                @endif
                                 <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td><span class="section-title">{{ $work->position_title }}</span></td>
@@ -108,14 +116,23 @@
                 </tbody>
             </table>
 
+            @if ($educationSectionBreak)
+                <div class="page-break"></div>
+                <div style="padding-top: 70px;">&nbsp;</div>
+            @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
                         <td><span class="section-heading">Education</span></td>
                     </tr>
-                    @foreach( $resume->resumeEducations as $education )
+                    @foreach( $resume->resumeEducations as $key=>$education )
                     <tr>
                         <td class="section-group">
+                            <!-- This line will cleanly break a page -->
+                            @if(in_array($key, $educationIndexBreaks))
+                                <div class="page-break"></div>
+                                <div style="padding-top: 70px;">&nbsp;</div>
+                            @endif
                             <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td><span class="section-title">{{ $education->school_name }} &ndash; {{ $education->degree_received }} {{ $education->field_of_study }}</span></td>
