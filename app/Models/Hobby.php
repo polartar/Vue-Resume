@@ -16,6 +16,7 @@ class Hobby extends Model
     protected $fillable = [
         'resume_id',
         'name',
+        'order',
     ];
 
     public function resume()

@@ -17,6 +17,7 @@ class CreateHobbiesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('resume_id');
             $table->text('name');
+            $table->integer('order');
             $table->softDeletes();
             $table->timestamps();
         });

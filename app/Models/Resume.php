@@ -84,6 +84,6 @@ class Resume extends Model
 
     public function hobbies()
     {
-        return $this->hasMany(Hobby::class);
+        return $this->hasMany(Hobby::class)->orderBy('order');
     }
 }
