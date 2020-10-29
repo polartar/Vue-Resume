@@ -137,7 +137,13 @@ class GenerateResumePdfController extends Controller
 
         if ($request->get('page')) {
             // dump($template);
-            return view('templates.' . $template, compact('resume'));
+            return view('templates.' . $template, compact([
+                'resume',
+                'workExperienceSectionBreak',
+                'workExperienceIndexBreaks',
+                'educationSectionBreak',
+                'educationIndexBreaks',
+            ]));
         }
         $pdf->setPaper('letter', 'portrait');
 
