@@ -2,74 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hobbies;
+use App\Models\Hobby;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreHobbyRequest;
+use Exception;
 
-class HobbiesController extends Controller
+class HobbyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreHobbyRequest $request)
     {
-        //
-    }
+        $validated = $request->validated();
+        try {
+            Hobby::create($validated);
+        } catch (Exception $e) {
+            return response(['success' => false, 'error' => $e], 500);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Hobbies  $hobbies
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Hobbies $hobbies)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Hobbies  $hobbies
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Hobbies $hobbies)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hobbies  $hobbies
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Hobbies $hobbies)
-    {
-        //
+        return response(204);
     }
 
     /**
@@ -78,8 +33,14 @@ class HobbiesController extends Controller
      * @param  \App\Models\Hobbies  $hobbies
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hobbies $hobbies)
+    public function destroy(Hobby $hobby)
     {
-        //
+        try {
+            $hobby->delete();
+        } catch (Exception $e) {
+            return response(['success' => false, 'error' => $e], 500);
+        }
+        
+        return response(204);
     }
 }
