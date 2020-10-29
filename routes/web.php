@@ -47,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::resource('resume-design', \App\Http\Controllers\ResumeDesignController::class);
     Route::resource('education-description', \App\Http\Controllers\EducationDescriptionController::class);
+    Route::resource('hobby', \App\Http\Controllers\HobbiesController::class);
     
     Route::get('/generate-resume-pdf/{resume}', \App\Http\Controllers\GenerateResumePdfController::class);
 });
