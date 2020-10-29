@@ -17,6 +17,40 @@
             </div>
         </div>
 
+        <div class="resume-step-heading-container">
+            <h3 class="resume-step-heading">Hobbies and Affiliations</h3>
+        </div>
+
+        <div class="resume-step-form">
+            <div class="grid-x grid-margin-x">
+                <div class="cell medium-10">
+                    <div class="form-group">
+                        <label>Hobby or Affiliation</label>
+                        <input type="text" v-model="hobbyString" placeholder="Enter a hobby or affiliation" />
+                    </div>
+                </div>
+                <div class="cell medium-2">
+                    <el-button type="primary" icon="el-icon-plus" style="margin-top: 25px;" circle @click="addHobby()"></el-button>
+                </div>
+
+                <div class="cell">
+                    <draggable v-model="hobbies" group="hobbies" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
+                        <div class="cell" v-for="hobby in hobbies" :key="hobby.id">
+                            <div class="card">
+                                <div class="card-section">
+                                    <p class="float-left" style="margin-bottom: 0;">
+                                        {{ hobby.name }}
+                                    </p>
+                                    <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeHobby(hobby.id)"></el-button>
+                                </div>
+                            </div>
+                        </div>
+                    </draggable>
+                </div>
+
+            </div>
+        </div>
+
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button">Preview</button>
@@ -26,7 +60,10 @@
 </template>
 
 <script>
+    import draggable from 'vuedraggable';
+
     export default {
+        components: {draggable},
         computed: {
             dateFormat: {
                 get() {
@@ -34,6 +71,14 @@
                 },
                 set(value) {
                     this.$store.dispatch('updateResumeDateFormat', value);
+                }
+            },
+            hobbies: {
+                get() {
+                    return this.$store.state.resume.hobbies;
+                },
+                set(value) {
+                    // await this.$store.dispatch('updateResumeEducationOrder', value);
                 }
             }
         },
@@ -51,6 +96,38 @@
                     { id: 8, value: 'Day-Month-Year' },
                     { id: 9, value: 'Month-Day-Year' },
                 ],
+                hobbyString: '',
+                hobbyList: [
+                    {
+                        id: 1,
+                        order: 1,
+                        name: 'Drones',
+                    },
+                    {
+                        id: 2,
+                        order: 2,
+                        name: 'Motorcycles',
+                    }
+                ]
+            }
+        },
+        methods: {
+            addHobby: async function () {
+                await this.$store.dispatch('axiosPostRequest', {
+                    route: '/hobby',
+                    payload: {
+                        resume_id: this.$store.state.resume.id,
+                        name: this.hobbyString,
+                        order: this.hobbyList.length + 1,
+                    },
+                    commits: ['reloadResume'],
+                    successMessage: 'Successfully added item.'
+                });
+
+                this.hobbyString = '';
+            },
+            removeHobby: async function () {
+                // 
             }
         }
     }
