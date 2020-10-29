@@ -109,13 +109,17 @@
                         order: this.hobbyList.length + 1,
                     },
                     commits: ['reloadResume'],
-                    successMessage: 'Successfully added item.'
+                    successMessage: 'Successfully added item',
                 });
 
                 this.hobbyString = '';
             },
-            removeHobby: async function () {
-                // 
+            removeHobby: async function (hobbyId) {
+                this.$store.dispatch('axiosDeleteRequest', {
+                    route: '/hobby/' + hobbyId,
+                    commits: ['reloadResume'],
+                    successMessage: 'Successfully removed item',
+                })
             }
         }
     }
