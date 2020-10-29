@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UpdateHobbyOrderController;
 use App\Http\Controllers\UpdateUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('resume-design', \App\Http\Controllers\ResumeDesignController::class);
     Route::resource('education-description', \App\Http\Controllers\EducationDescriptionController::class);
     Route::resource('hobby', \App\Http\Controllers\HobbyController::class);
+    Route::put('/hobbies', \App\Http\Controllers\UpdateHobbyOrderController::class);
     
     Route::get('/generate-resume-pdf/{resume}', \App\Http\Controllers\GenerateResumePdfController::class);
 });

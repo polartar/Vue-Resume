@@ -77,8 +77,8 @@
                 get() {
                     return this.$store.state.resume.hobbies;
                 },
-                set(value) {
-                    // await this.$store.dispatch('updateResumeEducationOrder', value);
+                async set(value) {
+                    await this.$store.dispatch('updateResumeHobbiesOrder', value);
                 }
             }
         },
@@ -97,18 +97,6 @@
                     { id: 9, value: 'Month-Day-Year' },
                 ],
                 hobbyString: '',
-                hobbyList: [
-                    {
-                        id: 1,
-                        order: 1,
-                        name: 'Drones',
-                    },
-                    {
-                        id: 2,
-                        order: 2,
-                        name: 'Motorcycles',
-                    }
-                ]
             }
         },
         methods: {
