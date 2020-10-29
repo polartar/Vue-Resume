@@ -43,6 +43,7 @@ class GenerateResumePdfController extends Controller
 
         $lineCount = 0;
 
+
         /* Summary line count
             If the summary is in the bullet point format, create an array by exploding the newlines
             Assuming here that the user won't blow out the entire first page with the summary section (10/29/20)
@@ -63,6 +64,7 @@ class GenerateResumePdfController extends Controller
                 $lineCount += round( strlen($name) / self::AVERAGE_LINE_LENGTH);
             }
         }
+
 
         /* Work Experience Section
             Counting the headers and the description lines
@@ -93,6 +95,7 @@ class GenerateResumePdfController extends Controller
             }
         }
 
+
         /* Education Section
             Counting the headers and description lines
         */
@@ -102,6 +105,7 @@ class GenerateResumePdfController extends Controller
         } else {
             $lineCount += self::EDUCATION_SECTION_HEADER_LINE_COUNT;
         }
+        
 
         /* Check what the line count will be with each education
             If it exceeds FIRST_PAGE_LINE_LIMIT, then the index of that education will be noted.
