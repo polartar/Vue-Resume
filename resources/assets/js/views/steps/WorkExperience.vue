@@ -69,8 +69,7 @@
                     <div class="card">
                         <div class="card-section">
                             <p style="margin-bottom: 0; display: inline-block; max-width: 70%;">
-                                {{ workExperience.position_title }} at {{ workExperience.position_company }}
-                                <br/>
+                                <span style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ workExperience.position_title }} at {{ workExperience.position_company }}</span>                                
                                 <em>{{ workExperience.position_start_date }} to
                                     {{ workExperience.position_end_date ? workExperience.position_end_date : "present" }}</em>
                                 <br/>
