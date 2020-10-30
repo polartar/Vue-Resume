@@ -17,6 +17,10 @@ class ResumeDesign extends Model
         'name',
     ];
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
