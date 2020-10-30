@@ -65,7 +65,7 @@
         </div>
         <div v-if="workExperienceList && workExperienceList.length > 0">
             <draggable v-model="workExperienceList" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x" :sort="true">
-                <div class="cell" v-for="workExperience in workExperienceList" :key="workExperience.id">
+                <div class="cell grabbable" v-for="workExperience in workExperienceList" :key="workExperience.id">
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
@@ -299,6 +299,9 @@
     }
     .el-input__inner {
         margin-bottom: 0!important;
+    }
+    .grabbable {
+        cursor: grab;
     }
 </style>
 

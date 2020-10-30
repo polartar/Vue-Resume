@@ -89,7 +89,7 @@
         </div>
         <div v-if="educationList && educationList.length > 0">
             <draggable v-model="educationList" group="work-experiences" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
-                <div class="cell" v-for="education in educationList" :key="education.id">
+                <div class="cell grabbable" v-for="education in educationList" :key="education.id">
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
@@ -333,3 +333,8 @@
         }
     }
 </script>
+<style scoped>
+    .grabbable {
+        cursor: grab;
+    }
+</style>
