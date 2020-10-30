@@ -36,7 +36,7 @@
                 <div class="cell">
                     <draggable v-model="hobbies" group="hobbies" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
                         <div class="cell grabbable" v-for="hobby in hobbies" :key="hobby.id">
-                            <div class="card">
+                            <div class="card" style="padding: 12px!important;">
                                 <div class="card-section">
                                     <p class="float-left" style="margin-bottom: 0;">
                                         {{ hobby.name }}
