@@ -3,7 +3,7 @@
         <div class="resume-step-heading-container">
             <h3 class="resume-step-heading">
                 Education
-                <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
+                <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
                     <span v-if="!show || (resume.resume_educations && resume.resume_educations.length == 0)">Create</span><span v-else>Cancel</span>
                 </small>
             </h3>
@@ -301,6 +301,7 @@
                             title: 'Success',
                             message: 'Successfully added education experience!',
                         });
+                        this.summary = '';
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -324,6 +325,7 @@
                 this.edit = false;
                 this.editId = null;
                 this.editDescriptionId = null;
+                this.summary = '';
                 this.formReset();
             },
             toggleView: function () {
