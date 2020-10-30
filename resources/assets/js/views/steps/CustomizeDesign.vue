@@ -106,7 +106,7 @@
                     payload: {
                         resume_id: this.$store.state.resume.id,
                         name: this.hobbyString,
-                        order: this.hobbyList.length + 1,
+                        order: this.hobbies.length + 1,
                     },
                     commits: ['reloadResume'],
                     successMessage: 'Successfully added item',
