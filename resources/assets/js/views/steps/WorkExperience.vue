@@ -68,13 +68,13 @@
                 <div class="cell grabbable" v-for="workExperience in workExperienceList" :key="workExperience.id">
                     <div class="card">
                         <div class="card-section">
-                            <p class="float-left" style="margin-bottom: 0;">
+                            <p style="margin-bottom: 0; display: inline-block; max-width: 70%;">
                                 {{ workExperience.position_title }} at {{ workExperience.position_company }}
                                 <br/>
                                 <em>{{ workExperience.position_start_date }} to
                                     {{ workExperience.position_end_date ? workExperience.position_end_date : "present" }}</em>
-                                <span v-if="workExperience.resume_descriptions && workExperience.resume_descriptions.length > 0">
-                                    <br/>
+                                <br/>
+                                <span v-if="workExperience.resume_descriptions && workExperience.resume_descriptions.length > 0" style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
                                     {{ workExperience.resume_descriptions[0].description }}
                                 </span>
                             </p>
