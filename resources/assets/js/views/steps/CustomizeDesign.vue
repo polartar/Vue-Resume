@@ -25,12 +25,12 @@
             <div class="grid-x grid-margin-x">
                 <div class="cell medium-10">
                     <div class="form-group">
-                        <label>Hobby or Affiliation</label>
-                        <input type="text" v-model="hobbyString" placeholder="Enter a hobby or affiliation" />
+                        <label>Hobby or Affiliation <span class="label-optional-text">Press enter to add</span></label>
+                        <input type="text" v-model="hobbyString" placeholder="Enter a hobby or affiliation" @keyup.enter="addHobby()" />
                     </div>
                 </div>
                 <div class="cell medium-2">
-                    <el-button type="primary" icon="el-icon-plus" style="margin-top: 25px;" circle @click="addHobby()"></el-button>
+                    <el-button type="primary" style="margin-top: 25px;" circle @click="addHobby()">⏎</el-button>
                 </div>
 
                 <div class="cell">
