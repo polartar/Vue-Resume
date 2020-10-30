@@ -62,9 +62,15 @@
     }
 
     .section-summary {
+        ul,
+        ol {
+            margin: 10px 0;
+            padding: 0;
+        }
+
         p,
         li {
-            margin-bottom: 10px;
+            margin: 15px 0;
 
             &:last-of-type {
                 margin-bottom: 0;
@@ -73,6 +79,14 @@
 
         li {
             list-style: square;
+            margin-left: 50px;
+            padding: 0 0 0 5px;
+
+            &.paragraph-bullet-point {
+                list-style: none;
+                margin: 24px 0;
+
+            }
         }
     }
 

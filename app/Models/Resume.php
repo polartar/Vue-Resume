@@ -74,12 +74,16 @@ class Resume extends Model
 
     public function getFirstAddressAttribute()
     {
-        return UserAddress::find($this->user_address_ids[0]);
+        if($this->user_address_ids){
+            return UserAddress::find($this->user_address_ids)->first();
+        }
     }
 
     public function getFirstResumeSummaryAttribute()
     {
-        return ResumeSummary::find($this->resume_summaries[0]);
+        if($this->resume_summaries){
+            return ResumeSummary::find($this->resume_summaries)->first();
+        }
     }
 
     public function hobbies()

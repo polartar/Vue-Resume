@@ -23,7 +23,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <p class="contact-info">{{ $resume->first_address->city }}, {{ $resume->first_address->province }}</p>
+                                            <p class="contact-info">{{ $resume->first_address->city ?? '' }}, {{ $resume->first_address->province ?? '' }}</p>
                                         </td>
                                     </tr>
 
@@ -62,7 +62,7 @@
                             @if(isset($resume->resumeSummaries))
                                 <ul>
                                     @foreach ($resume->resumeSummaries as $summary)
-                                        <li>{{ $summary->name }}</li>
+                                        <li class="@if(!$summary->bullet_point) paragraph-bullet-point @endif">{{ $summary->name }}</li>
                                     @endforeach
                                 </ul>
                             @endif
@@ -72,7 +72,7 @@
             </table>
             @if ($workExperienceSectionBreak)
                 <div class="page-break"></div>
-                <div style="padding-top: 70px;">&nbsp;</div>
+                <div style="padding-top: 75px;">&nbsp;</div>
             @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
@@ -86,25 +86,23 @@
                                 <!-- This line will cleanly break a page -->
                                 @if(in_array($key, $workExperienceIndexBreaks))
                                     <div class="page-break"></div>
-                                    <div style="padding-top: 70px;">&nbsp;</div>
+                                    <div style="padding-top: 75px;">&nbsp;</div>
                                 @endif
                                 <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td><span class="section-title">{{ $work->position_title }}</span></td>
-                                        <td class="text-right"><span class="section-dates">{{ $work->position_start_date}} &ndash; {{ $work->position_end_date ? $work->position_end_date : 'Present' }}</span></td>
+                                        <td class="text-right"><span class="section-dates">{{ $work->position_start_date->format('m/d/Y') }} &ndash; {{ $work->position_end_date ? $work->position_end_date->format('m/d/Y') : 'Present' }}</span></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"><span class="section-title">{{ $work->position_company }}</span></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="section-summary">
-                                            <ul class="work-experience-description-list">
-                                                @foreach( $work->resumeDescriptions as $description )
-                                                    <li class="work-experience-description">
-                                                        {{ $description->description }}
-                                                    </li>
-                                                @endforeach
-                                            </ul>
+                                            @foreach( $work->resumeDescriptions as $description )
+                                                <p>
+                                                    {{ $description->description }}
+                                                </p>
+                                            @endforeach
                                         </td>
                                     </tr>
                                 </table>
@@ -118,7 +116,7 @@
 
             @if ($educationSectionBreak)
                 <div class="page-break"></div>
-                <div style="padding-top: 70px;">&nbsp;</div>
+                <div style="padding-top: 75px;">&nbsp;</div>
             @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
@@ -131,12 +129,12 @@
                             <!-- This line will cleanly break a page -->
                             @if(in_array($key, $educationIndexBreaks))
                                 <div class="page-break"></div>
-                                <div style="padding-top: 70px;">&nbsp;</div>
+                                <div style="padding-top: 75px;">&nbsp;</div>
                             @endif
                             <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td><span class="section-title">{{ $education->school_name }} &ndash; {{ $education->degree_received }} {{ $education->field_of_study }}</span></td>
-                                    <td class="text-right"><span class="section-dates">{{ $education->start_date}} &ndash; {{ $education->end_date ? $education->end_date : 'Present' }}</span></td>
+                                    <td class="text-right"><span class="section-dates">{{ $education->start_date->format('m/d/Y') }} &ndash; {{ $education->end_date ? $education->end_date->format('m/d/Y') : 'Present' }}</span></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="section-summary">
@@ -152,20 +150,25 @@
                 </tbody>
             </table>
 
-            <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
+            <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
-                        <td>
-
+                        <td><span class="section-heading">Affiliations &amp; Hobbies</span></td>
+                    </tr>
+                    <tr>
+                        <td class="section-summary">
+                            @if(isset($resume->hobbies))
+                                <ul>
+                                    @foreach ($resume->hobbies as $hobbies)
+                                        <li>{{ $hobbies->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         </td>
                     </tr>
                 </tbody>
             </table>
-
-
-
-            <span class="heading">Affiliations &amp; Hobbies</span>
-            <br/>
+            
         </div>
     </body>
 </html>

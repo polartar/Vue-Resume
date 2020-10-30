@@ -3,7 +3,7 @@
 }
 
 body {
-    margin: 0px; 
+    margin: 0px;
 }
 
 .resume-pdf {
@@ -32,6 +32,11 @@ body {
         height: 100%;
         width: 100%;
     }
+}
+
+.resume-html,
+.resume-pdf   {
+    
 }
 
 @media print {
