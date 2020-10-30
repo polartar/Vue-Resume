@@ -9,8 +9,8 @@
             <div class="grid-x grid-margin-x">
                 <div class="cell medium-6">
                     <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" name="first_name" value="">
+                        <label>Skill Name <span class="label-optional-text">(Unavailable at this time)</span></label>
+                        <input type="text" value="" disabled>
                     </div>
                 </div>
             </div>
