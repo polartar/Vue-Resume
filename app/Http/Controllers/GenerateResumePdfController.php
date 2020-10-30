@@ -15,7 +15,7 @@ class GenerateResumePdfController extends Controller
     const EDUCATION_SECTION_HEADER_LINE_COUNT = 2;
     const EDUCATION_HEADER_LINE_COUNT = 3;
 
-    const FIRST_PAGE_LINE_LIMIT = 22;
+    const FIRST_PAGE_LINE_LIMIT = 21;
     const AVERAGE_LINE_LENGTH = 80;
 
     public function __invoke(Request $request, Resume $resume)
