@@ -39,7 +39,7 @@
                             <div class="card" style="padding: 12px!important;">
                                 <div class="card-section">
                                     <p class="float-left" style="margin-bottom: 0;">
-                                        {{ hobby.name }}
+                                        <i class="el-icon-s-grid" style="color: lightgrey;"></i> {{ hobby.name }}
                                     </p>
                                     <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeHobby(hobby.id)"></el-button>
                                 </div>

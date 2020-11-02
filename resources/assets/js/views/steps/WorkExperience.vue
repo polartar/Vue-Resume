@@ -69,12 +69,12 @@
                     <div class="card">
                         <div class="card-section">
                             <p style="margin-bottom: 0; display: inline-block; max-width: 70%;">
-                                <span style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ workExperience.position_title }} at {{ workExperience.position_company }}</span>                                
-                                <em>{{ workExperience.position_start_date }} to
+                                <span style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ workExperience.position_title }} at {{ workExperience.position_company }}</span>                                
+                                <i class="el-icon-s-grid" style="color: lightgrey;"></i> <em>{{ workExperience.position_start_date }} to
                                     {{ workExperience.position_end_date ? workExperience.position_end_date : "present" }}</em>
                                 <br/>
                                 <span v-if="workExperience.resume_descriptions && workExperience.resume_descriptions.length > 0" style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
-                                    {{ workExperience.resume_descriptions[0].description }}
+                                    <i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ workExperience.resume_descriptions[0].description }}
                                 </span>
                             </p>
                             <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeWorkExperience(workExperience.id)"></el-button>

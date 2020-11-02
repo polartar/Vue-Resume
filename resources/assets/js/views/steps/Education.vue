@@ -93,14 +93,14 @@
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
-                                {{ education.school_name }} - {{ education.type }}
+                                <i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ education.school_name }} - {{ education.type }}
                                 <br/>
                                 <em>
-                                    {{ education.start_date }} to
+                                    <i class="el-icon-s-grid" style="color: lightgrey;"></i> {{ education.start_date }} to
                                     {{ education.end_date ? education.end_date : "present" }}
                                 </em>
                                 <br/>
-                                {{ education.degree_received }} in {{ education.field_of_study }}
+                                <i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ education.degree_received }} in {{ education.field_of_study }}
                             </p>
                             <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeEducation(education.id)"></el-button>
                             <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editEducation(education)"></el-button>
