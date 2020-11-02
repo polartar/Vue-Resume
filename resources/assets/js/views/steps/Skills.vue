@@ -7,12 +7,32 @@
 
         <div class="resume-step-form">
             <div class="grid-x grid-margin-x">
-                <div class="cell medium-6">
+
+                <div class="cell medium-10">
                     <div class="form-group">
-                        <label>Skill Name <span class="label-optional-text">(Unavailable at this time)</span></label>
-                        <input type="text" value="" disabled>
+                        <label>Skill <span class="label-optional-text">Press enter to add</span></label>
+                        <input type="text" v-model="skillString" placeholder="Enter a skill" @keyup.enter="addSkill()" />
                     </div>
                 </div>
+                <div class="cell medium-2">
+                    <el-button type="primary" style="margin-top: 25px;" circle @click="addSkill()">⏎</el-button>
+                </div>
+
+                <div class="cell">
+                    <draggable v-model="skills" group="skills" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
+                        <div class="cell grabbable" v-for="skill in skills" :key="skill.id">
+                            <div class="card" style="padding: 12px!important;">
+                                <div class="card-section">
+                                    <p class="float-left" style="margin-bottom: 0;">
+                                        {{ skill.name }}
+                                    </p>
+                                    <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeSkill(skill.id)"></el-button>
+                                </div>
+                            </div>
+                        </div>
+                    </draggable>
+                </div>
+
             </div>
         </div>
         <div class="resume-form-nav-buttons">
@@ -23,5 +43,53 @@
     </div>
 </template>
 <script>
-    export default {}
+    import draggable from 'vuedraggable';
+    export default {
+        components: {draggable},
+        data: function () {
+            return {
+                skillString: '',
+                skills: [
+                    {
+                        id: 1,
+                        order: 1,
+                        name: 'whistling',
+                    },
+                    {
+                        id: 2,
+                        order: 2,
+                        name: 'biking',
+                    }
+                ],
+            }
+        },
+        methods: {
+            addSkill: async function () {
+                await this.$store.dispatch('axiosPostRequest', {
+                    route: '/skill',
+                    payload: {
+                        resume_id: this.$store.state.resume.id,
+                        name: this.skillString,
+                        order: this.skils.length + 1,
+                    },
+                    commits: ['reloadResume'],
+                    successMessage: 'Successfully added skill',
+                });
+
+                this.skillString = '';
+            },
+            removeSkill: function (skillId) {
+                this.$store.dispatch('axiosDeleteRequest', {
+                    route: '/skill/' + skillId,
+                    commits: ['reloadResume'],
+                    successMessage: 'Successfully removed skill',
+                })
+            }
+        }
+    }
 </script>
+<style scoped>
+    .grabbable {
+        cursor: grab;
+    }
+</style>
