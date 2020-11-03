@@ -18,6 +18,7 @@ class ResumeSummary extends Model
         'name',
         'bullet_point',
         'transferable_skill_ids',
+        'order',
     ];
 
     /**

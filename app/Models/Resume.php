@@ -64,7 +64,7 @@ class Resume extends Model
 
     public function resumeSummaries()
     {
-        return $this->hasMany(ResumeSummary::class);
+        return $this->hasMany(ResumeSummary::class)->orderBy('order');
     }
 
     public function resumeSkill()
