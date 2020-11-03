@@ -32,8 +32,10 @@ Route::middleware(['auth:sanctum'])->get('/new-resume', 'App\Http\Controllers\Re
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('resume', \App\Http\Controllers\ResumeController::class);
-    Route::resource('resume-summary', \App\Http\Controllers\ResumeSummaryController::class);
     Route::resource('resume-description', \App\Http\Controllers\ResumeDescriptionController::class);
+    
+    Route::resource('resume-summary', \App\Http\Controllers\ResumeSummaryController::class);
+    Route::put('/resume-summaries', \App\Http\Controllers\UpdateResumeSummaryOrderController::class);
 
     Route::resource('user-phone', \App\Http\Controllers\UserPhoneController::class);
     Route::resource('user-email', \App\Http\Controllers\UserEmailController::class);
