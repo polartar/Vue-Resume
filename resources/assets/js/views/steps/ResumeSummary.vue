@@ -31,8 +31,8 @@
             <button v-else class='button' type='button' @click='saveSummary'>Add Summary</button>
         </div>
         <div v-if="!show">
-            <div class='grid-x grid-margin-x'>
-                <div class="cell" v-for="summary in resume.resume_summaries" :key="summary.id">
+            <draggable v-model="summaries" group="resume-summaries" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x" :sort="true">
+                <div class="cell grabbable" v-for="summary in summaries" :key="summary.id">
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </draggable>
         </div>
 
         <div class="resume-form-nav-buttons">
@@ -56,17 +56,30 @@
 
 <script>
     import { mapState, mapMutations } from 'vuex'
+    import draggable from 'vuedraggable'
 
     export default {
-
-        computed: mapState([
-            'resume',
-            'toggleResumePreview',
-        ]),
+        components: {
+            draggable,
+        },
+        computed: {
+            ...mapState([
+                'resume',
+                'toggleResumePreview',
+            ]),
+            'summaries': {
+                get() {
+                    return this.$store.state.resume.resume_summaries;
+                },
+                set(value) {
+                    this.$store.dispatch('updateResumeSummaryOrder', value);
+                }
+            }
+        },
         data: function () {
             return {
                 'name': '',
-                'bulleted': false,
+                'bulleted': true,
                 'show': false,
                 'edit': false,
                 'editId': '',
