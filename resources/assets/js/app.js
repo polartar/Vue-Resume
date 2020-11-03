@@ -186,6 +186,10 @@ const store = new Vuex.Store({
                     console.log('error reloading resume: ', error);
                 });
         },
+        updateResumeSummaries (state, payload) {
+            state.resume.resume_summaries = payload;
+            axios.put('/resume-summaries', {'summaries': payload});
+        },
         updateResumeWorkExperiences (state, payload) {
             state.resume.resume_work_experiences = payload;
             axios.put('/resume-work-experiences', {'work-experiences': payload});
@@ -214,6 +218,13 @@ const store = new Vuex.Store({
         }
     },
     actions: {
+        updateResumeSummaryOrder: (context, resumeSummaries) => {
+            resumeSummaries.forEach( (summary, index) => {
+                summary.order = index + 1;
+            })
+
+            context.commit('updateResumeSummaries', resumeSummaries);
+        },
         updateResumeWorkExperienceOrder: (context, resumeWorkExperiences) => {
             resumeWorkExperiences.forEach( (workExperience, index) => {
                 workExperience.order = index + 1;
