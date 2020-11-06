@@ -11,6 +11,7 @@ import {Notification} from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/en'
 // import 'element-ui/lib/theme-chalk/index.css'; // in main scss file
 
+Vue.use(require('vue-moment'));
 Vue.use(VueRouter);
 Vue.use(ElementUI, {locale});
 Vue.use(Vuex);
@@ -251,10 +252,10 @@ const store = new Vuex.Store({
         },
         /**
          * Globally available put request
-         * 
+         *
          * Parameters:
          *  payload: must contain route, payload, successMessage, and commits
-         * 
+         *
          * Returns:
          *  true/false depending on success
          */
@@ -276,10 +277,10 @@ const store = new Vuex.Store({
         },
         /**
          * Globally available post request
-         * 
+         *
          * Parameters:
          *  payload: must contain route, payload, successMessage, and commits
-         * 
+         *
          * Returns:
          *  true/false depending on success
          */
@@ -301,10 +302,10 @@ const store = new Vuex.Store({
         },
         /**
          * Globally available delete request
-         * 
+         *
          * Parameters:
          *  payload: must contain route, payload, successMessage, and commits
-         * 
+         *
          * Returns:
          *  true/false depending on success
          */

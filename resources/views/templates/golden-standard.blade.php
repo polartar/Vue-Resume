@@ -2,13 +2,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" href="{{ asset('assets/css/resumes/gold-standard.css') }}">
-        <style media="screen">
-        </style>
-        <style>
-            .page-break {
-                page-break-after: always;
-            }
-        </style>
     </head>
     <body class="resume-pdf resume-gold-standard">
         <div class="print-paper">
@@ -91,7 +84,7 @@
                                 <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td><span class="section-title">{{ $work->position_title }}</span></td>
-                                        <td class="text-right"><span class="section-dates">{{ $work->position_start_date->format('m/d/Y') }} &ndash; {{ $work->position_end_date ? $work->position_end_date->format('m/d/Y') : 'Present' }}</span></td>
+                                        <td class="text-right"><span class="section-dates">{{ $work->position_start_date->format($date_format) }} &ndash; {{ $work->position_end_date ? $work->position_end_date->format($date_format) : 'Present' }}</span></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"><span class="section-title">{{ $work->position_company }}</span></td>
@@ -134,7 +127,7 @@
                             <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td><span class="section-title">{{ $education->school_name }} &ndash; {{ $education->degree_received }} {{ $education->field_of_study }}</span></td>
-                                    <td class="text-right"><span class="section-dates">{{ $education->start_date->format('m/d/Y') }} &ndash; {{ $education->end_date ? $education->end_date->format('m/d/Y') : 'Present' }}</span></td>
+                                    <td class="text-right"><span class="section-dates">{{ $education->start_date->format($date_format) }} &ndash; {{ $education->end_date ? $education->end_date->format($date_format) : 'Present' }}</span></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="section-summary">
@@ -168,7 +161,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+
         </div>
     </body>
 </html>

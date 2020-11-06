@@ -37,6 +37,7 @@
         "foundation-sites": "^6.6.3",
         "moment": "^2.27.0",
         "vue": "^2.6.12",
+        "vue-moment": "^4.1.0",
         "vue-router": "^3.4.3",
         "vue-toasted": "^1.1.28",
         "vuedraggable": "^2.24.2",

@@ -15,7 +15,7 @@
             <recruiter v-if="resume.resume_design.name === 'Recruiter'"></recruiter>
             <sidebar v-if="resume.resume_design.name === 'Sidebar'"></sidebar>
         </div> -->
-        <div class="resume-container">
+        <div class="resume-container" :style="scaleStylesObject">
             <iframe v-if="resume.id" id="iframe-resume-preview" width="880" height="1100" :src="'/generate-resume-pdf/' + resume.id + '?page=true'"></iframe>
         </div>
     </div>

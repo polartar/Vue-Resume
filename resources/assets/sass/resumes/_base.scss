@@ -23,6 +23,10 @@ body {
             vertical-align: top;
         }
     }
+
+    .page-break {
+        page-break-after: always;
+    }
 }
 
 .resume-html {
@@ -32,11 +36,16 @@ body {
         height: 100%;
         width: 100%;
     }
+
+    .page-break {
+        background: #f3f5f3;
+        padding: 2rem 0;
+    }
 }
 
 .resume-html,
 .resume-pdf   {
-    
+
 }
 
 @media print {

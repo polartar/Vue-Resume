@@ -9,9 +9,12 @@
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>Date Format</label>
-                        <select class="fancy-select fancy-select-full-width" v-model="dateFormat">
-                            <option v-for="format in dateFormats" :value="format.id" :key="format.id">{{format.value}}</option>
-                        </select>
+                        <div class="fancy-select fancy-select-full-width">
+                            <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
+                            <select v-model="dateFormat">
+                                <option v-for="format in dateFormats" :value="format.id" :key="format.id">{{ format.value }}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,15 +89,13 @@
             return {
                 dateSeparater: '',
                 dateFormats: [
-                    { id: 1, value: 'Year.Month.Day' },
-                    { id: 2, value: 'Day.Month.Year' },
-                    { id: 3, value: 'Month.Day.Year' },
-                    { id: 4, value: 'Year/Month/Day' },
-                    { id: 5, value: 'Day/Month/Year' },
-                    { id: 6, value: 'Month/Day/Year' },
-                    { id: 7, value: 'Year-Month-Day' },
-                    { id: 8, value: 'Day-Month-Year' },
-                    { id: 9, value: 'Month-Day-Year' },
+                    { id: 1, value: this.$moment().format('MMMM YYYY')},
+                    { id: 2, value: this.$moment().format('D/M/YYYY')},
+                    { id: 3, value: this.$moment().format('D-M-YYYY')},
+                    { id: 4, value: this.$moment().format('M/D/YYYY')},
+                    { id: 5, value: this.$moment().format('M-D-YYYY')},
+                    { id: 6, value: this.$moment().format('M/YYYY')},
+                    { id: 7, value: this.$moment().format('M-YYYY')},
                 ],
                 hobbyString: '',
             }

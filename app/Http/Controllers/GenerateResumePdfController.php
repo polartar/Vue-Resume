@@ -133,6 +133,18 @@ class GenerateResumePdfController extends Controller
         if($resume->resumeDesign) {
             $template = Str::slug($resume->resumeDesign->name, '-');
 
+            $date_formats = [
+                1 => 'F Y',
+                2 => 'j/n/Y',
+                3 => 'j-n-Y',
+                4 => 'n/j/Y',
+                5 => 'n-j-Y',
+                6 => 'n/Y',
+                7 => 'n-Y',
+            ];
+
+            $date_format = $date_formats[$resume->date_format];
+
             // dd($resume);
 
             $pdf = PDF::loadView('templates.' . $template, compact([
@@ -141,6 +153,7 @@ class GenerateResumePdfController extends Controller
                 'workExperienceIndexBreaks',
                 'educationSectionBreak',
                 'educationIndexBreaks',
+                'date_format',
             ]));
 
             if ($request->get('page')) {
@@ -150,6 +163,7 @@ class GenerateResumePdfController extends Controller
                     'workExperienceIndexBreaks',
                     'educationSectionBreak',
                     'educationIndexBreaks',
+                    'date_format',
                 ]));
             }
             $pdf->setPaper('letter', 'portrait');
