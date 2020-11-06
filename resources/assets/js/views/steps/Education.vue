@@ -44,12 +44,12 @@
                     </div>
                 </div>
 
-                <div class="cell">
+                <!-- <div class="cell">
                     <div class="form-group">
                         <label>Description</label>
                         <textarea required v-model="summary" rows="8" cols="80"></textarea>
                     </div>
-                </div>
+                </div> -->
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>Start Date</label>
@@ -190,7 +190,12 @@
                     })
                     .then(response => {
                         this.show = false;
-                        this.createEducationDescription(response.data.id);
+                        //this.createEducationDescription(response.data.id);
+                        this.$store.commit('reloadResume');
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully updated education experience!',
+                        });
                         this.formReset();
                     })
                     .catch(error => {
@@ -222,7 +227,12 @@
                         'currently_studying'        : this.currentlyStudying,
                     })
                     .then(response =>  {
-                        this.updateEducationDescription();
+                        //this.updateEducationDescription();
+                        this.$store.commit('reloadResume');
+                        this.$notify.success({
+                            title: 'Success',
+                            message: 'Successfully updated education experience!',
+                        });
                     })
                     .catch(error => {
                         this.$notify.error({

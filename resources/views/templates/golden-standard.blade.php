@@ -129,13 +129,13 @@
                                     <td><span class="section-title">{{ $education->school_name }} &ndash; {{ $education->degree_received }} {{ $education->field_of_study }}</span></td>
                                     <td class="text-right"><span class="section-dates">{{ $education->start_date->format($date_format) }} &ndash; {{ $education->end_date ? $education->end_date->format($date_format) : 'Present' }}</span></td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td colspan="2" class="section-summary">
                                         @foreach( $education->educationDescriptions as $description )
                                             <p>{{ $description->description }}</p>
                                         @endforeach
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </table>
                         </td>
                     </tr>
