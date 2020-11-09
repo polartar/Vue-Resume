@@ -146,6 +146,25 @@
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
+                        <td><span class="section-heading">Skills</span></td>
+                    </tr>
+                    <tr>
+                        <td class="section-summary">
+                            @if(isset($resume->resumeSkill))
+                                <ul>
+                                    @foreach ($resume->resumeSkill as $skill)
+                                        <li>{{ $skill->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
                         <td><span class="section-heading">Affiliations &amp; Hobbies</span></td>
                     </tr>
                     <tr>

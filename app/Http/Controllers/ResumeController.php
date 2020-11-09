@@ -72,6 +72,7 @@ class ResumeController extends Controller
             'resumeEducations.educationDescriptions',
             'resumeDesign',
             'hobbies',
+            'resumeSkill',
         ])->find($resume->id);
 
         return response(['success' => 'true', 'resume' => $resume], 200);

@@ -39,28 +39,26 @@
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button">Preview</button>
             <router-link tag="button" class="button" to="customize-design">Save and Next</router-link>
-        </div>    
+        </div>
     </div>
 </template>
 <script>
     import draggable from 'vuedraggable';
     export default {
         components: {draggable},
+        computed: {
+            skills: {
+                get() {
+                    return this.$store.state.resume.resume_skill;
+                },
+                async set(value) {
+                    await this.$store.dispatch('updateResumeSkillsOrder', value);
+                }
+            }
+        },
         data: function () {
             return {
-                skillString: '',
-                skills: [
-                    {
-                        id: 1,
-                        order: 1,
-                        name: 'whistling',
-                    },
-                    {
-                        id: 2,
-                        order: 2,
-                        name: 'biking',
-                    }
-                ],
+                skillString: ''
             }
         },
         methods: {
@@ -70,7 +68,7 @@
                     payload: {
                         resume_id: this.$store.state.resume.id,
                         name: this.skillString,
-                        order: this.skils.length + 1,
+                        order: this.skills.length + 1,
                     },
                     commits: ['reloadResume'],
                     successMessage: 'Successfully added skill',

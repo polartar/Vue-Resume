@@ -202,6 +202,10 @@ const store = new Vuex.Store({
         updateResumeHobbies (state, payload) {
             state.resume.hobbies = payload;
             axios.put('/hobbies', {'hobbies': payload});
+        },
+        updateResumeSkills (state, payload) {
+            state.resume.skills = payload;
+            axios.put('/skills', {'skills': payload});
         }
     },
     getters: {
@@ -247,6 +251,14 @@ const store = new Vuex.Store({
 
             context.commit('updateResumeHobbies', hobbies)
         },
+        updateResumeSkillsOrder: (context, skills) => {
+            skills.forEach( (skill, index) => {
+                skill.order = index + 1;
+            })
+
+            context.commit('updateResumeSkills', skills)
+        },
+
         updateResumeDateFormat: (context, dateFormat) => {
             context.commit('updateResumeDateFormat', dateFormat);
         },
