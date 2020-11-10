@@ -27,8 +27,8 @@ class UserPhone extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function setPhoneNumberAttribute($value)
-    {
-        // $this->attributes['phone_number'] = preg_replace('/[^0-9]/', '', $value);
-    }
+    // public function setPhoneNumberAttribute($value)
+    // {
+    //     $this->attributes['phone_number'] = preg_replace('/[^0-9]/', '', $value);
+    // }
 }
