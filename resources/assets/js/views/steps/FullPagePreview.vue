@@ -84,7 +84,7 @@
                     document.querySelector('#iframe-resume-preview').src += ''
                 }
 
-                // console.log('refresh')
+                console.log('refresh')
 
                 setTimeout(() => {
                     //this.refreshiFrame()
@@ -97,9 +97,9 @@
                 this.doResize()
             },
 
-            // refreshPreview: function() {
-            //     this.refreshiFrame()
-            // }
+            refreshPreview: function() {
+                this.refreshiFrame()
+            }
         }
     }
 </script>

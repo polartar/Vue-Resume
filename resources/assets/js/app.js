@@ -39,11 +39,16 @@ const store = new Vuex.Store({
         userPhoneIds: [],
         summary: {},
         resumeDesigns: [],
-        toggleResumePreview: false
+        toggleResumePreview: false,
+        refreshPreview: 0
     },
     mutations: {
         updateToggleResumePreview (state, payload) {
             state.toggleResumePreview = payload;
+        },
+        updateRefreshPreview (state) {
+            console.log(state)
+            state.refreshPreview = state.refreshPreview + 1
         },
         updateResume (state, payload) {
             state.resume = payload;
@@ -56,6 +61,7 @@ const store = new Vuex.Store({
                 'name': state.resume.name,
             }).then((response) => {
                 this.commit('reloadResume');
+                state.refreshPreview = state.refreshPreview + 1
                 Notification.success({
                     title: 'Success',
                     message: 'Successfully updated date format!',

@@ -4,7 +4,7 @@
             <h3 class="resume-step-heading">
                 Work Experience
                 <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
-                    <span v-if="!show || (resume.resume_work_experiences && resume.resume_work_experiences.length === 0)">Create</span><span v-else>Cancel</span>
+                    <span v-if="!show || (resume.resume_work_experiences && resume.resume_work_experiences.length === 0)">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
@@ -69,7 +69,7 @@
                     <div class="card">
                         <div class="card-section">
                             <p style="margin-bottom: 0; display: inline-block; max-width: 70%;">
-                                <span style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ workExperience.position_title }} at {{ workExperience.position_company }}</span>                                
+                                <span style="display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ workExperience.position_title }} at {{ workExperience.position_company }}</span>
                                 <i class="el-icon-s-grid" style="color: lightgrey;"></i> <em>{{ workExperience.position_start_date }} to
                                     {{ workExperience.position_end_date ? workExperience.position_end_date : "present" }}</em>
                                 <br/>
@@ -104,6 +104,7 @@
             ...mapState([
                 'resume',
                 'toggleResumePreview',
+                'refreshPreview',
             ]),
             workExperienceList: {
                 get() {
@@ -159,6 +160,8 @@
                             title: 'Success',
                             message: 'Successfully added work experience!',
                         });
+
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -189,6 +192,7 @@
                             title: 'Success',
                             message: 'Successfully updated work experience!',
                         });
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -205,6 +209,7 @@
                             message: 'Successfully removed work experience!',
                         });
                         this.$store.commit('reloadResume');
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -223,7 +228,7 @@
                         'type': 'paragraph',
                     })
                     .then(response => {
-                        //
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         //
@@ -234,7 +239,7 @@
                     this.createResumeDescription(workExperienceId);
                     return;
                 }
-                
+
                 this.$axios
                     .put(`/resume-description/${resumeDescriptionId}`, {
                         'resume_work_experience_id': workExperienceId,
@@ -242,13 +247,13 @@
                         'type': 'paragraph',
                     })
                     .then(response => {
-                        //
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         console.log('error create resume description', error);
                     });
             },
-           
+
             /* Actions */
             editWorkExperience: function (workExperience) {
                 this.setupEditing(workExperience);
@@ -289,6 +294,9 @@
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
+            updateRefreshPreview: function (event) {
+                this.$store.commit('updateRefreshPreview')
+            },
         }
     }
 </script>
@@ -303,4 +311,3 @@
         cursor: grab;
     }
 </style>
-

@@ -4,7 +4,7 @@
             <h3 class="resume-step-heading">
                 Education
                 <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
-                    <span v-if="!show || (resume.resume_educations && resume.resume_educations.length == 0)">Create</span><span v-else>Cancel</span>
+                    <span v-if="!show || (resume.resume_educations && resume.resume_educations.length == 0)">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
@@ -133,6 +133,7 @@
             ...mapState([
                 'resume',
                 'toggleResumePreview',
+                'refreshPreview',
             ]),
             educationList: {
                 get() {
@@ -197,6 +198,7 @@
                             message: 'Successfully updated education experience!',
                         });
                         this.formReset();
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -233,6 +235,8 @@
                             title: 'Success',
                             message: 'Successfully updated education experience!',
                         });
+
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -260,6 +264,8 @@
                             title: 'Success',
                             message: 'Successfully updated education experience!',
                         });
+
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -270,6 +276,9 @@
             },
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
+            },
+            updateRefreshPreview: function (event) {
+                this.$store.commit('updateRefreshPreview')
             },
             setupEditing: function (education) {
                 this.schoolName         = education.school_name
@@ -291,6 +300,7 @@
                             message: 'Successfully removed education experience',
                         });
                         this.$store.commit('reloadResume');
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -312,6 +322,7 @@
                             message: 'Successfully added education experience!',
                         });
                         this.summary = '';
+                        this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({

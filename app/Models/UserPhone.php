@@ -29,6 +29,6 @@ class UserPhone extends Model
 
     public function setPhoneNumberAttribute($value)
     {
-        $this->attributes['phone_number'] = preg_replace('/[^0-9]/', '', $value);
+        // $this->attributes['phone_number'] = preg_replace('/[^0-9]/', '', $value);
     }
 }

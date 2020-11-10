@@ -322,13 +322,13 @@
                         <input type="text" name="street_2" :value="street_2" @input="updateStreet2">
                     </div>
                 </div>
-                <div class="cell medium-6 large-4">
+                <div class="cell medium-6">
                     <div class="form-group">
                         <label>City</label>
                         <input required type="text" name="city" :value="city" @input="updateCity">
                     </div>
                 </div>
-                <div class="cell medium-6 large-4">
+                <div class="cell medium-6">
                     <div class="form-group">
                         <label>State<span v-if="country != 'United States'"> / Province</span></label>
                         <div class="fancy-select fancy-select-full-width" v-if="country == 'United States'">
@@ -395,7 +395,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="cell medium-6 large-4">
+                <div class="cell medium-6">
                     <div class="form-group">
                         <label><span v-if="country == 'United States'">Zip</span><span v-else>Postal</span> Code <span class="label-optional-text">(Optional)</span></label>
                         <input type="text" name="postal_code" :value="zip" @input="updateZip">
@@ -433,6 +433,7 @@
             'userAddressIds',
             'userPhoneIds',
             'toggleResumePreview',
+            'refreshPreview',
         ]),
         methods: {
             ...mapMutations([
@@ -469,6 +470,9 @@
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
+            updateRefreshPreview: function (event) {
+                this.$store.commit('updateRefreshPreview')
+            },
 
 
             saveContactInfo: async function () {
@@ -482,9 +486,9 @@
                     successMessage: 'You updated your name!', // TODO: Remove this notification
                     commits: [],
                 });
-                
-                /* 
-                    No updating the email address, this is a bad idea. 
+
+                /*
+                    No updating the email address, this is a bad idea.
                     TODO: Add an email field to the resume, so that the user can display a different email if they want.
                 */
 
@@ -497,6 +501,7 @@
                 // Need to create a userAddress
                 await this.createUserAddress(true);
 
+                await this.updateRefreshPreview()
                 // Update resume via post w/all info (probably going to create new address)
                 //this.saveResume();
             },
@@ -538,7 +543,7 @@
                     commits: ['addUserAddressId'],
                 });
 
-                if (saveResume) 
+                if (saveResume)
                     await this.saveResume();
             },
 
@@ -549,7 +554,7 @@
                 updateData['user_email_ids'] = this.$store.state.userEmailIds;
                 updateData['user_address_ids'] = this.$store.state.userAddressIds;
                 updateData['user_phone_ids'] = this.$store.state.userPhoneIds;
-                
+
                 const success = await this.$store.dispatch('axiosPutRequest', {
                     route: '/resume/' + this.resume.id,
                     payload: updateData,

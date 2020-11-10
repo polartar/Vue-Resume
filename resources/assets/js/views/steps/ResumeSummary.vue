@@ -4,7 +4,7 @@
             <h3 class="resume-step-heading">
                 Resume Summary
                 <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
-                    <span v-if="!show">Create</span><span v-else>Cancel</span>
+                    <span v-if="!show">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
@@ -66,6 +66,7 @@
             ...mapState([
                 'resume',
                 'toggleResumePreview',
+                'refreshPreview',
             ]),
             'summaries': {
                 get() {
@@ -102,6 +103,7 @@
 
                 if (success)
                     this.name = '';
+                    await this.updateRefreshPreview()
             },
             updateSummary: async function () {
                 this.show = false;
@@ -119,6 +121,7 @@
                 if (success) {
                     this.name = '';
                     this.edit = false;
+                    await this.updateRefreshPreview()
                 }
             },
             updateToggleResumePreview: function (event) {
@@ -138,7 +141,11 @@
                     successMessage: 'Successfully removed the resume summary',
                     commits: ['reloadResume'],
                 });
-            }
+                await this.updateRefreshPreview()
+            },
+            updateRefreshPreview: function (event) {
+                this.$store.commit('updateRefreshPreview')
+            },
         }
     }
 </script>
