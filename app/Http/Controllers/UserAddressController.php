@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserAddressRequest;
 use App\Models\UserAddress;
+use App\Models\Resume;
 use Illuminate\Http\Request;
 
 class UserAddressController extends Controller
@@ -50,11 +51,25 @@ class UserAddressController extends Controller
 
         // Avoid Duplication
         if ($address) {
+            if($request->input('resume_id')) {
+                Resume::where('id', $request->input('resume_id'))->update(
+                    [
+                        'user_address_id' => $address->id
+                    ]
+                );
+            }
             return response(['success' => 'true', 'id' => $address->id],200);
         }
 
         try {
             $address = UserAddress::create($validated);
+            if($request->input('resume_id')) {
+                Resume::where('id', $request->input('resume_id'))->update(
+                    [
+                        'user_address_id' => $address->id
+                    ]
+                );
+            }
         } catch (\Exception $e) {
             return response(['success' => 'false', 'message' => $e], 400);
         }

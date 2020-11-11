@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserPhoneRequest;
 use App\Models\UserPhone;
+use App\Models\Resume;
 use Illuminate\Http\Request;
 
 class UserPhoneController extends Controller
@@ -42,8 +43,16 @@ class UserPhoneController extends Controller
             ->where('user_id', $validated['user_id'])
             ->first();
 
+
         // Avoid duplication
         if ($phone) {
+            if($request->input('resume_id')) {
+                Resume::where('id', $request->input('resume_id'))->update(
+                    [
+                        'user_phone_id' => $phone->id
+                    ]
+                );
+            }
             return response(['success' => 'true', 'id' => $phone->id], 200);
         }
 
@@ -51,6 +60,14 @@ class UserPhoneController extends Controller
             $phone = UserPhone::create($validated);
         } catch (\Exception $e) {
             return response(['success' => 'false', 'message' => $e], 400);
+        }
+
+        if($request->input('resume_id')) {
+            Resume::where('id', $request->input('resume_id'))->update(
+                [
+                    'user_phone_id' => $phone->id
+                ]
+            );
         }
 
         return response(['success' => 'true', 'id' => $phone->id], 201);

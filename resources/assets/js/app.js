@@ -47,7 +47,7 @@ const store = new Vuex.Store({
             state.toggleResumePreview = payload;
         },
         updateRefreshPreview (state) {
-            console.log(state)
+            // console.log(state)
             state.refreshPreview = state.refreshPreview + 1
         },
         updateResume (state, payload) {
@@ -87,6 +87,9 @@ const store = new Vuex.Store({
                 state.email = payload;
             }
         },
+        updateResumeEmail (state, payload) {
+            state.resume.email = payload;
+        },
         updateResumeDesigns (state, payload) {
             state.resumeDesigns = payload;
         },
@@ -94,64 +97,39 @@ const store = new Vuex.Store({
 
         updateUserEmailIds (state, payload) {
             if (payload == null) {
-                state.userEmailIds = [];
+                state.userEmailIds = null;
             } else {
                 state.userEmailIds = payload;
             }
         },
         addUserEmailId (state, payload) {
-            let userEmailIds = state.userEmailIds;
-            if (userEmailIds.length === 0) {
-                this.commit('updateUserEmailIds', [payload]);
-            } else {
-                if (userEmailIds.indexOf(payload) === -1) {
-                    userEmailIds.push(payload);
-                    this.updateUserEmailIds(userEmailIds);
-                }
-            }
+            this.commit('updateUserEmailIds', payload);
         },
 
 
         updateUserAddressIds (state, payload) {
             if (payload == null) {
-                state.userAddressIds = [];
+                state.userAddressIds = null;
             } else {
                 state.userAddressIds = payload;
             }
         },
         addUserAddressId (state, payload) {
-            let userAddressIds = state.userAddressIds;
-            if (userAddressIds.length === 0) {
-                this.commit('updateUserAddressIds', [payload]);
-            } else {
-                if (userAddressIds.indexOf(payload) === -1) {
-                    userAddressIds.unshift(payload);
-                    this.commit('updateUserAddressIds', userAddressIds);
-                }
-            }
+            this.commit('updateUserAddressIds', payload);
         },
 
 
         updateUserPhoneIds (state, payload) {
             if (payload == null) {
-                state.userPhoneIds = [];
+                state.userPhoneIds = null;
             } else {
                 state.userPhoneIds = payload;
             }
         },
         // Only adding if it doesn't already exist.
-        addUserPhoneId (state, payload) {
-            let userPhoneIds = state.userPhoneIds;
-            if (userPhoneIds.length === 0) {
-                this.commit('updateUserPhoneIds', [payload]);
-            } else {
-                if (userPhoneIds.indexOf(payload) === -1) {
-                    userPhoneIds.push(payload);
-                    this.commit('updateUserPhoneIds', userPhoneIds);
-                }
-            }
+        addResumePhoneId (state, payload) {
+            this.commit('updateUserPhoneIds', payload);
         },
-
 
         updatePhone (state, payload) {
             state.phone = payload;

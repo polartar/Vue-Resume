@@ -15,11 +15,19 @@ class GenerateResumePdfController extends Controller
     const EDUCATION_SECTION_HEADER_LINE_COUNT = 2;
     const EDUCATION_HEADER_LINE_COUNT = 3;
 
+    const SKILLS_SECTION_HEADER_LINE_COUNT = 2;
+    const SKILLS_HEADER_LINE_COUNT = 3;
+
+    const HOBBIES_SECTION_HEADER_LINE_COUNT = 2;
+    const HOBBIES_HEADER_LINE_COUNT = 3;
+
     const FIRST_PAGE_LINE_LIMIT = 21;
     const AVERAGE_LINE_LENGTH = 80;
 
     public function __invoke(Request $request, Resume $resume)
     {
+
+        $resume->load(['user', 'phone', 'hobbies', 'resumeSkill', 'email', 'address', 'resumeSummaries', 'resumeEducations.educationDescriptions', 'resumeWorkExperiences.resumeDescriptions', 'resumeDesign']);
         /* Ideas for page breaks
             Lines have between 1 and 85 characters, with a common minimum being 80 characters
 
@@ -41,7 +49,13 @@ class GenerateResumePdfController extends Controller
         $educationSectionBreak = false;
         $educationIndexBreaks = [];
 
-        $lineCount = 0;
+        $skillSectionBreak = false;
+        $skillIndexBreaks = [];
+
+        $hobbySectionBreak = false;
+        $hobbyIndexBreaks = [];
+
+        $lineCount = 2;
 
 
         /* Summary line count
@@ -125,10 +139,64 @@ class GenerateResumePdfController extends Controller
             }
         }
 
-        // dd($educationIndexBreaks, $workExperienceIndexBreaks, $lineCount);
-
-        /* Generating the PDF
+        /* Skills Section
+            Counting the headers and description lines
         */
+        if ($lineCount + self::SKILLS_SECTION_HEADER_LINE_COUNT >= self::FIRST_PAGE_LINE_LIMIT) {
+            $lineCount = self::SKILLS_SECTION_HEADER_LINE_COUNT;
+            $skillSectionBreak = true;
+        } else {
+            $lineCount += self::SKILLS_SECTION_HEADER_LINE_COUNT;
+        }
+
+
+        /* Check what the line count will be with each skills
+            If it exceeds FIRST_PAGE_LINE_LIMIT, then the index of that skill will be noted.
+        */
+        foreach ($resume->resumeSkill as $key=>$skill) {
+            $lines = self::SKILLS_HEADER_LINE_COUNT;
+
+            $lines += round( strlen($skill->name) / self::AVERAGE_LINE_LENGTH );
+
+            if ($lineCount + $lines >= self::FIRST_PAGE_LINE_LIMIT) {
+                $lineCount = $lines;
+                array_push($skillIndexBreaks, $key);
+            } else {
+                $lineCount += $lines;
+            }
+        }
+
+        /* Hobbies Section
+            Counting the headers and description lines
+        */
+        if ($lineCount + self::HOBBIES_SECTION_HEADER_LINE_COUNT >= self::FIRST_PAGE_LINE_LIMIT) {
+            $lineCount = self::HOBBIES_SECTION_HEADER_LINE_COUNT;
+            $hobbySectionBreak = true;
+        } else {
+            $lineCount += self::HOBBIES_SECTION_HEADER_LINE_COUNT;
+        }
+
+
+        /* Check what the line count will be with each skills
+            If it exceeds FIRST_PAGE_LINE_LIMIT, then the index of that hobby will be noted.
+        */
+        foreach ($resume->hobbies as $key => $hobby) {
+            $lines = self::HOBBIES_HEADER_LINE_COUNT;
+
+            $lines += round( strlen($hobby->name) / self::AVERAGE_LINE_LENGTH );
+
+            if ($lineCount + $lines >= self::FIRST_PAGE_LINE_LIMIT) {
+                $lineCount = $lines;
+                array_push($hobbyIndexBreaks, $key);
+            } else {
+                $lineCount += $lines;
+            }
+        }
+
+
+
+
+        /* Generating the PDF */
 
         if($resume->resumeDesign) {
             $template = Str::slug($resume->resumeDesign->name, '-');
@@ -154,7 +222,11 @@ class GenerateResumePdfController extends Controller
                 'educationSectionBreak',
                 'educationIndexBreaks',
                 'date_format',
+                'skillSectionBreak',
+                'skillIndexBreaks',
+                'hobbySectionBreak',
             ]));
+
 
             if ($request->get('page')) {
                 return view('templates.' . $template, compact([
@@ -164,6 +236,9 @@ class GenerateResumePdfController extends Controller
                     'educationSectionBreak',
                     'educationIndexBreaks',
                     'date_format',
+                    'skillSectionBreak',
+                    'skillIndexBreaks',
+                    'hobbySectionBreak',
                 ]));
             }
             $pdf->setPaper('letter', 'portrait');

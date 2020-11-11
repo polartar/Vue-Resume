@@ -28,9 +28,9 @@ class StoreResumeRequest extends FormRequest
             'name' => 'required|string',
             'resume_design_id' => 'nullable|uuid',
             'pdf_url' => 'nullable|url',
-            'user_address_ids' => 'nullable|array',
-            'user_phone_ids' => 'nullable|array',
-            'user_email_ids' => 'nullable|array',
+            'user_address_id' => 'nullable|uuid',
+            'user_phone_id' => 'nullable|uuid',
+            'user_email_id' => 'nullable|uuid',
             'date_format' => 'integer',
         ];
     }

@@ -37,10 +37,24 @@ body {
         width: 100%;
     }
 
-    .page-break {
+    .page-break-after {
         background: #f3f5f3;
         padding: 2rem 0;
     }
+}
+
+
+.resume-html-page {
+    .page-break-after {
+        background: #f3f5f3;
+        box-shadow: 77px 0 0 #f3f5f3, -77px 0 0 #f3f5f3;
+        margin: 75px 0;
+        padding: 2rem 0;
+    }
+}
+
+.page-break-after {
+    padding-top: 75px;
 }
 
 .resume-html,

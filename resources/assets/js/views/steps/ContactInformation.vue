@@ -22,11 +22,28 @@
                     <!-- make select with saved emails and option to add new -->
                     <div class="form-group">
                         <label>Email</label>
-                        <input required type="email" name="email" :value="email" disabled>
+                        <input required type="email" name="email" :value="resume.email" @input="updateResumeEmail">
                     </div>
                 </div>
                 <div class="cell medium-6">
                     <!-- make select with saved phones and option to add new -->
+
+
+                    <!-- <div class="form-group">
+                        <label>Phone</label>
+                        <div class="fancy-select fancy-select-full-width">
+                            <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
+                            <select required class="fancy-select" @change="updatePhone">
+                                <option value="">Select Phone</option>
+                                <option v-for="p in userPhoneIds" :selected="p.id == phone.id" :value="p.id">{{ p.phone_number }}</option>
+                            </select>
+                        </div>
+                        <div class="">
+                            <a>Add New</a>
+                            <a>Manage Phones</a>
+                        </div>
+
+                    </div> -->
                     <div class="form-group">
                         <label>Phone</label>
                         <input required type="tel" name="phone" :value="phone" @input="updatePhone">
@@ -417,24 +434,42 @@
 
     export default {
 
-        computed: mapState([
-            'resume',
-            'firstName',
-            'lastName',
-            'email',
-            'phone',
-            'street_1',
-            'street_2',
-            'city',
-            'province',
-            'country',
-            'zip',
-            'userEmailIds',
-            'userAddressIds',
-            'userPhoneIds',
-            'toggleResumePreview',
-            'refreshPreview',
-        ]),
+        data() {
+            return {
+                newPhone: ''
+            }
+        },
+        computed: {
+            ...mapState([
+                'resume',
+                'firstName',
+                'lastName',
+                'phone',
+                'street_1',
+                'street_2',
+                'city',
+                'province',
+                'country',
+                'zip',
+                'userEmailIds',
+                'userAddressIds',
+                'userPhoneIds',
+                'toggleResumePreview',
+                'refreshPreview',
+            ]),
+            // phone: {
+            //     get() {
+            //         return this.$store.state.phone;
+            //     },
+            //     async set(value) {
+            //         // await this.$store.dispatch('updateResumeSkillsOrder', value);
+            //         await this.createUserPhone()
+            //     }
+            // }
+        },
+        mounted() {
+            // console.log(this.phone)
+        },
         methods: {
             ...mapMutations([
                 'updateFirstName',
@@ -473,7 +508,9 @@
             updateRefreshPreview: function (event) {
                 this.$store.commit('updateRefreshPreview')
             },
-
+            updateResumeEmail: function (event) {
+                this.$store.commit('updateResumeEmail', event.target.value)
+            },
 
             saveContactInfo: async function () {
                 // Update User Info
@@ -510,10 +547,11 @@
                     route: '/user-phone',
                     payload: {
                         'user_id': this.resume.user.id,
-                        'phone_number': this.phone
+                        'phone_number': this.phone,
+                        'resume_id': this.resume.id
                     },
                     successMessage: null,
-                    commits: ['addUserPhoneId'],
+                    commits: ['addResumePhoneId'],
                 });
             },
             createUserEmail: async function () {
@@ -521,7 +559,8 @@
                     route: '/user-email',
                     payload: {
                         'user_id': this.resume.user.id,
-                        'email': this.email
+                        'email': this.resume.email,
+                        'resume_id': this.resume.id
                     },
                     successMessage: null,
                     commits: ['addUserEmailId'],
@@ -538,6 +577,7 @@
                         'province': this.province,
                         'country': this.country,
                         'postal_code': this.zip,
+                        'resume_id': this.resume.id
                     },
                     successMessage: null,
                     commits: ['addUserAddressId'],
@@ -551,10 +591,11 @@
                 // Eager loading needs a little love on the way back
                 let updateData = this.resume;
                 updateData['user_id'] = this.resume.user.id;
-                updateData['user_email_ids'] = this.$store.state.userEmailIds;
-                updateData['user_address_ids'] = this.$store.state.userAddressIds;
-                updateData['user_phone_ids'] = this.$store.state.userPhoneIds;
+                updateData['user_email_id'] = this.$store.state.userEmailIds;
+                updateData['user_address_id'] = this.$store.state.userAddressIds;
+                updateData['user_phone_id'] = this.$store.state.userPhoneIds;
 
+                // console.log(updateData)
                 const success = await this.$store.dispatch('axiosPutRequest', {
                     route: '/resume/' + this.resume.id,
                     payload: updateData,

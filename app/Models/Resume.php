@@ -18,6 +18,9 @@ class Resume extends Model
         'name',
         'resume_design_id',
         'pdf_url',
+        'user_address_id',
+        'user_phone_id',
+        'user_email_id',
         'user_address_ids',
         'user_phone_ids',
         'user_email_ids',
@@ -36,6 +39,30 @@ class Resume extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function phone()
+    {
+        return $this->belongsTo(UserPhone::class, 'user_phone_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function email()
+    {
+        return $this->belongsTo(UserEmail::class, 'user_email_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function address()
+    {
+        return $this->belongsTo(UserAddress::class, 'user_address_id', 'id');
     }
 
     /**

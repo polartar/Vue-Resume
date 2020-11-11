@@ -3,7 +3,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" href="{{ asset('assets/css/resumes/gold-standard.css') }}">
     </head>
-    <body class="resume-pdf resume-gold-standard">
+    <body class="@if(request()->input('page')) resume-html-page @endif resume-pdf resume-gold-standard">
         <div class="print-paper">
             <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
@@ -16,21 +16,24 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <p class="contact-info">{{ $resume->first_address->city ?? '' }}, {{ $resume->first_address->province ?? '' }}</p>
+                                            @if(isset($resume->address))
+                                            <p class="contact-info">
+                                                @if($resume->address->street_1){{ $resume->address->street_1 }}@endif @if($resume->address->street_2){{ $resume->address->street_2 }}@endif @if($resume->address->street_1 || $resume->address->street_1)<br>@endif
+                                                {{ $resume->address->city ?? '' }}, {{ $resume->address->province ?? '' }} @if($resume->address->postal_code){{ $resume->address->postal_code }}@endif
+                                            </p>
+                                            @endif
                                         </td>
                                     </tr>
 
-                                    @if($resume->user->user_phones->first())
                                     <tr>
                                         <td>
-                                            <p class="contact-info">{{ $resume->user->user_phones->first()->phone_number }}</p>
+                                            <p class="contact-info">{{ $resume->phone->phone_number ?? '' }}</p>
                                         </td>
                                     </tr>
-                                    @endif
 
                                     <tr>
                                         <td>
-                                            <p class="contact-info">{{ $resume->user->email }}</p>
+                                            <p class="contact-info">{{ $resume->email->email ?? '' }}</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -65,7 +68,7 @@
             </table>
             @if ($workExperienceSectionBreak)
                 <div class="page-break"></div>
-                <div style="padding-top: 75px;">&nbsp;</div>
+                <div class="page-break-after">&nbsp;</div>
             @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
@@ -73,13 +76,13 @@
                         <td><span class="section-heading">Work Experience</span></td>
                     </tr>
 
-                    @foreach( $resume->resumeWorkExperiences as $key=>$work )
+                    @foreach( $resume->resumeWorkExperiences as $key => $work )
                         <tr>
                             <td class="section-group">
                                 <!-- This line will cleanly break a page -->
                                 @if(in_array($key, $workExperienceIndexBreaks))
                                     <div class="page-break"></div>
-                                    <div style="padding-top: 75px;">&nbsp;</div>
+                                    <div class="page-break-after">&nbsp;</div>
                                 @endif
                                 <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
@@ -109,7 +112,7 @@
 
             @if ($educationSectionBreak)
                 <div class="page-break"></div>
-                <div style="padding-top: 75px;">&nbsp;</div>
+                <div class="page-break-after">&nbsp;</div>
             @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
@@ -122,7 +125,7 @@
                             <!-- This line will cleanly break a page -->
                             @if(in_array($key, $educationIndexBreaks))
                                 <div class="page-break"></div>
-                                <div style="padding-top: 75px;">&nbsp;</div>
+                                <div class="page-break-after">&nbsp;</div>
                             @endif
                             <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
@@ -143,6 +146,10 @@
                 </tbody>
             </table>
 
+            @if ($skillSectionBreak)
+                <div class="page-break"></div>
+                <div class="page-break-after">&nbsp;</div>
+            @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
@@ -162,6 +169,10 @@
                 </tbody>
             </table>
 
+            @if ($hobbySectionBreak)
+                <div class="page-break"></div>
+                <div class="page-break-after">&nbsp;</div>
+            @endif
             <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>

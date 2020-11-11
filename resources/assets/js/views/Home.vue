@@ -4,7 +4,7 @@
             <div class="form-group" v-if="this.$route.name === 'home'">
                 <h3>Home</h3>
                 <label>Resume Name</label>
-                <input :placeholder="resumeName" type="text" @change="updateResumeName">
+                <input :value="resumeName" type="text" @change="updateResumeName">
 
             </div>
             <div class="resume-form-nav-buttons" v-if="this.$route.name === 'home'">
@@ -72,7 +72,7 @@
                 this.$axios
                     .get('/resume/' + resumeId)
                     .then(response => {
-                        console.log(response.data.resume);
+                        // console.log(response.data.resume);
                         // Assign name values from resume
                         let resume = response.data.resume;
                         this.$store.commit('updateResume', resume);
@@ -81,21 +81,26 @@
                         this.$store.commit('updateUserEmail', resume.user.email);
                         this.$store.commit('updateUserEmailIds', resume.user_email_ids);
                         this.$store.commit('updateUserAddressIds', resume.user_address_ids);
-                        this.$store.commit('updateUserPhoneIds', resume.user_phone_ids);
+                        this.$store.commit('updateUserPhoneIds', resume.user.user_phones);
                         if (resume.resume_summaries.length > 0) {
                             this.$store.commit('updateSummary', resume.resume_summaries[0]);
-                            console.log(this.$store.state.summary);
+                            //console.log(this.$store.state.summary);
                         }
                         // From here, we need to bring in:
                         // phone number
-                        if (this.$store.state.userPhoneIds.length > 0) {
-                            this.getPhoneNumber(this.$store.state.userPhoneIds[0]);
+                        if (resume.user_phone_id) {
+                            this.getPhoneNumber(resume.user_phone_id);
                         }
                         // email TODO: sortable emails, handle later
-                        // Address
-                        if (this.$store.state.userAddressIds.length > 0) {
-                            this.getUserAddress(this.$store.state.userAddressIds[0]);
+                        // Email
+                        if (resume.user_email_id) {
+                            this.getUserEmail(resume.user_email_id);
                         }
+                        // Address
+                        if (resume.user_address_id) {
+                            this.getUserAddress(resume.user_address_id);
+                        }
+
                     })
                     .catch(error => {
                         console.log('failed to retrieve resume', error)
@@ -104,7 +109,7 @@
             fetchResumeDesigns: function () {
                 this.$axios.get('/resume-design')
                     .then(response => {
-                        console.log(response);
+                        //console.log(response);
                         this.$store.commit('updateResumeDesigns', response.data.resumeDesigns);
                     })
             },
@@ -112,20 +117,30 @@
                 this.$axios
                     .get('/user-phone/' + phoneId)
                     .then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         this.$store.commit('updatePhone', response.data.userPhone.phone_number);
                     })
                     .catch(error => {
                         console.log('failed to retrieve phone number');
                     });
-            }
-            ,
+            },
             getUserAddress: function (userAddressId) {
                 this.$axios
                     .get('/user-address/' + userAddressId)
                     .then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         this.$store.commit('updateAddress', response.data.userAddress);
+                    })
+                    .catch(error => {
+                        console.log('failed to retrieve phone number');
+                    });
+            },
+            getUserEmail: function (userEmailId) {
+                this.$axios
+                    .get('/user-email/' + userEmailId)
+                    .then(response => {
+                        // console.log(response.data);
+                        this.$store.commit('updateResumeEmail', response.data.userEmail.email);
                     })
                     .catch(error => {
                         console.log('failed to retrieve phone number');
@@ -137,15 +152,19 @@
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
+            updateRefreshPreview: function (event) {
+                this.$store.commit('updateRefreshPreview')
+            },
             saveResumeName: async function () {
                 const success = await this.$store.dispatch('axiosPutRequest', {
                     route: '/resume/' + this.resume.id,
                     payload: this.resume,
                     successMessage: 'Successfully updated the resume name',
                 });
-                
+
                 if (success)
                     this.$router.push({name: 'select-design', query: this.$route.query});
+                    await this.updateRefreshPreview()
             }
         }
     }

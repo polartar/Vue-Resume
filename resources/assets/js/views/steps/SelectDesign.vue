@@ -58,6 +58,11 @@
 
                 if (success)
                     this.$store.commit('reloadResume');
+                    this.updateRefreshPreview()
+
+            },
+            updateRefreshPreview: function (event) {
+                this.$store.commit('updateRefreshPreview')
             },
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)

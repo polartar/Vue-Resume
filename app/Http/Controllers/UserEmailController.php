@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserEmailRequest;
 use App\Models\UserEmail;
+use App\Models\Resume;
 use Illuminate\Http\Request;
 
 class UserEmailController extends Controller
@@ -44,11 +45,25 @@ class UserEmailController extends Controller
 
         // Avoid duplication
         if ($email) {
+            if($request->input('resume_id')) {
+                Resume::where('id', $request->input('resume_id'))->update(
+                    [
+                        'user_email_id' => $email->id
+                    ]
+                );
+            }
             return response(['success' => 'true', 'id' => $email->id], 200);
         }
 
         try {
             $email = UserEmail::create($validated);
+            if($request->input('resume_id')) {
+                Resume::where('id', $request->input('resume_id'))->update(
+                    [
+                        'user_email_id' => $email->id
+                    ]
+                );
+            }
         } catch (\Exception $e) {
             return response(['success' => 'false', 'message' => $e], 400);
         }
@@ -64,7 +79,7 @@ class UserEmailController extends Controller
      */
     public function show(UserEmail $userEmail)
     {
-        return response(['success' => 'true', 'resume' => $userEmail], 200);
+        return response(['success' => 'true', 'userEmail' => $userEmail], 200);
     }
 
     /**
