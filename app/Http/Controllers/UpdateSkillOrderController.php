@@ -17,7 +17,7 @@ class UpdateSkillOrderController extends Controller
     {
         foreach ($request->input('skills') as $skill) {
             $skill_record = ResumeSkill::find($skill["id"]);
-            $skill_record->order = $skill["order"];
+            $skill_record->sort_order = $skill["sort_order"];
             $skill_record->save();
         }
 

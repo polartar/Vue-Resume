@@ -10,18 +10,18 @@ use Str;
 class GenerateResumePdfController extends Controller
 {
     const WORK_EXPERIENCE_SECTION_HEADER_LINE_COUNT = 2;
-    const WORK_EXPERIENCE_HEADER_LINE_COUNT = 3;
+    const WORK_EXPERIENCE_HEADER_LINE_COUNT = 2;
 
     const EDUCATION_SECTION_HEADER_LINE_COUNT = 2;
-    const EDUCATION_HEADER_LINE_COUNT = 3;
+    const EDUCATION_HEADER_LINE_COUNT = 2;
 
     const SKILLS_SECTION_HEADER_LINE_COUNT = 2;
-    const SKILLS_HEADER_LINE_COUNT = 3;
+    const SKILLS_HEADER_LINE_COUNT = 2;
 
     const HOBBIES_SECTION_HEADER_LINE_COUNT = 2;
-    const HOBBIES_HEADER_LINE_COUNT = 3;
+    const HOBBIES_HEADER_LINE_COUNT = 2;
 
-    const FIRST_PAGE_LINE_LIMIT = 21;
+    const FIRST_PAGE_LINE_LIMIT = 36;
     const AVERAGE_LINE_LENGTH = 80;
 
     public function __invoke(Request $request, Resume $resume)
@@ -159,10 +159,10 @@ class GenerateResumePdfController extends Controller
             $lines += round( strlen($skill->name) / self::AVERAGE_LINE_LENGTH );
 
             if ($lineCount + $lines >= self::FIRST_PAGE_LINE_LIMIT) {
-                $lineCount = $lines;
+                $lineCount = $lines / 4;
                 array_push($skillIndexBreaks, $key);
             } else {
-                $lineCount += $lines;
+                $lineCount += $lines / 4;
             }
         }
 
@@ -186,10 +186,10 @@ class GenerateResumePdfController extends Controller
             $lines += round( strlen($hobby->name) / self::AVERAGE_LINE_LENGTH );
 
             if ($lineCount + $lines >= self::FIRST_PAGE_LINE_LIMIT) {
-                $lineCount = $lines;
+                $lineCount = $lines / 2;
                 array_push($hobbyIndexBreaks, $key);
             } else {
-                $lineCount += $lines;
+                $lineCount += $lines / 2;
             }
         }
 

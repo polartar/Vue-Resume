@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum'])->get('/new-resume', 'App\Http\Controllers\Re
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('resume', \App\Http\Controllers\ResumeController::class);
     Route::resource('resume-description', \App\Http\Controllers\ResumeDescriptionController::class);
-    
+
     Route::resource('resume-summary', \App\Http\Controllers\ResumeSummaryController::class);
     Route::put('/resume-summaries', \App\Http\Controllers\UpdateResumeSummaryOrderController::class);
 
@@ -41,10 +41,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('user-email', \App\Http\Controllers\UserEmailController::class);
     Route::resource('user-address', \App\Http\Controllers\UserAddressController::class);
     Route::put('/update-user/{user}', \App\Http\Controllers\UpdateUserController::class);
-    
+
     Route::resource('resume-work-experience', \App\Http\Controllers\ResumeWorkExperienceController::class);
     Route::put('/resume-work-experiences', \App\Http\Controllers\UpdateResumeWorkExperiencesOrderController::class);
-    
+
     Route::resource('resume-education', \App\Http\Controllers\ResumeEducationController::class);
     Route::put('/resume-educations', \App\Http\Controllers\UpdateResumeEducationsOrderController::class);
 
@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/hobbies', \App\Http\Controllers\UpdateHobbyOrderController::class);
 
     Route::resource('skill', \App\Http\Controllers\ResumeSkillController::class);
-    Route::put('/hobbies', \App\Http\Controllers\UpdateSkillOrderController::class);
-    
+    Route::put('/skills', \App\Http\Controllers\UpdateSkillOrderController::class);
+
     Route::get('/generate-resume-pdf/{resume}', \App\Http\Controllers\GenerateResumePdfController::class);
 });

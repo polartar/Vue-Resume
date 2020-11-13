@@ -76,12 +76,12 @@ class ResumeSkillController extends Controller
      * @param  \App\Models\ResumeSkill  $resumeSkill
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreResumeSkillRequest $request, ResumeSkill $resumeSkill)
+    public function update(StoreResumeSkillRequest $request, ResumeSkill $skill)
     {
         $validated = $request->validated();
 
         try {
-            $resumeSkill->update($validated);
+            $skill->update($validated);
         } catch (\Exception $e) {
             return response(['success' => 'false', 'message' => $e], 400);
         }
@@ -95,10 +95,10 @@ class ResumeSkillController extends Controller
      * @param  \App\Models\ResumeSkill  $resumeSkill
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ResumeSkill $resumeSkill)
+    public function destroy(ResumeSkill $skill)
     {
         try {
-            $resumeSkill->delete();
+            $skill->delete();
         } catch (\Exception $e) {
             return response(['success' => 'false', 'message' => $e], 400);
         }

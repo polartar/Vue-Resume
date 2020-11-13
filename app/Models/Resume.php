@@ -96,7 +96,7 @@ class Resume extends Model
 
     public function resumeSkill()
     {
-        return $this->hasMany(ResumeSkill::class);
+        return $this->hasMany(ResumeSkill::class)->orderBy('sort_order');;
     }
 
     public function getFirstAddressAttribute()

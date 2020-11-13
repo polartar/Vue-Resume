@@ -1,12 +1,10 @@
-html {
-    box-sizing: border-box;
-}
+@import '~foundation-sites/scss/foundation';
+@import 'foundation/settings';
+@import 'foundation/adjustments';
 
-*,
-*::before,
-*::after {
-    box-sizing: inherit;
-}
+@import '~foundation-sites/scss/foundation';
+
+@include foundation-global-styles;
 
 @import 'fonts/cheeky-fonts';
 @import 'bits/colors';

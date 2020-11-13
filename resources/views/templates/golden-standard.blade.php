@@ -14,31 +14,36 @@
                         <td>
                             <table class="full-width-table header-contact-info" align="center" cellpadding="0" cellspacing="0">
                                 <tbody>
+                                    @if(isset($resume->address))
                                     <tr>
-                                        <td>
+                                        <td class="contact-info">
+                                            @if($resume->address->street_1){{ $resume->address->street_1 }}@endif @if($resume->address->street_2){{ $resume->address->street_2 }}@endif @if($resume->address->street_1 || $resume->address->street_1)<br>@endif
+                                        </td>
+                                    </tr>
+                                    @endif
+
+                                    <tr>
+                                        <td class="contact-info">
                                             @if(isset($resume->address))
-                                            <p class="contact-info">
-                                                @if($resume->address->street_1){{ $resume->address->street_1 }}@endif @if($resume->address->street_2){{ $resume->address->street_2 }}@endif @if($resume->address->street_1 || $resume->address->street_1)<br>@endif
                                                 {{ $resume->address->city ?? '' }}, {{ $resume->address->province ?? '' }} @if($resume->address->postal_code){{ $resume->address->postal_code }}@endif
-                                            </p>
                                             @endif
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td>
-                                            <p class="contact-info">{{ $resume->phone->phone_number ?? '' }}</p>
+                                        <td class="contact-info">
+                                            {{ $resume->phone->phone_number ?? '' }}
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td>
-                                            <p class="contact-info">{{ $resume->email->email ?? '' }}</p>
+                                        <td class="contact-info">
+                                            {{ $resume->email->email ?? '' }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <p class="contact-info">LinkedIn URL (todo)</p>
+                                        <td class="contact-info">
+                                            LinkedIn URL (todo)
                                         </td>
                                     </tr>
 
@@ -58,7 +63,7 @@
                             @if(isset($resume->resumeSummaries))
                                 <ul>
                                     @foreach ($resume->resumeSummaries as $summary)
-                                        <li class="@if(!$summary->bullet_point) paragraph-bullet-point @endif">{{ $summary->name }}</li>
+                                        <li class="@if(!$summary->bullet_point) paragraph-bullet-point @endif"><p>{{ $summary->name }}</p></li>
                                     @endforeach
                                 </ul>
                             @endif
@@ -86,11 +91,11 @@
                                 @endif
                                 <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
-                                        <td><span class="section-title">{{ $work->position_title }}</span></td>
+                                        <td><span class="section-sub-title">{{ $work->position_title }}</span></td>
                                         <td class="text-right"><span class="section-dates">{{ $work->position_start_date->format($date_format) }} &ndash; {{ $work->position_end_date ? $work->position_end_date->format($date_format) : 'Present' }}</span></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><span class="section-title">{{ $work->position_company }}</span></td>
+                                        <td colspan="2"><span class="section-sub-sub-title">{{ $work->position_company }}</span></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="section-summary">
@@ -129,7 +134,7 @@
                             @endif
                             <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td><span class="section-title">{{ $education->school_name }} &ndash; {{ $education->degree_received }} {{ $education->field_of_study }}</span></td>
+                                    <td><span class="section-sub-title">{{ $education->school_name }} &ndash; {{ $education->degree_received }} {{ $education->field_of_study }}</span></td>
                                     <td class="text-right"><span class="section-dates">{{ $education->start_date->format($date_format) }} &ndash; {{ $education->end_date ? $education->end_date->format($date_format) : 'Present' }}</span></td>
                                 </tr>
                                 {{-- <tr>
@@ -158,11 +163,22 @@
                     <tr>
                         <td class="section-summary">
                             @if(isset($resume->resumeSkill))
-                                <ul>
-                                    @foreach ($resume->resumeSkill as $skill)
-                                        <li>{{ $skill->name }}</li>
-                                    @endforeach
-                                </ul>
+                                <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($resume->resumeSkill->split(4) as $skillGroup)
+
+                                                <td>
+                                                    <ul class="bulletless-list">
+                                                        @foreach ($skillGroup as $skill)
+                                                            <li>{{ $skill->name }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
                             @endif
                         </td>
                     </tr>
@@ -181,12 +197,24 @@
                     <tr>
                         <td class="section-summary">
                             @if(isset($resume->hobbies))
-                                <ul>
-                                    @foreach ($resume->hobbies as $hobbies)
-                                        <li>{{ $hobbies->name }}</li>
-                                    @endforeach
-                                </ul>
+                                <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($resume->hobbies->split(2) as $hobbyGroup)
+
+                                                <td>
+                                                    <ul class="bulletless-list">
+                                                        @foreach ($hobbyGroup as $hobby)
+                                                            <li>{{ $hobby->name }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
                             @endif
+
                         </td>
                     </tr>
                 </tbody>

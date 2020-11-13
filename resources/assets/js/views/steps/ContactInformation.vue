@@ -423,7 +423,8 @@
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <router-link tag="button" class="button" v-on:click.native="saveContactInfo" to="resume-summary">Save &amp; Continue</router-link>
+            <button class="button" @click="saveContactInfo">Save &amp; Continue</button>
+            <!-- <router-link tag="button" class="button" v-on:click.native="saveContactInfo" to="resume-summary">Save &amp; Continue</router-link> -->
         </div>
     </div>
 
@@ -530,20 +531,28 @@
                 */
 
                 // Need to create a userPhone, then add it to the list of ids
-                await this.createUserPhone();
+                const success1 = await this.createUserPhone();
 
                 // Need to create a userEmail
-                await this.createUserEmail();
+                const success2 = await this.createUserEmail();
 
                 // Need to create a userAddress
-                await this.createUserAddress(true);
+                const success3 = await this.createUserAddress(true);
 
                 await this.updateRefreshPreview()
                 // Update resume via post w/all info (probably going to create new address)
                 //this.saveResume();
+
+                console.log({success1})
+                console.log({success2})
+                console.log({success3})
+
+                if (success1 && success2 && success3)
+                    this.$router.push({name: 'resume-summary', query: this.$route.query});
+                    await this.updateRefreshPreview()
             },
             createUserPhone: async function () {
-                await this.$store.dispatch('axiosPostRequest', {
+                let phone = await this.$store.dispatch('axiosPostRequest', {
                     route: '/user-phone',
                     payload: {
                         'user_id': this.resume.user.id,
@@ -553,9 +562,11 @@
                     successMessage: null,
                     commits: ['addResumePhoneId'],
                 });
+
+                return phone
             },
             createUserEmail: async function () {
-                await this.$store.dispatch('axiosPostRequest', {
+                let email = await this.$store.dispatch('axiosPostRequest', {
                     route: '/user-email',
                     payload: {
                         'user_id': this.resume.user.id,
@@ -565,9 +576,11 @@
                     successMessage: null,
                     commits: ['addUserEmailId'],
                 });
+
+                return email
             },
             createUserAddress: async function (saveResume = false) {
-                await this.$store.dispatch('axiosPostRequest', {
+                let address = await this.$store.dispatch('axiosPostRequest', {
                     route: '/user-address',
                     payload: {
                         'user_id': this.resume.user.id,
@@ -585,6 +598,8 @@
 
                 if (saveResume)
                     await this.saveResume();
+
+                return address
             },
 
             saveResume: async function () {

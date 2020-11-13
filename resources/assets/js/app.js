@@ -185,11 +185,17 @@ const store = new Vuex.Store({
         },
         updateResumeHobbies (state, payload) {
             state.resume.hobbies = payload;
-            axios.put('/hobbies', {'hobbies': payload});
+            axios.put('/hobbies', {'hobbies': payload})
+                .then(response => {
+                    state.refreshPreview = state.refreshPreview + 1
+                });
         },
         updateResumeSkills (state, payload) {
             state.resume.skills = payload;
-            axios.put('/skills', {'skills': payload});
+            axios.put('/skills', {'skills': payload})
+                .then(response => {
+                    state.refreshPreview = state.refreshPreview + 1
+                });
         }
     },
     getters: {
@@ -237,7 +243,7 @@ const store = new Vuex.Store({
         },
         updateResumeSkillsOrder: (context, skills) => {
             skills.forEach( (skill, index) => {
-                skill.order = index + 1;
+                skill.sort_order = index + 1;
             })
 
             context.commit('updateResumeSkills', skills)
@@ -306,6 +312,7 @@ const store = new Vuex.Store({
          *  true/false depending on success
          */
         axiosDeleteRequest: async (context, payload) => {
+            console.log(payload)
             return await axios.delete(payload.route)
                 .then(response => {
                     if (payload.commits)
@@ -333,6 +340,7 @@ import ResumeSummary from './views/steps/ResumeSummary'
 import WorkExperience from './views/steps/WorkExperience'
 import Education from './views/steps/Education'
 import Skills from './views/steps/Skills'
+import Hobbies from './views/steps/Hobbies'
 import CustomizeDesign from './views/steps/CustomizeDesign'
 import FullPagePreview from './views/steps/FullPagePreview'
 
@@ -380,6 +388,11 @@ const router = new VueRouter({
                     path: 'skills',
                     name: 'skills',
                     component: Skills,
+                },
+                {
+                    path: 'hobbies',
+                    name: 'hobbies',
+                    component: Hobbies,
                 },
                 {
                     path: 'customize-design',

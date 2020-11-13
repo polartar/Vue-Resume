@@ -1,3 +1,5 @@
+$html-font-size-conversions: 1.0475;
+
 @page {
     margin: 0px;
 }
@@ -5,6 +7,7 @@
 body {
     margin: 0px;
 }
+
 
 .resume-pdf {
     //@include body-font-regular;
@@ -31,6 +34,17 @@ body {
 
 .resume-html {
     height: 100%;
+    margin: 0;
+
+
+    .full-width-table {
+        width: 100%;
+
+        td {
+            vertical-align: top;
+        }
+    }
+
 
     .print-paper {
         height: 100%;
@@ -108,4 +122,21 @@ body {
     src: url('/assets/fonts/open-sans/Open-Sans-800.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+    width: 100%;
+}
+
+.bulletless-list {
+    list-style: none;
+    margin: 0;
+
+    li {
+        margin: 0;
+    }
 }

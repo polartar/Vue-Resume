@@ -60,7 +60,6 @@
                     { id: 6, value: this.$moment().format('M/YYYY')},
                     { id: 7, value: this.$moment().format('M-YYYY')},
                 ],
-                hobbyString: '',
             }
         },
         methods: {

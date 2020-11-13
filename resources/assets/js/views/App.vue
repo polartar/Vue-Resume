@@ -80,6 +80,11 @@
                         icon: 'el-icon-star-off',
                     },
                     {
+                        link: 'hobbies',
+                        title: 'Hobbies',
+                        icon: 'el-icon-star-off',
+                    },
+                    {
                         link: 'customize-design',
                         title: 'Customize',
                         icon: 'el-icon-setting',

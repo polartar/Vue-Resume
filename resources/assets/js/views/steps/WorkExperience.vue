@@ -221,37 +221,41 @@
 
             /* Resume Descriptions for Work Experience */
             createResumeDescription: async function (workExperienceId) {
-                await this.$axios
-                    .post('/resume-description', {
-                        'resume_work_experience_id': workExperienceId,
-                        'description': this.description,
-                        'type': 'paragraph',
-                    })
-                    .then(response => {
-                        this.updateRefreshPreview()
-                    })
-                    .catch(error => {
-                        //
-                    });
+                if(this.description) {
+                    await this.$axios
+                        .post('/resume-description', {
+                            'resume_work_experience_id': workExperienceId,
+                            'description': this.description,
+                            'type': 'paragraph',
+                        })
+                        .then(response => {
+                            this.updateRefreshPreview()
+                        })
+                        .catch(error => {
+                            //
+                        });
+                }
             },
             updateResumeDescription: function (resumeDescriptionId, workExperienceId) {
-                if (!resumeDescriptionId) { // Need to create a new resume description in this case
-                    this.createResumeDescription(workExperienceId);
-                    return;
-                }
+                if(this.description) {
+                    if (!resumeDescriptionId) { // Need to create a new resume description in this case
+                        this.createResumeDescription(workExperienceId);
+                        return;
+                    }
 
-                this.$axios
-                    .put(`/resume-description/${resumeDescriptionId}`, {
-                        'resume_work_experience_id': workExperienceId,
-                        'description': this.description,
-                        'type': 'paragraph',
-                    })
-                    .then(response => {
-                        this.updateRefreshPreview()
-                    })
-                    .catch(error => {
-                        console.log('error create resume description', error);
-                    });
+                    this.$axios
+                        .put(`/resume-description/${resumeDescriptionId}`, {
+                            'resume_work_experience_id': workExperienceId,
+                            'description': this.description,
+                            'type': 'paragraph',
+                        })
+                        .then(response => {
+                            this.updateRefreshPreview()
+                        })
+                        .catch(error => {
+                            console.log('error create resume description', error);
+                        });
+                }
             },
 
             /* Actions */
