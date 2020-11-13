@@ -5,11 +5,11 @@
         </div>
 
         <div class="grid-x grid-margin-x">
-            <div class="cell small-6" v-for="design in resumeDesigns">
-                <div class="card" v-if="design.active">
+            <div class="cell small-6 medium-4 large-6" v-for="design in resumeDesigns"  v-if="design.active">
+                <div class="card">
                     <h3 class="card-heading">{{ design.name }}</h3>
                     <div class="card-image">
-                        <img width="85" height="110" src="https://via.placeholder.com/85x110" alt="">
+                        <img width="85" height="85" src="https://via.placeholder.com/250" alt="">
                     </div>
                     <label class="button text-center" :class="{
                             'button-no-fill' : resume.resume_design_id != design.id

@@ -50,7 +50,7 @@
             background: $white;
             color: $black;
 
-            @include breakpoint(medium) {
+            @include breakpoint(large) {
                 display: none;
             }
         }

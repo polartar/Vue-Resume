@@ -1,6 +1,6 @@
 <template>
     <div class="grid-x grid-margin-x align-center">
-        <div class="cell medium-6 large-5" v-if="this.$route.name !== 'full-page-preview'">
+        <div class="cell large-6" v-if="this.$route.name !== 'full-page-preview'">
             <div class="form-group" v-if="this.$route.name === 'home'">
                 <h3>Home</h3>
                 <label>Resume Name</label>
@@ -18,9 +18,10 @@
                 <router-view></router-view>
             </div>
         </div>
-        <div class="cell medium-6 large-7 resume-preview-cell"
+        <div class="cell medium-6 large-5 large-offset-1 resume-preview-cell"
             :class="{
                 'hide-for-small-only': !toggleResumePreview,
+                'hide-for-medium-only': !toggleResumePreview,
                 'full-page-resume-preview': toggleResumePreview
             }"
              v-if="this.$route.name !== 'full-page-preview'">

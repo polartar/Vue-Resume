@@ -39,13 +39,14 @@
 
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
-            <button class="button preview-button">Preview</button>
+            <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
             <router-link tag="button" class="button" to="hobbies">Save and Next</router-link>
         </div>
     </div>
 </template>
 <script>
     import draggable from 'vuedraggable';
+    import { mapState } from 'vuex'
     export default {
         components: {draggable},
         computed: {
@@ -62,7 +63,10 @@
                 get() {
                     return this.$store.state.refreshPreview;
                 }
-            }
+            },
+            ...mapState([
+                'toggleResumePreview',
+            ]),
         },
         data: function () {
             return {
@@ -96,6 +100,9 @@
             },
             updateRefreshPreview: function (event) {
                 this.$store.commit('updateRefreshPreview')
+            },
+            updateToggleResumePreview: function (event) {
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
         }
     }

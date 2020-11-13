@@ -76,7 +76,7 @@
 
                 this.scaleStylesObject.transform = "translate(" + translate + "%, " + translate + "%) " + "scale(" + scale + ")"
                 let baseHeight = document.querySelector('.resume-preview-action-links').offsetHeight + 1100 + 48
-                document.querySelector('.resume-preview-container').style.height = (baseHeight * scale) + 'px';
+                document.querySelector('.resume-preview-container').style.height = window.innerHeight - 60 + 'px';
             },
 
             refreshiFrame: function() {
