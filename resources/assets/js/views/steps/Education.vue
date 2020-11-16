@@ -34,13 +34,13 @@
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>Degree</label>
-                        <input type="text" name="degree" v-model="degreeReceived">
+                        <input placeholder="PhD" type="text" name="degree" v-model="degreeReceived">
                     </div>
                 </div>
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>Field of Study</label>
-                        <input type="text" name="field_of_study" v-model="fieldOfStudy">
+                        <input placeholder="Chemistry" type="text" name="field_of_study" v-model="fieldOfStudy">
                     </div>
                 </div>
 

@@ -21,7 +21,7 @@ class GenerateResumePdfController extends Controller
     const HOBBIES_SECTION_HEADER_LINE_COUNT = 2;
     const HOBBIES_HEADER_LINE_COUNT = 2;
 
-    const FIRST_PAGE_LINE_LIMIT = 36;
+    const FIRST_PAGE_LINE_LIMIT = 32;
     const AVERAGE_LINE_LENGTH = 80;
 
     public function __invoke(Request $request, Resume $resume)
@@ -99,6 +99,7 @@ class GenerateResumePdfController extends Controller
 
             if ( count($workExperience->resumeDescriptions) > 0 ) {
                 $lines += round( strlen($workExperience->resumeDescriptions[0]->description) / self::AVERAGE_LINE_LENGTH );
+                $lines += count(preg_split('/\n+/', $workExperience->resumeDescriptions));
             }
 
             if ($lineCount + $lines >= self::FIRST_PAGE_LINE_LIMIT) {

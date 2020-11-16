@@ -100,9 +100,14 @@
                                     <tr>
                                         <td colspan="2" class="section-summary">
                                             @foreach( $work->resumeDescriptions as $description )
-                                                <p>
-                                                    {{ $description->description }}
-                                                </p>
+                                                @php
+                                                    $paragraphs = preg_split('/\n+/', $description->description);
+                                                @endphp
+                                                @foreach($paragraphs as $p)
+                                                    @if(strlen($p) > 0)
+                                                        <p>{{ $p }}</p>
+                                                    @endif
+                                                @endforeach
                                             @endforeach
                                         </td>
                                     </tr>
@@ -134,8 +139,12 @@
                             @endif
                             <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td><span class="section-sub-title">{{ $education->school_name }} &ndash; {{ $education->degree_received }} {{ $education->field_of_study }}</span></td>
+                                    <td><span class="section-sub-title">{{ $education->degree_received }} in {{ $education->field_of_study }}</span></td>
                                     <td class="text-right"><span class="section-dates">{{ $education->start_date->format($date_format) }} &ndash; {{ $education->end_date ? $education->end_date->format($date_format) : 'Present' }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="section-sub-sub-title">{{ $education->school_name }}</span></td>
+                                    <td class="text-right"></td>
                                 </tr>
                                 {{-- <tr>
                                     <td colspan="2" class="section-summary">
