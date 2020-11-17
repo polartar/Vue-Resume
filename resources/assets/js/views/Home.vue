@@ -73,7 +73,7 @@
                 this.$axios
                     .get('/resume/' + resumeId)
                     .then(response => {
-                        // console.log(response.data.resume);
+                        // console.log(response.data.resume.resume_links);
                         // Assign name values from resume
                         let resume = response.data.resume;
                         this.$store.commit('updateResume', resume);
@@ -83,10 +83,18 @@
                         this.$store.commit('updateUserEmailIds', resume.user_email_ids);
                         this.$store.commit('updateUserAddressIds', resume.user_address_ids);
                         this.$store.commit('updateUserPhoneIds', resume.user.user_phones);
+
                         if (resume.resume_summaries.length > 0) {
                             this.$store.commit('updateSummary', resume.resume_summaries[0]);
                             //console.log(this.$store.state.summary);
                         }
+
+                        let links = response.data.resume.resume_links
+                        let linkedin_url = links.find(o => o.name === "LinkedIn");
+
+                        this.$store.commit('updateLinkedInUrl', linkedin_url.url);
+
+
                         // From here, we need to bring in:
                         // phone number
                         if (resume.user_phone_id) {

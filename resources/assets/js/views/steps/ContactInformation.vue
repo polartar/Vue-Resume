@@ -522,15 +522,18 @@
                 */
 
                 // Need to create a userPhone, then add it to the list of ids
-                const success1 = await this.createUserPhone();
+                const success1 = await this.createUserPhone()
 
                 // Need to create a userEmail
-                const success2 = await this.createUserEmail();
+                const success2 = await this.createUserEmail()
 
                 // Need to create a userAddress
-                const success3 = await this.createUserAddress(true);
+                const success3 = await this.createUserAddress(true)
 
-                const success4 = await this.createLinkedInURL(true);
+                let success4 = true
+                if(this.resume.linkedin_url) {
+                    success4 = await this.createLinkedInURL()
+                }
 
                 await this.updateRefreshPreview()
                 // Update resume via post w/all info (probably going to create new address)
