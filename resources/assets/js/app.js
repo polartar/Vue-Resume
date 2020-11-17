@@ -152,6 +152,9 @@ const store = new Vuex.Store({
         updateZip (state, payload) {
             state.zip = payload
         },
+        updateLinkedInUrl (state, payload) {
+            state.resume.linkedin_url = payload
+        },
         updateAddress (state, payload) {
             this.commit('updateStreet1', payload.street_1);
             this.commit('updateStreet2', payload.street_2);

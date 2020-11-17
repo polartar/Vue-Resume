@@ -27,7 +27,7 @@ class GenerateResumePdfController extends Controller
     public function __invoke(Request $request, Resume $resume)
     {
 
-        $resume->load(['user', 'phone', 'hobbies', 'resumeSkill', 'email', 'address', 'resumeSummaries', 'resumeEducations.educationDescriptions', 'resumeWorkExperiences.resumeDescriptions', 'resumeDesign']);
+        $resume->load(['user', 'phone', 'resumeLinks', 'hobbies', 'resumeSkill', 'email', 'address', 'resumeSummaries', 'resumeEducations.educationDescriptions', 'resumeWorkExperiences.resumeDescriptions', 'resumeDesign']);
         /* Ideas for page breaks
             Lines have between 1 and 85 characters, with a common minimum being 80 characters
 

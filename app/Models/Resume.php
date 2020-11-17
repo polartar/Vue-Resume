@@ -76,6 +76,14 @@ class Resume extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function resumeLinks()
+    {
+        return $this->hasMany(ResumeLink::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function resumeEducations()
     {
         return $this->hasMany(ResumeEducation::class)->orderBy('order');

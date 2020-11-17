@@ -26,27 +26,15 @@
                     </div>
                 </div>
                 <div class="cell medium-6">
-                    <!-- make select with saved phones and option to add new -->
-
-
-                    <!-- <div class="form-group">
-                        <label>Phone</label>
-                        <div class="fancy-select fancy-select-full-width">
-                            <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
-                            <select required class="fancy-select" @change="updatePhone">
-                                <option value="">Select Phone</option>
-                                <option v-for="p in userPhoneIds" :selected="p.id == phone.id" :value="p.id">{{ p.phone_number }}</option>
-                            </select>
-                        </div>
-                        <div class="">
-                            <a>Add New</a>
-                            <a>Manage Phones</a>
-                        </div>
-
-                    </div> -->
                     <div class="form-group">
                         <label>Phone</label>
                         <input required type="tel" name="phone" :value="phone" @input="updatePhone">
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="form-group">
+                        <label>LinkedIn URL</label>
+                        <input required type="url" name="linkedin_url" :value="resume.linkedin_url" @input="updateLinkedInUrl">
                     </div>
                 </div>
             </div>
@@ -512,6 +500,9 @@
             updateResumeEmail: function (event) {
                 this.$store.commit('updateResumeEmail', event.target.value)
             },
+            updateLinkedInUrl: function (event) {
+                this.$store.commit('updateLinkedInUrl', event.target.value)
+            },
 
             saveContactInfo: async function () {
                 // Update User Info
@@ -539,15 +530,17 @@
                 // Need to create a userAddress
                 const success3 = await this.createUserAddress(true);
 
+                const success4 = await this.createLinkedInURL(true);
+
                 await this.updateRefreshPreview()
                 // Update resume via post w/all info (probably going to create new address)
                 //this.saveResume();
 
-                console.log({success1})
-                console.log({success2})
-                console.log({success3})
+                // console.log({success1})
+                // console.log({success2})
+                // console.log({success3})
 
-                if (success1 && success2 && success3)
+                if (success1 && success2 && success3 && success4)
                     this.$router.push({name: 'resume-summary', query: this.$route.query});
                     await this.updateRefreshPreview()
             },
@@ -601,7 +594,19 @@
 
                 return address
             },
+            createLinkedInURL: async function () {
+                let linkedin_url = await this.$store.dispatch('axiosPostRequest', {
+                    route: '/resume-links',
+                    payload: {
+                        'url': this.resume.linkedin_url,
+                        'name': 'LinkedIn',
+                        'resume_id': this.resume.id
+                    },
+                    successMessage: null,
+                });
 
+                return linkedin_url['url']
+            },
             saveResume: async function () {
                 // Eager loading needs a little love on the way back
                 let updateData = this.resume;

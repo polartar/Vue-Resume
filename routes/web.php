@@ -57,5 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('skill', \App\Http\Controllers\ResumeSkillController::class);
     Route::put('/skills', \App\Http\Controllers\UpdateSkillOrderController::class);
 
+    Route::resource('resume-links', \App\Http\Controllers\ResumeLinksController::class);
+
     Route::get('/generate-resume-pdf/{resume}', \App\Http\Controllers\GenerateResumePdfController::class);
 });

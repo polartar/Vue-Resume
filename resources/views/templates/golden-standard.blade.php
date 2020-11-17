@@ -43,7 +43,9 @@
                                     </tr>
                                     <tr>
                                         <td class="contact-info">
-                                            LinkedIn URL (todo)
+                                            @if($resume->resumeLinks->where('name', 'LinkedIn')->count())
+                                                {{ $resume->resumeLinks->where('name', 'LinkedIn')->first()->url }}
+                                            @endif
                                         </td>
                                     </tr>
 
