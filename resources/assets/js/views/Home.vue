@@ -91,7 +91,7 @@
 
                         let links = response.data.resume.resume_links
                         let linkedin_url = links.find(o => o.name === "LinkedIn");
-
+                        
                         this.$store.commit('updateLinkedInUrl', linkedin_url.url);
 
 

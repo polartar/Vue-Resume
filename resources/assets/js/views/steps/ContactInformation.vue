@@ -542,6 +542,7 @@
                 // console.log({success1})
                 // console.log({success2})
                 // console.log({success3})
+                // console.log({success4})
 
                 if (success1 && success2 && success3 && success4)
                     this.$router.push({name: 'resume-summary', query: this.$route.query});
@@ -608,7 +609,7 @@
                     successMessage: null,
                 });
 
-                return linkedin_url['url']
+                return linkedin_url
             },
             saveResume: async function () {
                 // Eager loading needs a little love on the way back
