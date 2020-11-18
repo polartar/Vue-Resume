@@ -138,13 +138,15 @@
             addWorkExperience: async function () {
                 // Need to create a new resume description
                 const workExperienceId = await this.createWorkExperience();
-                await this.createResumeDescription(workExperienceId);
-                this.resetForm();
-                this.show = false;
-                this.$store.commit('reloadResume');
+                if(workExperienceId) {
+                    await this.createResumeDescription(workExperienceId);
+                    this.resetForm();
+                    this.show = false;
+                    this.$store.commit('reloadResume');    
+                }
             },
             createWorkExperience: async function () {
-                let id;
+                let id = false;
                 await this.$axios
                     .post('/resume-work-experience', {
                         'resume_id': this.resume.id,
