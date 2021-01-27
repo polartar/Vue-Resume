@@ -147,6 +147,7 @@ const store = new Vuex.Store({
             state.city = payload
         },
         updateProvince (state, payload) {
+            console.log({payload})
             state.province = payload
         },
         updateZip (state, payload) {

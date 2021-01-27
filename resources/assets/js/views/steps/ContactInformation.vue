@@ -455,16 +455,16 @@
               <select
                 required
                 class="fancy-select"
-                :value="province"
+                :value="province?province:'default'"
                 name="province"
-                @input="updateProvince"
+                @change="updateProvince"
               >
                 <!-- #region(collapsed) States -->
-                <option value="">Select State</option>
+                <option value="default">Select State</option>
                 <option
                   v-for="state in states"
                   :key="state.name"
-                  :value="state"
+                  :value="state.name"
                 >
                   {{ state.value }}
                 </option>
@@ -472,7 +472,7 @@
               </select>
             </div>
             <div v-else>
-              <input required type="text" name="province" value=""  @input="updateProvince"/>
+              <input required type="text" name="province" :value='province'  @input="updateProvince"/>
             </div>
           </div>
         </div>
@@ -580,7 +580,11 @@ export default {
       this.$store.commit('updateCity', event.target.value);
     },
     updateProvince: function(event) {
-      this.$store.commit('updateProvince', event.target.value);
+       if(typeof(event.target.options)){
+        this.$store.commit('updateProvince', event.target.options[event.target.options.selectedIndex].value);
+      }
+      else
+        this.$store.commit('updateProvince', event.target.value);
     },
     updateZip: function(event) {
       this.$store.commit('updateZip', event.target.value);
@@ -604,6 +608,8 @@ export default {
     saveContactInfo: async function() {
       // console.log(this.firstNamem, this.lastName, this.email, this.phone, this.resume, this.country, this.state, this.city)
       //Validate the form
+
+      console.log(this.province)
       if (
         !this.firstName ||
         !this.lastName ||
@@ -632,10 +638,9 @@ export default {
       updatedUser.first_name = this.firstName;
       updatedUser.last_name = this.lastName;
 
-      this.$store.dispatch('axiosPutRequest', {
+      const success = await this.$store.dispatch('axiosPutRequest', {
         route: '/update-user/' + updatedUser.id,
         payload: updatedUser,
-        successMessage: 'You updated your name!', // TODO: Remove this notification
         commits: [],
       });
 
@@ -660,15 +665,13 @@ export default {
 
       await this.updateRefreshPreview();
       // Update resume via post w/all info (probably going to create new address)
-      //this.saveResume();
+      
 
-      // console.log({success1})
-      // console.log({success2})
-      // console.log({success3})
-      // console.log({success4})
-
-      if (success1 && success2 && success3 && success4)
-        this.$router.push({ name: 'resume-summary', query: this.$route.query });
+      if (success && success1 && success2 && success3 && success4){
+        const res  = await this.saveResume();
+        if(res)
+          this.$router.push({ name: 'resume-summary', query: this.$route.query });
+      }
       await this.updateRefreshPreview();
     },
     createUserPhone: async function() {
@@ -700,7 +703,7 @@ export default {
     },
     validateEmail(email){
         const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if(email.match(mailformat))
+        if(mailformat.test(email))
             return true
         else return false;
     },
@@ -718,7 +721,7 @@ export default {
 
       return email;
     },
-    createUserAddress: async function(saveResume = false) {
+    createUserAddress: async function() {
       let address = await this.$store.dispatch('axiosPostRequest', {
         route: '/user-address',
         payload: {
@@ -734,8 +737,6 @@ export default {
         successMessage: null,
         commits: ['addUserAddressId'],
       });
-
-      if (saveResume) await this.saveResume();
 
       return address;
     },
