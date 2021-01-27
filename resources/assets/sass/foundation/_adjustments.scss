@@ -1,42 +1,37 @@
 .grid-container {
-    &.grid-container-small {
-        max-width: $global-width-small;
-    }
+  &.grid-container-small {
+    max-width: $global-width-small;
+  }
 
-    &.grid-container-large {
-        max-width: $global-width-large;
-    }
+  &.grid-container-large {
+    max-width: $global-width-large;
+  }
 }
-
-
 
 .equal-height-cell {
-    > .cell {
-        display: flex;
-    }
+  > .cell {
+    display: flex;
+  }
 }
-
 
 @include breakpoint(large) {
-    .grid-x {
-        > .large-fifth {
-            width: 20%;
-        }
-
-        &.grid-margin-x > .large-fifth {
-            width: calc(20% - 1.875rem);
-        }
+  .grid-x {
+    > .large-fifth {
+      width: 20%;
     }
 
+    &.grid-margin-x > .large-fifth {
+      width: calc(20% - 1.875rem);
+    }
+  }
 }
 
-
 .flexbox-cell {
-    display: flex;
+  display: flex;
 }
 
 .flexbox-cell-v-center {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
 }

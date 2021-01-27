@@ -1,77 +1,79 @@
-$page-sections:
-'white' $white $black $primary-blue,
-'light-gray' #f4f4f4 $black $primary-blue,
-'primary-blue' $primary-blue $white $white,
-'primary-gray' $primary-gray $white $white,
-'primary-black' $primary-black $white $white,
-'secondary-green' $secondary-green $white $white,
-'secondary-orange' $secondary-orange $black $primary-blue,
-'secondary-yellow' $secondary-yellow $black $primary-blue,
-'secondary-blue' $secondary-blue $white $white,
-'alt-blue' $header-color $white;
+$page-sections: 'white' $white $black $primary-blue,
+  'light-gray' #f4f4f4 $black $primary-blue,
+  'primary-blue' $primary-blue $white $white,
+  'primary-gray' $primary-gray $white $white,
+  'primary-black' $primary-black $white $white,
+  'secondary-green' $secondary-green $white $white,
+  'secondary-orange' $secondary-orange $black $primary-blue,
+  'secondary-yellow' $secondary-yellow $black $primary-blue,
+  'secondary-blue' $secondary-blue $white $white,
+  'alt-blue' $header-color $white;
 
 .page-section {
+  padding: 1.5rem 0;
+
+  @include breakpoint(medium) {
+    padding: 2rem 0;
+  }
+
+  @include breakpoint(large) {
+    padding: 3rem 0;
+  }
+
+  @include breakpoint(xlarge) {
+    padding: 5rem 0;
+  }
+
+  @each $page-section in $page-sections {
+    $class: nth($page-section, 1);
+    $hex: nth($page-section, 2);
+    $text: nth($page-section, 3);
+
+    &-#{$class} {
+      background: $hex;
+      color: $text;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: $text;
+      }
+    }
+  }
+
+  &.page-section-small-no-padding {
+    @include breakpoint(small only) {
+      padding-top: 0;
+    }
+  }
+
+  &.page-section-no-over-flow {
+    overflow: hidden;
+  }
+
+  &.page-section-slim {
     padding: 1.5rem 0;
+  }
 
-    @include breakpoint(medium) {
-        padding: 2rem 0;
-    }
+  &.page-section-no-padding-bottom {
+    padding-bottom: 0;
+  }
 
-    @include breakpoint(large) {
-        padding: 3rem 0;
-    }
-
-    @include breakpoint(xlarge) {
-        padding: 5rem 0;
-    }
-
-    @each $page-section in $page-sections {
-        $class: nth($page-section, 1);
-        $hex: nth($page-section, 2);
-        $text: nth($page-section, 3);
-
-        &-#{$class} {
-            background: $hex;
-            color: $text;
-
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                color: $text;
-            }
-        }
-    }
-
-    &.page-section-small-no-padding {
-        @include breakpoint(small only) {
-            padding-top: 0;
-        }
-    }
-
-    &.page-section-no-over-flow {
-        overflow: hidden;
-    }
-
-    &.page-section-slim {
-        padding: 1.5rem 0;
-    }
-
-    &.page-section-no-padding-bottom {
-        padding-bottom: 0;
-    }
-
-    &.page-section-no-padding-top {
-        padding-top: 0;
-    }
+  &.page-section-no-padding-top {
+    padding-top: 0;
+  }
 }
 
 body {
-    background: #f3f5f3;
+  background: #f3f5f3;
 }
 
 main {
-    padding-bottom: 3rem;
+  padding-bottom: 3rem;
+}
+.vue-recycle-scroller__item-view {
+  text-align: left;
 }

@@ -79,7 +79,6 @@ class GenerateResumePdfController extends Controller
             }
         }
 
-
         /* Work Experience Section
             Counting the headers and the description lines
         */

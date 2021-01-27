@@ -417,6 +417,7 @@ function hasQueryParams(route) {
 }
 
 router.beforeEach((to, from, next) => {
+    
     if(!hasQueryParams(to) && hasQueryParams(from)){
         next({name: to.name, query: from.query});
     } else {
