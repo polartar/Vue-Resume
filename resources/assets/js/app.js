@@ -279,6 +279,32 @@ const store = new Vuex.Store({
                     return false;
                 });
         },
+
+        /**
+         * Globally available put request
+         *
+         * Parameters:
+         *  payload: must contain route, payload, successMessage, and commits
+         *
+         * Returns:
+         *  true/false depending on success
+         */
+        axiosPatchRequest: async (context, payload) => {
+            return await axios.patch(payload.route, payload.payload)
+                .then(response => {
+                    if (payload.commits)
+                        payload.commits.forEach( (pCommit) => {
+                            store.commit(pCommit, response.data.id);
+                        });
+                    if (payload.successMessage)
+                        Notification.success({ title: 'Success', message: payload.successMessage });
+                    return true;
+                })
+                .catch(error => {
+                    Notification.error({message: 'Uh oh, we had some trouble with that'});
+                    return false;
+                });
+        },
         /**
          * Globally available post request
          *

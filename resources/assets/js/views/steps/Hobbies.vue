@@ -1,51 +1,65 @@
 <template>
     <div>
         <div class="resume-step-heading-container">
-            <h3 class="resume-step-heading">Hobbies and Affiliations</h3>
+            <h3 class="resume-step-heading">
+                Hobbies and Affiliations
+                <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
+                    <span v-if="!show">Add</span><span v-else>Cancel</span>
+                </small>
+            </h3>
         </div>
-        <div class="resume-step-form">
-            <div class="grid-x grid-margin-x">
-                <div class="cell medium-10">
-                    <div class="form-group">
-                        <label>Hobby or Affiliation <span class="label-optional-text">Press enter to add</span></label>
-                        <textarea type="text" v-model="hobbyString" placeholder="Enter a hobby or affiliation"  />
+
+        <div class='resume-step-form' v-if="show">
+            <div class='grid-x grid-margin-x'>
+                <div class='cell'>
+                    <div class='form-group'>
+                        <label>Hobby or Affiliation</label>
+                        <textarea rows='8' cols='80' v-model='hobbyString' />
                     </div>
                 </div>
-                <div class="cell medium-2 v-center">
-                    <el-button type="primary" circle @click="addHobby()" icon="el-icon-plus"></el-button>
-                </div>
-
-                <div class="cell">
-                    <draggable v-model="hobbies" group="hobbies" @start="drag=true" @end="drag=false" class='grid-x grid-margin-x'>
-                        <div class="cell grabbable" v-for="hobby in hobbies" :key="hobby.id">
-                            <div class="card" style="padding: 12px!important;">
-                                <div class="card-section">
-                                    <p class="float-left" style="margin-bottom: 0;">
-                                        <i class="el-icon-s-grid" style="color: lightgrey;"></i> {{ hobby.name }}
-                                    </p>
-                                    <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeHobby(hobby.id)"></el-button>
-                                </div>
-                            </div>
-                        </div>
-                    </draggable>
-                </div>
-
             </div>
+            <button v-if="edit" class='button' type='button' @click='updateHobby'>UpdateHobby or Affiliation </button>
+            <button v-if="edit" class='button' type='button' @click='show = !show'>Cancel</button>
+            <button v-else class='button' type='button' @click='saveHobby'>Add Hobby or Affiliation </button>
+        </div>
+        <div>
+            <draggable v-model="hobbies" group="resume-hobbies" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x" :sort="true">
+                <div class="cell grabbable" v-for="hobby in hobbies" :key="hobby.id">
+                    <div class="card">
+                        <div class="card-section">
+                            <p class="float-left" style="margin-bottom: 0;">
+                                {{ hobby.name }}
+                            </p>
+                            <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeHobby(hobby.id)"></el-button>
+                            <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editHobby(hobby.id)"></el-button>
+                        </div>
+                    </div>
+                </div>
+            </draggable>
         </div>
 
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <router-link tag="button" class="button" to="customize-design">Save and Next</router-link>
+            <router-link tag="button" class="button" to="work-experience">Save &amp; Continue</router-link>
         </div>
     </div>
 </template>
+
 <script>
-    import draggable from 'vuedraggable';
-    import { mapState } from 'vuex'
+    import { mapState, mapMutations } from 'vuex'
+    import draggable from 'vuedraggable'
+
     export default {
-        components: {draggable},
+        components: {
+            draggable,
+        },
         computed: {
+            ...mapState([
+                'resume',
+                'toggleResumePreview',
+                'refreshPreview',
+            ]),
             hobbies: {
                 get() {
                     return this.$store.state.resume.hobbies;
@@ -55,34 +69,23 @@
                     // await this.updateRefreshPreview()
                 }
             },
-            refreshPreview: {
-                get() {
-                    return this.$store.state.refreshPreview;
-                }
-            },
-            ...mapState([
-                'toggleResumePreview',
-            ]),
         },
         data: function () {
             return {
                 hobbyString: '',
+                show: false,
+                edit: false,
+                editId: '',
                 drag: false,
                 isProcess: false
             }
         },
         methods: {
-            updateRefreshPreview: function (event) {
-                this.$store.commit('updateRefreshPreview')
-            },
-            updateToggleResumePreview: function (event) {
-                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
-            },
-            addHobby: async function () {
+            saveHobby: async function () {
                 console.log(this.hobbyString)
                 if(this.isProcess) return;
                 this.isProcess  = true;
-                await this.$store.dispatch('axiosPostRequest', {
+                const success = await this.$store.dispatch('axiosPostRequest', {
                     route: '/hobby',
                     payload: {
                         resume_id: this.$store.state.resume.id,
@@ -92,31 +95,63 @@
                     commits: ['reloadResume'],
                     successMessage: 'Successfully added item',
                 });
-
-                this.hobbyString = '';
-                await this.updateRefreshPreview()
+                
+                if(success){
+                    this.hobbyString = '';
+                    await this.updateRefreshPreview()
+                }
+               
                 this.isProcess = false;
+            },
+            updateHobby: async function () {
+                this.show = false;
+                console.log(this.editId)
+                const success = await this.$store.dispatch('axiosPutRequest', {
+                    route: '/hobby/' + this.editId,
+                    payload: {
+                        name: this.hobbyString,
+                     },
+                    successMessage: 'Successfully updated',
+                    commits: ['reloadResume'],
+                });
+
+                if (success) {
+                    this.name = '';
+                    this.edit = false;
+                    await this.updateRefreshPreview()
+                }
+            },
+            updateToggleResumePreview: function (event) {
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
+            },
+            editHobby: function (hobbyId) {
+                this.hobbyString = this.resume.hobbies.find(obj => obj.id === hobbyId).name;
+                this.edit = true;
+                this.editId = hobbyId;
+                this.show = true;
             },
             removeHobby: async function (hobbyId) {
                 if(this.isProcess) return;
                 this.isProcess = true;
-                await this.$store.dispatch('axiosDeleteRequest', {
+                const success = await this.$store.dispatch('axiosDeleteRequest', {
                     route: '/hobby/' + hobbyId,
+                    payload: {},
+                    successMessage: 'Successfully removed',
                     commits: ['reloadResume'],
-                    successMessage: 'Successfully removed item',
-                })
+                });
+                if(success)
                 await this.updateRefreshPreview()
 
                 this.isProcess = false;
+            },
+            updateRefreshPreview: function (event) {
+                this.$store.commit('updateRefreshPreview')
             },
         }
     }
 </script>
 <style scoped>
-    .grabbable {
-        cursor: grab;
-    }
-    .v-center{
-        margin:auto 0;
+    .el-button {
+        margin-right: 10px;
     }
 </style>
