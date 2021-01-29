@@ -8,11 +8,11 @@
                 <div class="cell medium-10">
                     <div class="form-group">
                         <label>Hobby or Affiliation <span class="label-optional-text">Press enter to add</span></label>
-                        <input type="text" v-model="hobbyString" placeholder="Enter a hobby or affiliation" @keyup.enter="addHobby()" />
+                        <textarea type="text" v-model="hobbyString" placeholder="Enter a hobby or affiliation"  />
                     </div>
                 </div>
-                <div class="cell medium-2">
-                    <el-button type="primary" style="margin-top: 25px;" circle @click="addHobby()">⏎</el-button>
+                <div class="cell medium-2 v-center">
+                    <el-button type="primary" circle @click="addHobby()" icon="el-icon-plus"></el-button>
                 </div>
 
                 <div class="cell">
@@ -68,6 +68,7 @@
             return {
                 hobbyString: '',
                 drag: false,
+                isProcess: false
             }
         },
         methods: {
@@ -78,6 +79,9 @@
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             addHobby: async function () {
+                console.log(this.hobbyString)
+                if(this.isProcess) return;
+                this.isProcess  = true;
                 await this.$store.dispatch('axiosPostRequest', {
                     route: '/hobby',
                     payload: {
@@ -91,14 +95,19 @@
 
                 this.hobbyString = '';
                 await this.updateRefreshPreview()
+                this.isProcess = false;
             },
             removeHobby: async function (hobbyId) {
-                this.$store.dispatch('axiosDeleteRequest', {
+                if(this.isProcess) return;
+                this.isProcess = true;
+                await this.$store.dispatch('axiosDeleteRequest', {
                     route: '/hobby/' + hobbyId,
                     commits: ['reloadResume'],
                     successMessage: 'Successfully removed item',
                 })
                 await this.updateRefreshPreview()
+
+                this.isProcess = false;
             },
         }
     }
@@ -106,5 +115,8 @@
 <style scoped>
     .grabbable {
         cursor: grab;
+    }
+    .v-center{
+        margin:auto 0;
     }
 </style>

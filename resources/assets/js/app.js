@@ -167,7 +167,6 @@ const store = new Vuex.Store({
             axios
                 .get('/resume/' + state.resume.id)
                 .then(response => {
-                    console.log(response.data.resume);
                     state.resume = response.data.resume;
                 })
                 .catch(error => {

@@ -30,7 +30,7 @@
             <button v-if="edit" class='button' type='button' @click='show = !show'>Cancel</button>
             <button v-else class='button' type='button' @click='saveSummary'>Add Summary</button>
         </div>
-        <div v-if="!show">
+        <div>
             <draggable v-model="summaries" group="resume-summaries" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x" :sort="true">
                 <div class="cell grabbable" v-for="summary in summaries" :key="summary.id">
                     <div class="card">
