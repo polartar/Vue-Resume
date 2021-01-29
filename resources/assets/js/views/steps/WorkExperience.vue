@@ -96,7 +96,6 @@
 <script>
     import {mapState} from 'vuex';
     import draggable from 'vuedraggable';
-
     export default {
         components: {draggable},
 
@@ -136,6 +135,38 @@
         methods: {
             /* Work Experiences */
             addWorkExperience: async function () {
+                 //check validation
+                if(!this.title){
+                    this.$notify.error({ 
+                          title: 'Error',
+                          message: 'You should input the Job Title',
+                        });
+                    return;
+                }
+
+                if(!this.startDate){
+                     this.$notify.error({ 
+                          title: 'Error',
+                          message: 'You should input the Start Date',
+                        });
+                    return;
+                }
+
+                if(!this.currentEmployer && !this.endDate){
+                    this.$notify.error({ 
+                          title: 'Error',
+                          message: 'You should input the End Date',
+                        });
+                    return;
+                }
+                if(this.startDate >=  this.endDate){
+                     this.$notify.error({ 
+                          title: 'Error',
+                          message: 'Please input valid start and end dates',
+                        });
+                    return;
+                }
+
                 // Need to create a new resume description
                 const workExperienceId = await this.createWorkExperience();
                 if(workExperienceId) {

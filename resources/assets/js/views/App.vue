@@ -8,12 +8,14 @@
                             align-center
                             process-status="finish"
                             finish-status="success"
+                            ref='elSteps'
                             >
                             <el-step v-for="step in steps"
                                 :key="step.link"
                                 :title="step.title"
                                 :icon="step.icon"
-                                v-on:click.native="step.link === $route.name ? null : $router.push({name: step.link, query: $route.query})"
+                                :status="getStatus(step.link)"
+                                v-on:click.native="e=>nextStep(step)"
                                 >
                             </el-step>
                         </el-steps>
@@ -28,6 +30,7 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex';
     export default {
         computed: {
             activeStep: function () {
@@ -38,7 +41,11 @@
                     }
                 }
                 return -1;
-            }
+            },
+            ...mapState([
+            'resume',
+            'firstName',
+            ]), 
         },
         data: function () {
             return {
@@ -103,9 +110,31 @@
             window.addEventListener('resize', this.doResize)
         },
         methods: {
+            getStatus(link){
+                if(link === this.$route.name)
+                    return "finish";
+                    
+                const arr = Object.keys(this.resume);
+                if(arr.length === 0) return;
+
+                const resume = {...this.resume, firstName:this.firstName?[this.firstName]:[]};
+                //validate the steps
+                const step_links = ['home', 'select-design','contact-information','resume-summary', 'work-experience', 'education', 'skills', 'hobbies', 'customize-design', 'full-page-preview']
+                const resume_fields=['name', 'resume_design_id', 'firstName', 'resume_summaries', 'resume_work_experiences', 'resume_educations', 'resume_skill', 'hobbies', 'hobbies', 'hobbies']
+          
+                const index = step_links.indexOf(link);
+             
+
+                if(resume[resume_fields[index]].length ===0)
+                    return "process";
+                else    
+                    return "success"
+            },
             doResize: function() {
                 this.widowWidt = window.outerWidth
-
+            },
+            nextStep(step){                
+                step.link === this.$route.name ? null : this.$router.push({name: step.link, query: this.$route.query})
             }
         }
     }

@@ -609,8 +609,7 @@ export default {
       // console.log(this.firstNamem, this.lastName, this.email, this.phone, this.resume, this.country, this.state, this.city)
       //Validate the form
 
-      console.log(this.province)
-      if (
+       if (
         !this.firstName ||
         !this.lastName ||
         !this.resume.email ||

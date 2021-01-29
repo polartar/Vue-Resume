@@ -147,7 +147,6 @@ const store = new Vuex.Store({
             state.city = payload
         },
         updateProvince (state, payload) {
-            console.log({payload})
             state.province = payload
         },
         updateZip (state, payload) {
@@ -418,9 +417,8 @@ function hasQueryParams(route) {
 }
 
 router.beforeEach((to, from, next) => {
-    
     if(!hasQueryParams(to) && hasQueryParams(from)){
-        next({name: to.name, query: from.query});
+         next({name: to.name, query: from.query});
     } else {
         next()
     }
