@@ -82,9 +82,9 @@
         },
         methods: {
             saveHobby: async function () {
-                console.log(this.hobbyString)
+                
                 if(this.isProcess) return;
-                this.isProcess  = true;
+                    this.isProcess  = true;
                 const success = await this.$store.dispatch('axiosPostRequest', {
                     route: '/hobby',
                     payload: {
@@ -104,9 +104,11 @@
                 this.isProcess = false;
             },
             updateHobby: async function () {
+                if(this.isProcess) return;
+                    this.isProcess  = true;
                 this.show = false;
-                console.log(this.editId)
-                const success = await this.$store.dispatch('axiosPutRequest', {
+                
+                 const success = await this.$store.dispatch('axiosPutRequest', {
                     route: '/hobby/' + this.editId,
                     payload: {
                         name: this.hobbyString,
@@ -120,6 +122,7 @@
                     this.edit = false;
                     await this.updateRefreshPreview()
                 }
+                 this.isProcess = false;
             },
             updateToggleResumePreview: function (event) {
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
@@ -132,7 +135,7 @@
             },
             removeHobby: async function (hobbyId) {
                 if(this.isProcess) return;
-                this.isProcess = true;
+                    this.isProcess = true;
                 const success = await this.$store.dispatch('axiosDeleteRequest', {
                     route: '/hobby/' + hobbyId,
                     payload: {},
@@ -140,7 +143,7 @@
                     commits: ['reloadResume'],
                 });
                 if(success)
-                await this.updateRefreshPreview()
+                    await this.updateRefreshPreview()
 
                 this.isProcess = false;
             },

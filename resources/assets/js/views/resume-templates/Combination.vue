@@ -27,13 +27,13 @@
 
             <span class="heading heading-bold">Relevant Work Experience</span>
 
-            <div v-for="work in resume.resume_work_experiences" class="section">
+            <div v-for="work in resume.resume_work_experiences" :key="work.id" class="section">
                 <span class="work-experience-title">
                     {{ work.position_title }} - {{ work.position_start_date}} to {{ work.position_end_date ? work.position_end_date : 'present' }}
                 </span>
                 <span class="work-experience-company">{{ work.position_company }}</span>
                 <ul class="work-experience-description-list">
-                    <li v-for="description in work.resume_descriptions" class="work-experience-description">
+                    <li v-for="description in work.resume_descriptions" :key="description.description" class="work-experience-description">
                         {{ description.description }}
                     </li>
                 </ul>
@@ -41,7 +41,7 @@
 
             <span class="heading">Education</span>
             <br/>
-            <div v-for="education in resume.resume_educations">
+            <div v-for="education in resume.resume_educations" :key="education.id">
                 <span class="education-experience-title">
                     {{ education.school_name }}. {{ education.start_date}} to {{ education.end_date ? education.end_date : 'present' }}.</span>
     <!--            <br/>-->

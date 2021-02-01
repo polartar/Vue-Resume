@@ -49,7 +49,7 @@
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <router-link tag="button" class="button" to="work-experience">Save &amp; Continue</router-link>
+            <router-link tag="button" class="button" to="work-experience" @click.native="moveNext">Save &amp; Continue</router-link>
         </div>
     </div>
 </template>
@@ -146,7 +146,21 @@
             updateRefreshPreview: function (event) {
                 this.$store.commit('updateRefreshPreview')
             },
-        }
+            moveNext(){
+                if(this.show){
+                    this.$store.dispatch('axiosPostRequest', {
+                        route: '/resume-summary',
+                        payload: {
+                            'resume_id': this.$store.state.resume.id,
+                            'name': this.name,
+                            'bullet_point': this.bulleted,
+                        },
+                        commits: ['reloadResume'],
+                    }).then(res=>this.updateRefreshPreview())
+                }
+
+            }
+       }
     }
 </script>
 <style scoped>
