@@ -24,7 +24,7 @@
                             <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
                             <select v-model="type" class="fancy-select">
                                 <option disabled selected>--Choose--</option>
-                                <option v-for="schoolType in types" :value="schoolType">
+                                <option v-for="schoolType in types" :value="schoolType" :key="schoolType">
                                     {{ schoolType }}
                                 </option>
                             </select>
@@ -109,10 +109,12 @@
                 </div>
             </draggable>
         </div>
+         <confirm-modal title="Are you going to continue without save?" ref="confirm">
+        </confirm-modal>
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <router-link tag="button" class="button" to="skills">Save &amp; Continue</router-link>
+            <button class="button"   @click="moveNext">Continue</button>
         </div>
     </div>
 </template>
@@ -120,10 +122,11 @@
 <script>
     import {mapGetters, mapState} from 'vuex'
     import draggable from 'vuedraggable';
-
+    import ConfirmModal from "../../components/ConfirmDialog";
     export default {
         components: {
             draggable,
+            ConfirmModal
         },
 
         computed: {
@@ -353,6 +356,21 @@
                 this.show = !this.show;
                 this.resetEditing();
             },
+            moveNext(){
+                if(this.show || (this.resume.resume_educations && this.resume.resume_educations.length) == 0){
+                     this.$refs.confirm
+                        .show()
+                        .then(() => {
+                            this.$router.push("skills");
+                        })
+                        .catch(() => {
+                        
+                        });  
+                }else{
+                    this.$router.push("skills");
+                }
+                
+            }
         }
     }
 </script>

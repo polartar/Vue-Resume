@@ -37,11 +37,12 @@
                 </div>
             </draggable>
         </div>
-
+<confirm-modal title="Are you going to continue without save?" ref="confirm">
+        </confirm-modal>
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <router-link tag="button" class="button" to="work-experience">Save &amp; Continue</router-link>
+             <button class="button"  @click="moveNext">Continue</button>
         </div>
     </div>
 </template>
@@ -49,10 +50,12 @@
 <script>
     import { mapState, mapMutations } from 'vuex'
     import draggable from 'vuedraggable'
+    import ConfirmModal from "../../components/ConfirmDialog";
 
     export default {
         components: {
             draggable,
+            ConfirmModal
         },
         computed: {
             ...mapState([
@@ -150,6 +153,21 @@
             updateRefreshPreview: function (event) {
                 this.$store.commit('updateRefreshPreview')
             },
+             moveNext(){
+                if(this.show){
+                     this.$refs.confirm
+                        .show()
+                        .then(() => {
+                            this.$router.push("customize-design");
+                        })
+                        .catch(() => {
+                        
+                        });  
+                }else{
+                    this.$router.push("customize-design");
+                }
+                
+            }
         }
     }
 </script>

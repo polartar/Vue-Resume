@@ -63,6 +63,7 @@
             <button v-if="edit" class='button' type='button' @click='updateWorkExperience'>Update Work Experience</button>
             <button v-else class='button' type='button' @click='addWorkExperience'>Add Work Experience</button>
         </div>
+         
         <div v-if="workExperienceList && workExperienceList.length > 0">
             <draggable v-model="workExperienceList" group="work-experiences" @start="drag=true" @end="drag=false" class="grid-x grid-margin-x" :sort="true">
                 <div class="cell grabbable" v-for="workExperience in workExperienceList" :key="workExperience.id">
@@ -84,10 +85,12 @@
                 </div>
             </draggable>
         </div>
+        <confirm-modal title="Are you going to continue without save?" ref="confirm">
+        </confirm-modal>
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <router-link tag="button" class="button" to="education">Save &amp; Continue</router-link>
+            <button class="button" to="education" @click="moveNext">Continue</button>
         </div>
     </div>
     </div>
@@ -96,8 +99,10 @@
 <script>
     import {mapState} from 'vuex';
     import draggable from 'vuedraggable';
+    import ConfirmModal from "../../components/ConfirmDialog";
+
     export default {
-        components: {draggable},
+        components: {draggable, ConfirmModal},
 
         computed: {
             ...mapState([
@@ -135,6 +140,7 @@
         methods: {
             /* Work Experiences */
             addWorkExperience: async function () {
+                                        
                  //check validation
                 if(!this.title){
                     this.$notify.error({ 
@@ -173,7 +179,8 @@
                     await this.createResumeDescription(workExperienceId);
                     this.resetForm();
                     this.show = false;
-                    this.$store.commit('reloadResume');    
+                    this.$store.commit('reloadResume');
+                    
                 }
             },
             createWorkExperience: async function () {
@@ -334,6 +341,22 @@
             updateRefreshPreview: function (event) {
                 this.$store.commit('updateRefreshPreview')
             },
+            moveNext(){
+                if(this.show){
+                     this.$refs.confirm
+                        .show()
+                        .then(() => {
+                            this.$router.push("education");
+                        })
+                        .catch(() => {
+                        
+                        });  
+                }else{
+                    this.$router.push("education");
+                }
+                
+            }
+             
         }
     }
 </script>
