@@ -93,7 +93,7 @@
             <button class="button" to="education" @click="moveNext">Continue</button>
         </div>
     </div>
-    </div>
+    
 </template>
 
 <script>
