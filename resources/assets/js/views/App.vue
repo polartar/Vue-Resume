@@ -113,9 +113,9 @@ import { mapState } from 'vuex';
             getStatus(link){
                 if(link === this.$route.name)
                     return "finish";
-                    
-                const arr = Object.keys(this.resume);
-                if(arr.length === 0) return;
+  
+                // const arr = Object.keys(this.resume);
+                if(!this.resume.email) return;
 
                 const resume = {...this.resume, firstName:this.firstName?[this.firstName]:[]};
                 //validate the steps

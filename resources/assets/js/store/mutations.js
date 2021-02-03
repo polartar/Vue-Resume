@@ -1,3 +1,6 @@
+import axios from "axios"
+import {Notification} from 'element-ui'
+
 const mutations = {
     updateToggleResumePreview (state, payload) {
         state.toggleResumePreview = payload;

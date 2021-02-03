@@ -6,7 +6,7 @@ import axios from 'axios'
 
 // Docs: https://element.eleme.io/#/en-US/component/quickstart
 import ElementUI from 'element-ui';
-import {Notification} from 'element-ui'
+
 import locale from 'element-ui/lib/locale/lang/en'
 // import 'element-ui/lib/theme-chalk/index.css'; // in main scss file
 
@@ -114,7 +114,3 @@ const app = new Vue({
     store,
 });
 
-function capitalize(s) {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
-}

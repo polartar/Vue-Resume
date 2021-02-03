@@ -1,5 +1,9 @@
 const state = {
-    resume: {},
+    resume: {
+        resume_summaries:[],
+        resume_educations:[],
+        resume_work_experiences:[]
+    },
     firstName : '',
     lastName : '',
     user: {

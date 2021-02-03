@@ -13,29 +13,29 @@
             </span>
             <br/>
 
-            <div v-if="resume.resume_summaries[0]">
+            <div v-if="resume && resume.resume_summaries[0]">
                 <span class="heading">Summary</span>
                 <ul v-if="isBullet">
-                    <li class="summary-list-item" v-for="point in summaryAsArray">{{ point }}</li>
+                    <li class="summary-list-item" v-for="(point, index) in summaryAsArray" :key="index">{{ point }}</li>
                 </ul>
                 <span v-else>{{ resume.resume_summaries[0].name }}</span>
             </div>
 
             <span class="heading">Work Experience</span>
-            <div v-for="work in resume.resume_work_experiences" class="section">
+            <div v-for="work in resume && resume.resume_work_experiences" class="section" :key="work.id">
                 <span class="work-experience-title float-left">{{ work.position_title }}</span>
                 <span class="work-experience-dates float-right">{{ work.position_start_date}} to {{ work.position_end_date ? work.position_end_date : 'present' }}</span>
                 <br/>
                 <span class="work-experience-company">{{ work.position_company }}</span>
                 <ul class="work-experience-description-list">
-                    <li v-for="description in work.resume_descriptions" class="work-experience-description">
+                    <li v-for="(description, index) in work.resume_descriptions" class="work-experience-description" :key="index">
                         {{ description.description }}
                     </li>
                 </ul>
             </div>
 
             <span class="heading">Education</span>
-            <div v-for="education in resume.resume_educations">
+            <div v-for="education in resume.resume_educations" :key="education.id">
                 <span class="education-experience-title float-left">{{ education.school_name }}</span>
                 <span class="education-experience-dates float-right">{{ education.start_date}} to {{ education.end_date ? education.end_date : 'present' }}</span>
     <!--            <br/>-->
@@ -76,20 +76,22 @@
                 'fullName',
             ]),
             summaryAsArray: function () {
-                if (this.resume.resume_summaries.length > 0)
+                if (this.resume & this.resume.resume_summaries.length > 0)
                     return this.resume.resume_summaries[0].name.split(/\r?\n/)
 
                 return [];
             },
             isBullet: function () {
-                if (this.resume.resume_summaries.length > 0)
+                if (this.resume & this.resume.resume_summaries.length > 0)
                     return this.resume.resume_summaries[0].bullet_point
 
                 return false;
             }
         },
 
-        mounted() {},
+        mounted() {
+            console.log(this.resume)
+         },
 
         methods: {}
     }

@@ -1,3 +1,6 @@
+import axios from "axios"
+import {Notification} from 'element-ui'
+import store from "./index"
 const actions ={
     updateResumeSummaryOrder: (context, resumeSummaries) => {
         resumeSummaries.forEach( (summary, index) => {
@@ -101,6 +104,7 @@ const actions ={
     axiosPostRequest: async (context, payload) => {
         return await axios.post(payload.route, payload.payload)
             .then(response => {
+                console.log(response)
                 if (payload.commits)
                     payload.commits.forEach( (pCommit) => {
                         store.commit(pCommit, response.data.id);

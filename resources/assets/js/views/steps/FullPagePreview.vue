@@ -7,6 +7,7 @@
                 :underline="false">
                 Download as PDF
             </el-link> -->
+
             <button class="button" @click="download">Download as a pdf</button>
         </div>
         <!-- <div v-if="resume.resume_design" class="resume-container" :style="scaleStylesObject">
@@ -16,19 +17,33 @@
             <recruiter v-if="resume.resume_design.name === 'Recruiter'"></recruiter>
             <sidebar v-if="resume.resume_design.name === 'Sidebar'"></sidebar>
         </div> -->
+
         <!-- <div class="resume-container" :style="scaleStylesObject">
             <iframe v-if="resume.id" id="iframe-resume-preview" width="850" height="1100" :src="'/generate-resume-pdf/' + resume.id + '?page=true'"></iframe>
         </div> -->
-         
-        <div id="print" class="A4">
-        <div class="pageout"><PrintElement ref="print" /></div>
-         </div>
+        <vue-html2pdf
+            :show-layout="false"
+            :float-layout="false"
+            :enable-download="true"
+            :preview-modal="true"
+            :paginate-elements-by-height="1400"
+            :filename="resume.id"
+            :pdf-quality="2"
+            :manual-pagination="false"
+            pdf-format="a4"
+            pdf-orientation="landscape"
+            pdf-content-width="100%"
+            ref="html2Pdf"
+        > 
+            <GoldenStandard slot="pdf-content"/>
+        </vue-html2pdf>
+          
+     
     </div>
 </template>
 
 <script>
-    import PrintElement from "./Print";
-    import { createPdfFromHtml } from "./logic.js";
+    import VueHtml2pdf from 'vue-html2pdf'
     import {mapState, mapGetters} from 'vuex'
     import GoldenStandard from "../resume-templates/GoldenStandard";
     import Functional from "../resume-templates/Functional";
@@ -37,7 +52,7 @@
     import Sidebar from "../resume-templates/Sidebar";
 
     export default {
-        components: {Recruiter, Functional, GoldenStandard, Combination, Sidebar, PrintElement},
+        components: {Recruiter, Functional, GoldenStandard, Combination, Sidebar, VueHtml2pdf},
         data() {
             return {
                 scaleStylesObject: {
@@ -66,9 +81,9 @@
         },
 
         methods: {
-            download() {
-                alert(this.$refs.print);
-                createPdfFromHtml(this.$refs.print.$el);
+            download(){
+                // console.log(this.$refs.html2Pdf)
+                this.$refs.html2Pdf.generatePdf();
             },
             downloadResume: function () {
                 this.$axios.get(`/generate-resume-pdf/${this.resume.id}`)
