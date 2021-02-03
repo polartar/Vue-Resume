@@ -44,8 +44,8 @@
         left: 0;
         line-height: 16pt;
         padding: 75px;
-        // position: absolute;
-        top: 0;
+        width: calc(100% - 150px);
+        position: absolute;
     }
 
     &.resume-html-page .print-paper {

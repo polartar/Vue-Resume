@@ -32,7 +32,7 @@
             :manual-pagination="false"
             pdf-format="a4"
             pdf-orientation="landscape"
-            pdf-content-width="100%"
+            pdf-content-width="800px"
             ref="html2Pdf"
         > 
             <GoldenStandard slot="pdf-content"/>
