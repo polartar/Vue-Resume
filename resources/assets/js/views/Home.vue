@@ -42,18 +42,18 @@
         components: {FullPagePreview},
         computed: {
             ...mapState([
-                'firstName',
-                'lastName',
-                'email',
-                'phone',
-                'street_1',
-                'street_2',
-                'city',
-                'province',
-                'zip',
-                'country',
-                'summary',
-                'resume',
+                // 'firstName',
+                // 'lastName',
+                // 'email',
+                // 'phone',
+                // 'street_1',
+                // 'street_2',
+                // 'city',
+                // 'province',
+                // 'zip',
+                // 'country',
+                // 'summary',
+                // 'resume',
                 'toggleResumePreview',
             ]),
             ...mapGetters([
@@ -76,6 +76,7 @@
                         // console.log(response.data.resume.resume_links);
                         // Assign name values from resume
                         let resume = response.data.resume;
+                        console.log({resume})
                         this.$store.commit('updateResume', resume);
                         this.$store.commit('updateFirstName', resume.user.first_name);
                         this.$store.commit('updateLastName', resume.user.last_name);

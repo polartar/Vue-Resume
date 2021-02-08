@@ -106,6 +106,7 @@ import { mapState } from 'vuex';
             }
         },
         mounted() {
+            console.log("app")
             this.doResize()
             window.addEventListener('resize', this.doResize)
         },

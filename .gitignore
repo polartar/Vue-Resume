@@ -20,3 +20,4 @@ public/fonts/
 public/mix-manifest.json
 public/js/
 resources/views/vendor/mail/html/themes/default.css
+tsconfig.json

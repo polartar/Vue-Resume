@@ -4,6 +4,15 @@
     padding: 1rem;
     width: 100%;
     position: relative;
+
+    .html2pdf__page-break{
+        background: #f3f5f3;
+        padding:15px 0;
+        box-shadow: 77px 0 0 #f3f5f3, -77px 0 0 #f3f5f3;
+     }
+    .page-top{
+        margin-top: 60px!important;
+    }
 }
 
 .resume-preview {

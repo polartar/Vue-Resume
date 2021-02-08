@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from "./store/index"
 import axios from 'axios'
-
+import Fragment from 'vue-fragment'
 // Docs: https://element.eleme.io/#/en-US/component/quickstart
 import ElementUI from 'element-ui';
 
@@ -13,6 +13,8 @@ import locale from 'element-ui/lib/locale/lang/en'
 Vue.use(require('vue-moment'));
 Vue.use(VueRouter);
 Vue.use(ElementUI, {locale});
+Vue.use(Fragment.Plugin)
+
 Vue.prototype.$axios = axios;
 
 

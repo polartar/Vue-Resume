@@ -38,14 +38,14 @@
     }
 
     .print-paper {
-        background-color: #fff;
-        font-size: 12pt;
-        font-weight: normal;
-        left: 0;
-        line-height: 16pt;
-        padding: 75px;
-        width: calc(100% - 150px);
-        position: absolute;
+        // background-color: #fff;
+        // font-size: 12pt;
+        // font-weight: normal;
+        // left: 0;
+        // line-height: 16pt;
+        // padding: 75px;
+        // width: calc(100% - 150px);
+        // position: absolute;
     }
 
     &.resume-html-page .print-paper {
@@ -69,16 +69,38 @@
     }
 
 
-
+    .work-experience-description{
+        padding-left: 5px;
+        
+        li{
+            list-style: square;
+        }
+       
+    }
+    .skill-body{
+        box-sizing: border-box;
+        padding-left: 55px;
+    }
+    .skill-column {
+        float: left;
+        width: 33.33%;
+       }
+      
+      /* Clear floats after the columns */
+    .skill-row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
     .section-heading {
         display: block;
         font-family: 'OpenSans300';
-        font-size: 18pt;
+        font-size: 1.2rem;
         margin-bottom: 10px;
     }
 
     &.resume-html-page .section-heading {
-        font-size: 18pt * $html-font-size-conversions;
+        font-size: 1.2rem * $html-font-size-conversions;
     }
 
     .section-title {
@@ -117,10 +139,11 @@
 
     .section-group {
         padding-bottom: 12.5px;
+        padding-left:5px;
     }
-
+        
     .section-summary {
-        ul,
+         ul,
         ol {
             margin: 0;
             padding: 0;

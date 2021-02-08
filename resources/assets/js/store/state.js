@@ -1,8 +1,10 @@
 const state = {
     resume: {
-        resume_summaries:[],
-        resume_educations:[],
-        resume_work_experiences:[]
+        resume_summaries: [],
+        resume_educations: [],
+        resume_work_experiences: [],
+        resume_skill : [],
+        hobbies: []
     },
     firstName : '',
     lastName : '',

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  >
         <div class="resume-preview-action-links">
             <!-- <el-link type="success"
                 :href="'/generate-resume-pdf/' + resume.id + '?preview=true'"
@@ -26,16 +26,15 @@
             :float-layout="false"
             :enable-download="true"
             :preview-modal="true"
-            :paginate-elements-by-height="1400"
             :filename="resume.id"
             :pdf-quality="2"
-            :manual-pagination="false"
-            pdf-format="a4"
-            pdf-orientation="landscape"
-            pdf-content-width="800px"
+            :manual-pagination="true"
+            pdf-format="letter"
+            pdf-orientation="portrait"
+            pdf-content-width="100%"
             ref="html2Pdf"
         > 
-            <GoldenStandard slot="pdf-content"/>
+              <GoldenStandard  slot="pdf-content"/>           
         </vue-html2pdf>
           
      
@@ -55,6 +54,7 @@
         components: {Recruiter, Functional, GoldenStandard, Combination, Sidebar, VueHtml2pdf},
         data() {
             return {
+              
                 scaleStylesObject: {
                     transform: "translate(-50%, -50%) "  + "scale(.5)",
                     transformOrigin: "100% 100%"
@@ -76,7 +76,7 @@
         mounted() {
             this.doResize()
             this.refreshiFrame()
-            // https://stackoverflow.com/questions/45437827/how-to-use-listeners-in-vue-js-for-events-like-scroll-and-windows-resizing
+                 // https://stackoverflow.com/questions/45437827/how-to-use-listeners-in-vue-js-for-events-like-scroll-and-windows-resizing
             window.addEventListener('resize', this.doResize)
         },
 
@@ -129,3 +129,17 @@
         }
     }
 </script>
+<style scoped>
+.print-paper {
+  background-color: #fff;
+  font-size: 12pt;
+  font-weight: normal;
+  left: 0;
+  line-height: 16pt;
+  margin: 0;
+  padding: 75px;
+ }
+.page-break {
+  page-break-after: always;
+}
+</style>
