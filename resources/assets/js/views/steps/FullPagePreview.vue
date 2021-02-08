@@ -29,6 +29,7 @@
             :filename="resume.id"
             :pdf-quality="2"
             :manual-pagination="true"
+            :htmlToPdfOptions="{margin:[-20,0]}"
             pdf-format="letter"
             pdf-orientation="portrait"
             pdf-content-width="100%"
@@ -49,12 +50,13 @@
     import Combination from "../resume-templates/Combination";
     import Recruiter from "../resume-templates/Recruiter";
     import Sidebar from "../resume-templates/Sidebar";
+    import debounce from 'lodash/debounce';
 
     export default {
         components: {Recruiter, Functional, GoldenStandard, Combination, Sidebar, VueHtml2pdf},
         data() {
             return {
-              
+                scrollHeight:0,
                 scaleStylesObject: {
                     transform: "translate(-50%, -50%) "  + "scale(.5)",
                     transformOrigin: "100% 100%"
@@ -79,8 +81,18 @@
                  // https://stackoverflow.com/questions/45437827/how-to-use-listeners-in-vue-js-for-events-like-scroll-and-windows-resizing
             window.addEventListener('resize', this.doResize)
         },
-
+        created(){
+            this.handleDebouncedScroll = debounce(this.handleScroll, 100);
+            window.addEventListener("scroll", this.handleDebouncedScroll);
+        },
+        beforeDestroy(){
+            window.removeEventListener('scroll', this.handleDebouncedScroll)
+        },
         methods: {
+            handleScroll(event){
+                this.scrollHeight = window.scrollY;
+                console.log(this.scrollHeight);
+            },
             download(){
                 // console.log(this.$refs.html2Pdf)
                 this.$refs.html2Pdf.generatePdf();

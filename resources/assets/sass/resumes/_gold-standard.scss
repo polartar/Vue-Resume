@@ -38,7 +38,7 @@
     }
 
     .print-paper {
-        // background-color: #fff;
+        //  ackground-color: #fff;
         // font-size: 12pt;
         // font-weight: normal;
         // left: 0;
@@ -62,6 +62,7 @@
         font-size: 24pt;
         font-weight: 400;
         margin: 0;
+        white-space: nowrap;
     }
 
     &.resume-html-page .resume-title {

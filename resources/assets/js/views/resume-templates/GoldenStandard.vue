@@ -61,119 +61,101 @@
             </tbody>
         </table>
 
-        <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0" >
-            <tbody>
-                <tr>
-                    <td><span class="section-heading " ref='work_title'>Work Experience</span></td>
-                </tr>
-                <tr v-for="work in resume && resume.resume_work_experiences" class="section" :key="work.id" ref="work_child">
-                    <td class="section-group">
-                    
-                        <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td><span class="section-sub-title">{{ work.position_title }}</span></td>
-                                <td class="text-right"><span class="section-dates">{{ work.position_start_date}} to {{ work.position_end_date ? work.position_end_date : 'present' }}</span></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><span class="section-sub-sub-title">{{ work.position_company }}</span></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="work-experience-description" v-for="(description, index) in work.resume_descriptions" :key="index">
-                                    <ul >
-                                        <li class="" v-for="(item, index) in stringToArray(description.description)" :key="index" >
-                                            {{item}}
-                                        </li>
-                                    </ul>
-                                    <!-- <p v-for="(description, index) in work.resume_descriptions" class="work-experience-description" :key="index">{{description.description}}</p> -->
-                                </td>
-                            </tr>
-                        </table>
-                     </td>
-                </tr>
+        <div class="full-width-table resume-section" ref='work'  >
+       
+                <div>
+                    <span class="section-heading " ref='work_title'>Work Experience</span> 
+                </div>
+                <div v-for="work in resume && resume.resume_work_experiences" class="section" :key="work.id" ref="work_child">
+                     
+                    <table class="full-width-table section-group" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><span class="section-sub-title">{{ work.position_title }}</span></td>
+                            <td class="text-right"><span class="section-dates">{{ work.position_start_date}} to {{ work.position_end_date ? work.position_end_date : 'present' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><span class="section-sub-sub-title">{{ work.position_company }}</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="work-experience-description" v-for="(description, index) in work.resume_descriptions" :key="index">
+                                <ul >
+                                    <li class="" v-for="(item, index) in stringToArray(description.description)" :key="index" >
+                                        {{item}}
+                                    </li>
+                                </ul>
+                                <!-- <p v-for="(description, index) in work.resume_descriptions" class="work-experience-description" :key="index">{{description.description}}</p> -->
+                            </td>
+                        </tr>
+                    </table>
+                 </div>
     
-            </tbody>
-        </table>
+           
+        </div>
     
-        <table class="full-width-table resume-section"  v-if="resume && resume.resume_educations[0]" align="center" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td><span class="section-heading ">Education</span></td>
-                </tr>
-                <tr  v-for="education in resume.resume_educations" :key="education.id">
-                    <td class="section-group">
-                    
-                        <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td><span class="section-sub-title">{{ education.degree_received }} in {{ education.field_of_study }}</span></td>
-                                <td class="text-right"><span class="section-dates">{{ education.start_date}} to {{ education.end_date ? education.end_date : 'present' }}</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>
-                                <td class="text-right"></td>
-                            </tr>
-                            <!-- {{-- <tr>
-                                <td colspan="2" class="section-summary" v-if="education.educationDescriptions.length > 0">
-                                        <p v-for="(description, id) in education.educationDescriptions" v-bind:key="id">{{ description.description }}</p>
-                                </td>
-                            </tr> --}} -->
-                        </table>
-                    </td>
-                </tr>
+        <div class="full-width-table resume-section" ref='education' v-if="resume && resume.resume_educations[0]" >
+          
+                <div>
+                    <td><span class="section-heading " ref='education_title'>Education</span></td>
+                </div>
+                <div  v-for="education in resume.resume_educations" :key="education.id" ref='education_child'>
+                    <table class="full-width-table section-group " align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><span class="section-sub-title">{{ education.degree_received }} in {{ education.field_of_study }}</span></td>
+                            <td class="text-right"><span class="section-dates">{{ education.start_date}} to {{ education.end_date ? education.end_date : 'present' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>
+                            <td class="text-right"></td>
+                        </tr>
+                        <!-- {{-- <tr>
+                            <td colspan="2" class="section-summary" v-if="education.educationDescriptions.length > 0">
+                                    <p v-for="(description, id) in education.educationDescriptions" v-bind:key="id">{{ description.description }}</p>
+                            </td>
+                        </tr> --}} -->
+                    </table>
+                 </div>
             
-            </tbody>
-        </table>
+        </div>
 
-        <table class="full-width-table resume-section"   align="center" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td><span class="section-heading">Techniques, Software, & Instrumentation</span></td>
-                </tr>
-                <tr>
-                    <td class="skill-body"  v-if="resume && resume.resume_skill[0]" >
-                        <div class="skill-row">
-                            <div class='skill-column'  v-for="skill in resume.resume_skill" v-bind:key="skill.id">
-                                {{ skill.name }}
-                            </div>
+        <table class="full-width-table resume-section" ref='skill'   >
+               <div class="section-heading" >Techniques, Software, & Instrumentation</div>
+               <div>
+                    <div class="skill-row">
+                        <div class='skill-column'  v-for="skill in resume.resume_skill" v-bind:key="skill.id">
+                            {{ skill.name }}
                         </div>
-                        <!-- <table class="full-width-table" v-if="resume && resume.resume_skill[0]" align="center" cellpadding="0" cellspacing="0">
-                            <tbody>
-                                <tr v-for="skill in resume.resume_skill" v-bind:key="skill.id">
-                                    <td>
-                                        <ul class="bulletless-list">
-                                            <li>{{ skill.name }}</li>
-                                        </ul>
-                                        </td>
-                                    </tr>
-                            </tbody>
-                        </table> -->
-                    </td>
-                </tr>
-            </tbody>
+                    </div>
+                    <!-- <table class="full-width-table" v-if="resume && resume.resume_skill[0]" align="center" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr v-for="skill in resume.resume_skill" v-bind:key="skill.id">
+                                <td>
+                                    <ul class="bulletless-list">
+                                        <li>{{ skill.name }}</li>
+                                    </ul>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table> -->
+                 </div>
         </table>
 
         
-        <table class="full-width-table resume-section" align="center" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td><span class="section-heading">Affiliations &amp; Hobbies</span></td>
-                </tr>
-                <tr>
-                    <td class="section-summary">
-                        <table class="full-width-table" align="center" cellpadding="0" cellspacing="0" v-if="resume.hobbies[0]">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <ul class="">
-                                            <li v-for="hobby in resume.hobbies" v-bind:key="hobby.id"><p>{{ hobby.name }}</p></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>  
+        <div class="full-width-table resume-section" ref='hobby'  >
+                <div><span class="section-heading">Affiliations &amp; Hobbies</span></div>
+                <div>
+                    <table class="full-width-table" align="center" cellpadding="0" cellspacing="0" v-if="resume.hobbies[0]">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul class="">
+                                        <li v-for="hobby in resume.hobbies" v-bind:key="hobby.id"><p>{{ hobby.name }}</p></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>  
     </div>
 
 </template>
@@ -204,6 +186,8 @@
           },
         updated(){
             this.$nextTick(function () {
+                console.log("updated") 
+                // return;
                 // Code that will run only after the
                 // entire view has been re-rendered
                 //  maring 40px
@@ -222,52 +206,100 @@
                     }
 
                     if (work_first_end > page_bottom + offset){
-                        // const margin_top = page_bottom - work_top + start - 15;
-                        // let div = document.createElement("div");
-                        // div.classList.add("html2pdf__page-break")
-                        // div.setAttribute("style" ,`margin-top: ${margin_top}px`);
-                        // this.insertAfter(div, this.$refs.summary);
-                        // this.$refs.work_title.classList.value = this.$refs.work_title.classList + " page-top";
                         this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
                     }
                 }
               
                 if(Array.isArray(work_childs)){
-                    work_childs.map( ( element, index ) => {
+                    this.insertBreakToBlock(page_bottom, start, offset, work_childs)
+                }
+
+
+                const education_top = this.$refs.education_title.getBoundingClientRect().top
+                const education_childs = this.$refs.education_child;
+                for(let index = 1; index < 3 ; index ++)
+                {
+                    if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
+                        let education_first_end = 0;
+                        if(Array.isArray(education_childs)){
+                            education_first_end = education_childs[0].getBoundingClientRect().bottom;
+                        }else{
+                            education_first_end = education_childs.getBoundingClientRect().bottom;
+                        }
+
+                        if (education_first_end > page_bottom * index + offset){
+                            this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education_title, "div");
+                        }
+                    }
+                }
+              
+                if(Array.isArray(education_childs)){
+                    this.insertBreakToBlock(page_bottom, start, offset, education_childs)
+                }
+
+                const skill_top = this.$refs.skill.getBoundingClientRect().top
+                for(let index = 1; index <= 3 ; index ++)
+                {
+                    if( (skill_top  < page_bottom * index + offset)  && (skill_top  > page_bottom * (index-1) )){
+                        const skill_end = this.$refs.skill.getBoundingClientRect().bottom;
+
+                        if (skill_end > page_bottom * index + offset){
+                            this.insertBreak(page_bottom * index, start, skill_top, this.$refs.education, this.$refs.skill, "div");
+                        }
+                    }
+                }
+
+                const hobby_top = this.$refs.hobby.getBoundingClientRect().top
+                for(let index = 1; index <= 3 ; index ++)
+                {
+                    if( (hobby_top  < page_bottom * index + offset)  && (hobby_top  > page_bottom * (index-1) )){
+                        const hobby_end = this.$refs.hobby.getBoundingClientRect().bottom;
+
+                        if (hobby_end > page_bottom * index + offset){
+                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.skill, this.$refs.hobby, "div");
+                        }
+                    }
+                }
+              
+            })
+        },
+        methods: {
+            insertBreakToBlock(page_bottom, start, offset, childs){
+              
+                if(Array.isArray(childs)){
+                    childs.map( ( element, index ) => {
                         if( index !== 0 ){
                             const top = element.getBoundingClientRect().top;
                             const bottom = element.getBoundingClientRect().bottom;
                             if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                             {
-                                this.insertBreak(page_bottom, start, top, work_childs[index - 1], element, "td" );
+                                this.insertBreak(page_bottom, start, top, childs[index - 1], element );
                             }
                             else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
-                                this.insertBreak(page_bottom * 2, start, top, work_childs[index - 1], element, "td" );
+                                this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
                             }
                         }
                         return element;
                     })
                 }
-            })
-        },
-        methods: {
+            },
             stringToArray: function (str) {
                 if (str.length > 0)
                     return str.split(/\r?\n/)
                 return [];
             },
 
-            insertAfter(newNode, existingNode) {
-                existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+            insertAfter(new_node, existing_node) {
+                existing_node.parentNode.insertBefore(new_node, existing_node.nextSibling);
             },
 
-            insertBreak(page_bottom, page_start, current_top , currentNode, nextNode, nodeType){
-                const margin_top = page_bottom - current_top + page_start - 15;
-                let newNode = document.createElement(nodeType);
-                newNode.classList.add("html2pdf__page-break")
-                newNode.setAttribute("style" ,`margin-top: ${margin_top}px`);
-                this.insertAfter(newNode, currentNode);
-                nextNode.classList.add("page-top");
+            insertBreak(page_bottom, page_start, current_top , current_node, next_node){
+                const margin_top = page_bottom - current_top + page_start - 35;
+                let new_node = document.createElement("div");
+                new_node.classList.add("html2pdf__page-break")
+                new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
+                this.insertAfter(new_node, current_node);
+                next_node.classList.add("page-top");
             }
 
         }
