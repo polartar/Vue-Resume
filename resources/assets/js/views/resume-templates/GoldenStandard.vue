@@ -1,6 +1,6 @@
 <template>
     <div class='print-paper resume-gold-standard resume-html-page' ref='resume_body'>
-        <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
+       <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
                     <td class="text-left">
@@ -117,9 +117,9 @@
             
         </div>
 
-        <table class="full-width-table resume-section" ref='skill'   >
+        <div class="full-width-table resume-section" ref='skill'   >
                <div class="section-heading" >Techniques, Software, & Instrumentation</div>
-               <div>
+               <div class="skill-body">
                     <div class="skill-row">
                         <div class='skill-column'  v-for="skill in resume.resume_skill" v-bind:key="skill.id">
                             {{ skill.name }}
@@ -137,10 +137,10 @@
                         </tbody>
                     </table> -->
                  </div>
-        </table>
+        </div>
 
         
-        <div class="full-width-table resume-section" ref='hobby'  >
+        <div class="full-width-table " ref='hobby'  >
                 <div><span class="section-heading">Affiliations &amp; Hobbies</span></div>
                 <div>
                     <table class="full-width-table" align="center" cellpadding="0" cellspacing="0" v-if="resume.hobbies[0]">
@@ -157,13 +157,18 @@
                 </div>
         </div>  
     </div>
-
 </template>
 
 <script>
     import {mapState, mapGetters} from 'vuex'
 
     export default {
+        data(){
+            return {
+                pageBottom: 0,
+                padding:0,
+            }
+        },
         computed: {
             ...mapState([
                 'phone',
@@ -181,19 +186,49 @@
 
            
         },
-
-        mounted() {
-          },
+        created(){
+           
+            window.addEventListener("resize", this.onResize);
+        },
+        updated() {
+              this.onResize();
+        },
         updated(){
             this.$nextTick(function () {
-                console.log("updated") 
-                // return;
-                // Code that will run only after the
-                // entire view has been re-rendered
-                //  maring 40px
+                this.makePageBreak();
+            })
+        },
+        methods: {
+            removePageBreak()
+            {
+                let breaks = document.getElementsByClassName("html2pdf__page-break");
+                let len = breaks.length;
+                if(breaks && len > 0)
+                {
+                    console.log(breaks)
+                    console.log(breaks.length)
+                    for(let i = 0 ; i < len; i++){
+                        if(breaks[i])
+                          breaks[i].remove();
+                    }   
+                }
+                
+                let pagetops = document.getElementsByClassName("page-top");
+                len = pagetops.length;
+                if(pagetops && len > 0)
+                {
+                    for(let i = 0 ; i < len; i++){
+                        if(pagetops[i])
+                            pagetops[i].classList.remove("page-top")
+                    }   
+                }
+               
+            },
+            makePageBreak(){
+                this.removePageBreak();
                 const start = this.$refs.resume_body.getBoundingClientRect().top;
-                const page_bottom = 1056;
-                const offset =  start - 75;
+                const page_bottom = this.pageBottom;
+                const offset =  start - this.padding;
 
                 const work_top = this.$refs.work_title.getBoundingClientRect().top
                 const work_childs = this.$refs.work_child;
@@ -260,10 +295,24 @@
                         }
                     }
                 }
-              
-            })
-        },
-        methods: {
+            },
+            onResize(){
+                let page_bottom = 0
+                if(window.innerWidth >=1500){
+                    page_bottom = 890.35;
+                    this.padding =63.234;
+                } else if( window.innerWidth >= 1250){
+                    page_bottom = 890.35 * 6 / 6;
+                    this.padding =63.234 * 5 / 6;
+                }else{
+                    page_bottom = 890.35 * 2 / 3;
+                    this.padding =63.234 * 2 / 3;
+                }
+               
+                if(this.pageBottom !== page_bottom)
+                    this.pageBottom = page_bottom
+                    this.makePageBreak();
+            },
             insertBreakToBlock(page_bottom, start, offset, childs){
               
                 if(Array.isArray(childs)){

@@ -21,6 +21,8 @@
         <!-- <div class="resume-container" :style="scaleStylesObject">
             <iframe v-if="resume.id" id="iframe-resume-preview" width="850" height="1100" :src="'/generate-resume-pdf/' + resume.id + '?page=true'"></iframe>
         </div> -->
+
+        <!-- :htmlToPdfOptions="{html2canvas:{ y:scrollHeight }}" -->
         <vue-html2pdf
             :show-layout="false"
             :float-layout="false"
@@ -29,7 +31,7 @@
             :filename="resume.id"
             :pdf-quality="2"
             :manual-pagination="true"
-            :htmlToPdfOptions="{margin:[-20,0]}"
+            :htmlToPdfOptions="{html2canvas:{ y:scrollHeight }}"
             pdf-format="letter"
             pdf-orientation="portrait"
             pdf-content-width="100%"
@@ -50,7 +52,7 @@
     import Combination from "../resume-templates/Combination";
     import Recruiter from "../resume-templates/Recruiter";
     import Sidebar from "../resume-templates/Sidebar";
-    import debounce from 'lodash/debounce';
+    import debounce from 'lodash.debounce';
 
     export default {
         components: {Recruiter, Functional, GoldenStandard, Combination, Sidebar, VueHtml2pdf},
@@ -90,9 +92,8 @@
         },
         methods: {
             handleScroll(event){
-                this.scrollHeight = window.scrollY;
-                console.log(this.scrollHeight);
-            },
+                this.scrollHeight =window.scrollY  
+             },
             download(){
                 // console.log(this.$refs.html2Pdf)
                 this.$refs.html2Pdf.generatePdf();
@@ -142,15 +143,7 @@
     }
 </script>
 <style scoped>
-.print-paper {
-  background-color: #fff;
-  font-size: 12pt;
-  font-weight: normal;
-  left: 0;
-  line-height: 16pt;
-  margin: 0;
-  padding: 75px;
- }
+
 .page-break {
   page-break-after: always;
 }

@@ -35,9 +35,7 @@
                 <div class="cell grabbable" v-for="summary in summaries" :key="summary.id">
                     <div class="card">
                         <div class="card-section">
-                            <p class="float-left" style="margin-bottom: 0;">
-                                {{ summary.name }}
-                            </p>
+                            <p class="float-left summary-item" style="margin-bottom: 0; ">{{ summary.name }}</p>
                             <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeSummary(summary.id)"></el-button>
                             <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editSummary(summary.id)"></el-button>
                         </div>
