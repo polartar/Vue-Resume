@@ -190,6 +190,11 @@
            
             window.addEventListener("resize", this.onResize);
         },
+        mounted(){
+            this.$nextTick(function () {
+                this.onResize();
+            })
+        },
         updated() {
               this.onResize();
         },
@@ -205,8 +210,6 @@
                 let len = breaks.length;
                 if(breaks && len > 0)
                 {
-                    console.log(breaks)
-                    console.log(breaks.length)
                     for(let i = 0 ; i < len; i++){
                         if(breaks[i])
                           breaks[i].remove();
@@ -249,28 +252,30 @@
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs)
                 }
 
+                if(this.resume.resume_educations[0]){
+                    const education_top = this.$refs.education_title.getBoundingClientRect().top
+                    const education_childs = this.$refs.education_child;
+                    for(let index = 1; index < 3 ; index ++)
+                    {
+                        if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
+                            let education_first_end = 0;
+                            if(Array.isArray(education_childs)){
+                                education_first_end = education_childs[0].getBoundingClientRect().bottom;
+                            }else{
+                                education_first_end = education_childs.getBoundingClientRect().bottom;
+                            }
 
-                const education_top = this.$refs.education_title.getBoundingClientRect().top
-                const education_childs = this.$refs.education_child;
-                for(let index = 1; index < 3 ; index ++)
-                {
-                    if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
-                        let education_first_end = 0;
-                        if(Array.isArray(education_childs)){
-                            education_first_end = education_childs[0].getBoundingClientRect().bottom;
-                        }else{
-                            education_first_end = education_childs.getBoundingClientRect().bottom;
-                        }
-
-                        if (education_first_end > page_bottom * index + offset){
-                            this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education_title, "div");
+                            if (education_first_end > page_bottom * index + offset){
+                                this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education_title, "div");
+                            }
                         }
                     }
+                
+                    if(Array.isArray(education_childs)){
+                        this.insertBreakToBlock(page_bottom, start, offset, education_childs)
+                    }
                 }
-              
-                if(Array.isArray(education_childs)){
-                    this.insertBreakToBlock(page_bottom, start, offset, education_childs)
-                }
+                
 
                 const skill_top = this.$refs.skill.getBoundingClientRect().top
                 for(let index = 1; index <= 3 ; index ++)

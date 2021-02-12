@@ -47,13 +47,72 @@ const mutations = {
         }
     },
     updateResumeEmail (state, payload) {
-        state.resume.email = payload;
+        // state.resume.email = payload;
+        // state.resume = JSON.parse(JSON.stringify(state.resume));
+        state.resume = {...state.resume, email: payload}
     },
     updateResumeDesigns (state, payload) {
         state.resumeDesigns = payload;
     },
     
-    
+    updateCurrentResumeSummary (state, payload){
+        if(payload.id === "new"){
+            const tmp = state.resume.resume_summaries.filter(summary =>  summary.id === "new");
+            if(tmp.length === 0){
+                state.resume.resume_summaries.push({id: "new", name: payload.name})
+                state.resume = {...state.resume};
+                return;
+            }
+        }
+        
+        let resume_summaries = state.resume.resume_summaries.map(summary=>{
+            if(summary.id === payload.id)
+                return {...summary, name: payload.name};
+            else   
+                return summary
+        })
+        state.resume = {...state.resume, resume_summaries}
+    },    
+    updateCurrentResumeWorkExperience (state, payload){
+         if(payload.id === "new"){
+            const tmp = state.resume.resume_work_experiences.filter(work =>  work.id === "new");
+            if(tmp.length === 0){
+                state.resume.resume_work_experiences.push(
+                    {
+                        id: "new", 
+                        position_title: payload.title, 
+                        position_company: payload.company,
+                        resume_descriptions:[{
+                            id: "new",
+                            description: payload.description
+                        }],
+                        position_start_date: this.start_date,
+                        position_end_date: this.end_date
+                    }
+                )
+                state.resume = {...state.resume};
+                return;
+            }
+        }
+
+        let resume_work_experiences = state.resume.resume_work_experiences.map(work=>{
+            if(work.id === payload.id)
+                return {
+                    ...work,
+                    position_title: payload.title, 
+                    position_company: payload.company,
+                    resume_descriptions:[{
+                        id: "new",
+                        description: payload.description
+                    }],
+                    position_start_date: this.start_date,
+                    position_end_date: this.end_date
+                };
+            else   
+                return work
+        })
+        state.resume = {...state.resume, resume_work_experiences}
+    },    
     updateUserEmailIds (state, payload) {
         if (payload == null) {
             state.userEmailIds = null;

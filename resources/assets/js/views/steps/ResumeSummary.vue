@@ -3,7 +3,7 @@
         <div class="resume-step-heading-container">
             <h3 class="resume-step-heading">
                 Resume Summary
-                <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
+                <small style="text-decoration: underline; cursor: pointer;" @click="onAdd">
                     <span v-if="!show">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
@@ -14,7 +14,7 @@
                 <div class='cell'>
                     <div class='form-group'>
                         <label>Summary</label>
-                        <textarea rows='8' cols='80' v-model='name' />
+                        <textarea rows='8' cols='80' v-model='name' @input="onSummaryChange" />
                     </div>
                     <div class='form-group'>
                         <label>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <button v-if="edit" class='button' type='button' @click='updateSummary'>Update Summary</button>
-            <button v-if="edit" class='button' type='button' @click='show = !show'>Cancel</button>
+            <button v-if="edit" class='button' type='button' @click='onEditCancel'>Cancel</button>
             <button v-else class='button' type='button' @click='saveSummary'>Add Summary</button>
         </div>
         <div>
@@ -81,7 +81,7 @@
                 'bulleted': true,
                 'show': false,
                 'edit': false,
-                'editId': '',
+                'editId': 'new',
             }
         },
         methods: {
@@ -156,7 +156,18 @@
                         commits: ['reloadResume'],
                     }).then(res=>this.updateRefreshPreview())
                 }
-
+            },
+            onEditCancel(){
+                this.show = !this.show; 
+                this.name = ""
+                this.edit = false
+            },
+            onSummaryChange(){
+                this.$store.commit('updateCurrentResumeSummary', {id: this.editId, name: this.name})
+            },
+            onAdd(){
+                this.show = !this.show;
+                this.editId = "new";
             }
        }
     }

@@ -104,7 +104,6 @@ const actions ={
     axiosPostRequest: async (context, payload) => {
         return await axios.post(payload.route, payload.payload)
             .then(response => {
-                console.log(response)
                 if (payload.commits)
                     payload.commits.forEach( (pCommit) => {
                         store.commit(pCommit, response.data.id);
@@ -128,7 +127,6 @@ const actions ={
      *  true/false depending on success
      */
     axiosDeleteRequest: async (context, payload) => {
-        console.log(payload)
         return await axios.delete(payload.route)
             .then(response => {
                 if (payload.commits)

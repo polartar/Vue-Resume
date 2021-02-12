@@ -14,19 +14,19 @@
                 <div class='cell medium-6'>
                     <div class='form-group'>
                         <label>Job Title</label>
-                        <input type='text' name='position_title' v-model='title'>
+                        <input type='text' name='position_title' v-model='title' @input="onEditWorkExperience">
                     </div>
                 </div>
                 <div class='cell medium-6'>
                     <div class='form-group'>
                         <label>Company</label>
-                        <input type='text' name='company' v-model='company'>
+                        <input type='text' name='company' v-model='company' @input="onEditWorkExperience">
                     </div>
                 </div>
                 <div class='cell'>
                     <div class='form-group'>
                         <label>Description</label>
-                        <textarea required name='summary' rows='8' cols='80' v-model='description'></textarea>
+                        <textarea required name='summary' rows='8' cols='80' v-model='description' @input="onEditWorkExperience"></textarea>
                     </div>
                 </div>
                 <div class='cell medium-6'>
@@ -37,7 +37,9 @@
                             type="date"
                             format="yyyy/MM/dd"
                             value-format="yyyy-MM-dd"
-                            placeholder="Pick a day">
+                            placeholder="Pick a day"
+                            @input="onEditWorkExperience"
+                            >
                         </el-date-picker>
                     </div>
                     <br/>
@@ -54,7 +56,9 @@
                             type="date"
                             format="yyyy/MM/dd"
                             value-format="yyyy-MM-dd"
-                            placeholder="Pick a day">
+                            placeholder="Pick a day"
+                            @input="onEditWorkExperience"
+                            >
                         </el-date-picker>
                     </div>
                 </div>
@@ -130,7 +134,7 @@
                 'currentEmployer': false,
                 'show': false,
                 'edit': false,
-                'editId': null,
+                'editId': "new",
                 'editDescriptionId': null,
             }
         },
@@ -327,7 +331,7 @@
             },
             resetEditing: function () {
                 this.edit = false;
-                this.editId = null;
+                this.editId = "new";
                 this.editDescriptionId = null;
                 this.resetForm();
             },
@@ -355,6 +359,20 @@
                     this.$router.push("education");
                 }
                 
+            },
+
+            onEditWorkExperience(){
+ 
+                this.$store.commit('updateCurrentResumeWorkExperience', {
+                        id: this.editId, 
+                        title: this.title, 
+                        company: this.company, 
+                        description: 
+                        this.description,
+                        start_date: this.startDate,
+                        end_date: this.endDate
+                    }
+                )
             }
              
         }
