@@ -371,7 +371,6 @@
             },
 
             onEditWorkExperience(){
- 
                 this.$store.commit('updateCurrentResumeWorkExperience', {
                         id: this.editId, 
                         title: this.title, 

@@ -3,7 +3,7 @@
         <div class="resume-step-heading-container">
             <h3 class="resume-step-heading">
                 Hobbies and Affiliations
-                <small style="text-decoration: underline; cursor: pointer;" @click="show = !show">
+                <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
                     <span v-if="!show">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
@@ -14,12 +14,12 @@
                 <div class='cell'>
                     <div class='form-group'>
                         <label>Hobby or Affiliation</label>
-                        <textarea rows='8' cols='80' v-model='hobbyString' />
+                        <textarea rows='8' cols='80' v-model='hobbyString' @input="onChangeHobby"/>
                     </div>
                 </div>
             </div>
             <button v-if="edit" class='button' type='button' @click='updateHobby'>UpdateHobby or Affiliation </button>
-            <button v-if="edit" class='button' type='button' @click='show = !show'>Cancel</button>
+            <button v-if="edit" class='button' type='button' @click='toggleView'>Cancel</button>
             <button v-else class='button' type='button' @click='saveHobby'>Add Hobby or Affiliation </button>
         </div>
         <div>
@@ -78,9 +78,10 @@
                 hobbyString: '',
                 show: false,
                 edit: false,
-                editId: '',
+                editId: 'new',
                 drag: false,
-                isProcess: false
+                isProcess: false,
+                originalHobby: null
             }
         },
         methods: {
@@ -131,7 +132,9 @@
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             editHobby: function (hobbyId) {
-                this.hobbyString = this.resume.hobbies.find(obj => obj.id === hobbyId).name;
+                const hobby = this.resume.hobbies.find(obj => obj.id === hobbyId)
+                this.originalHobby = hobby;
+                this.hobbyString = hobby.name;
                 this.edit = true;
                 this.editId = hobbyId;
                 this.show = true;
@@ -167,7 +170,26 @@
                     this.$router.push("customize-design");
                 }
                 
-            }
+            },
+            onChangeHobby(){
+                this.$store.commit('updateCurrentResumeHobby', {
+                        id: this.editId, 
+                        name: this.hobbyString
+                    }
+                )
+            },
+            toggleView: function () {
+               if(this.show){
+                   if(this.edit) {
+                      this.$store.commit("updateCurrentResumeHobby", this.originalHobby)    
+                   }else{
+                       this.$store.commit("deleteNewHobby");
+                   }
+                }
+                this.show = !this.show;
+                this.editId = "new";
+                this.hobbyString = "";
+            },
         }
     }
 </script>

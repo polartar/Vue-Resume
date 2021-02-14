@@ -54,6 +54,11 @@ const mutations = {
     updateResumeDesigns (state, payload) {
         state.resumeDesigns = payload;
     },
+    deleteNewHobby(state){
+        let hobbies = state.resume.hobbies.filter(hobby => hobby.id !== 'new');
+
+        state.resume = {...state.resume, hobbies}
+    },
     deleteNewSummary(state){
         let resume_summaries = state.resume.resume_summaries.filter(summary => summary.id !== 'new');
 
@@ -150,7 +155,25 @@ const mutations = {
                 return work
         })
         state.resume = {...state.resume, resume_work_experiences}
-    },    
+    }, 
+    updateCurrentResumeHobby (state, payload){
+        if(payload.id === "new"){
+            const tmp = state.resume.hobbies.filter(hobby =>  hobby.id === "new");
+            if(tmp.length === 0){
+                state.resume.hobbies.push({id: "new", name: payload.name})
+                state.resume = {...state.resume};
+                return;
+            }
+        }
+        
+        let hobbies = state.resume.hobbies.map(hobby=>{
+            if(hobby.id === payload.id)
+                return {...hobby, name: payload.name};
+            else   
+                return hobby
+        })
+        state.resume = {...state.resume, hobbies}
+    },       
     updateUserEmailIds (state, payload) {
         if (payload == null) {
             state.userEmailIds = null;
