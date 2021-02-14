@@ -136,6 +136,7 @@
                 'edit': false,
                 'editId': "new",
                 'editDescriptionId': null,
+                originalWorkExperience: null,
             }
         },
 
@@ -312,6 +313,7 @@
                     this.editDescriptionId = workExperience.resume_descriptions[0].id;
             },
             setupEditing: function (workExperience) {
+                this.originalWorkExperience = workExperience;
                 this.editId = workExperience.id;
                 this.title = workExperience.position_title;
                 this.company = workExperience.position_company;
@@ -336,6 +338,13 @@
                 this.resetForm();
             },
             toggleView: function () {
+               if(this.show){
+                   if(this.edit) {
+                      this.$store.commit("updateCurrentResumeWorkExperience", this.originalWorkExperience)    
+                   }else{
+                       this.$store.commit("deleteNewWorkExperience");
+                   }
+                }
                 this.show = !this.show;
                 this.resetEditing();
             },

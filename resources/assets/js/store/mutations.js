@@ -54,7 +54,45 @@ const mutations = {
     updateResumeDesigns (state, payload) {
         state.resumeDesigns = payload;
     },
-    
+    deleteNewSummary(state){
+        let resume_summaries = state.resume.resume_summaries.filter(summary => summary.id !== 'new');
+
+        state.resume = {...state.resume, resume_summaries}
+    },
+    deleteNewWorkExperience(state){
+        let resume_work_experiences = state.resume.resume_work_experiences.filter(work => work.id !== 'new');
+
+        state.resume = {...state.resume, resume_work_experiences}
+    },
+    deleteNewResumeEducation(state){
+        let resume_educations = state.resume.resume_educations.filter(education => education.id !== 'new');
+
+        state.resume = {...state.resume, resume_educations}
+    },
+    updateCurrentResumeEducation(state, payload){
+         if(payload.id === "new"){
+            const tmp = state.resume.resume_educations.filter(education =>  education.id === "new");
+            if(tmp.length === 0){
+                state.resume.resume_educations.push({
+                    id: "new", 
+                    ...payload
+                })
+                state.resume = {...state.resume};
+                return;
+            }
+        }
+        
+        let resume_educations = state.resume.resume_educations.map(education=>{
+            if(education.id === payload.id)
+                return {
+                    ...education, 
+                    ...payload
+                };
+            else   
+                return education
+        })
+        state.resume = {...state.resume, resume_educations}  
+    },
     updateCurrentResumeSummary (state, payload){
         if(payload.id === "new"){
             const tmp = state.resume.resume_summaries.filter(summary =>  summary.id === "new");
@@ -86,8 +124,8 @@ const mutations = {
                             id: "new",
                             description: payload.description
                         }],
-                        position_start_date: this.start_date,
-                        position_end_date: this.end_date
+                        position_start_date: payload.start_date,
+                        position_end_date: payload.end_date
                     }
                 )
                 state.resume = {...state.resume};
@@ -105,8 +143,8 @@ const mutations = {
                         id: "new",
                         description: payload.description
                     }],
-                    position_start_date: this.start_date,
-                    position_end_date: this.end_date
+                    position_start_date: payload.start_date,
+                    position_end_date: payload.end_date
                 };
             else   
                 return work

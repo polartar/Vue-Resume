@@ -235,9 +235,9 @@
 
                 const work_top = this.$refs.work_title.getBoundingClientRect().top
                 const work_childs = this.$refs.work_child;
-                if(work_top  < page_bottom + offset){
+                if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;
-                    if(Array.isArray(work_childs)){
+                     if(Array.isArray(work_childs)){
                         work_first_end = work_childs[0].getBoundingClientRect().bottom;
                     }else{
                         work_first_end = work_childs.getBoundingClientRect().bottom;

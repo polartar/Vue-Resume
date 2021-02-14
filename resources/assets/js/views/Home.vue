@@ -53,7 +53,7 @@
                 // 'zip',
                 // 'country',
                 // 'summary',
-                // 'resume',
+                'resume',
                 'toggleResumePreview',
             ]),
             ...mapGetters([

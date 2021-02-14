@@ -14,7 +14,7 @@
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>School</label>
-                        <input type="text" name="school" v-model="schoolName">
+                        <input type="text" name="school" v-model="schoolName" @input='onChangeEducation'>
                     </div>
                 </div>
                 <div class="cell medium-6">
@@ -22,7 +22,7 @@
                         <label>School Type</label>
                         <div class="fancy-select fancy-select-full-width">
                             <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
-                            <select v-model="type" class="fancy-select">
+                            <select v-model="type" class="fancy-select" @input='onChangeEducation'>
                                 <option disabled selected>--Choose--</option>
                                 <option v-for="schoolType in types" :value="schoolType" :key="schoolType">
                                     {{ schoolType }}
@@ -34,13 +34,13 @@
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>Degree</label>
-                        <input placeholder="PhD" type="text" name="degree" v-model="degreeReceived">
+                        <input placeholder="PhD" type="text" name="degree" v-model="degreeReceived" @input='onChangeEducation'>
                     </div>
                 </div>
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>Field of Study</label>
-                        <input placeholder="Chemistry" type="text" name="field_of_study" v-model="fieldOfStudy">
+                        <input placeholder="Chemistry" type="text" name="field_of_study" v-model="fieldOfStudy" @input='onChangeEducation'>
                     </div>
                 </div>
 
@@ -58,12 +58,14 @@
                             type="date"
                             format="yyyy/MM/dd"
                             value-format="yyyy-MM-dd"
-                            placeholder="Pick a day">
+                            placeholder="Pick a day"
+                            @input='onChangeEducation'
+                            >
                         </el-date-picker>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label><input type="checkbox" name="currently_studying" v-model="currentlyStudying"> Currently Studying</label>
+                        <label><input type="checkbox" name="currently_studying" v-model="currentlyStudying" @input='onChangeEducation'> Currently Studying</label>
                     </div>
                 </div>
                 <div class="cell medium-6">
@@ -74,12 +76,14 @@
                             type="date"
                             format="yyyy/MM/dd"
                             value-format="yyyy-MM-dd"
-                            placeholder="Pick a day">
+                            placeholder="Pick a day"
+                            @input='onChangeEducation'
+                            >
                         </el-date-picker>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label><input type="checkbox" name="completed" v-model="completed"> Completed Degree</label>
+                        <label><input type="checkbox" name="completed" v-model="completed" @input='onChangeEducation'> Completed Degree</label>
                     </div>
                 </div>
             </div>
@@ -164,12 +168,11 @@
                 startDate: null,
                 endDate: null,
                 currentlyStudying: false,
-
                 show: false,
                 edit: false,
-                editId: null,
+                editId: "new",
                 editDescriptionId: null,
-
+                originalEducation: null,
                 summary: '',
             }
         },
@@ -284,6 +287,7 @@
                 this.$store.commit('updateRefreshPreview')
             },
             setupEditing: function (education) {
+                this.originalEducation  = education;
                 this.schoolName         = education.school_name
                 this.type               = education.type
                 this.degreeReceived     = education.degree_received
@@ -347,14 +351,22 @@
             },
             resetEditing: function () {
                 this.edit = false;
-                this.editId = null;
+                this.editId = "new";
                 this.editDescriptionId = null;
                 this.summary = '';
                 this.formReset();
             },
             toggleView: function () {
+                if(this.show){
+                   if(this.edit) {
+                      this.$store.commit("updateCurrentResumeEducation", this.originalEducation)    
+                   }else{
+                       this.$store.commit("deleteNewResumeEducation");
+                   }
+                }
                 this.show = !this.show;
                 this.resetEditing();
+               
             },
             moveNext(){
                 if(this.show || (this.resume.resume_educations && this.resume.resume_educations.length) == 0){
@@ -370,6 +382,19 @@
                     this.$router.push("skills");
                 }
                 
+            },
+            onChangeEducation(e){
+                this.$store.commit("updateCurrentResumeEducation", {
+                    id: this.editId,
+                    school_name: this.schoolName,
+                    type: this.type,
+                    degree_received: this.degreeReceived,
+                    field_of_study: this.fieldOfStudy,
+                    completed: this.completed,
+                    start_date: this.startDate,
+                    end_date: this.endDate,
+                    currently_studying: this.currentlyStudying,
+                })    
             }
         }
     }

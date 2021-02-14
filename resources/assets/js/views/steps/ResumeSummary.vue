@@ -82,6 +82,7 @@
                 'show': false,
                 'edit': false,
                 'editId': 'new',
+                 originalSummary: null
             }
         },
         methods: {
@@ -126,8 +127,10 @@
                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             editSummary: function (summaryId) {
-                this.name = this.resume.resume_summaries.find(obj => obj.id === summaryId).name;
-                this.bulleted = this.resume.resume_summaries.find(obj => obj.id === summaryId).bullet_point;
+                const summary  = this.resume.resume_summaries.find(obj => obj.id === summaryId);
+                this.originalSummary = summary;
+                this.name = summary.name;
+                this.bulleted = summary.bullet_point;
                 this.edit = true;
                 this.editId = summaryId;
                 this.show = true;
@@ -158,6 +161,7 @@
                 }
             },
             onEditCancel(){
+                this.$store.commit('updateCurrentResumeSummary', this.originalSummary)
                 this.show = !this.show; 
                 this.name = ""
                 this.edit = false
@@ -166,7 +170,11 @@
                 this.$store.commit('updateCurrentResumeSummary', {id: this.editId, name: this.name})
             },
             onAdd(){
+                if(this.show){
+                    this.$store.commit('deleteNewSummary')
+                }
                 this.show = !this.show;
+                this.name = "";
                 this.editId = "new";
             }
        }
