@@ -31,7 +31,7 @@
             :filename="resume.id"
             :pdf-quality="2"
             :manual-pagination="true"
-            :htmlToPdfOptions="{margin:[250,0,0,0]}"
+            :htmlToPdfOptions="{html2canvas:{ y:scrollHeight, scale:4 }}"
             pdf-format="letter"
             pdf-orientation="portrait"
             pdf-content-width="100%"
