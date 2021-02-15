@@ -74,6 +74,9 @@ const mutations = {
 
         state.resume = {...state.resume, resume_educations}
     },
+    updateCurrentResumeDateFormat(state, payload){
+        state.resume = {...state.resume, date_format: payload}
+    },
     updateCurrentResumeEducation(state, payload){
          if(payload.id === "new"){
             const tmp = state.resume.resume_educations.filter(education =>  education.id === "new");

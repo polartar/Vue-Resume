@@ -14,7 +14,7 @@
             <router-view></router-view>
         </div>
         <div class="" style="width:848px" v-if="this.$route.name === 'full-page-preview'">
-            <div class="resume-preview-container">
+            <div class="full-preview">
                 <router-view></router-view>
             </div>
         </div>

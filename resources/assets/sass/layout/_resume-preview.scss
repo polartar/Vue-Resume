@@ -1,4 +1,4 @@
-.resume-preview-container {
+.resume-preview-container, .full-preview {
     background: #eff3f6;
     margin-bottom: 2rem;
     padding: 1rem;
@@ -15,7 +15,11 @@
         margin-top: 60px!important;
     }
 }
-
+.full-preview{
+    .resume-preview-action-links{
+        transform: translate(-.5rem, -.5rem);
+    }
+}
 .resume-preview {
     background: $white;
     border: 2px solid rgba($gray-color, .5);

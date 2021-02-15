@@ -31,13 +31,15 @@
             :filename="resume.id"
             :pdf-quality="2"
             :manual-pagination="true"
-            :htmlToPdfOptions="{html2canvas:{ y:scrollHeight }}"
+            :htmlToPdfOptions="{margin:[250,0,0,0]}"
             pdf-format="letter"
             pdf-orientation="portrait"
             pdf-content-width="100%"
             ref="html2Pdf"
         > 
-              <GoldenStandard  slot="pdf-content"/>           
+              <div  slot="pdf-content">           
+                  <GoldenStandard/>
+              </div>
         </vue-html2pdf>
           
      
@@ -46,6 +48,7 @@
 
 <script>
     import VueHtml2pdf from 'vue-html2pdf'
+    // :htmlToPdfOptions="{html2canvas:{ y:scrollHeight }, image:{type: 'png', quality: 1}}"
     import {mapState, mapGetters} from 'vuex'
     import GoldenStandard from "../resume-templates/GoldenStandard";
     import Functional from "../resume-templates/Functional";
@@ -108,6 +111,7 @@
 
             // based on  https://css-tricks.com/scaled-proportional-blocks-with-css-and-javascript/
             doResize: function() {
+                return;
                 let container = document.querySelector('.resume-preview-container').offsetWidth - 32
                 let resume = 850
                 let scale = (container / resume).toFixed(2)

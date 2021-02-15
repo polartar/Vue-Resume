@@ -1,48 +1,43 @@
 <template>
     <div class='print-paper resume-gold-standard resume-html-page' ref='resume_body'>
-       <table class="full-width-table" align="center" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="text-left">
-                        <p class="resume-title">{{ fullName }}</p>
-                    </td>
-                    <td class="text-right">
-                        <table class="full-width-table header-contact-info" align="center" cellpadding="0" cellspacing="0">
-                            <tbody>
-                                <tr>
-                                    <td class="contact-info">
-                                        {{ street_1 }} {{street_2 }}
-                                    </td>
-                                </tr>
+        <div class="text-left">
+            <p class="resume-title">{{ fullName }}</p>
+        </div>
+        <div class="text-right">
+            <table class="full-width-table header-contact-info" align="center" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td class="contact-info">
+                            {{ street_1 }} {{street_2 }}
+                        </td>
+                    </tr>
 
-                                <tr>
-                                    <td class="contact-info">
-                                        {{ city }}, {{ province }} {{ zip }}
-                                    </td>
-                                </tr>
+                    <tr>
+                        <td class="contact-info">
+                            {{ city }}, {{ province }} {{ zip }}
+                        </td>
+                    </tr>
 
-                                <tr>
-                                    <td class="contact-info">
-                                        {{ phone}}
-                                    </td>
-                                </tr>
+                    <tr>
+                        <td class="contact-info">
+                            {{ phone}}
+                        </td>
+                    </tr>
 
-                                <tr>
-                                    <td class="contact-info">
-                                        {{ resume.email}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="contact-info">
-                                        {{this.resume.linkedin_url}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td class="contact-info">
+                            {{ resume.email}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="contact-info">
+                            {{this.resume.linkedin_url}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+ 
 
         <table class="full-width-table resume-section " ref='summary' v-if="resume && resume.resume_summaries[0]" align="center" cellpadding="0" cellspacing="0">
             <tbody>
@@ -71,7 +66,7 @@
                     <table class="full-width-table section-group" align="center" cellpadding="0" cellspacing="0">
                         <tr>
                             <td><span class="section-sub-title">{{ work.position_title }}</span></td>
-                            <td class="text-right"><span class="section-dates">{{ work.position_start_date}} to {{ work.position_end_date ? work.position_end_date : 'present' }}</span></td>
+                            <td class="text-right"><span class="section-dates">{{ dateFormat(work.position_start_date)}} to {{ work.position_end_date ? dateFormat(work.position_end_date) : 'present' }}</span></td>
                         </tr>
                         <tr>
                             <td colspan="2"><span class="section-sub-sub-title">{{ work.position_company }}</span></td>
@@ -101,7 +96,7 @@
                     <table class="full-width-table section-group " align="center" cellpadding="0" cellspacing="0">
                         <tr>
                             <td><span class="section-sub-title">{{ education.degree_received }} in {{ education.field_of_study }}</span></td>
-                            <td class="text-right"><span class="section-dates">{{ education.start_date}} to {{ education.end_date ? education.end_date : 'present' }}</span></td>
+                            <td class="text-right"><span class="section-dates">{{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}</span></td>
                         </tr>
                         <tr>
                             <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>
@@ -161,6 +156,7 @@
 
 <script>
     import {mapState, mapGetters} from 'vuex'
+    import {convertDate} from "../../services/utility.js"
 
     export default {
         data(){
@@ -252,7 +248,7 @@
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs)
                 }
 
-                if(this.resume.resume_educations[0]){
+                if(this.resume.resume_educations[0] && this.$refs.education_title){
                     const education_top = this.$refs.education_title.getBoundingClientRect().top
                     const education_childs = this.$refs.education_child;
                     for(let index = 1; index < 3 ; index ++)
@@ -303,7 +299,12 @@
             },
             onResize(){
                 let page_bottom = 0
-                if(window.innerWidth >=1500){
+                if(this.$refs.resume_body && this.$refs.resume_body.offsetWidth > 800)
+                {
+                    page_bottom = 1056;
+                    this.padding = 75;
+                }
+                else if(window.innerWidth >=1500){
                     page_bottom = 890.35;
                     this.padding =63.234;
                 } else if( window.innerWidth >= 1250){
@@ -354,6 +355,9 @@
                 new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
                 this.insertAfter(new_node, current_node);
                 next_node.classList.add("page-top");
+            },
+            dateFormat(date){
+                return convertDate(date, this.resume.date_format);
             }
 
         }

@@ -67,6 +67,23 @@ $xlargeRate: 5/6;
                     margin-bottom: .75rem * $rate;
                 }
             }
+            .resume-title{
+                font-weight: 300;
+                @include breakpoint(large) {
+                    font-size: 24pt* $rate * $largeRate * $html-font-size-conversions;
+                    line-height: 30pt* $rate * $largeRate;
+                }
+                @include breakpoint(xlarge) {
+                    font-size: 24pt* $rate * $xlargeRate * $html-font-size-conversions;
+                    line-height: 30pt* $rate * $xlargeRate;
+                }
+                @include breakpoint(xxlarge) {
+                    font-size: 24pt* $rate * $html-font-size-conversions ;
+                    font-weight: 400;
+                    line-height: 30pt* $rate;
+                }
+            }
+        
         }
      
         .header-contact-info {
@@ -88,15 +105,15 @@ $xlargeRate: 5/6;
             .contact-info {
                 @include breakpoint(large) {
                     font-size: 10pt * $html-font-size-conversions* $rate * $largeRate;
-                    line-height: 10px * $html-font-size-conversions* $rate * $largeRate;
+                    line-height: 12px * $html-font-size-conversions* $rate * $largeRate;
                 }
                 @include breakpoint(xlarge) {
                     font-size: 10pt * $html-font-size-conversions* $rate * $xlargeRate;
-                    line-height: 10px * $html-font-size-conversions* $rate * $xlargeRate;
+                    line-height: 12px * $html-font-size-conversions* $rate * $xlargeRate;
                 }
                 @include breakpoint(xxlarge) {
                     font-size: 10pt * $html-font-size-conversions;
-                    line-height: 10px * $html-font-size-conversions;
+                    line-height: 12px * $html-font-size-conversions;
                 }
             }
         }
@@ -114,20 +131,7 @@ $xlargeRate: 5/6;
             }
         }
     
-        .resume-title {
-            @include breakpoint(large) {
-                font-size: 24pt* $rate * $largeRate;
-                font-weight: 300;
-            }
-            @include breakpoint(xlarge) {
-                font-size: 24pt* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                font-size: 24pt* $rate ;
-                font-weight: 400;
-            }
-        }
-    
+        
         .work-experience-description{
             padding-left: 5px;     
             @include breakpoint(large) {
@@ -272,7 +276,7 @@ $xlargeRate: 5/6;
   }
 
 .resume-gold-standard {
-    font-family: 'OpenSans300', sans-serif;
+    // font-family: 'OpenSans300', sans-serif;
 
     p,
     li {
@@ -295,8 +299,6 @@ $xlargeRate: 5/6;
         }
 
         .contact-info {
-            font-size: 10pt;
-            line-height: 10px;
             margin: 0;
         }
     }
@@ -304,7 +306,7 @@ $xlargeRate: 5/6;
     &.resume-html-page .header-contact-info {
         .contact-info {
             font-size: 10pt * $html-font-size-conversions;
-            line-height: 10px * $html-font-size-conversions;
+            line-height: 12px * $html-font-size-conversions;
         }
     }
 
@@ -317,16 +319,13 @@ $xlargeRate: 5/6;
         margin-bottom: 25px;
     }
 
-    .resume-title {
+    &.resume-html-page .resume-title {
+        font-size: 24pt * $html-font-size-conversions;
         display: block;
-        font-size: 24pt;
         font-weight: 400;
         margin: 0;
         white-space: nowrap;
-    }
-
-    &.resume-html-page .resume-title {
-        font-size: 24pt * $html-font-size-conversions;
+        line-height: 30pt;
     }
 
 
@@ -356,7 +355,7 @@ $xlargeRate: 5/6;
     }
     .section-heading {
         display: block;
-        font-family: 'OpenSans300';
+        // font-family: 'OpenSans300';
         font-size: 1.2rem * $html-font-size-conversions;
         margin-bottom: 10px;
     }
