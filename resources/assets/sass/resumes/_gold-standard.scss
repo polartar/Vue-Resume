@@ -15,6 +15,20 @@ $xlargeRate: 5/6;
             width: 100%;
         }
     }
+    .heading-name{
+        @include breakpoint(large) {
+            margin-top:75px * $rate * $largeRate;
+            margin-bottom:30px * $rate * $largeRate;
+        }
+        @include breakpoint(xlarge) {
+            margin-top:75px * $rate * $xlargeRate;
+            margin-bottom:30px * $rate * $xlargeRate;
+        }
+        @include breakpoint(xxlarge) {
+            margin-top:75px * $rate ;
+            margin-bottom:30px * $rate ;
+        }
+    }
     .print-paper {
         @include breakpoint(large) {
             font-size: 12pt* $html-font-size-conversions * $rate * $largeRate;
@@ -274,6 +288,10 @@ $xlargeRate: 5/6;
     margin: 0;
     padding: 75px;
   }
+.heading-name{
+    margin-top:75px;
+    margin-bottom:30px;
+}
 
 .resume-gold-standard {
     // font-family: 'OpenSans300', sans-serif;
@@ -282,6 +300,9 @@ $xlargeRate: 5/6;
     li {
         font-size: 12pt;
         line-height: 16pt;
+    }
+    .heading-bold {
+        font-weight: bold;
     }
 
     &.resume-html-page {

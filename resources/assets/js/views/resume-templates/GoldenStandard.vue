@@ -14,7 +14,7 @@
 
                     <tr>
                         <td class="contact-info">
-                            {{ city }}, {{ province }} {{ zip }}
+                            {{ city }} {{city ? "," : ""}} {{ province }} {{ zip }}
                         </td>
                     </tr>
 
@@ -212,13 +212,23 @@
                     }   
                 }
                 
-                let pagetops = document.getElementsByClassName("page-top");
-                len = pagetops.length;
-                if(pagetops && len > 0)
+                // let pagetops = document.getElementsByClassName("page-top");
+                // len = pagetops.length;
+                // if(pagetops && len > 0)
+                // {
+                //     for(let i = 0 ; i < len; i++){
+                //         if(pagetops[i])
+                //             pagetops[i].classList.remove("page-top")
+                //     }   
+                // }
+
+                let headings = document.getElementsByClassName("heading-name");
+                len = headings.length;
+                if(headings && len > 0)
                 {
                     for(let i = 0 ; i < len; i++){
-                        if(pagetops[i])
-                            pagetops[i].classList.remove("page-top")
+                        if(headings[i])
+                            headings[i].remove();
                     }   
                 }
                
@@ -354,7 +364,14 @@
                 new_node.classList.add("html2pdf__page-break")
                 new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
                 this.insertAfter(new_node, current_node);
-                next_node.classList.add("page-top");
+
+                let name_element = document.createElement("div");
+                name_element.innerHTML = this.fullName;
+                name_element.classList.add("heading-name")
+                name_element.classList.add("text-right")
+                name_element.classList.add("heading-bold")
+                this.insertAfter(name_element, new_node);
+                // next_node.classList.add("page-top");
             },
             dateFormat(date){
                 return convertDate(date, this.resume.date_format);
