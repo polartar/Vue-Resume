@@ -74,6 +74,9 @@ const mutations = {
 
         state.resume = {...state.resume, resume_educations}
     },
+    updateCurrentResumeDesign(state, payload){
+        state.resume = {...state.resume, resume_design: {...state.resume.resume_design, name: payload}}
+    },
     updateCurrentResumeDateFormat(state, payload){
         state.resume = {...state.resume, date_format: payload}
     },

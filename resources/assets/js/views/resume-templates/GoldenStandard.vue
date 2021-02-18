@@ -66,7 +66,7 @@
                     <table class="full-width-table section-group" align="center" cellpadding="0" cellspacing="0">
                         <tr>
                             <td><span class="section-sub-title">{{ work.position_title }}</span></td>
-                            <td class="text-right"><span class="section-dates">{{ dateFormat(work.position_start_date)}} to {{ work.position_end_date ? dateFormat(work.position_end_date) : 'present' }}</span></td>
+                            <td v-if="resume.resume_design.name!=='Functional'" class="text-right"><span class="section-dates">{{ dateFormat(work.position_start_date)}} to {{ work.position_end_date ? dateFormat(work.position_end_date) : 'present' }}</span></td>
                         </tr>
                         <tr>
                             <td colspan="2"><span class="section-sub-sub-title">{{ work.position_company }}</span></td>
@@ -349,7 +349,7 @@
                 }
             },
             stringToArray: function (str) {
-                if (str.length > 0)
+                if (str && str.length > 0)
                     return str.split(/\r?\n/)
                 return [];
             },

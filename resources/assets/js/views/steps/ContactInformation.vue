@@ -633,6 +633,11 @@ export default {
         return;
       }
 
+      if(!this.isValidatedURL(this.resume.linkedin_url)){
+        this.showMessage("error", "LinkedinURL is invalid");
+        return;
+      }
+
       // Update User Info
       let updatedUser = this.$store.state.resume.user;
       updatedUser.first_name = this.firstName;
@@ -672,7 +677,7 @@ export default {
         if(res)
           this.$router.push({ name: 'resume-summary', query: this.$route.query });
       }
-      await this.updateRefreshPreview();
+      // await this.updateRefreshPreview();
     },
     createUserPhone: async function() {
       let phone = await this.$store.dispatch('axiosPostRequest', {
@@ -770,6 +775,15 @@ export default {
 
       return success;
     },
+    isValidatedURL(url){
+      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+      return !!pattern.test(url);
+    }
   },
 };
 </script>

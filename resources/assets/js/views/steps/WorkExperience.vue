@@ -13,13 +13,13 @@
             <div class='grid-x grid-margin-x'>
                 <div class='cell medium-6'>
                     <div class='form-group'>
-                        <label>Job Title</label>
+                        <label>{{getTitle()}}</label>
                         <input type='text' name='position_title' v-model='title' @input="onEditWorkExperience">
                     </div>
                 </div>
                 <div class='cell medium-6'>
                     <div class='form-group'>
-                        <label>Company</label>
+                        <label>{{getCompany}}</label>
                         <input type='text' name='company' v-model='company' @input="onEditWorkExperience">
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                         <textarea required name='summary' rows='8' cols='80' v-model='description' @input="onEditWorkExperience"></textarea>
                     </div>
                 </div>
-                <div class='cell medium-6'>
+                <div class='cell medium-6' v-if="resume.resume_design && resume.resume_design.name!=='Functional'">
                     <div class='form-group'>
                         <label>Start Date</label>
                         <el-date-picker
@@ -43,12 +43,12 @@
                         </el-date-picker>
                     </div>
                     <br/>
-                    <div class='form-group'>
+                    <div class='form-group'  v-if="resume.resume_design&&resume.resume_design.name!=='Functional'">
                         <label><input type='checkbox' name='end_date_currently' v-model='currentEmployer'> Current
                             Employer</label>
                     </div>
                 </div>
-                <div class='cell medium-6'>
+                <div class='cell medium-6'  v-if="resume.resume_design&&resume.resume_design.name!=='Functional'">
                     <div class='form-group'>
                         <label>End Date</label>
                         <el-date-picker
@@ -381,8 +381,25 @@
                         end_date: this.endDate
                     }
                 )
-            }
-             
+            },
+
+            getTitle(){
+                if(!this.resume.resume_design) return
+
+                if(this.resume.resume_design.name === 'Golden Standard')
+                    return "Title";
+                else if(this.resume.resume_design.name === 'Functional')
+                    return "Transferable or Technical Skill"
+            },
+
+            getCompany(){
+                if(!this.resume.resume_design) return
+                
+                 if(this.resume.resume_design.name === 'Golden Standard')
+                    return "Company";
+                else if(this.resume.resume_design.name === 'Functional')
+                    return "Company or Institution"
+            } 
         }
     }
 </script>
