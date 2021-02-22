@@ -203,4 +203,4 @@ export const states = [
         name:"WY",
         value:'Wyoming'
     },  
-]
+];

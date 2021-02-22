@@ -2,7 +2,7 @@
     <div>
         <div class="resume-step-heading-container">
             <h3 class="resume-step-heading">
-                Work Experience
+                {{getHeaderTitle()}}
                 <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
                     <span v-if="!show || (resume.resume_work_experiences && resume.resume_work_experiences.length === 0)">Add</span><span v-else>Cancel</span>
                 </small>
@@ -155,28 +155,31 @@
                     return;
                 }
 
-                if(!this.startDate){
-                     this.$notify.error({ 
-                          title: 'Error',
-                          message: 'You should input the Start Date',
-                        });
-                    return;
+                if(this.resume.resume_design.name !== "Functional")
+                {
+                    if(!this.startDate){
+                        this.$notify.error({ 
+                            title: 'Error',
+                            message: 'You should input the Start Date',
+                            });
+                        return;
+                    }
+                    if(!this.currentEmployer && !this.endDate){
+                        this.$notify.error({ 
+                            title: 'Error',
+                            message: 'You should input the End Date',
+                            });
+                        return;
+                    }
+                    if(this.startDate >=  this.endDate){
+                        this.$notify.error({ 
+                            title: 'Error',
+                            message: 'Please input valid start and end dates',
+                            });
+                        return;
+                    }
                 }
-
-                if(!this.currentEmployer && !this.endDate){
-                    this.$notify.error({ 
-                          title: 'Error',
-                          message: 'You should input the End Date',
-                        });
-                    return;
-                }
-                if(this.startDate >=  this.endDate){
-                     this.$notify.error({ 
-                          title: 'Error',
-                          message: 'Please input valid start and end dates',
-                        });
-                    return;
-                }
+                
 
                 // Need to create a new resume description
                 const workExperienceId = await this.createWorkExperience();
@@ -195,8 +198,8 @@
                         'resume_id': this.resume.id,
                         'position_title': this.title,
                         'position_company': this.company,
-                        'position_start_date': this.startDate,
-                        'position_end_date': this.endDate,
+                        'position_start_date': this.startDate?this.startDate:'2021-01-01',
+                        'position_end_date': this.endDate?this.endDate:'2021-01-01',
                         'current_employer': this.currentEmployer,
                     })
                     .then(response => {
@@ -386,20 +389,30 @@
             getTitle(){
                 if(!this.resume.resume_design) return
 
-                if(this.resume.resume_design.name === 'Golden Standard')
-                    return "Title";
-                else if(this.resume.resume_design.name === 'Functional')
-                    return "Transferable or Technical Skill"
+                if(this.resume.resume_design.name === 'Functional')
+                    return "Transferable or Technical Skill";
+                else 
+                    return "Title"
             },
 
             getCompany(){
                 if(!this.resume.resume_design) return
-                
-                 if(this.resume.resume_design.name === 'Golden Standard')
-                    return "Company";
-                else if(this.resume.resume_design.name === 'Functional')
+
+                 if(this.resume.resume_design.name === 'Combination')
                     return "Company or Institution"
-            } 
+                else 
+                    return "Company"
+            },
+             
+            getHeaderTitle(){
+                if(!this.resume.resume_design) return
+
+                if(this.resume.resume_design.name === 'Combination')
+                    return "Relavant Work Experience";
+                else
+                    return "Work Experience"
+            },
+
         }
     }
 </script>

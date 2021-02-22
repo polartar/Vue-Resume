@@ -38,7 +38,10 @@
             ref="html2Pdf"
         > 
               <div  slot="pdf-content">           
-                  <GoldenStandard/>
+                  <!-- <Combination v-if="design_type=='Combination'"/> -->
+                  <!-- <Recruiter v-if="design_type==='Recruiter'"/> -->
+                  <Sidebar />
+                  <!-- <GoldenStandard v-if="design_type==='Golden Standard' || design_type==='Functional'" /> -->
               </div>
         </vue-html2pdf>
           
@@ -51,21 +54,22 @@
     // :htmlToPdfOptions="{html2canvas:{ y:scrollHeight }, image:{type: 'png', quality: 1}}"
     import {mapState, mapGetters} from 'vuex'
     import GoldenStandard from "../resume-templates/GoldenStandard";
-    import Functional from "../resume-templates/Functional";
     import Combination from "../resume-templates/Combination";
     import Recruiter from "../resume-templates/Recruiter";
     import Sidebar from "../resume-templates/Sidebar";
     import debounce from 'lodash.debounce';
 
     export default {
-        components: {Recruiter, Functional, GoldenStandard, Combination, Sidebar, VueHtml2pdf},
+        components: {Recruiter, GoldenStandard, Combination, Sidebar, VueHtml2pdf},
         data() {
             return {
                 scrollHeight:0,
                 scaleStylesObject: {
                     transform: "translate(-50%, -50%) "  + "scale(.5)",
                     transformOrigin: "100% 100%"
-                }
+                },
+                design_type: false,
+                isRecur: false,
             }
         },
         computed: {
@@ -79,7 +83,11 @@
                 'resumeSummary',
             ])
         },
-
+        watch:{
+            resume(value){
+               this.design_type = value.resume_design.name;
+            }
+        },
         mounted() {
             this.doResize()
             this.refreshiFrame()

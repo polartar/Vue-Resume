@@ -3,7 +3,7 @@
         <div class="resume-step-heading-container">
             <h3 class="resume-step-heading">
                 Resume Summary
-                <small style="text-decoration: underline; cursor: pointer;" @click="onAdd">
+                <small style="text-decoration: underline; cursor: pointer;" @click="onAdd" v-if="design_type!=='Sidebar'">
                     <span v-if="!show">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
@@ -75,6 +75,11 @@
                 }
             }
         },
+        watch:{
+            resume(newvalue){
+                this.design_type = newvalue.resume_design.name;
+            }
+        },
         data: function () {
             return {
                 'name': '',
@@ -82,7 +87,8 @@
                 'show': false,
                 'edit': false,
                 'editId': 'new',
-                 originalSummary: null
+                design_type:'Golden Standard',
+                originalSummary: null
             }
         },
         methods: {

@@ -1,4 +1,10 @@
 .resume-sidebar {
+    .section{
+        margin-bottom: 10px;
+    }
+    .card-section p{
+        word-break: break-all;
+    }
     &.resume-pdf {
         .left {
             width: 100%;
@@ -8,18 +14,44 @@
             width: 100%;
         }
     }
-    .print-paper {
-        padding: 72px 72px 0 72px;
-        background-color: white;
-        font-family: Arial, sans-serif;
-        font-size: 12pt;
-        font-weight: normal;
+    .html2pdf__page-break{
+        // box-shadow: 64px 0 0 #f3f5f3, -64px 0 0 #f3f5f3; 
     }
-
+    .page-break-left{
+        box-shadow: 17px 0 0 #f3f5f3, -64px 0 0 #f3f5f3; 
+    }
+    .page-break-right{
+        box-shadow: 64px 0 0 #f3f5f3, -32px 0 0 #f3f5f3; 
+    }
+    .newpage-top{
+        padding-top: 60px;
+        margin-top: 0px!important;
+        box-shadow: 64px 0 0 white, -64px 0 0 white;
+    }
+    .print-paper {
+        // padding: 72px 72px 0 72px;
+        // background-color: white;
+        // font-family: Arial, sans-serif;
+        // font-size: 12pt;
+        // font-weight: normal;
+        word-break: break-all
+    }
+    ul li{
+        line-height: 16pt;
+        margin-bottom: 0px;
+    }
+    ul{
+        margin-bottom:  0px;
+        margin-top: 0px;
+    }
+    .contact-info{
+        font-weight: 500;
+    }
     .name {
         font-size: 36pt;
         display: block;
         text-align: center;
+        padding-bottom: 30px;
     }
 
     .resume-content {
@@ -61,5 +93,17 @@
     .sub-sub-header {
         font-weight: bold;
         display: block;
+    }
+    .education{
+        margin-top: 20px;
+    }
+    .skills{
+        margin-top: 20px;
+    }
+    .summary{
+        margin-top: 20px;
+    }
+    .workexperience{
+        margin-top: 20px;
     }
 }

@@ -179,11 +179,8 @@
             ...mapGetters([
                  'fullName',
             ]),
-
-           
         },
         created(){
-           
             window.addEventListener("resize", this.onResize);
         },
         mounted(){
@@ -191,12 +188,12 @@
                 this.onResize();
             })
         },
-        updated() {
-              this.onResize();
-        },
+        // updated() {
+        //       this.onResize();
+        // },
         updated(){
             this.$nextTick(function () {
-                this.makePageBreak();
+                this.onResize();
             })
         },
         methods: {
@@ -375,8 +372,7 @@
             },
             dateFormat(date){
                 return convertDate(date, this.resume.date_format);
-            }
-
+            },
         }
     }
 </script>

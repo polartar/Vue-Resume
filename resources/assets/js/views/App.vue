@@ -31,10 +31,10 @@
 </template>
 <script>
 import { mapState } from 'vuex';
+import {defaultsteps, combinationsteps, sidebarsteps} from "../constants/steps"
     export default {
         computed: {
             activeStep: function () {
-                // this.$route.name
                 for(var i = 0; i < this.steps.length; i += 1) {
                     if(this.steps[i]['link'] === this.$route.name) {
                         return i;
@@ -45,68 +45,40 @@ import { mapState } from 'vuex';
             ...mapState([
             'resume',
             'firstName',
-            ]), 
+            ]),            
+        },
+        watch:{
+            resume(value){
+                const resume_type = value.resume_design.name;
+                if(resume_type ==='Functional' || resume_type ==='Recruiter')
+                {
+                    this.steps = combinationsteps;
+                    if(resume_type ==='Recruiter'){
+                        this.steps = this.steps.map(step=>{
+                            if(step.link === "work-experience"){
+                                return {...step, title: 'Work Experience'};
+                            }
+                            if(step.link === "skills"){
+                                return {...step, title: 'Techniques, Software & Instrumentation'};
+                            }
+                            return step;
+                        })
+                    }
+                } else if (resume_type ==='Sidebar'){
+                    this.steps = sidebarsteps;
+                }
+                else {
+                    this.steps = defaultsteps;
+                }
+            }
         },
         data: function () {
             return {
                 widowWidth : window.outerWidth,
-                steps: [
-                    {
-                        link: 'home',
-                        title: 'Home',
-                        icon: 'el-icon-house',
-                    },
-                    {
-                        link: 'select-design',
-                        title: "Select\nDesign",
-                        icon: 'el-icon-picture'
-                    },
-                    {
-                        link: 'contact-information',
-                        title: "Contact\nInformation",
-                        icon: 'el-icon-wallet',
-                    },
-                    {
-                        link: 'resume-summary',
-                        title: "Resume\nSummary",
-                        icon: 'el-icon-s-order',
-                    },
-                    {
-                        link: 'work-experience',
-                        title: "Work\nExperience",
-                        icon: 'el-icon-office-building',
-                    },
-                    {
-                        link: 'education',
-                        title: 'Education',
-                        icon: 'el-icon-collection',
-                    },
-                    {
-                        link: 'skills',
-                        title: 'Skills',
-                        icon: 'el-icon-star-off',
-                    },
-                    {
-                        link: 'hobbies',
-                        title: 'Hobbies',
-                        icon: 'el-icon-star-off',
-                    },
-                    {
-                        link: 'customize-design',
-                        title: 'Customize',
-                        icon: 'el-icon-setting',
-                    },
-                    {
-                        link: 'full-page-preview',
-                        title: 'Preview',
-                        icon: 'el-icon-printer',
-                    },
-
-                ],
+                steps:defaultsteps  
             }
         },
         mounted() {
-            console.log("app")
             this.doResize()
             window.addEventListener('resize', this.doResize)
         },

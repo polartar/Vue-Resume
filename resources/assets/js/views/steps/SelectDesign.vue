@@ -27,7 +27,7 @@
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
             <button class="button preview-button" @click="updateToggleResumePreview"><span v-if="toggleResumePreview">Stop </span>Preview</button>
-            <button @click="onSave" to="contact-information" tag="button" class="button">Save and Continue</button @click="onSave">
+            <button @click="onSave" to="contact-information" tag="button" class="button">Save and Continue</button>
         </div>
     </div>
 </template>
