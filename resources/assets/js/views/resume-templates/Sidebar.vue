@@ -110,7 +110,7 @@
         },
         mounted() {
             this.$nextTick(function () {
-              //  this.onResize();
+               this.onResize();
             })
         },
         updated(){
