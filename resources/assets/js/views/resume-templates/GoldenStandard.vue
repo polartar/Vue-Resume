@@ -322,9 +322,10 @@
                     this.padding =63.234 * 2 / 3;
                 }
                
-                if(this.pageBottom !== page_bottom)
+                if(this.pageBottom !== page_bottom){
                     this.pageBottom = page_bottom
                     this.makePageBreak();
+                }
             },
             insertBreakToBlock(page_bottom, start, offset, childs){
               

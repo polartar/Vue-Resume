@@ -23,6 +23,7 @@
         </div> -->
 
         <!-- :htmlToPdfOptions="{html2canvas:{ y:scrollHeight }}" -->
+        Design_tye{{designType}}
         <vue-html2pdf
             :show-layout="false"
             :float-layout="false"
@@ -37,11 +38,11 @@
             pdf-content-width="100%"
             ref="html2Pdf"
         > 
-              <div  slot="pdf-content">           
-                  <!-- <Combination v-if="design_type=='Combination'"/> -->
-                  <!-- <Recruiter v-if="design_type==='Recruiter'"/> -->
-                  <Sidebar />
-                  <!-- <GoldenStandard v-if="design_type==='Golden Standard' || design_type==='Functional'" /> -->
+              <div slot="pdf-content">           
+                  <Combination v-if="designType=='Combination'"/>
+                  <Recruiter v-if="designType==='Recruiter'"/>
+                  <Sidebar v-if="designType==='Sidebar'"/>
+                  <GoldenStandard v-if="designType==='Golden Standard' || designType==='Functional'" />
               </div>
         </vue-html2pdf>
           
@@ -68,8 +69,7 @@
                     transform: "translate(-50%, -50%) "  + "scale(.5)",
                     transformOrigin: "100% 100%"
                 },
-                design_type: false,
-                isRecur: false,
+                design_type: "Golden Standard",
             }
         },
         computed: {
@@ -79,7 +79,7 @@
                 'refreshPreview',
             ]),
             ...mapGetters([
-                'resumeName',
+                'designType',
                 'resumeSummary',
             ])
         },
@@ -134,8 +134,6 @@
                 if( document.querySelector('#iframe-resume-preview') ) {
                     document.querySelector('#iframe-resume-preview').src += ''
                 }
-
-                console.log('refresh')
 
                 setTimeout(() => {
                     //this.refreshiFrame()

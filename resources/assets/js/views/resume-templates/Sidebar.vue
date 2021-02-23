@@ -1,11 +1,11 @@
 <template>
     <div class="resume-sidebar" ref='resume_body'>
-        <div class="print-paper">
+        <div class="print-paper" ref='print_paper'>
             <span class="name">{{ fullName }}</span>
             <hr/>
             <br/><br/>
             <div class="resume-content">
-                <div class="left">
+                <div class="left" ref='left'>
                     <div class='contact-info'>
                         <span class="header">Contact</span>
                         <hr/>
@@ -21,14 +21,14 @@
                         <br/>
                         <span>{{ city }}, {{ province }} {{ zip }}</span>
                     </div>
-                    <div class='skills' ref='skill'>
+                    <div class='mt-20' ref='skill'>
                         <span class="header">Skills</span>
                         <hr/>
                         <div class='skill-column section'  v-for="skill in resume.resume_skill" v-bind:key="skill.id" ref='skill-child'>
                             {{ skill.name }}
                         </div>
                     </div>
-                    <div class='education' ref='education'>
+                    <div class='mt-20' ref='education'>
                         <div ref='education_title'>
                             <span class="header" ref='education-header'>Education</span>
                             <hr/>
@@ -43,15 +43,15 @@
                     </div>
                 </div>
 
-                <div class="right">
-                    <div class='summary' v-if="resume.resume_summaries[0]">
+                <div class="right" ref='right'>
+                    <div class='mt-20' v-if="resume.resume_summaries[0]">
                         <span class="header">Professional Summary</span>
                         <hr/>
                         <span>{{ resume.resume_summaries[0].name }}</span>
                         <br/>
                     </div>
 
-                    <div class='workexpierience' ref='work'>
+                    <div class='mt-20' ref='work'>
                         <div ref='work_title'>
                             <span class="header">Work Experience</span>
                             <hr/>
@@ -85,6 +85,7 @@
             return {
                 pageBottom: 0,
                 padding:0,
+                scale:1
             }
         },
         computed: {
@@ -120,6 +121,17 @@
         methods: {
             removePageBreak()
             {
+
+                let breaktops = document.getElementsByClassName("break-top");
+                len = breaktops.length;
+                if(breaktops && len > 0)
+                {
+                    for(let i = 0 ; i < len; i++){
+                        if(breaktops[i])
+                            breaktops[i].remove()
+                    }   
+                }
+
                 let breaks = document.getElementsByClassName("html2pdf__page-break");
                 let len = breaks.length;
                 if(breaks)
@@ -206,6 +218,11 @@
                 if(Array.isArray(work_childs)){
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs, "work")
                 }
+     
+                if(this.$refs.education.getBoundingClientRect().bottom > page_bottom + start || this.$refs.work.getBoundingClientRect().bottom > page_bottom + start){
+                    this.$refs.print_paper.classList.add("fillHeight");
+                    // this.$refs.right.classList.add("fillHeight");
+                }
                 
             },
             onResize(){
@@ -214,21 +231,27 @@
                 {
                     page_bottom = 1056;
                     this.padding = 75;
+                    this.scale = 1;
                 }
                 else if(window.innerWidth >=1500){
                     page_bottom = 890.35;
                     this.padding =63.234;
+                    this.scale = 0.84313;
                 } else if( window.innerWidth >= 1250){
                     page_bottom = 890.35 * 6 / 6;
                     this.padding =63.234 * 5 / 6;
+                    this.scale = 0.84313 * 5 / 6;
                 }else{
                     page_bottom = 890.35 * 2 / 3;
                     this.padding =63.234 * 2 / 3;
+                    this.scale = 0.84313 * 2 / 3;
                 }
 
-                if(this.pageBottom !== page_bottom)
+                if(this.pageBottom !== page_bottom){
                     this.pageBottom = page_bottom
-                    this.makePageBreak();
+                    
+                }
+                this.makePageBreak();
             },
             insertBreakToBlock(page_bottom, start, offset, childs, section_title){
                 const len = childs.length;
@@ -245,7 +268,7 @@
                             else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
                                 this.insertBreak(page_bottom * 2, start, top, childs[index - 1], section_title );
                              }
-                             else if (bottom <= page_bottom + offset) {
+                            else if (bottom <= page_bottom + offset) {
                                 if( (index === len - 1) && ((section_title ==="education")||(section_title ==="work")) ){
                                     this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
                                 }
@@ -266,6 +289,11 @@
 
             insertBreak(page_bottom, page_start, current_top , current_node, section_title){
                 const margin_top = page_bottom - current_top + page_start - 30;
+                let break_top = document.createElement("div");
+                break_top.classList.add("break-top")
+                break_top.setAttribute("style" ,`margin-top: ${margin_top-30 * this.scale}px`);
+                this.insertAfter(break_top, current_node);
+
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")
                 if(section_title === "education")
@@ -273,8 +301,8 @@
                 else{
                     new_node.classList.add("page-break-right")
                 }
-                new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
-                this.insertAfter(new_node, current_node);
+                // new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
+                this.insertAfter(new_node, break_top);
 
                 // next_node.classList.add("page-top");
                 let page_top = document.createElement("div");

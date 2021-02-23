@@ -15,6 +15,9 @@ const  getters = {
     },
     fullName: state => {
         return capitalize(state.firstName) + ' ' + capitalize(state.lastName);
+    },
+    designType: state => {
+        return state.resume.resume_design.name;
     }
 }
 export default getters;

@@ -45,7 +45,6 @@
         },
 
         mounted() {
-            console.log(this.resumeDesigns)
         },
 
         methods: {

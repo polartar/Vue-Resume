@@ -7,6 +7,13 @@ html {
 *::after {
     box-sizing: inherit;
 }
+@import '~foundation-sites/scss/foundation';
+@import 'foundation/settings';
+@import 'foundation/adjustments';
+
+@import '~foundation-sites/scss/foundation';
+
+@include foundation-global-styles;
 
 @import 'fonts/cheeky-fonts';
 @import 'bits/colors';
