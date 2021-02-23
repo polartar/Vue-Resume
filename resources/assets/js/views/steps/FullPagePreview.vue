@@ -23,8 +23,7 @@
         </div> -->
 
         <!-- :htmlToPdfOptions="{html2canvas:{ y:scrollHeight }}" -->
-        Design_tye{{designType}}
-        <vue-html2pdf
+         <vue-html2pdf
             :show-layout="false"
             :float-layout="false"
             :enable-download="true"

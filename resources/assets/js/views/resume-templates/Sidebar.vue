@@ -38,7 +38,7 @@
                             <span class="sub-sub-header">{{ education.degree_received }}</span>
                             {{ education.school_name }}
                             <br/>
-                            {{ education.start_date.substring(0,4) }}-{{ education.end_date ? education.end_date.substring(0,4) : 'Present' }}
+                            {{ education.start_date&&education.start_date.substring(0,4) }}-{{ education.end_date ? education.end_date.substring(0,4) : 'Present' }}
                         </div>
                     </div>
                 </div>
@@ -109,61 +109,42 @@
              window.addEventListener("resize", this.onResize);
         },
         mounted() {
-             this.$nextTick(function () {
+            this.$nextTick(function () {
               //  this.onResize();
             })
         },
         updated(){
             this.$nextTick(function () {
-                this.onResize();
+                setTimeout(this.onResize, 1000);
             })
         },
         methods: {
             removePageBreak()
             {
-
-                let breaktops = document.getElementsByClassName("break-top");
-                len = breaktops.length;
+                 let breaktops = document.getElementsByClassName("break-top");
+                let len = breaktops.length;
                 if(breaktops && len > 0)
                 {
-                    for(let i = 0 ; i < len; i++){
-                        if(breaktops[i])
-                            breaktops[i].remove()
-                    }   
+                    while(breaktops[0])
+                        breaktops[0].remove();
                 }
 
                 let breaks = document.getElementsByClassName("html2pdf__page-break");
-                let len = breaks.length;
+                len = breaks.length;
                 if(breaks)
-                {
-                    for(let i = 0 ; i < len; i++){
-                        if(breaks[i])
-                          breaks[i].remove();
-                    }   
+                {  
+                    while(breaks[0])
+                        breaks[0].remove();
                 }
 
                 let pagetops = document.getElementsByClassName("newpage-top");
                 len = pagetops.length;
                 if(pagetops && len > 0)
-                {
-                    for(let i = 0 ; i < len; i++){
-                        if(pagetops[i])
-                            pagetops[i].remove()
-                    }   
+                {  
+                    while(pagetops[0])
+                        pagetops[0].remove();
                 }
 
-                // breaks = document.getElementsByClassName("html2pdf__page-break");
-                // len = breaks.length;
-                // if(len){
-                //     breaks[0].remove();
-                // }
-
-                // pagetops = document.getElementsByClassName("newpage-top");
-                // len = pagetops.length;
-                // if(len){
-                //     pagetops[0].remove();
-                // }
- 
             },
             makePageBreak(){
                 this.removePageBreak()
@@ -220,8 +201,9 @@
                 }
      
                 if(this.$refs.education.getBoundingClientRect().bottom > page_bottom + start || this.$refs.work.getBoundingClientRect().bottom > page_bottom + start){
-                    this.$refs.print_paper.classList.add("fillHeight");
-                    // this.$refs.right.classList.add("fillHeight");
+                    this.$refs.resume_body.classList.add("fillHeight");
+                }else{
+                    this.$refs.resume_body.classList.remove("fillHeight");
                 }
                 
             },
@@ -232,7 +214,7 @@
                     page_bottom = 1056;
                     this.padding = 75;
                     this.scale = 1;
-                }
+                 }
                 else if(window.innerWidth >=1500){
                     page_bottom = 890.35;
                     this.padding =63.234;
@@ -258,7 +240,8 @@
                 const tmp_childs = childs;
                 if(Array.isArray(childs)){
                     tmp_childs.map( ( element, index ) => {
-                        if( index !== 0 ){
+                        // if( index !== 0 )
+                        {
                             const top = element.getBoundingClientRect().top;
                             const bottom = element.getBoundingClientRect().bottom;
                             if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
@@ -270,6 +253,7 @@
                              }
                             else if (bottom <= page_bottom + offset) {
                                 if( (index === len - 1) && ((section_title ==="education")||(section_title ==="work")) ){
+                                    // debugger
                                     this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
                                 }
                             }
@@ -288,10 +272,10 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, section_title){
-                const margin_top = page_bottom - current_top + page_start - 30;
+                const margin_top = (page_bottom - current_top + page_start - 68 * this.scale) ;
                 let break_top = document.createElement("div");
                 break_top.classList.add("break-top")
-                break_top.setAttribute("style" ,`margin-top: ${margin_top-30 * this.scale}px`);
+                break_top.setAttribute("style" ,`margin-top: ${margin_top}px`);
                 this.insertAfter(break_top, current_node);
 
                 let new_node = document.createElement("div");

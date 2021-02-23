@@ -281,10 +281,10 @@
                     });
             },
             updateToggleResumePreview: function (event) {
-                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
+                // this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             updateRefreshPreview: function (event) {
-                this.$store.commit('updateRefreshPreview')
+                // this.$store.commit('updateRefreshPreview')
             },
             setupEditing: function (education) {
                 this.originalEducation  = education;
