@@ -1,5 +1,5 @@
 <template>
-    <div class='print-paper resume-gold-standard resume-html-page' ref='resume_body'>
+    <div class='print-paper resume-gold-standard resume-html-page combination' ref='resume_body'>
         <div class="text-left">
             <p class="resume-title">{{ fullName }}</p>
         </div>
@@ -60,9 +60,9 @@
                <div class="section-heading" >Key Industry Skills</div>
                <div class="skill-body">
                     <div class="skill-row">
-                        <ul class='skill-column'  v-for="skill in resume.resume_skill" v-bind:key="skill.id">
-                           <li> {{ skill.name }} </li>
-                        </ul>
+                        <!-- <ul class='' > -->
+                           <div ref='skill_child'  v-for="skill in resume.resume_skill" v-bind:key="skill.id"> <li> {{ skill.name }}</li> </div>
+                        <!-- </ul> -->
                     </div>
                  </div>
         </div>
@@ -218,15 +218,21 @@
                 const offset =  start - this.padding;
 
                 const skill_top = this.$refs.skill.getBoundingClientRect().top
-                for(let index = 1; index <= 3 ; index ++)
-                {
-                    if( (skill_top  < page_bottom * index + offset)  && (skill_top  > page_bottom * (index-1) )){
-                        const skill_end = this.$refs.skill.getBoundingClientRect().bottom;
-
-                        if (skill_end > page_bottom * index + offset){
-                            this.insertBreak(page_bottom * index, start, skill_top, this.$refs.summary, this.$refs.skill, "div");
-                        }
+                const skill_childs = this.$refs.skill_child;
+                if( (skill_top  < page_bottom + offset) && skill_childs) {
+                    let skill_first_end = 0;
+                     if(Array.isArray(skill_childs)){
+                        skill_first_end = skill_childs[0].getBoundingClientRect().bottom;
+                    }else{
+                        skill_first_end = skill_childs.getBoundingClientRect().bottom;
                     }
+
+                    if (skill_first_end > page_bottom + offset){
+                        this.insertBreak(page_bottom, start, skill_top, this.$refs.skill, this.$refs.skill_title, "div");
+                    }
+                }
+                if(Array.isArray(skill_childs)){
+                    this.insertBreakToBlock(page_bottom, start, offset, skill_childs)
                 }
 
                 const work_top = this.$refs.work_title.getBoundingClientRect().top
