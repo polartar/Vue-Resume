@@ -194,20 +194,16 @@
                 let len = breaks.length;
                 if(breaks && len > 0)
                 {
-                    for(let i = 0 ; i < len; i++){
-                        if(breaks[i])
-                          breaks[i].remove();
-                    }   
+                    while(breaks[0])
+                        breaks[0].remove();
                 }
 
                 let headings = document.getElementsByClassName("heading-name");
                 len = headings.length;
                 if(headings && len > 0)
                 {
-                    for(let i = 0 ; i < len; i++){
-                        if(headings[i])
-                            headings[i].remove();
-                    }   
+                    while(headings[0])
+                        headings[0].remove(); 
                 }
                
             },
