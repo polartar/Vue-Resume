@@ -115,7 +115,7 @@
         },
         updated(){
             this.$nextTick(function () {
-                setTimeout(this.onResize, 1000);
+                setTimeout(this.onResize, 500);
             })
         },
         methods: {
