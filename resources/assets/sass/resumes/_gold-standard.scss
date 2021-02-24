@@ -29,19 +29,19 @@
         @include breakpoint(large) {
             font-size: 12pt* $html-font-size-conversions * $rate * $largeRate;
             line-height: 16pt *$html-font-size-conversions* $rate * $largeRate;
-            padding: 75px 75px * $rate * $largeRate;
+            padding: 75px * $rate * $largeRate;
             width: 666px * $rate * $largeRate
         }
         @include breakpoint(xlarge) {
             font-size: 12pt *$html-font-size-conversions* $rate * $xlargeRate;
             line-height: 16pt*$html-font-size-conversions * $rate * $xlargeRate;
-            padding: 75px 75px * $rate * $xlargeRate;
+            padding: 75px * $rate * $xlargeRate;
             width: 666px * $rate * $xlargeRate
         }
         @include breakpoint(xxlarge) {
             font-size: 12pt*$html-font-size-conversions * $rate;
             line-height: 16pt*$html-font-size-conversions * $rate;
-            padding: 75px 75px * $rate;
+            padding: 75px * $rate;
             width: 666px * $rate ;
         }
     }
@@ -306,6 +306,7 @@
         li {
             font-size: 12pt * $html-font-size-conversions;
             line-height: 16pt * $html-font-size-conversions;
+            margin-bottom: .75rem ;
         }
     }
  
