@@ -24,7 +24,7 @@
                     <div class='mt-20' ref='skill'>
                         <span class="header">Skills</span>
                         <hr/>
-                        <div class='skill-column section'  v-for="skill in resume.resume_skill" v-bind:key="skill.id" ref='skill-child'>
+                        <div class='skill-column section'  v-for="skill in resume.resume_skill" v-bind:key="skill.id" ref='skill_child'>
                             {{ skill.name }}
                         </div>
                     </div>
@@ -238,12 +238,15 @@
             insertBreakToBlock(page_bottom, start, offset, childs, section_title){
                 const len = childs.length;
                 const tmp_childs = childs;
+                console.log("bottom", page_bottom + offset)
                 if(Array.isArray(childs)){
                     tmp_childs.map( ( element, index ) => {
                         // if( index !== 0 )
                         {
                             const top = element.getBoundingClientRect().top;
                             const bottom = element.getBoundingClientRect().bottom;
+                            console.log({section_title})
+                            console.log(bottom)
                             if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                             {
                                 this.insertBreak(page_bottom, start, top, childs[index - 1], section_title );
@@ -252,7 +255,7 @@
                                 this.insertBreak(page_bottom * 2, start, top, childs[index - 1], section_title );
                              }
                             else if (bottom <= page_bottom + offset) {
-                                if( (index === len - 1) && ((section_title ==="education")||(section_title ==="work")) ){
+                                if( (index === len - 1) &&(section_title==='education' || section_title==='work')  ){
                                     // debugger
                                     this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
                                 }
@@ -272,7 +275,7 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, section_title){
-                const margin_top = (page_bottom - current_top + page_start - 68 * this.scale) ;
+                const margin_top = (page_bottom - current_top + page_start - 63 * this.scale) ;
                 let break_top = document.createElement("div");
                 break_top.classList.add("break-top")
                 break_top.setAttribute("style" ,`margin-top: ${margin_top}px`);
@@ -280,7 +283,7 @@
 
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")
-                if(section_title === "education")
+                if(section_title === "education" || section_title === "skill")
                     new_node.classList.add("page-break-left")
                 else{
                     new_node.classList.add("page-break-right")

@@ -1,13 +1,13 @@
  .resume-preview-container{
     .fillHeight{
         @include breakpoint(large) {
-            height: 2037px * $largeRate * $rate
+            height: 1962px * $largeRate * $rate
         }
         @include breakpoint(xlarge) {
-            height: 2037px * $xlargeRate* $rate
+            height: 1962px * $xlargeRate* $rate
         }
         @include breakpoint(xxlarge) {
-            height: 2037px* $rate;
+            height: 1962px* $rate;
         }
     }
     .resume-sidebar {
@@ -173,7 +173,7 @@
      }
 }
 .fillHeight{
-    height: 2037px;
+    height: 1962px;
 }
 .resume-sidebar {
 
@@ -188,13 +188,13 @@
         margin-top: 0px!important;
         // box-shadow: 64px 0 0 white, -64px 0 0 white;
         width: 400px;
-        margin-left: -80px;
+        margin-left: -70px;
         background-color: white;
     }
     .break-top{
         height: 75px;
         width: 400px;
-        margin-left: -80px;
+        margin-left: -70px;
         background-color: white;
     }
    
@@ -214,13 +214,12 @@
         }
     }
     .html2pdf__page-break{
-        // box-shadow: 64px 0 0 #f3f5f3, -64px 0 0 #f3f5f3; 
-    }
+     }
     .page-break-left{
-        box-shadow: 17px 0 0 #f3f5f3, -64px 0 0 #f3f5f3; 
+        box-shadow: 32px 0 0 #f3f5f3, -76px 0 0 #f3f5f3; 
     }
     .page-break-right{
-        box-shadow: 64px 0 0 #f3f5f3, -32px 0 0 #f3f5f3; 
+        box-shadow: 76px 0 0 #f3f5f3, -32px 0 0 #f3f5f3; 
     }
     .print-paper {
         // padding: 72px 72px 0 72px;
