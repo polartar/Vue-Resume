@@ -61,7 +61,7 @@
         </table>
 
         <div class="full-width-table resume-section" ref='skill'   >
-               <div class="section-heading" >Techniques, Software & Instrumentation</div>
+               <div class="section-heading" >Skills</div>
                <div class="skill-body">
                      <div class="skill-row">
                         <div class='skill-column'  v-for="skill in resume.resume_skill" v-bind:key="skill.id">

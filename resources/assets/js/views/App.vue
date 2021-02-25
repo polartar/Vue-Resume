@@ -59,7 +59,7 @@ import {defaultsteps, combinationsteps, sidebarsteps} from "../constants/steps"
                                 return {...step, title: 'Work Experience'};
                             }
                             if(step.link === "skills"){
-                                return {...step, title: 'Techniques, Software & Instrumentation'};
+                                return {...step, title: 'Skills'};
                             }
                             return step;
                         })
