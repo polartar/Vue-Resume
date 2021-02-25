@@ -19,7 +19,7 @@
                 </div>
                 <div class='cell medium-6'>
                     <div class='form-group'>
-                        <label>{{getCompany}}</label>
+                        <label>{{getCompany()}}</label>
                         <input type='text' name='company' v-model='company' @input="onEditWorkExperience">
                     </div>
                 </div>
