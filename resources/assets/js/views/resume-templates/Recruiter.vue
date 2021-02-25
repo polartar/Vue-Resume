@@ -14,7 +14,7 @@
 
                     <tr>
                         <td class="contact-info">
-                            {{ city }} {{city ? "," : ""}} {{ province }} {{ zip }}
+                            {{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}
                         </td>
                     </tr>
 

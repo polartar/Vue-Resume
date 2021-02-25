@@ -19,7 +19,7 @@
                         <span class="sub-header">Address</span>
                         <span>{{ street_1 }}{{ street_2 ? ", " + street_2 : ''}}</span>
                         <br/>
-                        <span>{{ city }}, {{ province }} {{ zip }}</span>
+                        <span>{{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}</span>
                     </div>
                     <div class='mt-20' ref='skill'>
                         <span class="header">Skills</span>

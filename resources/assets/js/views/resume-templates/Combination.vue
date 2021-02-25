@@ -14,7 +14,7 @@
 
                     <tr>
                         <td class="contact-info">
-                            {{ city }} {{city ? "," : ""}} {{ province }} {{ zip }}
+                            {{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}
                         </td>
                     </tr>
 
@@ -209,6 +209,7 @@
             },
             makePageBreak(){
                 this.removePageBreak();
+                if(!this.$refs.resume_body) return;
                 const start = this.$refs.resume_body.getBoundingClientRect().top;
                 const page_bottom = this.pageBottom;
                 const offset =  start - this.padding;
