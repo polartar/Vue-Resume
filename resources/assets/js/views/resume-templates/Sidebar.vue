@@ -14,7 +14,6 @@
                         <span>{{ phone }}</span>
                         <span class="sub-header">Email</span>
                         <span>{{ email }}</span>
-                        <span class="sub-header">Website</span>
                         <span class="sub-header">Address</span>
                         <span>{{ street_1 }}</span><br/>
                         <span>{{ street_2 }}</span><br/>

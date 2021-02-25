@@ -60,13 +60,15 @@
                 </tr>
             </tbody>
         </table>
-
+asdasdasd
         <div class="full-width-table resume-section" ref='skill'   >
                <div class="section-heading" >Key Industry Skills</div>
                <div class="skill-body">
                     <div class="skill-row">
                         <!-- <ul class='' > -->
-                           <div ref='skill_child'  v-for="skill in resume.resume_skill" v-bind:key="skill.id"> <li> {{ skill.name }}</li> </div>
+                           <ul  > 
+                               <li ref='skill_child'  v-for="skill in resume.resume_skill" v-bind:key="skill.id"> {{ skill.name }}</li> 
+                            </ul>
                         <!-- </ul> -->
                     </div>
                  </div>

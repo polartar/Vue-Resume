@@ -38,7 +38,7 @@
             ref="html2Pdf"
         > 
               <div slot="pdf-content">           
-                  <Combination v-if="designType=='Combination'"/>
+                  <Combination v-if="designType==='Combination'"/>
                   <Recruiter v-if="designType==='Recruiter'"/>
                   <Sidebar v-if="designType==='Sidebar'"/>
                   <GoldenStandard v-if="designType==='Golden Standard' || designType==='Functional'" />
