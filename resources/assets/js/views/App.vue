@@ -50,7 +50,7 @@ import {defaultsteps, combinationsteps, sidebarsteps} from "../constants/steps"
         watch:{
             resume(value){
                 const resume_type = value.resume_design.name;
-                if(resume_type ==='Functional' || resume_type ==='Recruiter')
+                if(resume_type ==='Combination' || resume_type ==='Recruiter')
                 {
                     this.steps = combinationsteps;
                     if(resume_type ==='Recruiter'){

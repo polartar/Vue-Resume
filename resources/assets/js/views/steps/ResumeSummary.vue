@@ -16,7 +16,7 @@
                         <label>Summary</label>
                         <textarea rows='8' cols='80' v-model='name' @input="onSummaryChange" />
                     </div>
-                    <div class='form-group'>
+                    <div class='form-group hide' >
                         <label>
                             <input type='checkbox' v-model='bulleted' />
                             Bullet Point?

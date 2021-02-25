@@ -15,11 +15,9 @@
                         <span class="sub-header">Email</span>
                         <span>{{ email }}</span>
                         <span class="sub-header">Website</span>
-                        <span>TODO: Make website form</span>
                         <span class="sub-header">Address</span>
                         <span>{{ street_1 }}</span><br/>
-                        {{ street_2 ? ", " + street_2 : ''}}
-                        <br/>
+                        <span>{{ street_2 }}</span><br/>
                         <span>{{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}</span>
                     </div>
                     <div class='mt-20' ref='skill'>
