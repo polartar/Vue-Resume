@@ -8,10 +8,14 @@
                 <tbody>
                     <tr>
                         <td class="contact-info">
-                            {{ street_1 }} {{street_2 }}
+                            {{ street_1 }}
                         </td>
                     </tr>
-
+                    <tr>
+                        <td class="contact-info">
+                            {{street_2 }}
+                        </td>
+                    </tr>
                     <tr>
                         <td class="contact-info">
                             {{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}
