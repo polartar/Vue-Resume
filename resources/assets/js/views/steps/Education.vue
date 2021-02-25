@@ -4,12 +4,12 @@
             <h3 class="resume-step-heading">
                 Education
                 <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
-                    <span v-if="!show || (resume.resume_educations && resume.resume_educations.length == 0)">Add</span><span v-else>Cancel</span>
+                    <span v-if="!show || (resume.resume_educations && (resume.resume_educations.length == 0 || resume.resume_educations[0].id==='new'))">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
 
-        <div class="resume-step-form" v-if="show || (resume.resume_educations && resume.resume_educations.length) == 0">
+        <div class="resume-step-form" v-if="show || (resume.resume_educations && (resume.resume_educations.length===0 || resume.resume_educations[0].id==='new') )">
             <div class="grid-x grid-margin-x">
                 <div class="cell medium-6">
                     <div class="form-group">
@@ -106,8 +106,8 @@
                                 <br/>
                                 <i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ education.degree_received }} in {{ education.field_of_study }}
                             </p>
-                            <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeEducation(education.id)"></el-button>
-                            <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editEducation(education)"></el-button>
+                            <el-button v-if="education.id!=='new'" class="float-right" type="danger" icon="el-icon-delete" circle @click="removeEducation(education.id)"></el-button>
+                            <el-button v-if="education.id!=='new'" class="float-right" type="primary" icon="el-icon-edit" circle @click="editEducation(education)"></el-button>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,6 @@
         },
 
         mounted() {
-            //
         },
 
         methods: {

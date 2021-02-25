@@ -4,12 +4,12 @@
             <h3 class="resume-step-heading">
                 {{getHeaderTitle()}}
                 <small style="text-decoration: underline; cursor: pointer;" @click="toggleView">
-                    <span v-if="!show || (resume.resume_work_experiences && resume.resume_work_experiences.length === 0)">Add</span><span v-else>Cancel</span>
+                    <span v-if="!show || (resume.resume_work_experiences && ( resume.resume_work_experiences.length === 0 || resume.resume_work_experiences[0].id==='new'))">Add</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>
 
-        <div class='resume-step-form' v-if="show || (resume.resume_work_experiences && resume.resume_work_experiences.length === 0)">
+        <div class='resume-step-form' v-if="show || (resume.resume_work_experiences && (resume.resume_work_experiences.length === 0|| resume.resume_work_experiences[0].id==='new'))">
             <div class='grid-x grid-margin-x'>
                 <div class='cell medium-6'>
                     <div class='form-group'>
@@ -82,8 +82,8 @@
                                     <i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ workExperience.resume_descriptions[0].description }}
                                 </span>
                             </p>
-                            <el-button class="float-right" type="danger" icon="el-icon-delete" circle @click="removeWorkExperience(workExperience.id)"></el-button>
-                            <el-button class="float-right" type="primary" icon="el-icon-edit" circle @click="editWorkExperience(workExperience)"></el-button>
+                            <el-button v-if="workExperience.id!=='new'" class="float-right" type="danger" icon="el-icon-delete" circle @click="removeWorkExperience(workExperience.id)"></el-button>
+                            <el-button v-if="workExperience.id!=='new'" class="float-right" type="primary" icon="el-icon-edit" circle @click="editWorkExperience(workExperience)"></el-button>
                         </div>
                     </div>
                 </div>
