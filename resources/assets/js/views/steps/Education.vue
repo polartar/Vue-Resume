@@ -113,7 +113,7 @@
                 </div>
             </draggable>
         </div>
-         <confirm-modal title="Are you going to continue without save?" ref="confirm">
+         <confirm-modal title="Are you sure you want to continue without saving?" ref="confirm">
         </confirm-modal>
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
@@ -241,7 +241,8 @@
                             title: 'Success',
                             message: 'Successfully updated education experience!',
                         });
-
+                        this.formReset();
+                        this.show = false;
                         this.updateRefreshPreview()
                     })
                     .catch(error => {
@@ -281,10 +282,10 @@
                     });
             },
             updateToggleResumePreview: function (event) {
-                // this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
+                 this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
             updateRefreshPreview: function (event) {
-                // this.$store.commit('updateRefreshPreview')
+                 this.$store.commit('updateRefreshPreview')
             },
             setupEditing: function (education) {
                 this.originalEducation  = education;
@@ -307,7 +308,7 @@
                             message: 'Successfully removed education experience',
                         });
                         this.$store.commit('reloadResume');
-                        this.updateRefreshPreview()
+                        // this.updateRefreshPreview()
                     })
                     .catch(error => {
                         this.$notify.error({

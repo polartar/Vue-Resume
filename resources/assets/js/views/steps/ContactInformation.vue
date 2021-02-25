@@ -3,7 +3,6 @@
     <div class="resume-step-heading-container">
       <h3 class="resume-step-heading">Contact Information</h3>
     </div>
-
     <div class="resume-step-form">
       <div class="grid-x grid-margin-x">
         <div class="cell medium-6">
@@ -528,6 +527,7 @@ export default {
   computed: {
     ...mapState([
       'resume',
+      "email",
       'firstName',
       'lastName',
       'phone',

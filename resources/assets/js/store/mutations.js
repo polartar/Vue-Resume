@@ -252,7 +252,8 @@ const mutations = {
         axios
             .get('/resume/' + state.resume.id)
             .then(response => {
-                state.resume = response.data.resume;
+                console.log({response})
+                state.resume = {...state.resume, ...response.data.resume};
             })
             .catch(error => {
                 console.log('error reloading resume: ', error);

@@ -89,7 +89,7 @@
                 </div>
             </draggable>
         </div>
-        <confirm-modal title="Are you going to continue without save?" ref="confirm">
+        <confirm-modal title="Are you sure you want to continue without saving?" ref="confirm">
         </confirm-modal>
         <div class="resume-form-nav-buttons">
             <button class="button back-button" @click="$router.go(-1)"><font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'arrow-left']"></font-awesome-icon></button>
