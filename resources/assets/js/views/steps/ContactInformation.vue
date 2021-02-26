@@ -543,18 +543,8 @@ export default {
       'toggleResumePreview',
       'refreshPreview',
     ]),
-    // phone: {
-    //     get() {
-    //         return this.$store.state.phone;
-    //     },
-    //     async set(value) {
-    //         // await this.$store.dispatch('updateResumeSkillsOrder', value);
-    //         await this.createUserPhone()
-    //     }
-    // }
   },
   mounted() {
-    // console.log(this.phone)
   },
   methods: {
     ...mapMutations(['updateFirstName', 'updateLastName']),
@@ -607,9 +597,6 @@ export default {
     },
 
     saveContactInfo: async function() {
-      // console.log(this.firstNamem, this.lastName, this.email, this.phone, this.resume, this.country, this.state, this.city)
-      //Validate the form
-
        if (
         !this.firstName ||
         !this.lastName ||
@@ -648,19 +635,9 @@ export default {
         payload: updatedUser,
         commits: [],
       });
-
-      /*
-                    No updating the email address, this is a bad idea.
-                    TODO: Add an email field to the resume, so that the user can display a different email if they want.
-                */
-
-      // Need to create a userPhone, then add it to the list of ids
+ 
       const success1 = await this.createUserPhone();
-
-      // Need to create a userEmail
       const success2 = await this.createUserEmail();
-
-      // Need to create a userAddress
       const success3 = await this.createUserAddress(true);
 
       let success4 = true;
@@ -669,8 +646,6 @@ export default {
       }
 
       await this.updateRefreshPreview();
-      // Update resume via post w/all info (probably going to create new address)
-      
 
       if (success && success1 && success2 && success3 && success4){
         const res  = await this.saveResume();
@@ -766,7 +741,6 @@ export default {
       updateData['user_address_id'] = this.$store.state.userAddressIds;
       updateData['user_phone_id'] = this.$store.state.userPhoneIds;
 
-      // console.log(updateData)
       const success = await this.$store.dispatch('axiosPutRequest', {
         route: '/resume/' + this.resume.id,
         payload: updateData,

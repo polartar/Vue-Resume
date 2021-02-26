@@ -87,7 +87,6 @@ import {defaultsteps, combinationsteps, sidebarsteps} from "../constants/steps"
                 if(link === this.$route.name)
                     return "finish";
   
-                // const arr = Object.keys(this.resume);
                 if(!this.resume.email) return;
 
                 const resume = {...this.resume, firstName:this.firstName?[this.firstName]:[]};

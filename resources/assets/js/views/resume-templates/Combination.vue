@@ -60,7 +60,7 @@
                 </tr>
             </tbody>
         </table>
-asdasdasd
+
         <div class="full-width-table resume-section" ref='skill'   >
                <div class="section-heading" >Key Industry Skills</div>
                <div class="skill-body">
@@ -236,10 +236,8 @@ asdasdasd
                     }
                 }
                 if(Array.isArray(skill_childs)){
-                    console.log("isSkill")
                     this.insertBreakToBlock(page_bottom, start, offset, skill_childs)
                 }
-console.log("isWork")
                 const work_top = this.$refs.work_title.getBoundingClientRect().top
                 const work_childs = this.$refs.work_child;
                 if( (work_top  < page_bottom + offset) && work_childs) {
@@ -324,11 +322,8 @@ console.log("isWork")
                         if( index !== 0 ){
                             const top = element.getBoundingClientRect().top;
                             const bottom = element.getBoundingClientRect().bottom;
-                            console.log({bottom})
-                            console.log(page_bottom+offset)
                             if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                             {
-                                console.log("Insert Break")
                                 this.insertBreak(page_bottom, start, top, childs[index - 1], element );
                             }
                             else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){

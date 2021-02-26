@@ -42,17 +42,6 @@
         components: {FullPagePreview},
         computed: {
             ...mapState([
-                // 'firstName',
-                // 'lastName',
-                // 'email',
-                // 'phone',
-                // 'street_1',
-                // 'street_2',
-                // 'city',
-                // 'province',
-                // 'zip',
-                // 'country',
-                // 'summary',
                 'resume',
                 'toggleResumePreview',
             ]),
@@ -73,8 +62,6 @@
                 this.$axios
                     .get('/resume/' + resumeId)
                     .then(response => {
-                        // console.log(response.data.resume.resume_links);
-                        // Assign name values from resume
                         let resume = response.data.resume;
                         console.log({resume})
                         this.$store.commit('updateResume', resume);
@@ -87,7 +74,6 @@
 
                         if (resume.resume_summaries.length > 0) {
                             this.$store.commit('updateSummary', resume.resume_summaries[0]);
-                            //console.log(this.$store.state.summary);
                         }
 
                         let links = response.data.resume.resume_links
@@ -95,18 +81,14 @@
                         
                         this.$store.commit('updateLinkedInUrl', linkedin_url.url);
 
-
-                        // From here, we need to bring in:
-                        // phone number
                         if (resume.user_phone_id) {
                             this.getPhoneNumber(resume.user_phone_id);
                         }
-                        // email TODO: sortable emails, handle later
-                        // Email
+                        
                         if (resume.user_email_id) {
                             this.getUserEmail(resume.user_email_id);
                         }
-                        // Address
+                        
                         if (resume.user_address_id) {
                             this.getUserAddress(resume.user_address_id);
                         }
@@ -119,7 +101,6 @@
             fetchResumeDesigns: function () {
                 this.$axios.get('/resume-design')
                     .then(response => {
-                        //console.log(response);
                         this.$store.commit('updateResumeDesigns', response.data.resumeDesigns);
                     })
             },
@@ -127,7 +108,6 @@
                 this.$axios
                     .get('/user-phone/' + phoneId)
                     .then(response => {
-                        // console.log(response.data);
                         this.$store.commit('updatePhone', response.data.userPhone.phone_number);
                     })
                     .catch(error => {
@@ -138,7 +118,6 @@
                 this.$axios
                     .get('/user-address/' + userAddressId)
                     .then(response => {
-                        // console.log(response.data);
                         this.$store.commit('updateAddress', response.data.userAddress);
                     })
                     .catch(error => {
@@ -149,7 +128,6 @@
                 this.$axios
                     .get('/user-email/' + userEmailId)
                     .then(response => {
-                        // console.log(response.data);
                         this.$store.commit('updateResumeEmail', response.data.userEmail.email);
                     })
                     .catch(error => {

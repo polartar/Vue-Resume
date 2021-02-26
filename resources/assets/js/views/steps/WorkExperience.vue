@@ -171,7 +171,7 @@
                             });
                         return;
                     }
-                    if(this.startDate >=  this.endDate){
+                    if(this.endDate && this.startDate >=  this.endDate){
                         this.$notify.error({ 
                             title: 'Error',
                             message: 'Please input valid start and end dates',
@@ -376,12 +376,17 @@
             onEditWorkExperience(){
                 this.$store.commit('updateCurrentResumeWorkExperience', {
                         id: this.editId, 
-                        title: this.title, 
-                        company: this.company, 
-                        description: 
-                        this.description,
-                        start_date: this.startDate,
-                        end_date: this.endDate
+                        position_title: this.title, 
+                        position_company: this.company, 
+                        resume_descriptions:[
+                        {
+                            id: this.editDescriptionId,
+                            description: this.description
+                        }
+                        ] 
+                        ,
+                        position_start_date: this.startDate,
+                        position_end_date: this.endDate
                     }
                 )
             },

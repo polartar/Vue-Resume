@@ -60,7 +60,7 @@
                                 {{ work.position_title }}
                             </span>
                             <span class="">
-                                {{ work.position_company }} | {{ work.position_start_date.substring(0,4) }}-{{ work.position_end_date ? work.position_end_date.substring(0,4) : 'Present' }}
+                                {{ work.position_company }} | {{work.position_start_date&& work.position_start_date.substring(0,4) }}-{{ work.position_end_date ? work.position_end_date.substring(0,4) : 'Present' }}
                             </span>
                             <ul v-if="work.resume_descriptions[0]">
                                 <li class="" v-for="(item, index) in stringToArray(work.resume_descriptions[0].description)" :key="index" >
@@ -236,15 +236,14 @@
             insertBreakToBlock(page_bottom, start, offset, childs, section_title){
                 const len = childs.length;
                 const tmp_childs = childs;
-                console.log("bottom", page_bottom + offset)
+                
                 if(Array.isArray(childs)){
                     tmp_childs.map( ( element, index ) => {
                         // if( index !== 0 )
                         {
                             const top = element.getBoundingClientRect().top;
                             const bottom = element.getBoundingClientRect().bottom;
-                            console.log({section_title})
-                            console.log(bottom)
+                            
                             if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                             {
                                 this.insertBreak(page_bottom, start, top, childs[index - 1], section_title );
@@ -254,8 +253,6 @@
                              }
                             else if (bottom <= page_bottom + offset) {
                                 if( (index === len - 1) &&(section_title==='skill' ||section_title==='education' || section_title==='work')  ){
-                                     console.log(section_title)
-
                                     if(this.$refs.education){
                                         if((this.$refs.education&&this.$refs.education.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
                                         this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
@@ -264,7 +261,6 @@
                                         if((this.$refs.skill&&this.$refs.skill.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
                                         this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );                                        
                                     }
-                                    
                                 }
                             }
                         }

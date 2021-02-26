@@ -60,16 +60,6 @@
             },
             applyDesign: async function (name) {
                 this.$store.commit('updateCurrentResumeDesign', name);
-                // const success = await this.$store.dispatch('axiosPutRequest', {
-                //     route: '/resume/' + this.resume.id,
-                //     payload: this.resume,
-                //     successMessage: 'Successfully changed resume design',
-                // });
-
-                // if (success)
-                //     this.$store.commit('reloadResume');
-                //     this.updateRefreshPreview()
-
             },
             updateRefreshPreview: function (event) {
                 // this.$store.commit('updateRefreshPreview')

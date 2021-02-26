@@ -105,7 +105,6 @@
                 this.scrollHeight =window.scrollY  
              },
             download(){
-                // console.log(this.$refs.html2Pdf)
                 this.$refs.html2Pdf.generatePdf();
             },
             downloadResume: function () {
@@ -133,11 +132,6 @@
                 if( document.querySelector('#iframe-resume-preview') ) {
                     document.querySelector('#iframe-resume-preview').src += ''
                 }
-
-                setTimeout(() => {
-                    //this.refreshiFrame()
-                    // console.log('refresh')
-                }, 2000)
             }
         },
         watch: {

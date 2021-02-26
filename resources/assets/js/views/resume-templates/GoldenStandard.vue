@@ -193,9 +193,7 @@
                 this.onResize();
             })
         },
-        // updated() {
-        //       this.onResize();
-        // },
+
         updated(){
             this.$nextTick(function () {
                 this.onResize();
@@ -212,16 +210,6 @@
                         breaks[0].remove();
                 }
                 
-                // let pagetops = document.getElementsByClassName("page-top");
-                // len = pagetops.length;
-                // if(pagetops && len > 0)
-                // {
-                //     for(let i = 0 ; i < len; i++){
-                //         if(pagetops[i])
-                //             pagetops[i].classList.remove("page-top")
-                //     }   
-                // }
-
                 let headings = document.getElementsByClassName("heading-name");
                 len = headings.length;
                 if(headings && len > 0)

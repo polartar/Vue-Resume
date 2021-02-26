@@ -6,7 +6,6 @@ const mutations = {
         state.toggleResumePreview = payload;
     },
     updateRefreshPreview (state) {
-        // console.log(state)
         state.refreshPreview = state.refreshPreview + 1
     },
     updateResume (state, payload) {
@@ -129,8 +128,8 @@ const mutations = {
                 state.resume.resume_work_experiences.push(
                     {
                         id: "new", 
-                        position_title: payload.title, 
-                        position_company: payload.company,
+                        position_title: payload.position_title, 
+                        position_company: payload.position_company,
                         resume_descriptions:[{
                             id: "new",
                             description: payload.description
@@ -148,14 +147,13 @@ const mutations = {
             if(work.id === payload.id)
                 return {
                     ...work,
-                    position_title: payload.title, 
-                    position_company: payload.company,
-                    resume_descriptions:[{
-                        id: "new",
-                        description: payload.description
-                    }],
-                    position_start_date: payload.start_date,
-                    position_end_date: payload.end_date
+                    ...payload,
+                    resume_descriptions:[
+                        {
+                            id:payload.resume_descriptions[0].id,
+                            description: payload.resume_descriptions[0].description
+                        }
+                    ]
                 };
             else   
                 return work
@@ -252,7 +250,6 @@ const mutations = {
         axios
             .get('/resume/' + state.resume.id)
             .then(response => {
-                console.log({response})
                 state.resume = {...state.resume, ...response.data.resume};
             })
             .catch(error => {
