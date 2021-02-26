@@ -245,7 +245,14 @@
                 }
 
                 if(this.resume.resume_educations[0] && this.$refs.education_title){
-                    const education_top = this.$refs.education_title.getBoundingClientRect().top
+                    let education_top;
+                    if(this.$refs.work){
+                        education_top = this.$refs.work.getBoundingClientRect().bottom
+                        education_top += 10;
+                    }
+                    else
+                        education_top = this.$refs.education_title.getBoundingClientRect().top
+
                     const education_childs = this.$refs.education_child;
                     for(let index = 1; index < 3 ; index ++)
                     {
@@ -267,9 +274,15 @@
                         this.insertBreakToBlock(page_bottom, start, offset, education_childs)
                     }
                 }
-                
 
-                const skill_top = this.$refs.skill.getBoundingClientRect().top
+                let skill_top;
+                if(this.$refs.education || this.$refs.work){
+                    skill_top = this.$refs.education?this.$refs.education.getBoundingClientRect().bottom : this.$refs.work.getBoundingClientRect().bottom
+                    skill_top += 10
+                }
+                else
+                    skill_top = this.$refs.skill.getBoundingClientRect().top;
+
                 for(let index = 1; index <= 3 ; index ++)
                 {
                     if( (skill_top  < page_bottom * index + offset)  && (skill_top  > page_bottom * (index-1) )){
@@ -281,7 +294,7 @@
                     }
                 }
 
-                const hobby_top = this.$refs.hobby.getBoundingClientRect().top
+                const hobby_top = this.$refs.skill.getBoundingClientRect().bottom+10
                 for(let index = 1; index <= 3 ; index ++)
                 {
                     if( (hobby_top  < page_bottom * index + offset)  && (hobby_top  > page_bottom * (index-1) )){

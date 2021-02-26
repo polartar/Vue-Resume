@@ -238,7 +238,8 @@
                 if(Array.isArray(skill_childs)){
                     this.insertBreakToBlock(page_bottom, start, offset, skill_childs)
                 }
-                const work_top = this.$refs.work_title.getBoundingClientRect().top
+
+                const work_top = this.$refs.skill.getBoundingClientRect().bottom + 10
                 const work_childs = this.$refs.work_child;
                 if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;

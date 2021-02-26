@@ -249,7 +249,7 @@
                 }
 
                 if(this.resume.resume_educations[0] && this.$refs.education_title){
-                    const education_top = this.$refs.education_title.getBoundingClientRect().top
+                    const education_top = this.$refs.work.getBoundingClientRect().bottom + 10;
                     const education_childs = this.$refs.education_child;
                     for(let index = 1; index < 3 ; index ++)
                     {
