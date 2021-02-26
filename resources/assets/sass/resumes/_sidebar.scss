@@ -84,13 +84,16 @@
         // }
         ul li{
             @include breakpoint(large) {
-                line-height: 16pt * $largeRate * $rate
+                line-height: 16pt * $largeRate * $rate;
+                font-size: 12pt * $largeRate * $rate;
             }
             @include breakpoint(xlarge) {
-                line-height: 16pt * $xlargeRate* $rate
+                line-height: 16pt * $xlargeRate* $rate;
+                font-size: 12pt * $xlargeRate * $rate;
             }
             @include breakpoint(xxlarge) {
                 line-height: 16pt* $rate;
+                font-size: 12pt  * $rate;
             }
         }
         .name {
