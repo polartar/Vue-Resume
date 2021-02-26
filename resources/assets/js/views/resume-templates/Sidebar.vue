@@ -26,7 +26,7 @@
                             {{ skill.name }}
                         </div>
                     </div>
-                    <div class='mt-20' ref='education'>
+                    <div class='mt-20' ref='education' v-if='resume.resume_educations.length!==0'>
                         <div ref='education_title'>
                             <span class="header" ref='education-header'>Education</span>
                             <hr/>
@@ -198,8 +198,8 @@
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs, "work")
                 }
      
-                if(this.$refs.education.getBoundingClientRect().bottom > page_bottom + start || this.$refs.work.getBoundingClientRect().bottom > page_bottom + start){
-                    this.$refs.resume_body.classList.add("fillHeight");
+                if(this.$refs.education&&this.$refs.education.getBoundingClientRect().bottom > page_bottom + start || this.$refs.work.getBoundingClientRect().bottom > page_bottom + start){
+                        this.$refs.resume_body.classList.add("fillHeight");
                 }else{
                     this.$refs.resume_body.classList.remove("fillHeight");
                 }
@@ -253,9 +253,18 @@
                                 this.insertBreak(page_bottom * 2, start, top, childs[index - 1], section_title );
                              }
                             else if (bottom <= page_bottom + offset) {
-                                if( (index === len - 1) &&(section_title==='education' || section_title==='work')  ){
-                                    // debugger
-                                    this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
+                                if( (index === len - 1) &&(section_title==='skill' ||section_title==='education' || section_title==='work')  ){
+                                     console.log(section_title)
+
+                                    if(this.$refs.education){
+                                        if((this.$refs.education&&this.$refs.education.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
+                                        this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
+                                    }
+                                    else{
+                                        if((this.$refs.skill&&this.$refs.skill.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
+                                        this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );                                        
+                                    }
+                                    
                                 }
                             }
                         }
