@@ -373,13 +373,13 @@
                      this.$refs.confirm
                         .show()
                         .then(() => {
-                            this.$router.push("skills");
+                            this.$router.push({ name: 'skills', query: this.$route.query });
                         })
                         .catch(() => {
                         
                         });  
                 }else{
-                    this.$router.push("skills");
+                    this.$router.push({ name: 'skills', query: this.$route.query });
                 }
                 
             },

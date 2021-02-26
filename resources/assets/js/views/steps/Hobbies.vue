@@ -161,13 +161,13 @@
                      this.$refs.confirm
                         .show()
                         .then(() => {
-                            this.$router.push("customize-design");
+                            this.$router.push({ name: 'customize-design', query: this.$route.query });
                         })
                         .catch(() => {
                         
                         });  
                 }else{
-                    this.$router.push("customize-design");
+                    this.$router.push({ name: 'customize-design', query: this.$route.query });
                 }
                 
             },

@@ -56,7 +56,7 @@
                 });
                 
                 if(success)
-                    this.$router.push("contact-information");
+                    this.$router.push({ name: 'contact-information', query: this.$route.query });
             },
             applyDesign: async function (name) {
                 this.$store.commit('updateCurrentResumeDesign', name);

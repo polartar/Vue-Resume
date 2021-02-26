@@ -76,7 +76,7 @@
             },
             async onSave(){
                 await this.$store.dispatch('updateResumeDateFormat', this.dateFormat);
-                this.$router.push("full-page-preview");
+                this.$router.push({ name: 'full-page-preview', query: this.$route.query });
             }
         }
     }

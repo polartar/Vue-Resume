@@ -362,13 +362,13 @@
                      this.$refs.confirm
                         .show()
                         .then(() => {
-                            this.$router.push("education");
+                            this.$router.push({ name: 'education', query: this.$route.query });
                         })
                         .catch(() => {
                         
                         });  
                 }else{
-                    this.$router.push("education");
+                    this.$router.push({ name: 'education', query: this.$route.query });
                 }
                 
             },
