@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="right" ref='right'>
-                    <div class='mt-20' v-if="resume.resume_summaries[0]">
+                    <div class='' v-if="resume.resume_summaries[0]">
                         <span class="header">Professional Summary</span>
                         <hr/>
                         <span>{{ resume.resume_summaries[0].name }}</span>
