@@ -95,35 +95,23 @@
             }
         
         }
-     
-        .header-contact-info {
-            td {
-                padding: 2px 0;
-                @include breakpoint(large) {
-                    padding: 2px* $rate * $largeRate 0;
-                }
-                @include breakpoint(xlarge) {
-                    padding: 2px* $rate * $xlargeRate 0;
-                }
-                @include breakpoint(xxlarge) {
-                    padding: 2px* $rate 0;
-                }
-            }
-        }
     
         &.resume-html-page .header-contact-info {
             .contact-info {
                 @include breakpoint(large) {
                     font-size: 10pt * $html-font-size-conversions* $rate * $largeRate;
                     line-height: 12px * $html-font-size-conversions* $rate * $largeRate;
+                    margin-bottom: 5px* $rate * $largeRate;
                 }
                 @include breakpoint(xlarge) {
                     font-size: 10pt * $html-font-size-conversions* $rate * $xlargeRate;
                     line-height: 12px * $html-font-size-conversions* $rate * $xlargeRate;
+                    margin-bottom: 5px* $rate * $xlargeRate;
                 }
                 @include breakpoint(xxlarge) {
                     font-size: 10pt * $html-font-size-conversions;
                     line-height: 12px * $html-font-size-conversions;
+                    margin-bottom: 5px* $rate;
                 }
             }
         }
@@ -291,7 +279,6 @@
 
 .resume-gold-standard {
     // font-family: 'OpenSans300', sans-serif;
-
     p,
     li {
         font-size: 12pt;
@@ -313,30 +300,15 @@
             }
         }
     }
- 
-    .header-contact-info {
-        td {
-            padding: 2px 0;
-            text-align: right;
-        }
-
-        .contact-info {
-            margin: 0;
-        }
-    }
 
     &.resume-html-page .header-contact-info {
         .contact-info {
             font-size: 10pt * $html-font-size-conversions;
             line-height: 12px * $html-font-size-conversions;
+            margin-bottom: 5px;
         }
     }
-
-    // &.resume-html-page .print-paper {
-    //     font-size: 12pt * $html-font-size-conversions;
-    //     line-height: 16pt * $html-font-size-conversions;
-    // }
-
+  
     .resume-section {
         margin-bottom: 25px;
     }

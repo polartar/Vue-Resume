@@ -7,17 +7,15 @@
             <div class="resume-content">
                 <div class="left" ref='left'>
                     <div class='contact-info'>
-                        <span class="header">Contact</span>
-                        <hr/>
-                   
-                        <span class="sub-header">Phone</span>
-                        <span>{{ phone }}</span>
-                        <span class="sub-header">Email</span>
-                        <span>{{ email }}</span>
-                        <span class="sub-header">Address</span>
-                        <span>{{ street_1 }}</span><br/>
-                        <span>{{ street_2 }}</span><br/>
-                        <span>{{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}</span>
+                        <div class="header">Contact</div>
+                        <div class="sub-header">Phone</div>
+                        <div>{{ phone }}</div>
+                        <div class="sub-header">Email</div>
+                        <div>{{ email }}</div>
+                        <div class="sub-header">Address</div>
+                        <div>{{ street_1 }}</div>
+                        <div>{{ street_2 }}</div>
+                        <div>{{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}</div>
                     </div>
                     <div class='mt-20' ref='skill'>
                         <span class="header">Skills</span>

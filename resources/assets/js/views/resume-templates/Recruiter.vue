@@ -1,46 +1,28 @@
 <template>
     <div class='print-paper resume-gold-standard resume-html-page' ref='resume_body'>
-        <div class="flex">
+       <div class="flex">
             <div class="text-left">
                 <p class="resume-title">{{ fullName }}</p>
             </div>
-            <div class="text-right">
-                <table class="full-width-table header-contact-info" align="center" cellpadding="0" cellspacing="0">
-                    <tbody>
-                        <tr>
-                            <td class="contact-info">
-                                {{ street_1 }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="contact-info">
-                                {{street_2 }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="contact-info">
-                                {{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="contact-info">
-                                {{ phone}}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="contact-info">
-                                {{ resume.email}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="contact-info">
-                                {{this.resume.linkedin_url}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="text-right full-width-table header-contact-info">
+                <div class="contact-info">
+                    {{ street_1 }}
+                </div>
+                <div class="contact-info">
+                    {{street_2 }}
+                </div>
+                <div class="contact-info">
+                    {{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}
+                </div>
+                <div class="contact-info">
+                    {{ phone}}
+                </div>
+                <div class="contact-info">
+                    {{ resume.email}}
+                </div>
+                <div class="contact-info">
+                    {{this.resume.linkedin_url}}
+                </div>
             </div>
         </div>
  
