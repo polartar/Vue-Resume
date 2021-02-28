@@ -100,18 +100,15 @@
             .contact-info {
                 @include breakpoint(large) {
                     font-size: 10pt * $html-font-size-conversions* $rate * $largeRate;
-                    line-height: 12px * $html-font-size-conversions* $rate * $largeRate;
-                    margin-bottom: 5px* $rate * $largeRate;
+                    line-height: 20px * $html-font-size-conversions* $rate * $largeRate;
                 }
                 @include breakpoint(xlarge) {
                     font-size: 10pt * $html-font-size-conversions* $rate * $xlargeRate;
-                    line-height: 12px * $html-font-size-conversions* $rate * $xlargeRate;
-                    margin-bottom: 5px* $rate * $xlargeRate;
+                    line-height: 20px * $html-font-size-conversions* $rate * $xlargeRate;
                 }
                 @include breakpoint(xxlarge) {
                     font-size: 10pt * $html-font-size-conversions;
-                    line-height: 12px * $html-font-size-conversions;
-                    margin-bottom: 5px* $rate;
+                    line-height: 20px * $rate;
                 }
             }
         }
@@ -304,8 +301,7 @@
     &.resume-html-page .header-contact-info {
         .contact-info {
             font-size: 10pt * $html-font-size-conversions;
-            line-height: 12px * $html-font-size-conversions;
-            margin-bottom: 5px;
+            line-height: 20px * $html-font-size-conversions;
         }
     }
   

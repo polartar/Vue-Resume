@@ -51,7 +51,7 @@ const mutations = {
         state.resume = {...state.resume, email: payload}
     },
     updateResumeDesigns (state, payload) {
-        state.resumeDesigns = payload;
+        state.resumeDesigns = payload.filter(design => design.name!=="Combination");
     },
     deleteNewHobby(state){
         let hobbies = state.resume.hobbies.filter(hobby => hobby.id !== 'new');
