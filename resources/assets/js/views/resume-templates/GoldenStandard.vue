@@ -1,46 +1,48 @@
 <template>
     <div class='print-paper resume-gold-standard resume-html-page' ref='resume_body'>
-        <div class="text-left">
-            <p class="resume-title">{{ fullName }}</p>
-        </div>
-        <div class="text-right">
-            <table class="full-width-table header-contact-info" align="center" cellpadding="0" cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td class="contact-info">
-                            {{ street_1 }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="contact-info">
-                            {{street_2 }}
-                        </td>
-                    </tr>
+        <div class="flex">
+            <div class="text-left">
+                <p class="resume-title">{{ fullName }}</p>
+            </div>
+            <div class="text-right">
+                <table class="full-width-table header-contact-info" align="center" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td class="contact-info">
+                                {{ street_1 }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="contact-info">
+                                {{street_2 }}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td class="contact-info">
-                            {{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}
-                        </td>
-                    </tr>
+                        <tr>
+                            <td class="contact-info">
+                                {{ city }}{{city ? "," : ""}} {{ province }} {{ zip }}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td class="contact-info">
-                            {{ phone}}
-                        </td>
-                    </tr>
+                        <tr>
+                            <td class="contact-info">
+                                {{ phone}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td class="contact-info">
-                            {{ resume.email}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="contact-info">
-                            {{this.resume.linkedin_url}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr>
+                            <td class="contact-info">
+                                {{ resume.email}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="contact-info">
+                                {{this.resume.linkedin_url}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
  
 
