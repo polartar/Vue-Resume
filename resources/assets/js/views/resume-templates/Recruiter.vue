@@ -214,12 +214,14 @@
                 const work_childs = this.$refs.work_child;
                 if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;
+                    console.log({work_top})
+                    consoel.log(page_bottom+offset)
                      if(Array.isArray(work_childs)){
                         work_first_end = work_childs[0].getBoundingClientRect().bottom;
                     }else{
                         work_first_end = work_childs.getBoundingClientRect().bottom;
                     }
-
+                    console.log({work_first_end})
                     if (work_first_end > page_bottom + offset){
                         this.insertBreak(page_bottom, start, work_top, this.$refs.skill, this.$refs.work_title, "div");
                     }
