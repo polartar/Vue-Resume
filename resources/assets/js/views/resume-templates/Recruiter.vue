@@ -202,7 +202,7 @@
                 const offset =  start - this.padding;
 
                 const skill_top = this.$refs.skill.getBoundingClientRect().top
-                for(let index = 1; index <= 3 ; index ++)
+                for(let index = 1; index <= 1 ; index ++)
                 {
                     if( (skill_top  < page_bottom * index + offset)  && (skill_top  > page_bottom * (index-1) )){
                         const skill_end = this.$refs.skill.getBoundingClientRect().bottom;
