@@ -212,6 +212,7 @@
 
                 const work_top = this.$refs.work_title.getBoundingClientRect().top
                 const work_childs = this.$refs.work_child;
+                console.log("work childs", work_childs.length)
                 if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;
                     console.log({work_top})
