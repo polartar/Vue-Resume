@@ -167,12 +167,9 @@
                 this.onResize();
             })
         },
-        updated() {
-              this.onResize();
-        },
         updated(){
             this.$nextTick(function () {
-                this.makePageBreak();
+                this.onResize();
             })
         },
         methods: {
