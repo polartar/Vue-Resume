@@ -216,7 +216,7 @@
                 if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;
                     console.log({work_top})
-                    consoel.log(page_bottom+offset)
+                    console.log(page_bottom+offset)
                      if(Array.isArray(work_childs)){
                         work_first_end = work_childs[0].getBoundingClientRect().bottom;
                     }else{
