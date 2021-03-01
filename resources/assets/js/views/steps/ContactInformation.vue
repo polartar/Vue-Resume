@@ -570,7 +570,6 @@ export default {
       this.$store.commit('updateCity', event.target.value);
     },
     updateProvince: function(event) {
-      console.log(typeof(event.target.options))
        if(typeof(event.target.options) === 'object'){
         this.$store.commit('updateProvince', event.target.options[event.target.options.selectedIndex].value);
       }
