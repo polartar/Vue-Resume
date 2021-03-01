@@ -86,8 +86,8 @@
            
         </div>
     
-        <div class="full-width-table resume-section" ref='education' v-if="resume && resume.resume_educations[0]" >
-          
+        <div class="full-width-table resume-section" ref='education' >
+            <div  v-if="resume && resume.resume_educations[0]">
                 <div>
                     <td><span class="section-heading " ref='education_title'>Education</span></td>
                 </div>
@@ -108,7 +108,7 @@
                         </tr> --}} -->
                     </table>
                  </div>
-            
+            </div>
         </div>
        
         <div class="full-width-table " ref='hobby'  >
@@ -212,17 +212,13 @@
 
                 const work_top = this.$refs.work_title.getBoundingClientRect().top
                 const work_childs = this.$refs.work_child;
-                console.log("work childs", work_childs.length)
                 if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;
-                    console.log({work_top})
-                    console.log(page_bottom+offset)
                      if(Array.isArray(work_childs)){
                         work_first_end = work_childs[0].getBoundingClientRect().bottom;
                     }else{
                         work_first_end = work_childs.getBoundingClientRect().bottom;
                     }
-                    console.log({work_first_end})
                     if (work_first_end > page_bottom + offset){
                         this.insertBreak(page_bottom, start, work_top, this.$refs.skill, this.$refs.work_title, "div");
                     }
@@ -263,7 +259,7 @@
                         const hobby_end = this.$refs.hobby.getBoundingClientRect().bottom;
 
                         if (hobby_end > page_bottom * index + offset){
-                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.skill, this.$refs.hobby, "div");
+                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.education, this.$refs.hobby, "div");
                         }
                     }
                 }
