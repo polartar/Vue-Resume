@@ -2,7 +2,7 @@
     <div>
         <div class="resume-step-heading-container">
             <h3 class="resume-step-heading">
-                Resume Summary{{designType}}
+                Resume Summary 
                 <small style="text-decoration: underline; cursor: pointer;" @click="onAdd" v-if="designType!=='Sidebar'">
                     <span v-if="!show">Add</span><span v-else>Cancel</span>
                 </small>
