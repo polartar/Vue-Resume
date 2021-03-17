@@ -9,7 +9,7 @@
                 <div class="card" v-if="design.active">
                     <h3 class="card-heading">{{ design.name }}</h3>
                     <div class="card-image">
-                        <img width="85" height="85" src="https://via.placeholder.com/250" alt="">
+                        <img width="85" height="85" :src="designImages[design.name]" alt="">
                     </div>
                     <label class="button text-center" :class="{
                             'button-no-fill' : resume.resume_design_id != design.id
@@ -34,7 +34,7 @@
 
 <script>
     import {mapState, mapGetters} from 'vuex'
-
+    import DesignImages from "../../constants/designimages"
     export default {
         computed: {
             ...mapState([
@@ -43,8 +43,13 @@
                 'toggleResumePreview',
             ]),
         },
-
+        data() {
+            return {
+                designImages: DesignImages
+            }
+        },
         mounted() {
+            console.log(this.designImages)
         },
 
         methods: {
@@ -62,10 +67,10 @@
                 this.$store.commit('updateCurrentResumeDesign', name);
             },
             updateRefreshPreview: function (event) {
-                // this.$store.commit('updateRefreshPreview')
+                this.$store.commit('updateRefreshPreview')
             },
             updateToggleResumePreview: function (event) {
-                // this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
+                this.$store.commit('updateToggleResumePreview', !this.toggleResumePreview)
             },
         }
     }
