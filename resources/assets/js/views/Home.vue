@@ -63,12 +63,12 @@
                     .get('/resume/' + resumeId)
                     .then(response => {
                         let resume = response.data.resume;
-                        // console.log({resume})
+                         console.log("fetch", resume)
                         this.$store.commit('updateResume', resume);
                         this.$store.commit('updateFirstName', resume.user.first_name);
                         this.$store.commit('updateLastName', resume.user.last_name);
-                        this.$store.commit('updateUserEmail', resume.user.email);
                         this.$store.commit('updateUserEmailIds', resume.user_email_ids);
+                        this.$store.commit('updateUserEmail', resume.user.email);
                         this.$store.commit('updateUserAddressIds', resume.user_address_ids);
                         this.$store.commit('updateUserPhoneIds', resume.user.user_phones);
 
@@ -79,7 +79,8 @@
                         let links = response.data.resume.resume_links
                         let linkedin_url = links.find(o => o.name === "LinkedIn");
                         
-                        this.$store.commit('updateLinkedInUrl', linkedin_url.url);
+                        if(linkedin_url)
+                            this.$store.commit('updateLinkedInUrl', linkedin_url.url);
 
                         if (resume.user_phone_id) {
                             this.getPhoneNumber(resume.user_phone_id);

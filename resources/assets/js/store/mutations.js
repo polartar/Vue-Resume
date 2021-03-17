@@ -41,9 +41,11 @@ const mutations = {
     },
     updateUserEmail (state, payload) {
         state.user.email = payload;
-        if (state.userEmailIds.length === 0) {
+        if (!state.userEmailIds || state.userEmailIds.length === 0) {
             state.email = payload;
         }
+        if(!state.resume.email)
+            state.resume.email = payload;
     },
     updateResumeEmail (state, payload) {
         // state.resume.email = payload;

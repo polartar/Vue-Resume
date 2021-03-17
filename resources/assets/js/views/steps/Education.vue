@@ -17,8 +17,8 @@
                         <input type="text" name="school" v-model="schoolName" @input='onChangeEducation'>
                     </div>
                 </div>
-                <div class="cell medium-6">
-                    <div class="form-group">
+                <div class="cell medium-6 ">
+                    <div class="form-group hide">
                         <label>School Type</label>
                         <div class="fancy-select fancy-select-full-width">
                             <font-awesome-icon aria-hidden="true"  class="fancy-select-icon" :icon="['fas', 'caret-down']"></font-awesome-icon>
@@ -44,12 +44,6 @@
                     </div>
                 </div>
 
-                <!-- <div class="cell">
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea required v-model="summary" rows="8" cols="80"></textarea>
-                    </div>
-                </div> -->
                 <div class="cell medium-6">
                     <div class="form-group">
                         <label>Start Date</label>
@@ -64,7 +58,7 @@
                         </el-date-picker>
                     </div>
                     <br/>
-                    <div class="form-group">
+                    <div class="form-group hide">
                         <label><input type="checkbox" name="currently_studying" v-model="currentlyStudying" @input='onChangeEducation'> Currently Studying</label>
                     </div>
                 </div>
@@ -82,7 +76,7 @@
                         </el-date-picker>
                     </div>
                     <br/>
-                    <div class="form-group">
+                    <div class="form-group hide">
                         <label><input type="checkbox" name="completed" v-model="completed" @input='onChangeEducation'> Completed Degree</label>
                     </div>
                 </div>
@@ -155,7 +149,7 @@
         data: function () {
             return {
                 schoolName: '',
-                type: '',
+                type: 'high school',
                 types: [
                     'high school',
                     'trade / vocation',
