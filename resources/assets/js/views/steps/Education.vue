@@ -335,13 +335,13 @@
             },
             formReset: function () {
                 this.schoolName = '';
-                this.type = '';
+                // this.type = 'hight school';
                 this.degreeReceived = '';
                 this.fieldOfStudy = '';
-                this.completed = false;
+                // this.completed = false;
                 this.startDate = null;
                 this.endDate = null;
-                this.currentlyStudying = false;
+                // this.currentlyStudying = false;
             },
             resetEditing: function () {
                 this.edit = false;

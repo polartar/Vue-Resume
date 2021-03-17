@@ -86,7 +86,6 @@ import {defaultsteps, combinationsteps, sidebarsteps} from "../constants/steps"
             getStatus(link){
                 if(link === this.$route.name)
                     return "finish";
-                console.log("resume",this.resume)
                 if(!this.resume.email) return;
 
                 const resume = {...this.resume, firstName:this.firstName?[this.firstName]:[]};

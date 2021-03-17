@@ -54,6 +54,12 @@ const mutations = {
     },
     updateResumeDesigns (state, payload) {
         state.resumeDesigns = payload.filter(design => design.name!=="Combination");
+        state.resumeDesigns = state.resumeDesigns.map(design => {
+            if(design.name === 'Golden Standard'){
+                design.name = 'Gold Standard';
+            }
+            return design;
+        })
     },
     deleteNewHobby(state){
         let hobbies = state.resume.hobbies.filter(hobby => hobby.id !== 'new');
