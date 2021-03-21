@@ -31,16 +31,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="cell medium-6">
+                <div class="cell medium-6" v-if="designType !=='Combination'">
                     <div class="form-group">
                         <label>Degree</label>
                         <input placeholder="PhD" type="text" name="degree" v-model="degreeReceived" @input='onChangeEducation'>
                     </div>
                 </div>
-                <div class="cell medium-6">
+                <div class="cell medium-6" v-if="designType !=='Combination'">
                     <div class="form-group">
                         <label>Field of Study</label>
                         <input placeholder="Chemistry" type="text" name="field_of_study" v-model="fieldOfStudy" @input='onChangeEducation'>
+                    </div>
+                </div>
+                <div class="cell medium-12" v-if="designType ==='Combination'">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea placeholder="Description" type="text" name="description" v-model="summary" @input='onChangeEducation' />
                     </div>
                 </div>
 
@@ -129,7 +135,7 @@
 
         computed: {
             ...mapGetters([
-                'resumeId'
+                'resumeId', 'designType'
             ]),
             ...mapState([
                 'resume',
@@ -190,14 +196,17 @@
                     })
                     .then(response => {
                         this.show = false;
-                        //this.createEducationDescription(response.data.id);
-                        this.$store.commit('reloadResume');
-                        this.$notify.success({
-                            title: 'Success',
-                            message: 'Successfully updated education experience!',
-                        });
-                        this.formReset();
-                        this.updateRefreshPreview()
+                        if(this.designType === 'Combination') {
+                            this.createEducationDescription(response.data.id);    
+                        } else {
+                            this.$store.commit('reloadResume');
+                            this.$notify.success({
+                                title: 'Success',
+                                message: 'Successfully updated education experience!',
+                            });
+                            this.formReset();
+                            this.updateRefreshPreview()
+                        }
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -228,15 +237,22 @@
                         'currently_studying'        : this.currentlyStudying,
                     })
                     .then(response =>  {
-                        //this.updateEducationDescription();
-                        this.$store.commit('reloadResume');
-                        this.$notify.success({
-                            title: 'Success',
-                            message: 'Successfully updated education experience!',
-                        });
-                        this.formReset();
-                        this.show = false;
-                        this.updateRefreshPreview()
+                        if(this.designType === 'Combination'){
+                            if( this.editDescriptionId )
+                                this.updateEducationDescription();
+                            else{
+                                this.createEducationDescription(this.editId);
+                            }
+                        } else {
+                            this.$store.commit('reloadResume');
+                            this.$notify.success({
+                                title: 'Success',
+                                message: 'Successfully updated education experience!',
+                            });
+                            this.formReset();
+                            this.show = false;
+                            this.updateRefreshPreview()
+                        }                        
                     })
                     .catch(error => {
                         this.$notify.error({
@@ -388,6 +404,7 @@
                     start_date: this.startDate,
                     end_date: this.endDate,
                     currently_studying: this.currentlyStudying,
+                    education_descriptions: [this.summary]
                 })    
             }
         }
