@@ -194,6 +194,9 @@
             },
             makePageBreak(){
                 this.removePageBreak();
+                if(!this.$refs.resume_body){
+                    return;
+                }
                 const start = this.$refs.resume_body.getBoundingClientRect().top;
                 const page_bottom = this.pageBottom;
                 const offset =  start - this.padding;

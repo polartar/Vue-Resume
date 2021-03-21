@@ -53,8 +53,7 @@ const mutations = {
         state.resume = {...state.resume, email: payload}
     },
     updateResumeDesigns (state, payload) {
-        state.resumeDesigns = payload.filter(design => design.name!=="Combination");
-        state.resumeDesigns = state.resumeDesigns.map(design => {
+        state.resumeDesigns = payload.map(design => {
             if(design.name === 'Golden Standard'){
                 design.name = 'Gold Standard';
             }

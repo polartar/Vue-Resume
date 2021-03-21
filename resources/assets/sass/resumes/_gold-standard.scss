@@ -1,429 +1,425 @@
-
-.resume-preview-container{
-    .resume-preview-action-links{
-        @include breakpoint(large) {
-            width: 688px * $largeRate
-        }
-        @include breakpoint(xlarge) {
-            width: 688px * $xlargeRate
-        }
-        @include breakpoint(xxlarge) {
-            width: 100%;
-        }
+.resume-preview-container {
+  .resume-preview-action-links {
+    @include breakpoint(large) {
+      width: 688px * $largeRate;
     }
-    .heading-name{
-        @include breakpoint(large) {
-            margin-top:75px * $rate * $largeRate;
-            margin-bottom:30px * $rate * $largeRate;
-        }
-        @include breakpoint(xlarge) {
-            margin-top:75px * $rate * $xlargeRate;
-            margin-bottom:30px * $rate * $xlargeRate;
-        }
-        @include breakpoint(xxlarge) {
-            margin-top:75px * $rate ;
-            margin-bottom:30px * $rate ;
-        }
+    @include breakpoint(xlarge) {
+      width: 688px * $xlargeRate;
     }
-    .print-paper {
-        @include breakpoint(large) {
-            font-size: 12pt* $html-font-size-conversions * $rate * $largeRate;
-            line-height: 16pt *$html-font-size-conversions* $rate * $largeRate;
-            padding: 75px * $rate * $largeRate;
-            width: 666px * $rate * $largeRate
-        }
-        @include breakpoint(xlarge) {
-            font-size: 12pt *$html-font-size-conversions* $rate * $xlargeRate;
-            line-height: 16pt*$html-font-size-conversions * $rate * $xlargeRate;
-            padding: 75px * $rate * $xlargeRate;
-            width: 666px * $rate * $xlargeRate
-        }
-        @include breakpoint(xxlarge) {
-            font-size: 12pt*$html-font-size-conversions * $rate;
-            line-height: 16pt*$html-font-size-conversions * $rate;
-            padding: 75px * $rate;
-            width: 666px * $rate ;
-        }
+    @include breakpoint(xxlarge) {
+      width: 100%;
     }
-    .resume-gold-standard {
-        &.resume-html-page {
-            ul{
-                @include breakpoint(large) {
-                    margin-bottom: 2rem * $rate * $largeRate;
-                }
-                @include breakpoint(xlarge) {
-                    margin-bottom: 2rem * $rate * $xlargeRate;
-                }
-                @include breakpoint(xxlarge) {
-                    margin-bottom: 2rem * $rate;
-                }
-            }
-            
-            p,
-            li {
-                @include breakpoint(large) {
-                    font-size: 12pt * $html-font-size-conversions* $rate * $largeRate;
-                    line-height: 16pt * $html-font-size-conversions* $rate * $largeRate;
-                    margin-bottom: .75rem * $rate * $largeRate;
-                }
-                @include breakpoint(xlarge) {
-                    font-size: 12pt * $html-font-size-conversions* $rate * $xlargeRate;
-                    line-height: 16pt * $html-font-size-conversions* $rate * $xlargeRate;
-                    margin-bottom: .75rem * $rate * $xlargeRate;
-                }
-                @include breakpoint(xxlarge) {
-                    font-size: 12pt * $html-font-size-conversions* $rate ;
-                    line-height: 16pt * $html-font-size-conversions* $rate ;
-                    margin-bottom: .75rem * $rate;
-                }
-            }
-            .resume-title{
-                font-weight: 300;
-                @include breakpoint(large) {
-                    font-size: 24pt* $rate * $largeRate * $html-font-size-conversions;
-                    line-height: 30pt* $rate * $largeRate;
-                }
-                @include breakpoint(xlarge) {
-                    font-size: 24pt* $rate * $xlargeRate * $html-font-size-conversions;
-                    line-height: 30pt* $rate * $xlargeRate;
-                }
-                @include breakpoint(xxlarge) {
-                    font-size: 24pt* $rate * $html-font-size-conversions ;
-                    font-weight: 400;
-                    line-height: 30pt* $rate;
-                }
-            }
-        
-        }
-    
-        &.resume-html-page .header-contact-info {
-            .contact-info {
-                @include breakpoint(large) {
-                    font-size: 10pt * $html-font-size-conversions* $rate * $largeRate;
-                    line-height: 20px * $html-font-size-conversions* $rate * $largeRate;
-                }
-                @include breakpoint(xlarge) {
-                    font-size: 10pt * $html-font-size-conversions* $rate * $xlargeRate;
-                    line-height: 20px * $html-font-size-conversions* $rate * $xlargeRate;
-                }
-                @include breakpoint(xxlarge) {
-                    font-size: 10pt * $html-font-size-conversions;
-                    line-height: 20px * $rate;
-                }
-            }
-        }
-        
-        .resume-section {
-            margin-bottom: 25px;
-            @include breakpoint(large) {
-                margin-bottom: 25px* $rate * $largeRate;
-            }
-            @include breakpoint(xlarge) {
-                margin-bottom: 25px* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                margin-bottom: 25px* $rate;
-            }
-        }
-    
-        
-        .work-experience-description{
-            padding-left: 5px;     
-            @include breakpoint(large) {
-                padding-left: 5px* $rate * $largeRate;
-            }
-            @include breakpoint(xlarge) {
-                padding-left: 5px* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                padding-left: 5px* $rate;
-            }      
-        }
-        .skill-body{
-            @include breakpoint(large) {
-                 padding-left: 55px* $rate * $largeRate;
-            }
-            @include breakpoint(xlarge) {
-                 padding-left: 55px* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                 padding-left: 55px* $rate;
-            }      
-        }
- 
-        .section-heading {
-            @include breakpoint(large) {
-                 font-size: 1.2rem * $html-font-size-conversions* $rate * $largeRate;
-                 margin-bottom: 10px* $rate * $largeRate;
-            }
-            @include breakpoint(xlarge) {
-                 font-size: 1.2rem * $html-font-size-conversions* $rate * $xlargeRate;
-                 margin-bottom: 10px* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                 font-size: 1.2rem * $html-font-size-conversions* $rate;
-                 margin-bottom: 10px* $rate;
-            } 
-        }    
-        .section-sub-title {
-            @include breakpoint(large) {
-                font-size: 12pt* $html-font-size-conversions* $rate * $largeRate;
-                margin-bottom: 4px* $rate * $largeRate;
-            }
-            @include breakpoint(xlarge) {
-                font-size: 12pt* $html-font-size-conversions* $rate * $xlargeRate;
-                margin-bottom: 4px* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                font-size: 12pt* $html-font-size-conversions* $rate;
-                margin-bottom: 4px* $rate;
-            } 
-        }
- 
-    
-        &.resume-html-page .section-sub-sub-title {
-            @include breakpoint(large) {
-                font-size: 12pt* $html-font-size-conversions* $rate * $largeRate;
-            }
-            @include breakpoint(xlarge) {
-                font-size: 12pt* $html-font-size-conversions* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                font-size: 12pt* $html-font-size-conversions* $rate;
-            } 
-        }
-    
-        .section-group {
-            @include breakpoint(large) {
-                padding-bottom: 12.5px* $rate * $largeRate;
-                padding-left:5px* $rate * $largeRate;
-            }
-            @include breakpoint(xlarge) {
-                padding-bottom: 12.5px* $rate * $xlargeRate;
-                padding-left:5px* $rate * $xlargeRate;
-            }
-            @include breakpoint(xxlarge) {
-                padding-bottom: 12.5px* $rate;
-                padding-left:5px* $rate;
-            } 
-        }
-            
-        // .section-summary {
-        //     p,
-        //     li {
-        //         @include breakpoint(large) {
-        //             margin: 0 0 12.5px* $rate * $largeRate;
-        //         }
-        //         @include breakpoint(xlarge) {
-        //             margin: 0 0 12.5px* $rate * $xlargeRate;
-        //         }
-        //         @include breakpoint(xxlarge) {
-        //             margin: 0 0 12.5px* $rate;
-        //         } 
-        //     }
-    
-        //     li {
-        //         margin-left: 50px;
-        //         padding: 0 0 0 5px;
-        //         @include breakpoint(large) {
-        //             margin-left: 50px* $rate * $largeRate;
-        //             padding: 0 0 0 5px* $rate * $largeRate;
-        //         }
-        //         @include breakpoint(xlarge) {
-        //             margin-left: 50px* $rate * $xlargeRate;
-        //             padding: 0 0 0 5px* $rate * $xlargeRate;
-        //         }
-        //         @include breakpoint(xxlarge) {
-        //             margin-left: 50px* $rate;
-        //             padding: 0 0 0 5px* $rate;
-        //         } 
-        //         &.paragraph-bullet-point {
-        //             margin: 0 0 24px;
-        //             padding: 0;
-        //             @include breakpoint(large) {
-        //                 margin: 0 0 24px* $rate * $largeRate;
-        //             }
-        //             @include breakpoint(xlarge) {
-        //                 margin: 0 0 24px* $rate * $xlargeRate;
-        //             }
-        //             @include breakpoint(xxlarge) {
-        //                 margin: 0 0 24px* $rate;
-        //             } 
-        //         }
-    
-        //         &:last-of-type {
-        //             margin-bottom: 0 !important;
-        //         }
-        //     }
-        // }
-    }
-    
-}
-
-.print-paper {
-    background-color: #fff;
-    font-size: 12pt * $html-font-size-conversions;
-    font-weight: normal;
-    left: 0;
-    line-height: 16pt *$html-font-size-conversions;
-    margin: 0;
-    padding: 75px;
   }
-.heading-name{
-    margin-top:75px;
-    margin-bottom:30px;
-}
-
-.resume-gold-standard {
-    // font-family: 'OpenSans300', sans-serif;
-    p,
-    li {
-        font-size: 12pt;
-        line-height: 16pt;
+  .heading-name {
+    @include breakpoint(large) {
+      margin-top: 75px * $rate * $largeRate;
+      margin-bottom: 30px * $rate * $largeRate;
     }
-    .heading-bold {
-        font-weight: bold;
+    @include breakpoint(xlarge) {
+      margin-top: 75px * $rate * $xlargeRate;
+      margin-bottom: 30px * $rate * $xlargeRate;
     }
-
+    @include breakpoint(xxlarge) {
+      margin-top: 75px * $rate;
+      margin-bottom: 30px * $rate;
+    }
+  }
+  .print-paper {
+    @include breakpoint(large) {
+      font-size: 12pt * $html-font-size-conversions * $rate * $largeRate;
+      line-height: 16pt * $html-font-size-conversions * $rate * $largeRate;
+      padding: 75px * $rate * $largeRate;
+      width: 666px * $rate * $largeRate;
+    }
+    @include breakpoint(xlarge) {
+      font-size: 12pt * $html-font-size-conversions * $rate * $xlargeRate;
+      line-height: 16pt * $html-font-size-conversions * $rate * $xlargeRate;
+      padding: 75px * $rate * $xlargeRate;
+      width: 666px * $rate * $xlargeRate;
+    }
+    @include breakpoint(xxlarge) {
+      font-size: 12pt * $html-font-size-conversions * $rate;
+      line-height: 16pt * $html-font-size-conversions * $rate;
+      padding: 75px * $rate;
+      width: 666px * $rate;
+    }
+  }
+  .resume-gold-standard {
     &.resume-html-page {
-        p,
-        li {
-            font-size: 12pt * $html-font-size-conversions;
-            line-height: 16pt * $html-font-size-conversions;
-            margin-bottom: .75rem ;
-     
-            &:last-of-type {
-                margin-bottom: 0 !important;
-            }
+      ul {
+        @include breakpoint(large) {
+          margin-bottom: 2rem * $rate * $largeRate;
         }
+        @include breakpoint(xlarge) {
+          margin-bottom: 2rem * $rate * $xlargeRate;
+        }
+        @include breakpoint(xxlarge) {
+          margin-bottom: 2rem * $rate;
+        }
+      }
+
+      p,
+      li {
+        @include breakpoint(large) {
+          font-size: 12pt * $html-font-size-conversions * $rate * $largeRate;
+          line-height: 16pt * $html-font-size-conversions * $rate * $largeRate;
+          margin-bottom: 0.75rem * $rate * $largeRate;
+        }
+        @include breakpoint(xlarge) {
+          font-size: 12pt * $html-font-size-conversions * $rate * $xlargeRate;
+          line-height: 16pt * $html-font-size-conversions * $rate * $xlargeRate;
+          margin-bottom: 0.75rem * $rate * $xlargeRate;
+        }
+        @include breakpoint(xxlarge) {
+          font-size: 12pt * $html-font-size-conversions * $rate;
+          line-height: 16pt * $html-font-size-conversions * $rate;
+          margin-bottom: 0.75rem * $rate;
+        }
+      }
+      .resume-title {
+        font-weight: 300;
+        @include breakpoint(large) {
+          font-size: 24pt * $rate * $largeRate * $html-font-size-conversions;
+          line-height: 30pt * $rate * $largeRate;
+        }
+        @include breakpoint(xlarge) {
+          font-size: 24pt * $rate * $xlargeRate * $html-font-size-conversions;
+          line-height: 30pt * $rate * $xlargeRate;
+        }
+        @include breakpoint(xxlarge) {
+          font-size: 24pt * $rate * $html-font-size-conversions;
+          font-weight: 400;
+          line-height: 30pt * $rate;
+        }
+      }
     }
 
     &.resume-html-page .header-contact-info {
-        .contact-info {
-            font-size: 10pt * $html-font-size-conversions;
-            line-height: 20px * $html-font-size-conversions;
+      .contact-info {
+        @include breakpoint(large) {
+          font-size: 10pt * $html-font-size-conversions * $rate * $largeRate;
+          line-height: 20px * $html-font-size-conversions * $rate * $largeRate;
         }
+        @include breakpoint(xlarge) {
+          font-size: 10pt * $html-font-size-conversions * $rate * $xlargeRate;
+          line-height: 20px * $html-font-size-conversions * $rate * $xlargeRate;
+        }
+        @include breakpoint(xxlarge) {
+          font-size: 10pt * $html-font-size-conversions;
+          line-height: 20px * $rate;
+        }
+      }
     }
-  
+
     .resume-section {
-        margin-bottom: 25px;
+      margin-bottom: 25px;
+      @include breakpoint(large) {
+        margin-bottom: 25px * $rate * $largeRate;
+      }
+      @include breakpoint(xlarge) {
+        margin-bottom: 25px * $rate * $xlargeRate;
+      }
+      @include breakpoint(xxlarge) {
+        margin-bottom: 25px * $rate;
+      }
     }
 
-    &.resume-html-page .resume-title {
-        font-size: 24pt * $html-font-size-conversions;
-        display: block;
-        font-weight: 400;
-        margin: 0;
-        white-space: nowrap;
-        line-height: 30pt;
+    .work-experience-description {
+      padding-left: 5px;
+      @include breakpoint(large) {
+        padding-left: 5px * $rate * $largeRate;
+      }
+      @include breakpoint(xlarge) {
+        padding-left: 5px * $rate * $xlargeRate;
+      }
+      @include breakpoint(xxlarge) {
+        padding-left: 5px * $rate;
+      }
+    }
+    .skill-body {
+      @include breakpoint(large) {
+        padding-left: 55px * $rate * $largeRate;
+      }
+      @include breakpoint(xlarge) {
+        padding-left: 55px * $rate * $xlargeRate;
+      }
+      @include breakpoint(xxlarge) {
+        padding-left: 55px * $rate;
+      }
     }
 
-
-    .work-experience-description{
-        padding-left: 5px;
-        
-        li{
-            list-style: square;
-            overflow-wrap: break-word
-        }
-       
-    }
-    .skill-body{
-        box-sizing: border-box;
-        padding-left: 55px;
-    }
-    .skill-column {
-        float: left;
-        width: 33.33%;
-       }
-      
-      /* Clear floats after the columns */
-    .skill-row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
     .section-heading {
-        display: block;
-        // font-family: 'OpenSans300';
-        font-size: 1.2rem * $html-font-size-conversions;
-        margin-bottom: 10px;
+      @include breakpoint(large) {
+        font-size: 1.2rem * $html-font-size-conversions * $rate * $largeRate;
+        margin-bottom: 10px * $rate * $largeRate;
+      }
+      @include breakpoint(xlarge) {
+        font-size: 1.2rem * $html-font-size-conversions * $rate * $xlargeRate;
+        margin-bottom: 10px * $rate * $xlargeRate;
+      }
+      @include breakpoint(xxlarge) {
+        font-size: 1.2rem * $html-font-size-conversions * $rate;
+        margin-bottom: 10px * $rate;
+      }
     }
-
-    .section-title {
-        display: block;
-        font-family: 'OpenSans600';
-        font-size: 16pt;
-        margin-bottom: 4px;
-    }
-
-    &.resume-html-page .section-title {
-        font-size: 16pt * $html-font-size-conversions;
-    }
-
     .section-sub-title {
-        display: block;
-        font-family: 'OpenSans600';
-        font-size: 12pt * $html-font-size-conversions;
-        margin-bottom: 4px;
+      @include breakpoint(large) {
+        font-size: 12pt * $html-font-size-conversions * $rate * $largeRate;
+        margin-bottom: 4px * $rate * $largeRate;
+      }
+      @include breakpoint(xlarge) {
+        font-size: 12pt * $html-font-size-conversions * $rate * $xlargeRate;
+        margin-bottom: 4px * $rate * $xlargeRate;
+      }
+      @include breakpoint(xxlarge) {
+        font-size: 12pt * $html-font-size-conversions * $rate;
+        margin-bottom: 4px * $rate;
+      }
     }
 
-
-    .section-sub-sub-title {
-        color: #555;
-        display: block;
-        font-family: 'OpenSans600';
-        font-size: 12pt * $html-font-size-conversions;
-        margin-bottom: 4px;
+    &.resume-html-page .section-sub-sub-title {
+      @include breakpoint(large) {
+        font-size: 12pt * $html-font-size-conversions * $rate * $largeRate;
+      }
+      @include breakpoint(xlarge) {
+        font-size: 12pt * $html-font-size-conversions * $rate * $xlargeRate;
+      }
+      @include breakpoint(xxlarge) {
+        font-size: 12pt * $html-font-size-conversions * $rate;
+      }
     }
 
     .section-group {
-        padding-bottom: 12.5px;
-        padding-left:5px;
+      @include breakpoint(large) {
+        padding-bottom: 12.5px * $rate * $largeRate;
+        padding-left: 5px * $rate * $largeRate;
+      }
+      @include breakpoint(xlarge) {
+        padding-bottom: 12.5px * $rate * $xlargeRate;
+        padding-left: 5px * $rate * $xlargeRate;
+      }
+      @include breakpoint(xxlarge) {
+        padding-bottom: 12.5px * $rate;
+        padding-left: 5px * $rate;
+      }
     }
-        
-    // .section-summary {
-    //      ul,
-    //     ol {
-    //         margin: 0;
-    //         padding: 0;
-    //     }
 
+    .summary-list-item p {
+      word-break: break-word;
+    }
+
+    // .section-summary {
     //     p,
     //     li {
-    //         margin: 0 0 12.5px;
-    //         white-space: pre-line;
-    //         overflow-wrap: break-word;
-
-    //         &:last-of-type {
-    //             margin-bottom: 0;
+    //         @include breakpoint(large) {
+    //             margin: 0 0 12.5px* $rate * $largeRate;
+    //         }
+    //         @include breakpoint(xlarge) {
+    //             margin: 0 0 12.5px* $rate * $xlargeRate;
+    //         }
+    //         @include breakpoint(xxlarge) {
+    //             margin: 0 0 12.5px* $rate;
     //         }
     //     }
 
     //     li {
-    //         list-style: square;
     //         margin-left: 50px;
     //         padding: 0 0 0 5px;
-
+    //         @include breakpoint(large) {
+    //             margin-left: 50px* $rate * $largeRate;
+    //             padding: 0 0 0 5px* $rate * $largeRate;
+    //         }
+    //         @include breakpoint(xlarge) {
+    //             margin-left: 50px* $rate * $xlargeRate;
+    //             padding: 0 0 0 5px* $rate * $xlargeRate;
+    //         }
+    //         @include breakpoint(xxlarge) {
+    //             margin-left: 50px* $rate;
+    //             padding: 0 0 0 5px* $rate;
+    //         }
     //         &.paragraph-bullet-point {
-    //             list-style: none;
     //             margin: 0 0 24px;
     //             padding: 0;
+    //             @include breakpoint(large) {
+    //                 margin: 0 0 24px* $rate * $largeRate;
+    //             }
+    //             @include breakpoint(xlarge) {
+    //                 margin: 0 0 24px* $rate * $xlargeRate;
+    //             }
+    //             @include breakpoint(xxlarge) {
+    //                 margin: 0 0 24px* $rate;
+    //             }
     //         }
 
     //         &:last-of-type {
     //             margin-bottom: 0 !important;
     //         }
     //     }
-
-    //     .bulletless-list {
-    //         list-style: none;
-    //         margin: 0;
-
-    //         li {
-    //             list-style: none;
-    //             margin: 6px 0;
-    //         }
-    //     }
     // }
+  }
+}
+
+.print-paper {
+  background-color: #fff;
+  font-size: 12pt * $html-font-size-conversions;
+  font-weight: normal;
+  left: 0;
+  line-height: 16pt * $html-font-size-conversions;
+  margin: 0;
+  padding: 75px;
+}
+.heading-name {
+  margin-top: 75px;
+  margin-bottom: 30px;
+}
+
+.resume-gold-standard {
+  // font-family: 'OpenSans300', sans-serif;
+  p,
+  li {
+    font-size: 12pt;
+    line-height: 16pt;
+  }
+  .heading-bold {
+    font-weight: bold;
+  }
+
+  &.resume-html-page {
+    p,
+    li {
+      font-size: 12pt * $html-font-size-conversions;
+      line-height: 16pt * $html-font-size-conversions;
+      margin-bottom: 0.75rem;
+
+      &:last-of-type {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  &.resume-html-page .header-contact-info {
+    .contact-info {
+      font-size: 10pt * $html-font-size-conversions;
+      line-height: 20px * $html-font-size-conversions;
+    }
+  }
+
+  .resume-section {
+    margin-bottom: 25px;
+  }
+
+  &.resume-html-page .resume-title {
+    font-size: 24pt * $html-font-size-conversions;
+    display: block;
+    font-weight: 400;
+    margin: 0;
+    white-space: nowrap;
+    line-height: 30pt;
+  }
+
+  .work-experience-description {
+    padding-left: 5px;
+
+    li {
+      list-style: square;
+      overflow-wrap: break-word;
+    }
+  }
+  .skill-body {
+    box-sizing: border-box;
+    padding-left: 55px;
+  }
+  .skill-column {
+    float: left;
+    width: 33.33%;
+  }
+
+  /* Clear floats after the columns */
+  .skill-row:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  .section-heading {
+    display: block;
+    // font-family: 'OpenSans300';
+    font-size: 1.2rem * $html-font-size-conversions;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    display: block;
+    font-family: 'OpenSans600';
+    font-size: 16pt;
+    margin-bottom: 4px;
+  }
+
+  &.resume-html-page .section-title {
+    font-size: 16pt * $html-font-size-conversions;
+  }
+
+  .section-sub-title {
+    display: block;
+    font-family: 'OpenSans600';
+    font-size: 12pt * $html-font-size-conversions;
+    margin-bottom: 4px;
+  }
+
+  .section-sub-sub-title {
+    color: #555;
+    display: block;
+    font-family: 'OpenSans600';
+    font-size: 12pt * $html-font-size-conversions;
+    margin-bottom: 4px;
+  }
+
+  .section-group {
+    padding-bottom: 12.5px;
+    padding-left: 5px;
+  }
+
+  // .section-summary {
+  //      ul,
+  //     ol {
+  //         margin: 0;
+  //         padding: 0;
+  //     }
+
+  //     p,
+  //     li {
+  //         margin: 0 0 12.5px;
+  //         white-space: pre-line;
+  //         overflow-wrap: break-word;
+
+  //         &:last-of-type {
+  //             margin-bottom: 0;
+  //         }
+  //     }
+
+  //     li {
+  //         list-style: square;
+  //         margin-left: 50px;
+  //         padding: 0 0 0 5px;
+
+  //         &.paragraph-bullet-point {
+  //             list-style: none;
+  //             margin: 0 0 24px;
+  //             padding: 0;
+  //         }
+
+  //         &:last-of-type {
+  //             margin-bottom: 0 !important;
+  //         }
+  //     }
+
+  //     .bulletless-list {
+  //         list-style: none;
+  //         margin: 0;
+
+  //         li {
+  //             list-style: none;
+  //             margin: 6px 0;
+  //         }
+  //     }
+  // }
 }
