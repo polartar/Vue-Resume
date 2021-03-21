@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="isSaving">
     <div class="resume-step-heading-container">
       <h3 class="resume-step-heading">Contact Information</h3>
     </div>
@@ -230,7 +230,8 @@ export default {
     return {
       newPhone: '',
       states,
-      countries
+      countries,
+      isSaving: false
     };
   },
  
@@ -334,6 +335,7 @@ export default {
         return;
       }
 
+      this.isSaving = true;
       // Update User Info
       let updatedUser = this.$store.state.resume.user;
       updatedUser.first_name = this.firstName;
@@ -362,6 +364,7 @@ export default {
           this.$router.push({ name: 'resume-summary', query: this.$route.query });
       }
       // await this.updateRefreshPreview();
+      this.isSaving = false;
     },
     createUserPhone: async function() {
       let phone = await this.$store.dispatch('axiosPostRequest', {
