@@ -89,10 +89,10 @@
         </div>
     
         <div class="full-width-table resume-section" ref='education' v-if="resume && resume.resume_educations[0]" >
-          
                 <div>
                     <td><span class="section-heading " ref='education_title'>Education</span></td>
                 </div>
+
                 <div  v-for="education in resume.resume_educations" :key="education.id" ref='education_child' class="education-section">
                     <div class="flex ">
                         <div class="section-sub-title">
@@ -108,7 +108,6 @@
                     </div>
                   
                  </div>
-            
         </div>
        
         <div class="full-width-table " ref='hobby'  >
@@ -213,7 +212,7 @@
                     }
 
                     if (skill_first_end > page_bottom + offset){
-                        this.insertBreak(page_bottom, start, skill_top, this.$refs.skill, this.$refs.skill_title, "div");
+                        this.insertBreak(page_bottom, start, skill_top, this.$refs.summary );
                     }
                 }
                 if(Array.isArray(skill_childs)){
@@ -231,7 +230,7 @@
                     }
 
                     if (work_first_end > page_bottom + offset){
-                        this.insertBreak(page_bottom, start, work_top, this.$refs.skill, this.$refs.work_title, "div");
+                        this.insertBreak(page_bottom, start, work_top, this.$refs.skill );
                     }
                 }
               
@@ -239,30 +238,48 @@
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs)
                 }
 
-                if(this.resume.resume_educations[0] && this.$refs.education_title){
-                    const education_top = this.$refs.education_title.getBoundingClientRect().top
-                    const education_childs = this.$refs.education_child;
-                    for(let index = 1; index < 3 ; index ++)
-                    {
-                        if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
-                            let education_first_end = 0;
-                            if(Array.isArray(education_childs)){
-                                education_first_end = education_childs[0].getBoundingClientRect().bottom;
-                            }else{
-                                education_first_end = education_childs.getBoundingClientRect().bottom;
-                            }
+                // if(this.resume.resume_educations[0] && this.$refs.education){
+                //     const education_top = this.$refs.education.getBoundingClientRect().top
+                //     const education_bottom = this.$refs.education.getBoundingClientRect().bottom
+                //     const education_childs = this.$refs.education_child;
+                //     for(let index = 1; index < 3 ; index ++)
+                //     {
+                        // if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
+                        //     let education_first_end = 0;
+                        //     if(Array.isArray(education_childs)){
+                        //         education_first_end = education_childs[0].getBoundingClientRect().bottom;
+                        //     }else{
+                        //         education_first_end = education_childs.getBoundingClientRect().bottom;
+                        //     }
 
-                            if (education_first_end > page_bottom * index + offset){
-                                this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education_title, "div");
-                            }
+                        //     if (education_first_end > page_bottom * index + offset){
+                        //         this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education_title, "div");
+                        //     }
+                        // }
+                        
+                        // if( (education_top  < page_bottom * index + offset)  && (education_bottom  > page_bottom * index + offset )){
+                        //     this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education, "div");
+                        // }
+
+                    // }
+                
+                    // if(Array.isArray(education_childs)){
+                    //     this.insertBreakToBlock(page_bottom, start, offset, education_childs)
+                    // }
+                // }
+                
+                const education_top = this.$refs.education.getBoundingClientRect().top
+                for(let index = 1; index <= 3 ; index ++)
+                {
+                    if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
+                        const education_end = this.$refs.education.getBoundingClientRect().bottom;
+
+                        if (education_end > page_bottom * index + offset){
+                            this.insertBreak(page_bottom * index, start, education_top, this.$refs.work);
                         }
                     }
-                
-                    if(Array.isArray(education_childs)){
-                        this.insertBreakToBlock(page_bottom, start, offset, education_childs)
-                    }
                 }
-                
+
                 const hobby_top = this.$refs.hobby.getBoundingClientRect().top
                 for(let index = 1; index <= 3 ; index ++)
                 {
@@ -270,7 +287,7 @@
                         const hobby_end = this.$refs.hobby.getBoundingClientRect().bottom;
 
                         if (hobby_end > page_bottom * index + offset){
-                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.skill, this.$refs.hobby, "div");
+                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.education);
                         }
                     }
                 }
