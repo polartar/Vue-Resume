@@ -1,61 +1,96 @@
-.combination{
-    .html2pdf__page-break{
-        box-shadow: 82px 0 0 #f3f5f3, -110px 0 0 #f3f5f3;
+.combination {
+  .html2pdf__page-break {
+    box-shadow: 82px 0 0 #f3f5f3, -110px 0 0 #f3f5f3;
+  }
+  .skill-row {
+    word-break: break-all;
+  }
+  .education-description {
+    padding-left: 100px;
+
+    p {
+      word-break: break-word;
     }
-    .skill-row{
-        word-break: break-all;
-    }
+  }
+  .education-section {
+    margin-bottom: 20px;
+  }
 }
-.resume-combination {
-    .print-paper {
-        padding: 72px 72px 0 72px;
-        background-color: white;
-        font-family: "Helvetica Neue", sans-serif;
-        font-size: 12pt;
-        font-weight: normal;
+.resume-preview-container {
+  .education-description {
+    @include breakpoint(large) {
+      padding-left: 100px * $rate * $largeRate;
     }
-
-    .section {
-        padding-bottom: 15px;
+    @include breakpoint(xlarge) {
+      padding-left: 100px * $rate * $xlargeRate;
     }
-
-    .resume-title {
-        font-size: 20pt;
-        display: block;
+    @include breakpoint(xxlarge) {
+      padding-left: 100px * $rate;
     }
-
-    .contact-info {
-        font-size: 9pt;
-        text-align: right;
-        display: block;
+  }
+  .education-section {
+    @include breakpoint(large) {
+      margin-bottom: 20px * $rate * $largeRate;
     }
-
-    .heading {
-        font-size: 14pt;
-        margin-top: 40px;
-        display: block;
+    @include breakpoint(xlarge) {
+      margin-bottom: 20px * $rate * $xlargeRate;
     }
-
-    .heading-bold {
-        font-weight: bold;
+    @include breakpoint(xxlarge) {
+      margin-bottom: 20px * $rate;
     }
-
-    .work-experience-company {
-        display: block;
-    }
-
-    .work-experience-title {
-        display: block;
-        text-align: center;
-    }
-
-    .work-experience-description, .skill-list-item {
-        font-family: "Helvetica Neue", sans-serif;
-        font-size: 12pt;
-    }
-
-    .work-experience-description-list {
-        margin-bottom: 0;
-        margin-top: 10px;
-    }
+  }
 }
+// .resume-combination {
+//   .print-paper {
+//     padding: 72px 72px 0 72px;
+//     background-color: white;
+//     font-family: 'Helvetica Neue', sans-serif;
+//     font-size: 12pt;
+//     font-weight: normal;
+//   }
+
+//   .section {
+//     padding-bottom: 15px;
+//   }
+
+//   .resume-title {
+//     font-size: 20pt;
+//     display: block;
+//   }
+
+//   .contact-info {
+//     font-size: 9pt;
+//     text-align: right;
+//     display: block;
+//   }
+
+//   .heading {
+//     font-size: 14pt;
+//     margin-top: 40px;
+//     display: block;
+//   }
+
+//   .heading-bold {
+//     font-weight: bold;
+//   }
+
+//   .work-experience-company {
+//     display: block;
+//   }
+
+//   .work-experience-title {
+//     display: block;
+//     text-align: center;
+//   }
+
+//   .work-experience-description,
+//   .skill-list-item {
+//     font-family: 'Helvetica Neue', sans-serif;
+//     font-size: 12pt;
+//   }
+
+//   .work-experience-description-list {
+//     margin-bottom: 0;
+//     margin-top: 10px;
+//   }
+// }

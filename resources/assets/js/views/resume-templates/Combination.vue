@@ -93,22 +93,20 @@
                 <div>
                     <td><span class="section-heading " ref='education_title'>Education</span></td>
                 </div>
-                <div  v-for="education in resume.resume_educations" :key="education.id" ref='education_child'>
-                    <table class="full-width-table section-group " align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td><span class="section-sub-title">{{ education.degree_received }} in {{ education.field_of_study }}</span></td>
-                            <td class="text-right"><span class="section-dates">{{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>
-                            <td class="text-right"></td>
-                        </tr>
-                        <!-- {{-- <tr>
-                            <td colspan="2" class="section-summary" v-if="education.educationDescriptions.length > 0">
-                                    <p v-for="(description, id) in education.educationDescriptions" v-bind:key="id">{{ description.description }}</p>
-                            </td>
-                        </tr> --}} -->
-                    </table>
+                <div  v-for="education in resume.resume_educations" :key="education.id" ref='education_child' class="education-section">
+                    <div class="flex ">
+                        <div class="section-sub-title">
+                            {{ education.school_name }}. 
+                        </div>
+                        <div class="text-right section-dates">
+                            {{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}
+                        </div>
+                    </div>  
+
+                    <div class="education-description" v-if="education.education_descriptions.length > 0 " >
+                        <p v-for="(description, id) in education.education_descriptions" v-bind:key="id">{{ description.description }}</p>
+                    </div>
+                  
                  </div>
             
         </div>

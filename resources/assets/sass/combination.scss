@@ -1,12 +1,19 @@
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
+@import '~foundation-sites/scss/foundation';
+@import 'foundation/settings';
+@import 'foundation/adjustments';
+
+@import '~foundation-sites/scss/foundation';
+
+@include foundation-global-styles;
 
 @import 'fonts/cheeky-fonts';
 @import 'bits/colors';
@@ -19,5 +26,5 @@ html {
 @import 'resumes/combination';
 
 #__bs_notify__ {
-    display: none !important;
+  display: none !important;
 }
