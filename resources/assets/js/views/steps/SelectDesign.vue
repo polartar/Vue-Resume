@@ -48,10 +48,6 @@
                 designImages: DesignImages
             }
         },
-        mounted() {
-            console.log(this.designImages)
-        },
-
         methods: {
             async onSave(){
                 const success = await this.$store.dispatch('axiosPutRequest', {
