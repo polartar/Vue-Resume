@@ -159,7 +159,6 @@
            
         },
         created(){
-           
             window.addEventListener("resize", this.onResize);
         },
         mounted(){

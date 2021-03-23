@@ -149,7 +149,7 @@
     export default {
         data(){
             return {
-                pageBottom: 0,
+                pageBottom: 1,
                 padding:0,
             }
         },

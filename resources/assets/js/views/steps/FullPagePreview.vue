@@ -68,7 +68,7 @@
                     transform: "translate(-50%, -50%) "  + "scale(.5)",
                     transformOrigin: "100% 100%"
                 },
-                design_type: "Golden Standard",
+                design_type: "Gold Standard",
             }
         },
         computed: {
