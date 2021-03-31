@@ -144,6 +144,9 @@
             },
             makePageBreak(){
                 this.removePageBreak()
+                if(!this.$refs.resume_body) {
+                    return;
+                }
                 const start = this.$refs.resume_body.getBoundingClientRect().top;
                 const page_bottom = this.pageBottom;
                 const offset =  start - this.padding;
@@ -205,6 +208,7 @@
             },
             onResize(){
                 let page_bottom = 0
+                
                 if(this.$refs.resume_body && this.$refs.resume_body.offsetWidth > 800)
                 {
                     page_bottom = 1056;
@@ -216,7 +220,7 @@
                     this.padding =63.234;
                     this.scale = 0.84313;
                 } else if( window.innerWidth >= 1250){
-                    page_bottom = 890.35 * 6 / 6;
+                    page_bottom = 890.35 * 5 / 6;
                     this.padding =63.234 * 5 / 6;
                     this.scale = 0.84313 * 5 / 6;
                 }else{
@@ -227,7 +231,6 @@
 
                 if(this.pageBottom !== page_bottom){
                     this.pageBottom = page_bottom
-                    
                 }
                 this.makePageBreak();
             },

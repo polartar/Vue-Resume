@@ -41,7 +41,8 @@
                   <Combination v-if="designType==='Combination'"/>
                   <Recruiter v-if="designType==='Recruiter'"/>
                   <Sidebar v-if="designType==='Sidebar'"/>
-                  <GoldenStandard v-if="designType==='Gold Standard' || designType==='Functional'" />
+                  <GoldenStandard v-if="designType==='Gold Standard'" />
+                  <Functional v-if="designType==='Functional'" />
               </div>
         </vue-html2pdf>
           
@@ -57,11 +58,13 @@
     import Combination from "../resume-templates/Combination";
     import Recruiter from "../resume-templates/Recruiter";
     import Sidebar from "../resume-templates/Sidebar";
+    import Functional from '../resume-templates/Functional';
     import debounce from 'lodash.debounce';
 
     export default {
-        components: {Recruiter, GoldenStandard, Combination, Sidebar, VueHtml2pdf},
+        components: {Recruiter, GoldenStandard, Combination, Sidebar, Functional, VueHtml2pdf},
         data() {
+                Functional
             return {
                 scrollHeight:0,
                 scaleStylesObject: {

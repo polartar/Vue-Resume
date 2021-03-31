@@ -77,7 +77,6 @@
                                         {{item}}
                                     </li>
                                 </ul>
-                                <!-- <p v-for="(description, index) in work.resume_descriptions" class="work-experience-description" :key="index">{{description.description}}</p> -->
                             </td>
                         </tr>
                     </table>
@@ -101,11 +100,6 @@
                             <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>
                             <td class="text-right"></td>
                         </tr>
-                        <!-- {{-- <tr>
-                            <td colspan="2" class="section-summary" v-if="education.educationDescriptions.length > 0">
-                                    <p v-for="(description, id) in education.educationDescriptions" v-bind:key="id">{{ description.description }}</p>
-                            </td>
-                        </tr> --}} -->
                     </table>
                  </div>
             </div>
@@ -139,6 +133,7 @@
             return {
                 pageBottom: 0,
                 padding:0,
+                scale: 1
             }
         },
         computed: {
@@ -230,7 +225,7 @@
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs)
                 }
 
-                if(this.resume.resume_educations[0] && this.$refs.education_title){
+                 if(this.resume.resume_educations[0] && this.$refs.education_title){
                     const education_top = this.$refs.work.getBoundingClientRect().bottom + 10;
                     const education_childs = this.$refs.education_child;
                     for(let index = 1; index < 3 ; index ++)
@@ -242,7 +237,6 @@
                             }else{
                                 education_first_end = education_childs.getBoundingClientRect().bottom;
                             }
-
                             if (education_first_end > page_bottom * index + offset){
                                 this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education_title, "div");
                             }
@@ -253,15 +247,14 @@
                         this.insertBreakToBlock(page_bottom, start, offset, education_childs)
                     }
                 }
-                
-                const hobby_top = this.$refs.hobby.getBoundingClientRect().top
+
+                const hobby_bottom = this.$refs.hobby.getBoundingClientRect().bottom;
+                const education_bottom = this.$refs.education.getBoundingClientRect().bottom;
                 for(let index = 1; index <= 3 ; index ++)
                 {
-                    if( (hobby_top  < page_bottom * index + offset)  && (hobby_top  > page_bottom * (index-1) )){
-                        const hobby_end = this.$refs.hobby.getBoundingClientRect().bottom;
-
-                        if (hobby_end > page_bottom * index + offset){
-                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.education, this.$refs.hobby, "div");
+                    if( (education_bottom  < page_bottom * index + offset)  && (education_bottom  > page_bottom * (index-1) )) {
+                        if (hobby_bottom > page_bottom * index + offset) {
+                            this.insertBreak(page_bottom * index, start, education_bottom, this.$refs.education);
                         }
                     }
                 }
@@ -271,25 +264,28 @@
                 if(this.$refs.resume_body && this.$refs.resume_body.offsetWidth > 800)
                 {
                     page_bottom = 1056;
+                    this.scale = 1;
                     this.padding = 75;
                 }
                 else if(window.innerWidth >=1500){
                     page_bottom = 890.35;
                     this.padding =63.234;
+                    this.scale = 0.84313;
                 } else if( window.innerWidth >= 1250){
-                    page_bottom = 890.35 * 6 / 6;
+                    page_bottom = 890.35 * 5 / 6;
                     this.padding =63.234 * 5 / 6;
+                    this.scale = 0.84313 * 5 / 6;
                 }else{
                     page_bottom = 890.35 * 2 / 3;
                     this.padding =63.234 * 2 / 3;
+                    this.scale = 0.84313 * 2 / 3;
                 }
                
-                if(this.pageBottom !== page_bottom)
+                // if(this.pageBottom !== page_bottom)
                     this.pageBottom = page_bottom
                     this.makePageBreak();
             },
             insertBreakToBlock(page_bottom, start, offset, childs){
-              
                 if(Array.isArray(childs)){
                     childs.map( ( element, index ) => {
                         if( index !== 0 ){
@@ -318,7 +314,7 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, next_node){
-                const margin_top = page_bottom - current_top + page_start - 35;
+                const margin_top = (page_bottom - current_top + page_start) * this.scale;
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")
                 new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);

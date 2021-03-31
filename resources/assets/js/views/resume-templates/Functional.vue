@@ -1,5 +1,5 @@
 <template>
-    <div class='print-paper resume-gold-standard resume-html-page combination' ref='resume_body'>
+    <div class='print-paper resume-gold-standard resume-html-page' ref='resume_body'>
         <div class="flex">
             <div class="text-left">
                 <p class="resume-title">{{ fullName }}</p>
@@ -44,32 +44,19 @@
             </tbody>
         </table>
 
-        <div class="full-width-table resume-section" ref='skill'   >
-            <div class="section-heading " >Key Industry Skills</div>
-
-            <div class="skill-row">
-                <!-- <ul class='' > -->
-                    <ul  > 
-                        <li ref='skill_child'  v-for="skill in resume.resume_skill" v-bind:key="skill.id"> {{ skill.name }}</li> 
-                    </ul>
-                <!-- </ul> -->
-            </div>
-        </div>
-
         <div class="full-width-table resume-section" ref='work'  >
        
                 <div>
-                    <span class="section-heading " ref='work_title'>Relevant Work Experience</span> 
+                    <span class="section-heading " ref='work_title'>Work Experience</span> 
                 </div>
                 <div v-for="work in resume && resume.resume_work_experiences" class="section" :key="work.id" ref="work_child">
                      
                     <table class="full-width-table section-group" align="center" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td><span class="section-sub-title">{{ work.position_title }}</span></td>
-                            <td class="text-right"><span class="section-dates">{{ dateFormat(work.position_start_date)}} to {{ work.position_end_date ? dateFormat(work.position_end_date) : 'present' }}</span></td>
+                            <td><span class="section-sub-title">Transferable or Technical Skill</span></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><span class="section-sub-sub-title">{{ work.position_company }}</span></td>
+                            <td colspan="2"><span class="section-sub-sub-title">{{ work.position_title }} at {{ work.position_company }}</span></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="work-experience-description" v-for="(description, index) in work.resume_descriptions" :key="index">
@@ -88,27 +75,37 @@
         </div>
     
         <div class="full-width-table resume-section" ref='education' v-if="resume && resume.resume_educations[0]" >
+          
                 <div>
                     <td><span class="section-heading " ref='education_title'>Education</span></td>
                 </div>
+                <div  v-for="education in resume.resume_educations" :key="education.id" ref='education_child'>
+                    <table class="full-width-table section-group " align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><span class="section-sub-title">{{ education.degree_received }} in {{ education.field_of_study }}</span></td>
+                            <td class="text-right"><span class="section-dates">{{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>
+                            <td class="text-right"></td>
+                        </tr>
+                    </table>
+                 </div>
+            
+        </div>
 
-                <div  v-for="education in resume.resume_educations" :key="education.id" ref='education_child' class="education-section">
-                    <div class="flex ">
-                        <div class="section-sub-title">
-                            {{ education.school_name }}. 
+        <div class="full-width-table resume-section" ref='skill'   >
+               <div class="section-heading" >Skills</div>
+               <div class="skill-body">
+                    <div class="skill-row">
+                        <div class='skill-column'  v-for="skill in resume.resume_skill" v-bind:key="skill.id">
+                            {{ skill.name }}
                         </div>
-                        <div class="text-right section-dates">
-                            {{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}
-                        </div>
-                    </div>  
-
-                    <div class="education-description" v-if="education.education_descriptions.length > 0 " >
-                        <p v-for="(description, id) in education.education_descriptions" v-bind:key="id">{{ description.description }}</p>
                     </div>
-                  
                  </div>
         </div>
-       
+
+        
         <div class="full-width-table " ref='hobby'  >
                 <div><span class="section-heading">Affiliations &amp; Hobbies</span></div>
                 <div>
@@ -135,8 +132,8 @@
     export default {
         data(){
             return {
-                pageBottom: 0,
-                padding:0,
+                pageBottom: 1,
+                padding: 0,
                 scale: 1
             }
         },
@@ -154,8 +151,6 @@
             ...mapGetters([
                  'fullName',
             ]),
-
-           
         },
         created(){
             window.addEventListener("resize", this.onResize);
@@ -165,9 +160,10 @@
                 this.onResize();
             })
         },
+
         updated(){
             this.$nextTick(function () {
-                this.makePageBreak();
+                this.onResize();
             })
         },
         methods: {
@@ -177,46 +173,29 @@
                 let len = breaks.length;
                 if(breaks && len > 0)
                 {
-                     while(breaks[0])
+                    while(breaks[0])
                         breaks[0].remove();
                 }
-
+                
                 let headings = document.getElementsByClassName("heading-name");
                 len = headings.length;
                 if(headings && len > 0)
                 {
-                     while(headings[0])
-                        headings[0].remove(); 
+                   while(headings[0])
+                        headings[0].remove();
                 }
                
             },
             makePageBreak(){
                 this.removePageBreak();
-                
-                if(!this.$refs.resume_body) return;
+                if(!this.$refs.resume_body) {
+                    return;
+                }
                 const start = this.$refs.resume_body.getBoundingClientRect().top;
                 const page_bottom = this.pageBottom;
                 const offset =  start - this.padding;
 
-                const skill_top = this.$refs.skill.getBoundingClientRect().top
-                const skill_childs = this.$refs.skill_child;
-                if( (skill_top  < page_bottom + offset) && skill_childs) {
-                    let skill_first_end = 0;
-                     if(Array.isArray(skill_childs)){
-                        skill_first_end = skill_childs[0].getBoundingClientRect().bottom;
-                    }else{
-                        skill_first_end = skill_childs.getBoundingClientRect().bottom;
-                    }
-
-                    if (skill_first_end > page_bottom + offset){
-                        this.insertBreak(page_bottom, start, skill_top, this.$refs.summary );
-                    }
-                }
-                if(Array.isArray(skill_childs)){
-                    this.insertBreakToBlock(page_bottom, start, offset, skill_childs)
-                }
-
-                const work_top = this.$refs.skill.getBoundingClientRect().bottom + 10
+                const work_top = this.$refs.work_title.getBoundingClientRect().top
                 const work_childs = this.$refs.work_child;
                 if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;
@@ -227,7 +206,7 @@
                     }
 
                     if (work_first_end > page_bottom + offset){
-                        this.insertBreak(page_bottom, start, work_top, this.$refs.skill );
+                        this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
                     }
                 }
               
@@ -235,15 +214,8 @@
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs)
                 }
 
-                if(this.resume.resume_educations[0] && this.$refs.education_title){
-                    let education_top;
-                    if(this.$refs.work){
-                        education_top = this.$refs.work.getBoundingClientRect().bottom
-                        education_top += 10;
-                    }
-                    else
-                        education_top = this.$refs.education_title.getBoundingClientRect().top
-
+                 if(this.resume.resume_educations[0] && this.$refs.education_title){
+                    const education_top = this.$refs.work.getBoundingClientRect().bottom + 10;
                     const education_childs = this.$refs.education_child;
                     for(let index = 1; index < 3 ; index ++)
                     {
@@ -254,7 +226,6 @@
                             }else{
                                 education_first_end = education_childs.getBoundingClientRect().bottom;
                             }
-
                             if (education_first_end > page_bottom * index + offset){
                                 this.insertBreak(page_bottom * index, start, education_top, this.$refs.work, this.$refs.education_title, "div");
                             }
@@ -265,7 +236,6 @@
                         this.insertBreakToBlock(page_bottom, start, offset, education_childs)
                     }
                 }
-                
                 // const education_top = this.$refs.education.getBoundingClientRect().top
                 // for(let index = 1; index <= 3 ; index ++)
                 // {
@@ -278,21 +248,40 @@
                 //     }
                 // }
 
-                const hobby_top = this.$refs.education.getBoundingClientRect().bottom + 10
+                let skill_top;
+                if(this.$refs.education || this.$refs.work){
+                    skill_top = this.$refs.education?this.$refs.education.getBoundingClientRect().bottom : this.$refs.work.getBoundingClientRect().bottom
+                    skill_top += 10
+                }
+                else
+                    skill_top = this.$refs.skill.getBoundingClientRect().top;
+
+                for(let index = 1; index <= 3 ; index ++)
+                {
+                    if( (skill_top  < page_bottom * index + offset)  && (skill_top  > page_bottom * (index-1) )){
+                        const skill_end = this.$refs.skill.getBoundingClientRect().bottom;
+
+                        if (skill_end > page_bottom * index + offset){
+                            this.insertBreak(page_bottom * index, start, skill_top, this.$refs.education, this.$refs.skill, "div");
+                        }
+                    }
+                }
+
+                const hobby_top = this.$refs.skill.getBoundingClientRect().bottom+10
                 for(let index = 1; index <= 3 ; index ++)
                 {
                     if( (hobby_top  < page_bottom * index + offset)  && (hobby_top  > page_bottom * (index-1) )){
                         const hobby_end = this.$refs.hobby.getBoundingClientRect().bottom;
 
                         if (hobby_end > page_bottom * index + offset){
-                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.education);
+                            this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.skill, this.$refs.hobby, "div");
                         }
                     }
                 }
             },
-
             onResize(){
                 let page_bottom = 0
+
                 if(this.$refs.resume_body && this.$refs.resume_body.offsetWidth > 800)
                 {
                     page_bottom = 1056;
@@ -314,10 +303,11 @@
                 }
                
                 // if(this.pageBottom !== page_bottom)
+                {
                     this.pageBottom = page_bottom
                     this.makePageBreak();
+                }
             },
-
             insertBreakToBlock(page_bottom, start, offset, childs){
               
                 if(Array.isArray(childs)){
@@ -348,7 +338,7 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, next_node){
-                const margin_top = (page_bottom - current_top + page_start) * this.scale;
+                 const margin_top = (page_bottom - current_top + page_start) * this.scale;
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")
                 new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
@@ -362,7 +352,6 @@
                 this.insertAfter(name_element, new_node);
                 // next_node.classList.add("page-top");
             },
-
             dateFormat(date){
                 return convertDate(date, this.resume.date_format);
             },

@@ -54,7 +54,7 @@
                     <table class="full-width-table section-group" align="center" cellpadding="0" cellspacing="0">
                         <tr>
                             <td><span class="section-sub-title">{{ work.position_title }}</span></td>
-                            <td v-if="resume.resume_design.name!=='Functional'" class="text-right"><span class="section-dates">{{ dateFormat(work.position_start_date)}} to {{ work.position_end_date ? dateFormat(work.position_end_date) : 'present' }}</span></td>
+                            <td class="text-right"><span class="section-dates">{{ dateFormat(work.position_start_date)}} to {{ work.position_end_date ? dateFormat(work.position_end_date) : 'present' }}</span></td>
                         </tr>
                         <tr>
                             <td colspan="2"><span class="section-sub-sub-title">{{ work.position_company }}</span></td>
@@ -90,11 +90,6 @@
                             <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>
                             <td class="text-right"></td>
                         </tr>
-                        <!-- {{-- <tr>
-                            <td colspan="2" class="section-summary" v-if="education.educationDescriptions.length > 0">
-                                    <p v-for="(description, id) in education.educationDescriptions" v-bind:key="id">{{ description.description }}</p>
-                            </td>
-                        </tr> --}} -->
                     </table>
                  </div>
             
@@ -108,17 +103,6 @@
                             {{ skill.name }}
                         </div>
                     </div>
-                    <!-- <table class="full-width-table" v-if="resume && resume.resume_skill[0]" align="center" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr v-for="skill in resume.resume_skill" v-bind:key="skill.id">
-                                <td>
-                                    <ul class="bulletless-list">
-                                        <li>{{ skill.name }}</li>
-                                    </ul>
-                                    </td>
-                                </tr>
-                        </tbody>
-                    </table> -->
                  </div>
         </div>
 
@@ -151,6 +135,7 @@
             return {
                 pageBottom: 1,
                 padding:0,
+                scale: 1
             }
         },
         computed: {
@@ -172,12 +157,14 @@
             window.addEventListener("resize", this.onResize);
         },
         mounted(){
+            console.log("mounted");
             this.$nextTick(function () {
                 this.onResize();
             })
         },
 
         updated(){
+            console.log("updated")
             this.$nextTick(function () {
                 this.onResize();
             })
@@ -204,6 +191,9 @@
             },
             makePageBreak(){
                 this.removePageBreak();
+                if(!this.$refs.resume_body) {
+                    return;
+                }
                 const start = this.$refs.resume_body.getBoundingClientRect().top;
                 const page_bottom = this.pageBottom;
                 const offset =  start - this.padding;
@@ -230,7 +220,7 @@
                 if(this.resume.resume_educations[0] && this.$refs.education_title){
                     let education_top;
                     if(this.$refs.work){
-                        education_top = this.$refs.work.getBoundingClientRect().bottom
+                        education_top = this.$refs.work.getBoundingClientRect().bottom + 10
                         education_top += 10;
                     }
                     else
@@ -258,6 +248,18 @@
                     }
                 }
 
+                // const education_top = this.$refs.education.getBoundingClientRect().top
+                // for(let index = 1; index <= 3 ; index ++)
+                // {
+                //     if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
+                //         const education_end = this.$refs.education.getBoundingClientRect().bottom;
+
+                //         if (education_end > page_bottom * index + offset){
+                //             this.insertBreak(page_bottom * index, start, education_top, this.$refs.work);
+                //         }
+                //     }
+                // }
+
                 let skill_top;
                 if(this.$refs.education || this.$refs.work){
                     skill_top = this.$refs.education?this.$refs.education.getBoundingClientRect().bottom : this.$refs.work.getBoundingClientRect().bottom
@@ -277,12 +279,11 @@
                     }
                 }
 
-                const hobby_top = this.$refs.skill.getBoundingClientRect().bottom+10
+                const hobby_top = this.$refs.skill.getBoundingClientRect().bottom + 10
                 for(let index = 1; index <= 3 ; index ++)
                 {
-                    if( (hobby_top  < page_bottom * index + offset)  && (hobby_top  > page_bottom * (index-1) )){
+                    if( hobby_top  < page_bottom * index + offset ){
                         const hobby_end = this.$refs.hobby.getBoundingClientRect().bottom;
-
                         if (hobby_end > page_bottom * index + offset){
                             this.insertBreak(page_bottom * index, start, hobby_top, this.$refs.skill, this.$refs.hobby, "div");
                         }
@@ -291,26 +292,27 @@
             },
             onResize(){
                 let page_bottom = 0
+
                 if(this.$refs.resume_body && this.$refs.resume_body.offsetWidth > 800)
                 {
                     page_bottom = 1056;
                     this.padding = 75;
-                }
-                else if(window.innerWidth >=1500){
+                    this.scale = 1;
+                } else if(window.innerWidth >=1500){
                     page_bottom = 890.35;
                     this.padding =63.234;
+                    this.scale = 0.84313;
                 } else if( window.innerWidth >= 1250){
-                    page_bottom = 890.35 * 6 / 6;
+                    page_bottom = 890.35 * 5 / 6;
                     this.padding =63.234 * 5 / 6;
-                }else{
+                    this.scale = 0.84313 * 5 / 6;
+                } else{
                     page_bottom = 890.35 * 2 / 3;
                     this.padding =63.234 * 2 / 3;
+                    this.scale = 0.84313 * 2 / 3;
                 }
-               
-                if(this.pageBottom !== page_bottom){
-                    this.pageBottom = page_bottom
-                    this.makePageBreak();
-                }
+                this.pageBottom = page_bottom
+                this.makePageBreak();
             },
             insertBreakToBlock(page_bottom, start, offset, childs){
               
@@ -342,7 +344,7 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, next_node){
-                const margin_top = page_bottom - current_top + page_start - 35;
+                 const margin_top = (page_bottom - current_top + page_start) * this.scale;
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")
                 new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
