@@ -344,7 +344,7 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, next_node){
-                 const margin_top = (page_bottom - current_top + page_start) * this.scale;
+                 const margin_top = (page_bottom - current_top + page_start + 35) * this.scale;
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")
                 new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
