@@ -60,11 +60,11 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="work-experience-description" v-for="(description, index) in work.resume_descriptions" :key="index">
-                                <ul >
-                                    <li class="" v-for="(item, index) in stringToArray(description.description)" :key="index" >
-                                        {{item}}
-                                    </li>
-                                </ul>
+                                <!-- <ul > -->
+                                    <div class="li-section" v-for="(item, index) in stringToArray(description.description)" :key="index" ref="work_child_detail">
+                                       <li> {{item}} </li>
+                                    </div>
+                                <!-- </ul> -->
                                 <!-- <p v-for="(description, index) in work.resume_descriptions" class="work-experience-description" :key="index">{{description.description}}</p> -->
                             </td>
                         </tr>
@@ -134,7 +134,8 @@
             return {
                 pageBottom: 1,
                 padding: 0,
-                scale: 1
+                scale: 1,
+                limit: 200
             }
         },
         computed: {
@@ -185,6 +186,16 @@
                         headings[0].remove();
                 }
                
+               let bottoms = document.getElementsByClassName("pagebreak-before-bottom");
+                len = bottoms.length;
+                if(bottoms && len > 0)
+                {
+                   const len = bottoms.length;
+                   for(let i = 0; i < bottoms.length; i ++) {
+                       bottoms[i].classList.remove("pagebreak-before-bottom");
+                   }
+                }
+               
             },
             makePageBreak(){
                 this.removePageBreak();
@@ -206,7 +217,8 @@
                     }
 
                     if (work_first_end > page_bottom + offset){
-                        this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
+                        if ( (work_first_end - work_top) < this.limit)
+                            this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
                     }
                 }
               
@@ -302,29 +314,49 @@
                     this.scale = 0.84313 * 2 / 3;
                 }
                
-                // if(this.pageBottom !== page_bottom)
-                {
-                    this.pageBottom = page_bottom
-                    this.makePageBreak();
-                }
+                this.pageBottom = page_bottom
+                this.makePageBreak();
             },
             insertBreakToBlock(page_bottom, start, offset, childs){
               
-                if(Array.isArray(childs)){
+                if(Array.isArray(childs)) {
                     childs.map( ( element, index ) => {
-                        if( index !== 0 ){
+                        {
                             const top = element.getBoundingClientRect().top;
                             const bottom = element.getBoundingClientRect().bottom;
-                            if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
-                            {
-                                this.insertBreak(page_bottom, start, top, childs[index - 1], element );
-                            }
-                            else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
-                                this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
+
+                            const child_details = element.getElementsByTagName("div");
+                            if ( (bottom - top) < this.limit  || (child_details && child_details.length===1) ) {
+                                if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
+                                {
+                                    this.insertBreak(page_bottom, start, top, childs[index - 1], element );
+                                }
+                                else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
+                                    this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
+                                }
+                            } else {
+                               this.insertBreakToChildBlock(page_bottom, start, offset, child_details); 
                             }
                         }
                         return element;
                     })
+                }
+            },
+            insertBreakToChildBlock(page_bottom, start, offset, childs){
+                const len = childs.length;
+                for(let i = 1; i < len; i ++) {
+                    let element = childs[i];
+                    {
+                        const top = element.getBoundingClientRect().top;
+                        const bottom = element.getBoundingClientRect().bottom;
+                        if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
+                        {
+                            this.insertBreak(page_bottom, start, top, childs[i - 1], element );
+                        }
+                        else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
+                            this.insertBreak(page_bottom * 2, start, top, childs[i - 1], element );
+                        }
+                    }
                 }
             },
             stringToArray: function (str) {

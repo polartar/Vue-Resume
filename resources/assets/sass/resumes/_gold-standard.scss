@@ -124,6 +124,17 @@
       }
     }
 
+    .li-section {
+      @include breakpoint(large) {
+        margin: 10px * $rate * $largeRate 0;
+      }
+      @include breakpoint(xlarge) {
+        margin: 10px * $rate * $xlargeRate 0;
+      }
+      @include breakpoint(xxlarge) {
+        margin: 10px * $rate 0;
+      }
+    }
     .work-experience-description {
       padding-left: 5px;
       @include breakpoint(large) {
@@ -284,6 +295,11 @@
     font-weight: bold;
   }
 
+  .li-section {
+    padding-left: 20px;
+    margin: 10px 0;
+  }
+
   &.resume-html-page {
     p,
     li {
@@ -377,49 +393,4 @@
     padding-bottom: 12.5px;
     padding-left: 5px;
   }
-
-  // .section-summary {
-  //      ul,
-  //     ol {
-  //         margin: 0;
-  //         padding: 0;
-  //     }
-
-  //     p,
-  //     li {
-  //         margin: 0 0 12.5px;
-  //         white-space: pre-line;
-  //         overflow-wrap: break-word;
-
-  //         &:last-of-type {
-  //             margin-bottom: 0;
-  //         }
-  //     }
-
-  //     li {
-  //         list-style: square;
-  //         margin-left: 50px;
-  //         padding: 0 0 0 5px;
-
-  //         &.paragraph-bullet-point {
-  //             list-style: none;
-  //             margin: 0 0 24px;
-  //             padding: 0;
-  //         }
-
-  //         &:last-of-type {
-  //             margin-bottom: 0 !important;
-  //         }
-  //     }
-
-  //     .bulletless-list {
-  //         list-style: none;
-  //         margin: 0;
-
-  //         li {
-  //             list-style: none;
-  //             margin: 6px 0;
-  //         }
-  //     }
-  // }
 }
