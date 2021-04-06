@@ -269,6 +269,7 @@ export default {
       this.$store.commit('updatePhone', event.target.value);
     },
     updateCountry: function(event) {
+      this.$store.commit('updateProvince', "");
       this.$store.commit('updateCountry', event.target.value);
     },
     updateStreet1: function(event) {
@@ -314,6 +315,7 @@ export default {
         !this.phone ||
         !this.resume.linkedin_url ||
         !this.country ||
+        this.province === 'default' ||
         !this.province ||
         !this.city
       ) {

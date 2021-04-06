@@ -5,7 +5,8 @@ const state = {
         resume_work_experiences: [],
         resume_skill : [],
         hobbies: [],
-        resume_design:[]
+        resume_design:  {},
+        linkedin_url:""
     },
     firstName : '',
     lastName : '',

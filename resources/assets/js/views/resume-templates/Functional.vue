@@ -338,10 +338,11 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, next_node){
-                 const margin_top = (page_bottom - current_top + page_start) * this.scale;
+                 const margin_top = (page_bottom - current_top + page_start + 50) * this.scale;
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")
                 new_node.setAttribute("style" ,`margin-top: ${margin_top}px`);
+                current_node.classList.add("pagebreak-before-bottom");
                 this.insertAfter(new_node, current_node);
 
                 let name_element = document.createElement("div");

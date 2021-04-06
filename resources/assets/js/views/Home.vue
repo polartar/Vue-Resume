@@ -63,7 +63,6 @@
                     .get('/resume/' + resumeId)
                     .then(response => {
                         let resume = response.data.resume;
-
                         this.$store.commit('updateResume', resume);
                         this.$store.commit('updateFirstName', resume.user.first_name);
                         this.$store.commit('updateLastName', resume.user.last_name);

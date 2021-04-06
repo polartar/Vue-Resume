@@ -46,17 +46,17 @@
   }
   .resume-gold-standard {
     &.resume-html-page {
-      // ul {
-      //   @include breakpoint(large) {
-      //     margin-bottom: 2rem * $rate * $largeRate;
-      //   }
-      //   @include breakpoint(xlarge) {
-      //     margin-bottom: 2rem * $rate * $xlargeRate;
-      //   }
-      //   @include breakpoint(xxlarge) {
-      //     margin-bottom: 2rem * $rate;
-      //   }
-      // }
+      .pagebreak-before-bottom {
+        @include breakpoint(large) {
+          margin-bottom: 40px * $largeRate;
+        }
+        @include breakpoint(xlarge) {
+          margin-bottom: 40px * $xlargeRate;
+        }
+        @include breakpoint(xxlarge) {
+          margin-bottom: 40px * $rate;
+        }
+      }
 
       p,
       li {

@@ -49,6 +49,9 @@ import {defaultsteps, combinationsteps, sidebarsteps} from "../constants/steps"
         },
         watch:{
             resume(value){
+                if(!value.resume_design) {
+                    return;
+                }
                 const resume_type = value.resume_design.name;
                 if(resume_type ==='Combination' || resume_type ==='Recruiter')
                 {
@@ -94,8 +97,9 @@ import {defaultsteps, combinationsteps, sidebarsteps} from "../constants/steps"
                 const resume_fields=['name', 'resume_design_id', 'firstName', 'resume_summaries', 'resume_work_experiences', 'resume_educations', 'resume_skill', 'hobbies', 'hobbies', 'hobbies']
           
                 const index = step_links.indexOf(link);
-             
-
+                if (!resume[resume_fields[index]]) {
+                    return
+                }
                 if(resume[resume_fields[index]].length ===0)
                     return "process";
                 else    

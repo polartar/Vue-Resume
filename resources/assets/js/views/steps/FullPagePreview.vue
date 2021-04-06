@@ -87,7 +87,9 @@
         },
         watch:{
             resume(value){
-               this.design_type = value.resume_design.name;
+                console.log(value.resume_design)
+               if(value.resume_design)
+                this.design_type = value.resume_design.name;
             }
         },
         mounted() {

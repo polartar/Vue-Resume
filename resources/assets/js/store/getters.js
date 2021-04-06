@@ -17,6 +17,9 @@ const  getters = {
         return capitalize(state.firstName) + ' ' + capitalize(state.lastName);
     },
     designType: state => {
+        if(!state.resume.resume_design) {
+            return "Gold Standard";
+        }
         if(state.resume.resume_design.name === 'Golden Standard')
             state.resume.resume_design.name = 'Gold Standard';
         return state.resume.resume_design.name;

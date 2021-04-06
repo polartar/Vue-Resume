@@ -243,7 +243,10 @@ const mutations = {
         state.zip = payload
     },
     updateLinkedInUrl (state, payload) {
-        state.resume.linkedin_url = payload
+        state.resume = {
+            ...state.resume,
+            linkedin_url: payload
+        }
     },
     updateAddress (state, payload) {
         this.commit('updateStreet1', payload.street_1);

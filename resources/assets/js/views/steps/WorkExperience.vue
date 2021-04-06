@@ -155,7 +155,7 @@
                     return;
                 }
 
-                if(this.resume.resume_design.name !== "Functional")
+                if(this.resume.resume_design && this.resume.resume_design.name !== "Functional")
                 {
                     if(!this.startDate){
                         this.$notify.error({ 
