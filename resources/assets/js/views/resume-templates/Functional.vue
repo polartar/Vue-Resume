@@ -50,11 +50,9 @@
                     <span class="section-heading " ref='work_title'>Work Experience</span> 
                 </div>
                 <div v-for="work in resume && resume.resume_work_experiences" class="section" :key="work.id" ref="work_child">
-                     
+                    <span class="section-sub-title">{{work.position_skill}}</span>                         
                     <table class="full-width-table section-group" align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td><span class="section-sub-title">{{work.position_skill}}</span></td>
-                        </tr>
+                        
                         <tr>
                             <td colspan="2"><span class="section-sub-sub-title">Gained as a {{ work.position_title }} at {{ work.position_company }}</span></td>
                         </tr>
