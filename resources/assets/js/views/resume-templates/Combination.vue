@@ -230,7 +230,8 @@
                 if( (work_top  < page_bottom + offset) && work_childs) {
                     let work_first_end = 0;
                      if(Array.isArray(work_childs)){
-                        work_first_end = work_childs[0].getBoundingClientRect().bottom;
+                        if (work_childs.length > 0 )
+                            work_first_end = work_childs[0].getBoundingClientRect().bottom;
                     }else{
                         work_first_end = work_childs.getBoundingClientRect().bottom;
                     }
@@ -258,7 +259,8 @@
                     {
                         if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
                             let education_first_end = 0;
-                            if(Array.isArray(education_childs)){
+                            if(Array.isArray(education_childs) ){
+                                if (education_childs.length > 0)
                                 education_first_end = education_childs[0].getBoundingClientRect().bottom;
                             }else{
                                 education_first_end = education_childs.getBoundingClientRect().bottom;

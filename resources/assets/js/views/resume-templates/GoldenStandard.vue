@@ -210,25 +210,29 @@
                 const page_bottom = this.pageBottom;
                 const offset =  start - this.padding;
 
-                const work_top = this.$refs.work_title.getBoundingClientRect().top
-                const work_childs = this.$refs.work_child;
-                if( (work_top  < page_bottom + offset) && work_childs) {
-                    let work_first_end = 0;
-                     if(Array.isArray(work_childs)){
-                        work_first_end = work_childs[0].getBoundingClientRect().bottom;
-                    }else{
-                        work_first_end = work_childs.getBoundingClientRect().bottom;
-                    }
+                if(this.$refs.work_title) {
+                     const work_top = this.$refs.work_title.getBoundingClientRect().top
+                    const work_childs = this.$refs.work_child;
+                    if( (work_top  < page_bottom + offset) && work_childs) {
+                        let work_first_end = 0;
+                        if(Array.isArray(work_childs)  ){
+                            if (work_childs.length > 0 )
+                             work_first_end = work_childs[0].getBoundingClientRect().bottom;
+                        }else{
+                            work_first_end = work_childs.getBoundingClientRect().bottom;
+                        }
 
-                    if (work_first_end > page_bottom + offset){
-                        if ( (work_first_end - work_top) < this.limit)
-                            this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
+                        if (work_first_end > page_bottom + offset){
+                            if ( (work_first_end - work_top) < this.limit)
+                                this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
+                        }
+                    }
+                
+                    if(Array.isArray(work_childs)){
+                        this.insertBreakToBlock(page_bottom, start, offset, work_childs)
                     }
                 }
-              
-                if(Array.isArray(work_childs)){
-                    this.insertBreakToBlock(page_bottom, start, offset, work_childs)
-                }
+               
 
                 if(this.resume.resume_educations[0] && this.$refs.education_title){
                     let education_top;
@@ -244,6 +248,7 @@
                         if( (education_top  < page_bottom * index + offset)  && (education_top  > page_bottom * (index-1) )){
                             let education_first_end = 0;
                             if(Array.isArray(education_childs)){
+                                if (education_childs.length > 0)
                                 education_first_end = education_childs[0].getBoundingClientRect().bottom;
                             }else{
                                 education_first_end = education_childs.getBoundingClientRect().bottom;
