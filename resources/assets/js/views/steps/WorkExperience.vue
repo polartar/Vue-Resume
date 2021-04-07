@@ -11,9 +11,15 @@
 
         <div class='resume-step-form' v-if="show || (resume.resume_work_experiences && (resume.resume_work_experiences.length === 0|| resume.resume_work_experiences[0].id==='new'))">
             <div class='grid-x grid-margin-x'>
+                <div class='cell medium-12'>
+                    <div class='form-group'>
+                        <label>Transferable or Technical Skill</label>
+                        <input type='text' name='position_skill' v-model='skill' @input="onEditWorkExperience">
+                    </div>
+                </div>
                 <div class='cell medium-6'>
                     <div class='form-group'>
-                        <label>{{getTitle()}}</label>
+                        <label>Title</label>
                         <input type='text' name='position_title' v-model='title' @input="onEditWorkExperience">
                     </div>
                 </div>
@@ -127,6 +133,7 @@
         data: function () {
             return {
                 'title': '',
+                'skill': '',
                 'company': '',
                 'startDate': '',
                 'endDate': '',
@@ -197,6 +204,7 @@
                     .post('/resume-work-experience', {
                         'resume_id': this.resume.id,
                         'position_title': this.title,
+                        'position_skill': this.skill,
                         'position_company': this.company,
                         'position_start_date': this.startDate?this.startDate:'2021-01-01',
                         'position_end_date': this.endDate?this.endDate:'2021-01-01',
@@ -224,6 +232,7 @@
                 this.$axios
                     .put('/resume-work-experience/' + this.editId, {
                         'position_title': this.title,
+                        'position_skill': this.skill,
                         'position_company': this.company,
                         'position_start_date': this.startDate,
                         'position_end_date': this.endDate,
@@ -319,6 +328,7 @@
                 this.originalWorkExperience = workExperience;
                 this.editId = workExperience.id;
                 this.title = workExperience.position_title;
+                this.skill = workExperience.position_skill;
                 this.company = workExperience.position_company;
                 this.startDate = workExperience.position_start_date;
                 this.endDate = workExperience.position_end_date;
@@ -328,6 +338,7 @@
             },
             resetForm: function () {
                 this.title = '';
+                this.skill = '';
                 this.company = '';
                 this.startDate = '';
                 this.endDate = '';
@@ -377,6 +388,7 @@
                 this.$store.commit('updateCurrentResumeWorkExperience', {
                         id: this.editId, 
                         position_title: this.title, 
+                        position_skill: this.skill, 
                         position_company: this.company, 
                         resume_descriptions:[
                         {

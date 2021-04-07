@@ -53,7 +53,7 @@
                      
                     <table class="full-width-table section-group" align="center" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td><span class="section-sub-title">Transferable or Technical Skill</span></td>
+                            <td><span class="section-sub-title">{{work.position_skill}}</span></td>
                         </tr>
                         <tr>
                             <td colspan="2"><span class="section-sub-sub-title">{{ work.position_title }} at {{ work.position_company }}</span></td>

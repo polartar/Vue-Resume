@@ -25,6 +25,7 @@ class UpdateResumeWorkExperienceRequest extends FormRequest
     {
         return [
             'position_title'         => 'string|nullable',
+            'position_skill'         => 'string|nullable',
             'position_company'       => 'string|nullable',
             'position_start_date'    => 'date',
             'position_end_date'      => 'date|nullable',

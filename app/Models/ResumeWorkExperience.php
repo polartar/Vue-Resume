@@ -15,6 +15,7 @@ class ResumeWorkExperience extends Model
     protected $fillable = [
         'resume_id',
         'position_title',
+        'position_skill',
         'position_company',
         'position_start_date',
         'position_end_date',

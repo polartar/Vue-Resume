@@ -136,6 +136,7 @@ const mutations = {
                     {
                         id: "new", 
                         position_title: payload.position_title, 
+                        position_skill: payload.position_skill, 
                         position_company: payload.position_company,
                         resume_descriptions:[{
                             id: "new",
