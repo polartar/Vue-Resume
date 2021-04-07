@@ -1,295 +1,296 @@
- .resume-preview-container{
-    .fillHeight{
-        @include breakpoint(large) {
-            height: 1962px * $largeRate * $rate
-        }
-        @include breakpoint(xlarge) {
-            height: 1962px * $xlargeRate* $rate
-        }
-        @include breakpoint(xxlarge) {
-            height: 1962px* $rate;
-        }
+.resume-preview-container {
+  .fillHeight {
+    @include breakpoint(large) {
+      height: 1962px * $largeRate * $rate;
     }
-    .resume-sidebar {
-        
-        .newpage-top{
-            @include breakpoint(large) {
-                padding-top: 75px * $largeRate * $rate;
-                box-shadow: 64px* $largeRate* $rate 0 0 white, -64px* $largeRate* $rate 0 0 white;
-            }
-            @include breakpoint(xlarge) {
-                padding-top: 75px * $xlargeRate* $rate;
-                box-shadow: 64px* $xlargeRate* $rate 0 0 white, -64px* $xlargeRate* $rate 0 0 white;
-            }
-            @include breakpoint(xxlarge) {
-                padding-top: 75px* $rate;
-                box-shadow: 64px* $rate 0 0 white, -64px* $rate 0 0 white;
-            }
-            margin-top: 0px!important;
-            // box-shadow: 64px 0 0 white, -64px 0 0 white;
-            width: unset;
-            margin-left: 0;
-        }
-        .break-top{
-            @include breakpoint(large) {
-                height: 35px * $largeRate * $rate;
-                box-shadow: 64px* $largeRate* $rate 0 0 white, -64px* $largeRate* $rate 0 0 white;
-            }
-            @include breakpoint(xlarge) {
-                height: 35px * $xlargeRate* $rate;
-                box-shadow: 64px* $xlargeRate* $rate 0 0 white, -64px* $xlargeRate* $rate 0 0 white;
-            }
-            @include breakpoint(xxlarge) {
-                height: 35px* $rate;
-                box-shadow: 64px* $rate 0 0 white, -64px* $rate 0 0 white;
-            }
-            // box-shadow: 64px 0 0 white, -64px 0 0 white;
-            width: unset;
-            margin-left: 0px;
-            margin-top: -0px;
-        }
-       
-        .section{
-            @include breakpoint(large) {
-                margin-bottom: 10px * $largeRate * $rate
-            }
-            @include breakpoint(xlarge) {
-                margin-bottom: 10px * $xlargeRate* $rate
-            }
-            @include breakpoint(xxlarge) {
-                margin-bottom: 10px* $rate;
-            }
-        }
-        // .page-break-left{
-        //     @include breakpoint(large) {
-        //         box-shadow: 17px*$largeRate * $rate 0 0 #f3f5f3, -64px*$largeRate * $rate 0 0 #f3f5f3;
-        //     }
-        //     @include breakpoint(xlarge) {
-        //         box-shadow: 17px*$xlargeRate * $rate 0 0 #f3f5f3, -64px*$xlargeRate * $rate 0 0 #f3f5f3;
-        //     }
-        //     @include breakpoint(xxlarge) {
-        //         box-shadow: 17px* $rate 0 0 #f3f5f3, -64px* $rate 0 0 #f3f5f3;
-        //     }
-        // }
-        // .page-break-right{
-        //     @include breakpoint(large) {
-        //         box-shadow: 64px*$largeRate * $rate 0 0 #f3f5f3, -32px*$largeRate * $rate 0 0 #f3f5f3;
-        //     }
-        //     @include breakpoint(xlarge) {
-        //         box-shadow: 64px*$xlargeRate * $rate 0 0 #f3f5f3, -32px*$xlargeRate * $rate 0 0 #f3f5f3;
-        //     }
-        //     @include breakpoint(xxlarge) {
-        //         box-shadow: 64px* $rate 0 0 #f3f5f3, -32px* $rate 0 0 #f3f5f3;
-        //     }
-        // }
-        ul li{
-            @include breakpoint(large) {
-                line-height: 16pt * $largeRate * $rate;
-                font-size: 12pt * $largeRate * $rate;
-            }
-            @include breakpoint(xlarge) {
-                line-height: 16pt * $xlargeRate* $rate;
-                font-size: 12pt * $xlargeRate * $rate;
-            }
-            @include breakpoint(xxlarge) {
-                line-height: 16pt* $rate;
-                font-size: 12pt  * $rate;
-            }
-        }
-        .name {
-            font-size: 36pt;
-            padding-bottom: 30px;
-            @include breakpoint(large) {
-                font-size: 36pt * $largeRate * $rate;
-                padding-bottom: 30px * $largeRate * $rate
-            }
-            @include breakpoint(xlarge) {
-                font-size: 36pt * $xlargeRate* $rate;
-                padding-bottom: 30px * $xlargeRate* $rate
-            }
-            @include breakpoint(xxlarge) {
-                font-size: 36pt* $rate;
-                padding-bottom: 30px* $rate;
-            }
-        }
-   
-        .left {
-            padding-right: 15px;
-            @include breakpoint(large) {
-                padding-right: 15px * $largeRate * $rate
-            }
-            @include breakpoint(xlarge) {
-                padding-right: 15px * $xlargeRate* $rate
-            }
-            @include breakpoint(xxlarge) {
-                padding-right: 15px * $rate;
-            }
-        }
-    
-        .right {
-            @include breakpoint(large) {
-                 padding-left: 30px * $largeRate * $rate
-            }
-            @include breakpoint(xlarge) {
-                 padding-left: 30px * $xlargeRate* $rate
-            }
-            @include breakpoint(xxlarge) {
-                 padding-left: 30px * $rate;
-            }
-        }
-    
-        .header {
-            @include breakpoint(large) {
-                font-size: 20pt * $largeRate * $rate
-            }
-            @include breakpoint(xlarge) {
-                    font-size: 20pt * $xlargeRate* $rate
-            }
-            @include breakpoint(xxlarge) {
-                    font-size: 20pt * $rate;
-            }
-        }
-    
-        .sub-header {
-            @include breakpoint(large) {
-                font-size: 15pt * $largeRate * $rate
-            }
-            @include breakpoint(xlarge) {
-                    font-size: 15pt * $xlargeRate* $rate
-            }
-            @include breakpoint(xxlarge) {
-                    font-size: 15pt * $rate;
-            }
-        }
-        .mt-20{
-            @include breakpoint(large) {
-                margin-top: 20px * $largeRate * $rate
-            }
-            @include breakpoint(xlarge) {
-                margin-top: 20px * $xlargeRate* $rate
-            }
-            @include breakpoint(xxlarge) {
-                margin-top: 20px * $rate;
-            }  
-        }
-        
-     }
-}
-.fillHeight{
-    height: 1962px;
-}
-.resume-sidebar {
+    @include breakpoint(xlarge) {
+      height: 1962px * $xlargeRate * $rate;
+    }
+    @include breakpoint(xxlarge) {
+      height: 1962px * $rate;
+    }
+  }
+  .resume-sidebar {
+    .newpage-top {
+      @include breakpoint(large) {
+        padding-top: 75px * $largeRate * $rate;
+        box-shadow: 64px * $largeRate * $rate 0 0 white,
+          -64px * $largeRate * $rate 0 0 white;
+      }
+      @include breakpoint(xlarge) {
+        padding-top: 75px * $xlargeRate * $rate;
+        box-shadow: 64px * $xlargeRate * $rate 0 0 white,
+          -64px * $xlargeRate * $rate 0 0 white;
+      }
+      @include breakpoint(xxlarge) {
+        padding-top: 75px * $rate;
+        box-shadow: 64px * $rate 0 0 white, -64px * $rate 0 0 white;
+      }
+      margin-top: 0px !important;
+      // box-shadow: 64px 0 0 white, -64px 0 0 white;
+      width: unset;
+      margin-left: 0;
+    }
+    .break-top {
+      @include breakpoint(large) {
+        height: 35px * $largeRate * $rate;
+        box-shadow: 64px * $largeRate * $rate 0 0 white,
+          -64px * $largeRate * $rate 0 0 white;
+      }
+      @include breakpoint(xlarge) {
+        height: 35px * $xlargeRate * $rate;
+        box-shadow: 64px * $xlargeRate * $rate 0 0 white,
+          -64px * $xlargeRate * $rate 0 0 white;
+      }
+      @include breakpoint(xxlarge) {
+        height: 35px * $rate;
+        box-shadow: 64px * $rate 0 0 white, -64px * $rate 0 0 white;
+      }
+      // box-shadow: 64px 0 0 white, -64px 0 0 white;
+      width: unset;
+      margin-left: 0px;
+      margin-top: -0px;
+    }
 
-    .resume-content{
-        height: 96%;
+    .section {
+      @include breakpoint(large) {
+        margin-bottom: 10px * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        margin-bottom: 10px * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        margin-bottom: 10px * $rate;
+      }
     }
-    .left{
-        height: 100%;
-    }
-    .newpage-top{
-        padding-top: 75px;
-        margin-top: 0px!important;
-        // box-shadow: 64px 0 0 white, -64px 0 0 white;
-        width: 400px;
-        margin-left: -70px;
-        background-color: white;
-    }
-    .break-top{
-        height: 0px;
-        width: 400px;
-        margin-left: -70px;
-        // background-color: white;
-    }
-   
-    .section{
-        margin-bottom: 10px;
-    }
-    .card-section p{
-        word-break: break-word;
-    }
-    &.resume-pdf {
-        .left {
-            width: 100%;
-        }
-
-        .right {
-            width: 100%;
-        }
-    }
-    .html2pdf__page-break{
-     }
-    .page-break-left{
-        box-shadow: 32px 0 0 #f3f5f3, -76px 0 0 #f3f5f3; 
-    }
-    .page-break-right{
-        box-shadow: 76px 0 0 #f3f5f3, -32px 0 0 #f3f5f3; 
-    }
-    .print-paper {
-        // padding: 72px 72px 0 72px;
-        // background-color: white;
-        // font-family: Arial, sans-serif;
-        // font-size: 12pt;
-        // font-weight: normal;
-        height: 100%;
-        word-break: break-word;
-    }
-    ul li{
-        line-height: 16pt;
-        margin-bottom: 0px;
-    }
-    ul{
-        margin-bottom:  0px;
-        margin-top: 0px;
-    }
-    .contact-info{
-        font-weight: 500;
+    // .page-break-left{
+    //     @include breakpoint(large) {
+    //         box-shadow: 17px*$largeRate * $rate 0 0 #f3f5f3, -64px*$largeRate * $rate 0 0 #f3f5f3;
+    //     }
+    //     @include breakpoint(xlarge) {
+    //         box-shadow: 17px*$xlargeRate * $rate 0 0 #f3f5f3, -64px*$xlargeRate * $rate 0 0 #f3f5f3;
+    //     }
+    //     @include breakpoint(xxlarge) {
+    //         box-shadow: 17px* $rate 0 0 #f3f5f3, -64px* $rate 0 0 #f3f5f3;
+    //     }
+    // }
+    // .page-break-right{
+    //     @include breakpoint(large) {
+    //         box-shadow: 64px*$largeRate * $rate 0 0 #f3f5f3, -32px*$largeRate * $rate 0 0 #f3f5f3;
+    //     }
+    //     @include breakpoint(xlarge) {
+    //         box-shadow: 64px*$xlargeRate * $rate 0 0 #f3f5f3, -32px*$xlargeRate * $rate 0 0 #f3f5f3;
+    //     }
+    //     @include breakpoint(xxlarge) {
+    //         box-shadow: 64px* $rate 0 0 #f3f5f3, -32px* $rate 0 0 #f3f5f3;
+    //     }
+    // }
+    ul li {
+      @include breakpoint(large) {
+        line-height: 16pt * $largeRate * $rate;
+        font-size: 12pt * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        line-height: 16pt * $xlargeRate * $rate;
+        font-size: 12pt * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        line-height: 16pt * $rate;
+        font-size: 12pt * $rate;
+      }
     }
     .name {
-        font-size: 36pt;
-        display: block;
-        text-align: center;
-        padding-bottom: 30px;
-    }
-
-    .resume-content {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+      font-size: 36pt;
+      padding-bottom: 30px;
+      @include breakpoint(large) {
+        font-size: 36pt * $largeRate * $rate;
+        padding-bottom: 30px * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        font-size: 36pt * $xlargeRate * $rate;
+        padding-bottom: 30px * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        font-size: 36pt * $rate;
+        padding-bottom: 30px * $rate;
+      }
     }
 
     .left {
-        width: 40%;
-        padding-right: 15px;
-        border-right: black 2px solid;
-        text-align: right;
+      padding-right: 15px;
+      @include breakpoint(large) {
+        padding-right: 15px * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        padding-right: 15px * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        padding-right: 15px * $rate;
+      }
     }
 
     .right {
-        width: 60%;
-        padding-left: 30px;
-        text-align: left;
-
-        .resume-pdf & {
-            width: 100%;
-        }
+      @include breakpoint(large) {
+        padding-left: 30px * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        padding-left: 30px * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        padding-left: 30px * $rate;
+      }
     }
 
     .header {
-        font-size: 20pt;
-        font-weight: bold;
+      @include breakpoint(large) {
+        font-size: 20pt * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        font-size: 20pt * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        font-size: 20pt * $rate;
+      }
     }
 
     .sub-header {
-        font-size: 15pt;
-        font-weight: bold;
-        display: block;
+      @include breakpoint(large) {
+        font-size: 15pt * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        font-size: 15pt * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        font-size: 15pt * $rate;
+      }
+    }
+    .mt-20 {
+      @include breakpoint(large) {
+        margin-top: 20px * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        margin-top: 20px * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        margin-top: 20px * $rate;
+      }
+    }
+  }
+}
+.fillHeight {
+  height: 1962px;
+}
+.resume-sidebar {
+  .resume-content {
+    height: 96%;
+  }
+  .left {
+    height: auto%;
+  }
+  .newpage-top {
+    padding-top: 75px;
+    margin-top: 0px !important;
+    // box-shadow: 64px 0 0 white, -64px 0 0 white;
+    width: 400px;
+    margin-left: -70px;
+    background-color: white;
+  }
+  .break-top {
+    height: 0px;
+    width: 400px;
+    margin-left: -70px;
+    // background-color: white;
+  }
+
+  .section {
+    margin-bottom: 10px;
+  }
+  .card-section p {
+    word-break: break-word;
+  }
+  &.resume-pdf {
+    .left {
+      width: 100%;
     }
 
-    .sub-sub-header {
-        font-weight: bold;
-        display: block;
+    .right {
+      width: 100%;
     }
-    .mt-20{
-        margin-top: 20px;
+  }
+  .html2pdf__page-break {
+  }
+  .page-break-left {
+    box-shadow: 32px 0 0 #f3f5f3, -76px 0 0 #f3f5f3;
+  }
+  .page-break-right {
+    box-shadow: 76px 0 0 #f3f5f3, -32px 0 0 #f3f5f3;
+  }
+  .print-paper {
+    // padding: 72px 72px 0 72px;
+    // background-color: white;
+    // font-family: Arial, sans-serif;
+    // font-size: 12pt;
+    // font-weight: normal;
+    height: 100%;
+    word-break: break-word;
+  }
+  ul li {
+    line-height: 16pt;
+    margin-bottom: 0px;
+  }
+  ul {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  .contact-info {
+    font-weight: 500;
+  }
+  .name {
+    font-size: 36pt;
+    display: block;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+
+  .resume-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .left {
+    width: 40%;
+    padding-right: 15px;
+    border-right: black 2px solid;
+    text-align: right;
+  }
+
+  .right {
+    width: 60%;
+    padding-left: 30px;
+    text-align: left;
+    height: auto;
+    .resume-pdf & {
+      width: 100%;
     }
+  }
+
+  .header {
+    font-size: 20pt;
+    font-weight: bold;
+  }
+
+  .sub-header {
+    font-size: 15pt;
+    font-weight: bold;
+    display: block;
+  }
+
+  .sub-sub-header {
+    font-weight: bold;
+    display: block;
+  }
+  .mt-20 {
+    margin-top: 20px;
+  }
 }

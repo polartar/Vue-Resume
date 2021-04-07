@@ -40,10 +40,10 @@
                 </div>
 
                 <div class="right" ref='right'>
-                    <div class='' v-if="resume.resume_summaries[0]">
+                    <div class=''  ref='summary'>
                         <span class="header">Professional Summary</span>
                         <hr/>
-                        <span>{{ resume.resume_summaries[0].name }}</span>
+                        <span>{{ resume.resume_summaries[0] &&resume.resume_summaries[0].name }}</span>
                         <br/>
                     </div>
 
@@ -60,11 +60,14 @@
                             <span class="">
                                 {{ work.position_company }} | {{work.position_start_date&& work.position_start_date.substring(0,4) }}-{{ work.position_end_date ? work.position_end_date.substring(0,4) : 'Present' }}
                             </span>
-                            <ul v-if="work.resume_descriptions[0]">
+                            <!-- <ul v-if="work.resume_descriptions[0]">
                                 <li class="" v-for="(item, index) in stringToArray(work.resume_descriptions[0].description)" :key="index" >
                                     {{item}}
                                 </li>
-                            </ul>
+                            </ul> -->
+                                <div class="" v-for="(item, index) in stringToArray(work.resume_descriptions)" :key="index" >
+                                    <ul><li> {{item}} </li></ul>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +84,8 @@
             return {
                 pageBottom: 0,
                 padding:0,
-                scale:1
+                scale:1,
+                limit: 200
             }
         },
         computed: {
@@ -180,20 +184,20 @@
                     }
                 }
 
-                const work_top = this.$refs.work_title.getBoundingClientRect().top
+                // const work_top = this.$refs.summary.getBoundingClientRect().bottom
                 const work_childs = this.$refs.work_child;
-                if( (work_top  < page_bottom + offset) && work_childs) {
-                    let work_first_end = 0;
-                     if(Array.isArray(work_childs)){
-                        work_first_end = work_childs[0].getBoundingClientRect().bottom;
-                    }else{
-                        work_first_end = work_childs.getBoundingClientRect().bottom;
-                    }
+                // if( (work_top  < page_bottom + offset) && work_childs) {
+                //     let work_first_end = 0;
+                //      if(Array.isArray(work_childs)){
+                //         work_first_end = work_childs[0].getBoundingClientRect().bottom;
+                //     }else{
+                //         work_first_end = work_childs.getBoundingClientRect().bottom;
+                //     }
 
-                    if (work_first_end > page_bottom + offset){
-                        this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
-                    }
-                }
+                //     if (work_first_end > page_bottom + offset){
+                //         this.insertBreak(page_bottom, start, work_top, this.$refs.summary, this.$refs.work_title, "div");
+                //     }
+                // }
               
                 if(Array.isArray(work_childs)){
                     this.insertBreakToBlock(page_bottom, start, offset, work_childs, "work")
@@ -245,33 +249,56 @@
                             const top = element.getBoundingClientRect().top;
                             const bottom = element.getBoundingClientRect().bottom;
                             
-                            if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
-                            {
-                                this.insertBreak(page_bottom, start, top, childs[index - 1], section_title );
-                            }
-                            else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
-                                this.insertBreak(page_bottom * 2, start, top, childs[index - 1], section_title );
-                             }
-                            else if (bottom <= page_bottom + offset) {
-                                if( (index === len - 1) &&(section_title==='skill' ||section_title==='education' || section_title==='work')  ){
-                                    if(this.$refs.education){
-                                        if((this.$refs.education&&this.$refs.education.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
-                                        this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
-                                    }
-                                    else{
-                                        if((this.$refs.skill&&this.$refs.skill.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
-                                        this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );                                        
+                            const child_details = element.getElementsByTagName("div");
+                            if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
+                                if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
+                                {
+                                    this.insertBreak(page_bottom, start, top, childs[index - 1], section_title );
+                                }
+                                else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
+                                    this.insertBreak(page_bottom * 2, start, top, childs[index - 1], section_title );
+                                }
+                                else if (bottom <= page_bottom + offset) {
+                                    if( (index === len - 1) &&(section_title==='skill' ||section_title==='education' || section_title==='work')  ){
+                                        if(this.$refs.education){
+                                            if((this.$refs.education&&this.$refs.education.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
+                                            this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );
+                                        }
+                                        else{
+                                            if((this.$refs.skill&&this.$refs.skill.getBoundingClientRect().bottom > page_bottom + start) || (this.$refs.work.getBoundingClientRect().bottom > page_bottom + start))
+                                            this.insertBreak(page_bottom, start, bottom + 10, childs[index ], section_title );                                        
+                                        }
                                     }
                                 }
+                            } else {                                
+                               this.insertBreakToChildBlock(page_bottom, start -10, offset, child_details); 
                             }
                         }
                         return element;
                     })
                 }
             },
+            insertBreakToChildBlock(page_bottom, start, offset, childs){
+                const len = childs.length;
+                for(let i = 1; i < len; i ++) {
+                    let element = childs[i];
+                    {
+                        const top = element.getBoundingClientRect().top;
+                        const bottom = element.getBoundingClientRect().bottom;
+                        if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
+                        {
+                            this.insertBreak(page_bottom, start, top, childs[i - 1], element );
+                        }
+                        else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
+                            this.insertBreak(page_bottom * 2, start, top, childs[i - 1], element );
+                        }
+                    }
+                    childs = element.getElementsByTagName("div");
+                }
+            },
             stringToArray: function (str) {
-                if (str && str.length > 0)
-                    return str.split(/\r?\n/)
+                if (str && str[0] && str[0].description.length > 0)
+                    return str[0].description.split(/\r?\n/)
                 return [];
             },
             insertAfter(new_node, existing_node) {
@@ -279,7 +306,7 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, section_title){
-                const margin_top = (page_bottom - current_top + page_start - 63 * this.scale) ;
+                const margin_top = (page_bottom - current_top + page_start - 63 * this.scale );
                 let break_top = document.createElement("div");
                 break_top.classList.add("break-top")
                 break_top.setAttribute("style" ,`margin-top: ${margin_top}px`);

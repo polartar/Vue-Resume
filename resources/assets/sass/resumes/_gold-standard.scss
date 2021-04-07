@@ -10,6 +10,17 @@
       width: 100%;
     }
   }
+  ul {
+    @include breakpoint(large) {
+      padding-left: 55px * $largeRate;
+    }
+    @include breakpoint(xlarge) {
+      padding-left: 55px * $xlargeRate;
+    }
+    @include breakpoint(xxlarge) {
+      padding-left: 55px * $rate;
+    }
+  }
   .heading-name {
     @include breakpoint(large) {
       margin-top: 75px * $rate * $largeRate;
@@ -126,13 +137,13 @@
 
     .li-section {
       @include breakpoint(large) {
-        margin: 10px * $rate * $largeRate 0;
+        padding-left: 35px * $rate * $largeRate;
       }
       @include breakpoint(xlarge) {
-        margin: 10px * $rate * $xlargeRate 0;
+        padding-left: 35px * $rate * $xlargeRate;
       }
       @include breakpoint(xxlarge) {
-        margin: 10px * $rate 0;
+        padding-left: 35px * $rate;
       }
     }
     .work-experience-description {
@@ -215,10 +226,6 @@
       }
     }
 
-    .summary-list-item p {
-      word-break: break-word;
-    }
-
     // .section-summary {
     //     p,
     //     li {
@@ -291,12 +298,15 @@
     font-size: 12pt;
     line-height: 16pt;
   }
+  ul {
+    padding-left: 55px !important;
+  }
   .heading-bold {
     font-weight: bold;
   }
 
   .li-section {
-    padding-left: 20px;
+    padding-left: 35px;
     margin: 10px 0;
   }
 
@@ -311,6 +321,9 @@
         margin-bottom: 0 !important;
       }
     }
+  }
+  .summary-list-item p {
+    word-break: break-word;
   }
 
   &.resume-html-page .header-contact-info {

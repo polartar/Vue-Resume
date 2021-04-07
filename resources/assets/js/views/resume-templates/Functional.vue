@@ -56,14 +56,14 @@
                             <td><span class="section-sub-title">{{work.position_skill}}</span></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><span class="section-sub-sub-title">{{ work.position_title }} at {{ work.position_company }}</span></td>
+                            <td colspan="2"><span class="section-sub-sub-title">Gained as a {{ work.position_title }} at {{ work.position_company }}</span></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="work-experience-description" v-for="(description, index) in work.resume_descriptions" :key="index">
                                 <!-- <ul > -->
-                                    <div class="li-section" v-for="(item, index) in stringToArray(description.description)" :key="index" ref="work_child_detail">
-                                       <li> {{item}} </li>
-                                    </div>
+                                <div class="" v-for="(item, index) in stringToArray(description.description)" :key="index" >
+                                    <ul><li> {{item}} </li></ul>
+                                </div>
                                 <!-- </ul> -->
                                 <!-- <p v-for="(description, index) in work.resume_descriptions" class="work-experience-description" :key="index">{{description.description}}</p> -->
                             </td>
@@ -325,7 +325,7 @@
                             const bottom = element.getBoundingClientRect().bottom;
 
                             const child_details = element.getElementsByTagName("div");
-                            if ( (bottom - top) < this.limit  || (child_details && child_details.length===1) ) {
+                            if ( (bottom - top) < this.limit  || (child_details && child_details.length===1) || !child_details ) {
                                 if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                                 {
                                     this.insertBreak(page_bottom, start, top, childs[index - 1], element );
