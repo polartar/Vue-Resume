@@ -17,7 +17,6 @@ class CreateResumeWorkExperiencesTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('resume_id')->index();
             $table->string('position_title')->nullable();
-            $table->string('position_skill')->nullable();
             $table->string('position_company')->nullable();
             $table->date('position_start_date');
             $table->date('position_end_date')->nullable();
