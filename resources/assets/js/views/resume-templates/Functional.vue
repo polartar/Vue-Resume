@@ -227,7 +227,7 @@
                 }
 
                  if(this.resume.resume_educations[0] && this.$refs.education_title){
-                    const education_top = this.$refs.work.getBoundingClientRect().bottom + 10;
+                    const education_top = this.$refs.work.getBoundingClientRect().bottom ;
                     const education_childs = this.$refs.education_child;
                     for(let index = 1; index < 3 ; index ++)
                     {
@@ -263,7 +263,6 @@
                 let skill_top;
                 if(this.$refs.education || this.$refs.work){
                     skill_top = this.$refs.education?this.$refs.education.getBoundingClientRect().bottom : this.$refs.work.getBoundingClientRect().bottom
-                    skill_top += 10
                 }
                 else
                     skill_top = this.$refs.skill.getBoundingClientRect().top;

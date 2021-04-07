@@ -239,7 +239,6 @@
                     let education_top;
                     if(this.$refs.work){
                         education_top = this.$refs.work.getBoundingClientRect().bottom
-                        education_top += 10;
                     }
                     else
                         education_top = this.$refs.education_title.getBoundingClientRect().top
