@@ -119,6 +119,7 @@
                 'resume',
                 'toggleResumePreview',
                 'refreshPreview',
+                
             ]),
             workExperienceList: {
                 get() {

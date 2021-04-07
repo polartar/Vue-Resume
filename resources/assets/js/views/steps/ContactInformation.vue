@@ -339,16 +339,20 @@ export default {
 
       this.isSaving = true;
       // Update User Info
-      let updatedUser = this.$store.state.resume.user;
-      updatedUser.first_name = this.firstName;
-      updatedUser.last_name = this.lastName;
+      // let updatedUser = this.$store.state.resume.user;
+      // updatedUser.first_name = this.firstName;
+      // updatedUser.last_name = this.lastName;
 
+      // const success = await this.$store.dispatch('axiosPutRequest', {
+      //   route: '/update-user/' + updatedUser.id,
+      //   payload: updatedUser,
+      //   commits: [],
+      // });
       const success = await this.$store.dispatch('axiosPutRequest', {
-        route: '/update-user/' + updatedUser.id,
-        payload: updatedUser,
-        commits: [],
-      });
- 
+                    route: '/resume/' + this.resume.id,
+                    payload: this.resume,
+                });
+
       const success1 = await this.createUserPhone();
       const success2 = await this.createUserEmail();
       const success3 = await this.createUserAddress(true);
@@ -358,7 +362,7 @@ export default {
         success4 = await this.createLinkedInURL();
       }
 
-      await this.updateRefreshPreview();
+      // await this.updateRefreshPreview();
 
       if (success && success1 && success2 && success3 && success4){
         const res  = await this.saveResume();

@@ -51,8 +51,10 @@ const actions ={
      *  true/false depending on success
      */
     axiosPutRequest: async (context, payload) => {
+        console.log({payload})
         return await axios.put(payload.route, payload.payload)
             .then(response => {
+                console.log({response})
                 if (payload.commits)
                     payload.commits.forEach( (pCommit) => {
                         store.commit(pCommit, response.data.id);

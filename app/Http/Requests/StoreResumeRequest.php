@@ -26,6 +26,8 @@ class StoreResumeRequest extends FormRequest
         return [
             'user_id' => 'required|uuid',
             'name' => 'required|string',
+            'first_name' => 'nullable|string',
+            'last_name' => 'nullable|string',
             'resume_design_id' => 'nullable|uuid',
             'pdf_url' => 'nullable|url',
             'user_address_id' => 'nullable|uuid',

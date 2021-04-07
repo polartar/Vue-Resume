@@ -19,6 +19,8 @@ class Resume extends Model
         'resume_design_id',
         'pdf_url',
         'user_address_id',
+        'first_name',
+        'last_name',
         'user_phone_id',
         'user_email_id',
         'user_address_ids',

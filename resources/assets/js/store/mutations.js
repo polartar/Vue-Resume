@@ -35,9 +35,11 @@ const mutations = {
     },
     updateFirstName (state, payload) {
         state.firstName = payload;
+        state.resume.first_name = payload;
     },
     updateLastName (state, payload) {
         state.lastName = payload;
+        state.resume.last_name = payload;
     },
     updateUserEmail (state, payload) {
         state.user.email = payload;

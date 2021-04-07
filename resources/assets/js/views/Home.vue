@@ -64,8 +64,8 @@
                     .then(response => {
                         let resume = response.data.resume;
                         this.$store.commit('updateResume', resume);
-                        this.$store.commit('updateFirstName', resume.user.first_name);
-                        this.$store.commit('updateLastName', resume.user.last_name);
+                        this.$store.commit('updateFirstName', resume.first_name);
+                        this.$store.commit('updateLastName', resume.last_name);
                         this.$store.commit('updateUserEmailIds', resume.user_email_ids);
                         this.$store.commit('updateUserEmail', resume.user.email);
                         this.$store.commit('updateUserAddressIds', resume.user_address_ids);
