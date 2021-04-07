@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                <div class="cell medium-6">
+                <div class="cell medium-6" v-if="resume.resume_design&&resume.resume_design.name!=='Functional'">
                     <div class="form-group">
                         <label>Start Date</label>
                         <el-date-picker
@@ -68,7 +68,7 @@
                         <label><input type="checkbox" name="currently_studying" v-model="currentlyStudying" @input='onChangeEducation'> Currently Studying</label>
                     </div>
                 </div>
-                <div class="cell medium-6">
+                <div class="cell medium-6" v-if="resume.resume_design&&resume.resume_design.name!=='Functional'">
                     <div class="form-group">
                         <label>End Date</label>
                         <el-date-picker
@@ -165,8 +165,8 @@
                 degreeReceived: '',
                 fieldOfStudy: '',
                 completed: false,
-                startDate: null,
-                endDate: null,
+                startDate: new Date(),
+                endDate: new Date(),
                 currentlyStudying: false,
                 show: false,
                 edit: false,
@@ -182,6 +182,7 @@
 
         methods: {
             createEducationExperience: async function () {
+                
                 this.$axios
                     .post('/resume-education', {
                         resume_id: this.resumeId,
@@ -355,8 +356,8 @@
                 this.degreeReceived = '';
                 this.fieldOfStudy = '';
                 // this.completed = false;
-                this.startDate = null;
-                this.endDate = null;
+                this.startDate = new Date();
+                this.endDate = new Date();
                 // this.currentlyStudying = false;
             },
             resetEditing: function () {

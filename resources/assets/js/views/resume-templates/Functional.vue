@@ -83,7 +83,7 @@
                     <table class="full-width-table section-group " align="center" cellpadding="0" cellspacing="0">
                         <tr>
                             <td><span class="section-sub-title">{{ education.degree_received }} in {{ education.field_of_study }}</span></td>
-                            <td class="text-right"><span class="section-dates">{{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}</span></td>
+                            <!-- <td class="text-right"><span class="section-dates">{{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}</span></td> -->
                         </tr>
                         <tr>
                             <td><span class="section-sub-sub-title">{{ education.school_name }}</span></td>

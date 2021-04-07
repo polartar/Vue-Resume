@@ -166,7 +166,7 @@
         },
         updated(){
             this.$nextTick(function () {
-                this.makePageBreak();
+                this.onResize();
             })
         },
         methods: {
