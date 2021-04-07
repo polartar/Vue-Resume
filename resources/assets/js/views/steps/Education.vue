@@ -97,9 +97,9 @@
                     <div class="card">
                         <div class="card-section">
                             <p class="float-left" style="margin-bottom: 0;">
-                                <i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ education.school_name }} - {{ education.type }}
+                                <i class="el-icon-s-grid" style="color: #ffffff00;"></i> {{ education.school_name }} {{ resume.resume_design&&resume.resume_design.name!=='Functional' ? ' - '+education.type:'' }}
                                 <br/>
-                                <em>
+                                <em v-if="resume.resume_design&&resume.resume_design.name!=='Functional'">
                                     <i class="el-icon-s-grid" style="color: lightgrey;"></i> {{ education.start_date }} to
                                     {{ education.end_date ? education.end_date : "present" }}
                                 </em>
