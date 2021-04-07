@@ -25,7 +25,7 @@ class CreateResumeDesignsTable extends Migration
         $designs = [
             [
                 'id' => Str::uuid(),
-                'name' => 'Golden Standard',
+                'name' => 'Gold Standard',
             ],
             [
                 'id' => Str::uuid(),
