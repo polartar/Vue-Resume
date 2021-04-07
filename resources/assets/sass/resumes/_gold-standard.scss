@@ -21,6 +21,17 @@
       padding-left: 55px * $rate;
     }
   }
+  .skill-column {
+    @include breakpoint(large) {
+      margin-bottom: 10px * $largeRate;
+    }
+    @include breakpoint(xlarge) {
+      margin-bottom: 10px * $xlargeRate;
+    }
+    @include breakpoint(xxlarge) {
+      margin-bottom: 10px * $rate;
+    }
+  }
   .heading-name {
     @include breakpoint(large) {
       margin-top: 75px * $rate * $largeRate;
@@ -361,6 +372,7 @@
   .skill-column {
     float: left;
     width: 33.33%;
+    margin-bottom: 10px;
   }
 
   /* Clear floats after the columns */
