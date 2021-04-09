@@ -351,7 +351,7 @@
                             top = element.getBoundingClientRect().top;
                             bottom = element.getBoundingClientRect().bottom;
                             child_details = element.getElementsByTagName("div");
-                            
+
                             if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
                                 if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                                 {
