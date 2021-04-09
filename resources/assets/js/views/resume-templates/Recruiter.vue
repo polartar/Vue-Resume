@@ -310,10 +310,22 @@
                 if(Array.isArray(childs)) {
                     childs.map( ( element, index ) => {
                         {
-                            const top = element.getBoundingClientRect().top;
-                            const bottom = element.getBoundingClientRect().bottom;
-
-                            const child_details = element.getElementsByTagName("div");
+                            let top = element.getBoundingClientRect().top;
+                            let bottom = element.getBoundingClientRect().bottom;
+                            let child_details = element.getElementsByTagName("div");
+                            if (child_details.length > 0) {
+                                const title_bottom = child_details[0].bottom;
+                                if ( ( top < page_bottom + start) && (bottom > title_bottom + offset) )
+                                {
+                                    this.insertBreak(title_bottom, start, top, childs[index - 1], element );
+                                }
+                                else if ( ( top < title_bottom * 2 + start ) && (bottom > title_bottom * 2 + offset ) ){
+                                    this.insertBreak(title_bottom * 2, start, top, childs[index - 1], element );
+                                }
+                            }
+                            top = element.getBoundingClientRect().top;
+                            bottom = element.getBoundingClientRect().bottom;
+                            child_details = element.getElementsByTagName("div");
                             if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
                                 if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                                 {
