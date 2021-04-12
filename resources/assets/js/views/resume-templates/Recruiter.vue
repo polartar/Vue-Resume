@@ -323,28 +323,34 @@
                                 const title_bottom = child_details[0].getBoundingClientRect().bottom;
                                 if ( ( top < page_bottom + start) && (title_bottom > page_bottom + offset) )
                                 {
-                                    this.insertBreak(page_bottom, start, top, childs[0] );
+                                    this.insertBreak(page_bottom, start, top, childs[index - 1] );
                                     
                                     flag = 1;   
                                 }
                                 else if ( ( top < page_bottom * 2 + start ) && (title_bottom > page_bottom * 2 + offset ) ){
-                                    this.insertBreak(page_bottom * 2, start, top, childs[0] );
+                                    this.insertBreak(page_bottom * 2, start, top, childs[index - 1] );
                                     
                                     flag = 1;
                                 }
                             }
                             
                             if(flag === 0) {
+                                if(index !==0) {
+                                    top = childs[index - 1].getBoundingClientRect().bottom;
+                                }
                                 top = element.getBoundingClientRect().top;
                                 bottom = element.getBoundingClientRect().bottom;
                                 child_details = element.getElementsByTagName("div");
                                 if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
                                     if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                                     {
-                                        this.insertBreak(page_bottom, start, top, childs[index - 1], element );
+                                        if( index ===0 )
+                                            this.insertBreak(page_bottom, start, top, childs[index - 1] );
+                                        else
+                                            this.insertBreak(page_bottom, start, top, childs[index - 1] );
                                     }
                                     else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
-                                        this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
+                                        this.insertBreak(page_bottom * 2, start, top, childs[index - 1] );
                                     }
                                 } else {
                                 this.insertBreakToChildBlock(page_bottom, start, offset, child_details); 
