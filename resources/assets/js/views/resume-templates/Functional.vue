@@ -162,7 +162,7 @@
 
         updated(){
             this.$nextTick(function () {
-                this.onResize();
+                this.makePageBreak();
             })
         },
         methods: {
@@ -323,10 +323,10 @@
                 if(Array.isArray(childs)) {
                     childs.map( ( element, index ) => {
                         {
-                            const top = element.getBoundingClientRect().top;
-                            const bottom = element.getBoundingClientRect().bottom;
+                            let top = element.getBoundingClientRect().top;
+                            let bottom = element.getBoundingClientRect().bottom;
 
-                            const child_details = element.getElementsByTagName("div");
+                            let child_details = element.getElementsByTagName("div");
 
                             if (child_details.length > 0) {
                                 const title_bottom = child_details[0].bottom;
