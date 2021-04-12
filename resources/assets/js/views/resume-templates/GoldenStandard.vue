@@ -342,12 +342,12 @@
 
                             if (child_details.length > 0) {
                                 const title_bottom = child_details[0].bottom;
-                                if ( ( top < page_bottom + start) && (bottom > title_bottom + offset) )
+                                if ( ( top < page_bottom + start) && (title_bottom > page_bottom + offset) )
                                 {
-                                    this.insertBreak(title_bottom, start, top, childs[index - 1], element );
+                                    this.insertBreak(page_bottom, start, top, element );
                                 }
-                                else if ( ( top < title_bottom * 2 + start ) && (bottom > title_bottom * 2 + offset ) ){
-                                    this.insertBreak(title_bottom * 2, start, top, childs[index - 1], element );
+                                else if ( ( top < page_bottom * 2 + start ) && (title_bottom > page_bottom * 2 + offset ) ){
+                                    this.insertBreak(page_bottom * 2, start, top, element );
                                 }
                             }
                             top = element.getBoundingClientRect().top;
