@@ -311,6 +311,14 @@
                     childs.map( ( element, index ) => {
                         {
                             let top = element.getBoundingClientRect().top;
+                            if(index !==0) {
+                                const first_child_details = childs[index - 1].getElementsByTagName("div");    
+                                if (first_child_details.length > 0)
+                                    top = first_child_details[first_child_details.length - 1].getBoundingClientRect().bottom;
+                                else 
+                                    top = childs[index -1].getBoundingClientRect().bottom;
+                            }
+                            
                             let bottom = element.getBoundingClientRect().bottom;
                             let child_details = element.getElementsByTagName("div");
                             if (child_details.length > 0) {
