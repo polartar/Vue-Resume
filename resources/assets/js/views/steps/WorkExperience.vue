@@ -207,8 +207,8 @@
                         'position_title': this.title,
                         'position_skill': this.skill,
                         'position_company': this.company,
-                        'position_start_date': this.startDate?this.startDate:'2021-01-01',
-                        'position_end_date': this.endDate?this.endDate:'2021-01-01',
+                        'position_start_date': this.startDate?this.startDate: this.$moment(new Date()).format('YYYY-MM-DD'),
+                        'position_end_date': this.endDate?this.endDate: this.$moment(new Date()).format('YYYY-MM-DD') ,
                         'current_employer': this.currentEmployer,
                     })
                     .then(response => {

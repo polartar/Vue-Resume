@@ -7,7 +7,7 @@
             <div class="resume-content">
                 <div class="left" ref='left'>
                     <div class='contact-info'>
-                        <div class="header">Contact</div>
+                        <div class="header section">Contact</div>
                         <div class="sub-header">Phone</div>
                         <div>{{ phone }}</div>
                         <div class="sub-header">Email</div>
