@@ -93,7 +93,7 @@
                 <div  v-for="education in resume.resume_educations" :key="education.id" ref='education_child' class="education-section">
                     <div class="flex ">
                         <div class="section-sub-title">
-                            {{ education.school_name }}. 
+                            {{ education.school_name }} 
                         </div>
                         <div class="text-right section-dates">
                             {{ dateFormat(education.start_date) }} to {{ education.end_date ? dateFormat( education.end_date) : 'present' }}
