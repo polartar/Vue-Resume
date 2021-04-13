@@ -137,7 +137,7 @@
                 pageBottom: 0,
                 padding:0,
                 scale: 1,
-                limit: 200
+                limit: 100
             }
         },
         computed: {
