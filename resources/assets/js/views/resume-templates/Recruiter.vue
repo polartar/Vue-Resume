@@ -208,7 +208,7 @@
                 }
                 const start = this.$refs.resume_body.getBoundingClientRect().top;
                 const page_bottom = this.pageBottom;
-                const offset =  start - this.padding;
+                const offset =  start - this.padding + 20;
 
                 const skill_top = this.$refs.skill.getBoundingClientRect().top
                 for(let index = 1; index <= 1 ; index ++)
