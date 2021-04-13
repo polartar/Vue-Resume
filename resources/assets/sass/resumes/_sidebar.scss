@@ -11,6 +11,31 @@
     }
   }
   .resume-sidebar {
+    .left {
+      padding-right: 15px;
+      @include breakpoint(large) {
+        padding-right: 15px * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        padding-right: 15px * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        padding-right: 15px * $rate;
+      }
+    }
+
+    .right {
+      @include breakpoint(large) {
+        padding-left: 30px * $largeRate * $rate;
+      }
+      @include breakpoint(xlarge) {
+        padding-left: 30px * $xlargeRate * $rate;
+      }
+      @include breakpoint(xxlarge) {
+        padding-left: 30px * $rate;
+      }
+    }
+
     .newpage-top {
       @include breakpoint(large) {
         padding-top: 75px * $largeRate * $rate;
@@ -116,31 +141,6 @@
       }
     }
 
-    .left {
-      padding-right: 15px;
-      @include breakpoint(large) {
-        padding-right: 15px * $largeRate * $rate;
-      }
-      @include breakpoint(xlarge) {
-        padding-right: 15px * $xlargeRate * $rate;
-      }
-      @include breakpoint(xxlarge) {
-        padding-right: 15px * $rate;
-      }
-    }
-
-    .right {
-      @include breakpoint(large) {
-        padding-left: 30px * $largeRate * $rate;
-      }
-      @include breakpoint(xlarge) {
-        padding-left: 30px * $xlargeRate * $rate;
-      }
-      @include breakpoint(xxlarge) {
-        padding-left: 30px * $rate;
-      }
-    }
-
     .header {
       @include breakpoint(large) {
         font-size: 20pt * $largeRate * $rate;
@@ -177,10 +177,19 @@
     }
   }
 }
+
 .fillHeight {
   height: 1962px;
 }
 .resume-sidebar {
+  .left {
+    padding-right: 15px;
+  }
+
+  .right {
+    padding-left: 30px * $largeRate * $rate;
+  }
+
   .resume-content {
     height: 96%;
   }
@@ -226,13 +235,12 @@
     box-shadow: 76px 0 0 #f3f5f3, -32px 0 0 #f3f5f3;
   }
   .print-paper {
-    // padding: 72px 72px 0 72px;
-    // background-color: white;
-    // font-family: Arial, sans-serif;
-    // font-size: 12pt;
-    // font-weight: normal;
     height: 100%;
     word-break: break-word;
+
+    .contact-info {
+      word-break: break-all;
+    }
   }
   ul li {
     line-height: 16pt;

@@ -11,7 +11,7 @@
                         <div class="sub-header">Phone</div>
                         <div>{{ phone }}</div>
                         <div class="sub-header">Email</div>
-                        <div>{{ email }}</div>
+                        <div> {{ resume.email}}</div>
                         <div class="sub-header">Address</div>
                         <div>{{ street_1 }}</div>
                         <div>{{ street_2 }}</div>

@@ -1,4 +1,4 @@
-<template>
+email<template>
     <div class='print-paper resume-gold-standard resume-html-page' ref='resume_body'>
         <div class="flex">
             <div class="text-left">
