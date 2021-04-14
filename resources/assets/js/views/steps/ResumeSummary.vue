@@ -4,7 +4,7 @@
             <h3 class="resume-step-heading">
                 Resume Summary 
                 <small style="text-decoration: underline; cursor: pointer;" @click="onAdd" v-if="designType!=='Sidebar'">
-                    <span v-if="!show">Add</span><span v-else>Cancel</span>
+                    <span v-if="!show">Add Bullet</span><span v-else>Cancel</span>
                 </small>
             </h3>
         </div>

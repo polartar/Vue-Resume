@@ -204,12 +204,12 @@
     margin-left: -70px;
     background-color: white;
   }
-  .break-top {
-    height: 0px;
-    width: 400px;
-    margin-left: -70px;
-    // background-color: white;
-  }
+  // .break-top {
+  //   height: 0px;
+  //   width: 400px;
+  //   margin-left: -70px;
+  //   // background-color: white;
+  // }
 
   .section {
     margin-bottom: 10px;
@@ -226,10 +226,11 @@
       width: 100%;
     }
   }
-  .html2pdf__page-break {
-  }
   .page-break-left {
-    box-shadow: 32px 0 0 #f3f5f3, -76px 0 0 #f3f5f3;
+    position: absolute;
+    bottom: 0px;
+    height: 50px;
+    background: red;
   }
   .page-break-right {
     box-shadow: 76px 0 0 #f3f5f3, -32px 0 0 #f3f5f3;
