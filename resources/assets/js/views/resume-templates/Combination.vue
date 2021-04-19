@@ -379,19 +379,24 @@
                     })
                 }
             },
-            insertBreakToChildBlock(page_bottom, start, offset, childs){
+             insertBreakToChildBlock(page_bottom, start, offset, childs){
                 const len = childs.length;
+                let flag = 0;
                 for(let i = 1; i < len; i ++) {
+                    if(flag !== 0)
+                        break;
                     let element = childs[i];
                     {
-                        const top = element.getBoundingClientRect().top;
+                        const top = childs[i-1].getBoundingClientRect().bottom;
                         const bottom = element.getBoundingClientRect().bottom;
                         if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                         {
                             this.insertBreak(page_bottom, start, top, childs[i - 1], element );
+                            flag = 1;
                         }
                         else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
                             this.insertBreak(page_bottom * 2, start, top, childs[i - 1], element );
+                            flag = 1;
                         }
                     }
                 }

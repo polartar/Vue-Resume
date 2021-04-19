@@ -85,7 +85,7 @@
                 pageBottom: 0,
                 padding:0,
                 scale:1,
-                limit: 200
+                limit: 150
             }
         },
         computed: {
@@ -200,7 +200,7 @@
                 // }
               
                 if(Array.isArray(work_childs)){
-                    this.insertBreakToBlock(page_bottom, start, offset, work_childs, "work")
+                    this.insertBreakToBlock(page_bottom, start, offset, work_childs, "work", this.$refs.summary )
                 }
      
                 if(this.$refs.education&&this.$refs.education.getBoundingClientRect().bottom > page_bottom + start || this.$refs.work.getBoundingClientRect().bottom > page_bottom + start){
@@ -238,18 +238,48 @@
                 }
                 this.makePageBreak();
             },
-            insertBreakToBlock(page_bottom, start, offset, childs, section_title){
+            insertBreakToBlock(page_bottom, start, offset, childs, section_title, beforeNode){
                 const len = childs.length;
                 const tmp_childs = childs;
-                
+                let flag = 0;
                 if(Array.isArray(childs)){
                     tmp_childs.map( ( element, index ) => {
-                        // if( index !== 0 )
-                        {
-                            const top = element.getBoundingClientRect().top;
-                            const bottom = element.getBoundingClientRect().bottom;
+
+                            let top = element.getBoundingClientRect().top;
+                            if(index !==0) {
+                                top = childs[index - 1].getBoundingClientRect().bottom;
+                            }
+
+                            let bottom = element.getBoundingClientRect().bottom;
+                            let child_details = element.getElementsByTagName("div");
                             
-                            const child_details = element.getElementsByTagName("div");
+                            if (child_details.length > 0) {
+                                const title_bottom = child_details[0].getBoundingClientRect().bottom;
+                                if ( ( top < page_bottom + start) && (title_bottom > page_bottom + offset) )
+                                {
+                                    if (index ===0)
+                                        this.insertBreak(page_bottom, start, top + 10, beforeNode);
+                                    else 
+                                        this.insertBreak(page_bottom, start, top + 10, childs[index - 1] );
+                                    flag = 1;   
+                                }
+                                else if ( ( top < page_bottom * 2 + start ) && (title_bottom > page_bottom * 2 + offset ) ){
+                                    if (index ===0)
+                                        this.insertBreak(page_bottom * 2, start, top + 10, beforeNode );
+                                    else
+                                        this.insertBreak(page_bottom * 2, start, top + 10, childs[index - 1] );
+                                    
+                                    flag = 1;
+                                }
+                            }
+
+                         if( flag !== 1 )
+                        {
+                            
+                             top = element.getBoundingClientRect().top;
+                             bottom = element.getBoundingClientRect().bottom;
+                            
+                            child_details = element.getElementsByTagName("div");
                             if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
                                 if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                                 {
@@ -298,6 +328,92 @@
                     }
                 }
             },
+            // insertBreakToBlock(page_bottom, start, offset, childs, beforeNode){
+            //   let flag  = 0;
+            //     if(Array.isArray(childs)) {
+            //         childs.map( ( element, index ) => {
+            //             {
+            //                 let top = element.getBoundingClientRect().top;
+            //                 if(index !==0) {
+            //                     top = childs[index - 1].getBoundingClientRect().bottom;
+            //                 }
+
+            //                 let bottom = element.getBoundingClientRect().bottom;
+            //                 let child_details = element.getElementsByTagName("div");
+                            
+            //                 if (child_details.length > 0) {
+            //                     const title_bottom = child_details[0].getBoundingClientRect().bottom;
+            //                     if ( ( top < page_bottom + start) && (title_bottom > page_bottom + offset) )
+            //                     {
+            //                         if (index ===0)
+            //                             this.insertBreak(page_bottom, start, top, beforeNode);
+            //                         else 
+            //                             this.insertBreak(page_bottom, start, top, childs[index - 1] );
+            //                         flag = 1;   
+            //                     }
+            //                     else if ( ( top < page_bottom * 2 + start ) && (title_bottom > page_bottom * 2 + offset ) ){
+            //                         if (index ===0)
+            //                             this.insertBreak(page_bottom * 2, start, top, beforeNode );
+            //                         else
+            //                             this.insertBreak(page_bottom * 2, start, top, childs[index - 1] );
+                                    
+            //                         flag = 1;
+            //                     }
+            //                 }
+                            
+            //                 if(flag === 0) {
+            //                     if(index !==0) {
+            //                         top = childs[index - 1].getBoundingClientRect().bottom;
+            //                     }
+            //                     top = element.getBoundingClientRect().top;
+            //                     bottom = element.getBoundingClientRect().bottom;
+            //                     child_details = element.getElementsByTagName("div");
+            //                     if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
+            //                         if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
+            //                         {
+            //                             if( index ===0 )
+            //                                 this.insertBreak(page_bottom, start, top, beforeNode );
+            //                             else
+            //                                 this.insertBreak(page_bottom, start, top, childs[index - 1] );
+            //                         }
+            //                         else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
+            //                             if( index ===0 )
+            //                                 this.insertBreak(page_bottom, start, top, beforeNode );
+            //                             else 
+            //                                 this.insertBreak(page_bottom * 2, start, top, childs[index - 1] );
+            //                         }
+            //                     } else {
+            //                     this.insertBreakToChildBlock(page_bottom, start, offset, child_details); 
+            //                     }
+            //                 }
+                           
+            //             }
+            //             return element;
+            //         })
+            //     }
+            // },
+            // insertBreakToChildBlock(page_bottom, start, offset, childs){
+            //     const len = childs.length;
+            //     let flag = 0;
+            //     for(let i = 1; i < len; i ++) {
+            //         if(flag !== 0)
+            //             break;
+            //         let element = childs[i];
+            //         {
+            //             const top = childs[i-1].getBoundingClientRect().bottom;
+            //             const bottom = element.getBoundingClientRect().bottom;
+            //             if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
+            //             {
+            //                 this.insertBreak(page_bottom, start, top, childs[i - 1], element );
+            //                 flag = 1;
+            //             }
+            //             else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
+            //                 this.insertBreak(page_bottom * 2, start, top, childs[i - 1], element );
+            //                 flag = 1;
+            //             }
+            //         }
+            //     }
+            // },
             stringToArray: function (str) {
                 if (str && str[0] && str[0].description.length > 0)
                     return str[0].description.split(/\r?\n/)
@@ -308,7 +424,7 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, section_title){
-                const margin_top = (page_bottom - current_top + page_start - 63 * this.scale );
+                const margin_top = (page_bottom - current_top + page_start - 63);
                 let break_top = document.createElement("div");
                 break_top.classList.add("break-top")
                 break_top.setAttribute("style" ,`margin-top: ${margin_top}px`);
