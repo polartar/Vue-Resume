@@ -9,7 +9,7 @@
             </el-link> -->
 
             <button class="button" @click="downloadPdf">Download as a pdf</button>
-            <button class="button" @click="downloadWord">Download as a word</button>
+            <button class="button word-button" @click="downloadWord">Download as a word</button>
         </div>
         <!-- <div v-if="resume.resume_design" class="resume-container" :style="scaleStylesObject">
             <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
@@ -61,7 +61,11 @@
     import Sidebar from "../resume-templates/Sidebar";
     import Functional from '../resume-templates/Functional';
     import debounce from 'lodash.debounce';
-
+    import { Component, Prop, Vue } from "vue-property-decorator";
+    import docxtemplater from 'docxtemplater';
+    import JSZip from 'jszip';
+    import JSzipUtils from 'jszip-utils';
+    import  saveAs  from 'file-saver';
     export default {
         components: {Recruiter, GoldenStandard, Combination, Sidebar, Functional, VueHtml2pdf},
         data() {
@@ -114,7 +118,89 @@
                 this.$refs.html2Pdf.generatePdf();
             },
             downloadWord(){
-
+                this.createAndSaveDocument();
+            },
+            loadFile(url ,callback){
+                JSzipUtils.getBinaryContent(url,callback);
+            },
+            createAndSaveDocument(){
+                /*
+                *   This required JSON dataset must be fetched from the backend API.
+                *   The tags in the template will be replaced by these data.
+                *   For demonstrations, I have hardcoded the tesdt dataset
+                */
+                let dataset = {
+                "students": [
+                    {
+                    "first_name": "Udith",
+                    "last_name": "Indrakantha",
+                    "phone": "+94760000000"
+                    },
+                    {
+                    "first_name": "Chamal",
+                    "last_name": "Silva",
+                    "phone": "+94760000001"
+                    },
+                    {
+                    "first_name": "Tharindu",
+                    "last_name": "Jayasinghe",
+                    "phone": "+94760000002"
+                    },
+                    {
+                    "first_name": "Sanindu",
+                    "last_name": "Rathnayake",
+                    "phone": "+94760000003"
+                    },
+                    {
+                    "first_name": "Pramodi",
+                    "last_name": "Samaratunga",
+                    "phone": "+94760000004"
+                    },
+                    {
+                    "first_name": "Samanthika",
+                    "last_name": "Rajapaksha",
+                    "phone": "+94760000005"
+                    }
+                ],
+                creater_name: "Udith Gayan Indrakantha",
+                created_date: "22/12/2020",
+                header: "Some Students' Details"
+                };
+                /* *
+                * The template's path must be passed as an arguement .
+                * This path can be either a URL(as  in the commented line) or a path relative to the Public folder
+                * For testing, I have created a folder named  "ReportTemplates" inside the public folder and it contains my sample
+                * template named "template1.docx" .
+                * */
+                // this.loadFile("https://docxtemplater.com/tag-example.docx",function(error: any,content : any){
+                this.loadFile('ResumeTemplates/functional.docx',function(error, content){
+                    if (error) { 
+                    throw error
+                    };
+                    let zip = new JSZip(content);
+                    let doc = new docxtemplater().loadZip(zip)
+                    doc.setData(dataset)
+                    try {
+                        doc.render()
+                    }
+                    catch (error) {
+                        let e = {
+                            message: error.message,
+                            name: error.name,
+                            stack: error.stack,
+                            properties: error.properties,
+                        }
+                        console.log(JSON.stringify({error: e}));
+                        // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
+                        throw error;
+                    }
+                    // docx generating
+                    let out = doc.getZip().generate({
+                        type:"blob",
+                        mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        })
+                    saveAs(out,`MyDocument.docx`);    // You can pass this blob to a custom file saver component in the project.  
+                });
             },
             // downloadResume: function () {
             //     this.$axios.get(`/generate-resume-pdf/${this.resume.id}`)
@@ -126,15 +212,14 @@
 
             // based on  https://css-tricks.com/scaled-proportional-blocks-with-css-and-javascript/
             doResize: function() {
-                return;
-                let container = document.querySelector('.resume-preview-container').offsetWidth - 32
-                let resume = 850
-                let scale = (container / resume).toFixed(2)
-                let translate = ((1 - container / resume) * 100 * -1).toFixed(0)
+                // let container = document.querySelector('.resume-preview-container').offsetWidth - 32
+                // let resume = 850
+                // let scale = (container / resume).toFixed(2)
+                // let translate = ((1 - container / resume) * 100 * -1).toFixed(0)
 
-                this.scaleStylesObject.transform = "translate(" + translate + "%, " + translate + "%) " + "scale(" + scale + ")"
-                let baseHeight = document.querySelector('.resume-preview-action-links').offsetHeight + 1100 + 48
-                document.querySelector('.resume-preview-container').style.height = window.innerHeight - 60 + 'px';
+                // this.scaleStylesObject.transform = "translate(" + translate + "%, " + translate + "%) " + "scale(" + scale + ")"
+                // let baseHeight = document.querySelector('.resume-preview-action-links').offsetHeight + 1100 + 48
+                // document.querySelector('.resume-preview-container').style.height = window.innerHeight - 60 + 'px';
             },
 
             refreshiFrame: function() {

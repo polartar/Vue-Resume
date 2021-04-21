@@ -1,77 +1,83 @@
 .button,
 input[type='submit'],
 %button {
-    @include single-transition;
-    @include heading-font-bold;
-    background: $secondary-orange;
-    border: 0;
-    border-radius: 25px;
-    color: $white;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 1.125rem;
-    letter-spacing: .05em;
-    line-height: 1;
-    margin-bottom: 0;
-    margin-top: 1rem;
-    padding: .75rem 1rem;
-    text-transform: uppercase;
+  @include single-transition;
+  @include heading-font-bold;
+  background: $secondary-orange;
+  border: 0;
+  border-radius: 25px;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.125rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 0;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  text-transform: uppercase;
+
+  &:hover {
+    background: $secondary-orange-shade;
+  }
+
+  &.button-full-width {
+    width: 100%;
+  }
+
+  &.button-input-sized {
+    padding: 0.625rem 1.25rem;
+  }
+
+  &.button-small {
+    font-size: 0.75rem;
+    padding: 0.625em;
+  }
+
+  &.button-no-margin {
+    margin: 0;
+  }
+
+  &.button-no-fill {
+    background: none;
+    border: 2px solid $secondary-orange-shade;
+    color: $secondary-orange-shade;
 
     &:hover {
-        background: $secondary-orange-shade;
-
+      background: $secondary-orange-shade;
+      color: $white;
     }
+  }
 
-    &.button-full-width {
-        width: 100%;
-    }
-
-    &.button-input-sized {
-        padding: .625rem 1.25rem;
-    }
-
-    &.button-small {
-        font-size: .75rem;
-        padding: .625em;
-    }
-
-    &.button-no-margin {
-        margin: 0;
-    }
-
-    &.button-no-fill {
-        background: none;
-        border: 2px solid $secondary-orange-shade;
-        color: $secondary-orange-shade;
-
-        &:hover {
-            background: $secondary-orange-shade;
-            color: $white;
-        }
-    }
-
-    &.secondary-button {
-        background: $primary-gray;
-    }
+  &.secondary-button {
+    background: $primary-gray;
+  }
 }
 
+.word-button {
+  background: $secondary-blue;
+
+  &:hover {
+    background: $alter-blue;
+  }
+}
 
 .input-button-connected {
-    display: flex;
-    flex-flow: row nowrap;
-    width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
 
-    input {
-        border-radius: 2.5rem 0 0 2.5rem;
-        margin: 0;
-    }
+  input {
+    border-radius: 2.5rem 0 0 2.5rem;
+    margin: 0;
+  }
 
-    .button {
-        border-radius: 0 2.5rem 2.5rem 0;
-        font-size: 1rem;
-        font-weight: 400;
-        margin: 0;
-        padding: .5rem .75rem;
-        white-space: nowrap;
-    }
+  .button {
+    border-radius: 0 2.5rem 2.5rem 0;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+  }
 }
