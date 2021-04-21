@@ -229,7 +229,7 @@
                     }
                 
                     if(Array.isArray(work_childs)){
-                        this.insertBreakToBlock(page_bottom, start, offset, work_childs)
+                        this.insertBreakToBlock(page_bottom, start, offset, work_childs, this.$refs.summary)
                     }
                 }
                
@@ -261,7 +261,7 @@
                     }
                 
                     if(Array.isArray(education_childs)){
-                        this.insertBreakToBlock(page_bottom, start, offset, education_childs)
+                        this.insertBreakToBlock(page_bottom, start, offset, education_childs, this.$refs.work)
                     }
                 }
 
@@ -330,7 +330,7 @@
                 this.pageBottom = page_bottom
                 this.makePageBreak();
             },
-          insertBreakToBlock(page_bottom, start, offset, childs){
+          insertBreakToBlock(page_bottom, start, offset, childs, beforeNode){
               let flag  = 0;
                 if(Array.isArray(childs)) {
                     childs.map( ( element, index ) => {
@@ -347,12 +347,18 @@
                                 const title_bottom = child_details[0].getBoundingClientRect().bottom;
                                 if ( ( top < page_bottom + start) && (title_bottom > page_bottom + offset) )
                                 {
-                                    this.insertBreak(page_bottom, start, top, childs[0] );
+                                   if (index ===0)
+                                        this.insertBreak(page_bottom, start, top, beforeNode);
+                                    else 
+                                        this.insertBreak(page_bottom, start, top, childs[index - 1] );
                                     
                                     flag = 1;   
                                 }
                                 else if ( ( top < page_bottom * 2 + start ) && (title_bottom > page_bottom * 2 + offset ) ){
-                                    this.insertBreak(page_bottom * 2, start, top, childs[0] );
+                                   if (index ===0)
+                                        this.insertBreak(page_bottom * 2, start, top, beforeNode );
+                                    else
+                                        this.insertBreak(page_bottom * 2, start, top, childs[index - 1] );
                                     
                                     flag = 1;
                                 }
@@ -365,10 +371,20 @@
                                 if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
                                     if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                                     {
-                                        this.insertBreak(page_bottom, start, top, childs[index - 1], element );
+                                        if (index === 0) {
+                                            this.insertBreak(page_bottom, start, top, childs[0], element );
+                                        } else {
+                                            this.insertBreak(page_bottom, start, top, childs[index - 1], element );
+                                        }
+                                       
                                     }
                                     else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
-                                        this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
+                                        if (index === 0) {
+                                            this.insertBreak(page_bottom * 2, start, top, childs[0], element );
+                                        } else {
+                                            this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
+                                        }
+                                        
                                     }
                                 } else {
                                 this.insertBreakToChildBlock(page_bottom, start, offset, child_details); 

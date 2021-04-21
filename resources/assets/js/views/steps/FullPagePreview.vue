@@ -8,7 +8,8 @@
                 Download as PDF
             </el-link> -->
 
-            <button class="button" @click="download">Download as a pdf</button>
+            <button class="button" @click="downloadPdf">Download as a pdf</button>
+            <button class="button" @click="downloadWord">Download as a word</button>
         </div>
         <!-- <div v-if="resume.resume_design" class="resume-container" :style="scaleStylesObject">
             <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
@@ -109,16 +110,19 @@
             handleScroll(event){
                 this.scrollHeight =window.scrollY  
              },
-            download(){
+            downloadPdf(){
                 this.$refs.html2Pdf.generatePdf();
             },
-            downloadResume: function () {
-                this.$axios.get(`/generate-resume-pdf/${this.resume.id}`)
-                    .then(response => {
-                        FileDownload(response.data, 'resume.pdf');
-                    })
-                    .catch();
+            downloadWord(){
+
             },
+            // downloadResume: function () {
+            //     this.$axios.get(`/generate-resume-pdf/${this.resume.id}`)
+            //         .then(response => {
+            //             FileDownload(response.data, 'resume.pdf');
+            //         })
+            //         .catch();
+            // },
 
             // based on  https://css-tricks.com/scaled-proportional-blocks-with-css-and-javascript/
             doResize: function() {

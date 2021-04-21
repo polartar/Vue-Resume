@@ -353,10 +353,20 @@ email<template>
                                 if ( (bottom - top) < this.limit  || (child_details && child_details.length===1)  || !child_details ) {
                                     if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
                                     {
-                                        this.insertBreak(page_bottom, start, top, childs[index - 1], element );
+                                        if (index === 0) {
+                                            this.insertBreak(page_bottom, start, top, childs[0], element );
+                                        } else {
+                                            this.insertBreak(page_bottom, start, top, childs[index - 1], element );
+                                        }
+                                       
                                     }
                                     else if ( ( top < page_bottom * 2 + start ) && (bottom > page_bottom * 2 + offset ) ){
-                                        this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
+                                        if (index === 0) {
+                                            this.insertBreak(page_bottom * 2, start, top, childs[0], element );
+                                        } else {
+                                            this.insertBreak(page_bottom * 2, start, top, childs[index - 1], element );
+                                        }
+                                        
                                     }
                                 } else {
                                 this.insertBreakToChildBlock(page_bottom, start, offset, child_details); 
