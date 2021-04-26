@@ -174,21 +174,27 @@
                 this.resume.resume_educations.forEach(education => {
                      dataset.educations.push(education)
                 });
-
-                const skills = this.resume.resume_skill;
-                const count = skills.length;
-                for(let i = 0; i < count; i = i + 3) {
-                    let name1 = "", name2 = "", name3 = "";
-                    if (skills[i]) {
-                        name1 = skills[i].name;
+               
+                if (this.designType === "Combination") {
+                    this.resume.resume_skill.forEach(skill => {
+                        dataset.skills.push({name: skill.name})
+                    });
+                } else {
+                     const skills = this.resume.resume_skill;
+                    const count = skills.length;
+                    for(let i = 0; i < count; i = i + 3) {
+                        let name1 = "", name2 = "", name3 = "";
+                        if (skills[i]) {
+                            name1 = skills[i].name;
+                        }
+                        if (skills[i+1]) {
+                            name2 = skills[i+1].name;
+                        }
+                        if (skills[i+2]) {
+                            name3 = skills[i+2].name;
+                        }
+                        dataset.skills.push({name1, name2, name3});
                     }
-                    if (skills[i+1]) {
-                        name2 = skills[i+1].name;
-                    }
-                    if (skills[i+2]) {
-                        name3 = skills[i+2].name;
-                    }
-                    dataset.skills.push({name1, name2, name3});
                 }
                
                 this.resume.hobbies.forEach(hobby => {
@@ -205,6 +211,7 @@
                 } else if (this.designType ==='Sidebar') {
                     filename = "sidebar";
                 }
+                console.log({dataset})
                 /* *
                 * The template's path must be passed as an arguement .
                 * This path can be either a URL(as  in the commented line) or a path relative to the Public folder

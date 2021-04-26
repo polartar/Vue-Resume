@@ -315,7 +315,9 @@
   .heading-bold {
     font-weight: bold;
   }
-
+  span {
+    word-break: break-all;
+  }
   .li-section {
     padding-left: 35px;
     margin: 10px 0;

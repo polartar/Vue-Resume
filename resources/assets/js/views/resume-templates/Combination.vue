@@ -428,7 +428,6 @@
             },
 
             insertBreak(page_bottom, page_start, current_top , current_node, next_node){
-                console.log({next_node})
                  const margin_top = (page_bottom - current_top + page_start + 50) * this.scale;
                 let new_node = document.createElement("div");
                 new_node.classList.add("html2pdf__page-break")

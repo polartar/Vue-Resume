@@ -1,10 +1,9 @@
 $html-font-size-conversions: 1;
-$originWidth : 666px;
-$rate : 0.84313;
+$originWidth: 666px;
+$rate: 0.84313;
 $largeRate: 2/3;
 $xlargeRate: 5/6;
 
- 
 @page {
   margin: 0px;
 }
@@ -12,14 +11,14 @@ $xlargeRate: 5/6;
 body {
   margin: 0px;
 }
-.hide{
+.hide {
   display: none;
 }
-.flex{
+.flex {
   display: flex;
   justify-content: space-between;
 }
-.summary-item{
+.summary-item {
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -80,8 +79,8 @@ body {
     padding: 2rem 0;
   }
 }
-.page-top{
-  margin-top:75px;
+.page-top {
+  margin-top: 75px;
 }
 .page-break-after {
   padding-top: 75px;
@@ -109,7 +108,11 @@ body {
 .text-right {
   text-align: right;
 }
-
+table {
+  .text-right {
+    width: 32%;
+  }
+}
 .text-left {
   text-align: left;
 }
