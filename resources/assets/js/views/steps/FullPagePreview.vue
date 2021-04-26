@@ -84,10 +84,18 @@
                 'resume',
                 'toggleResumePreview',
                 'refreshPreview',
+                'phone',
+                'street_1',
+                'street_2',
+                'city',
+                'province',
+                'zip',
+                'country',
             ]),
             ...mapGetters([
                 'designType',
                 'resumeSummary',
+                'fullName'
             ])
         },
         watch:{
@@ -129,43 +137,74 @@
                 *   The tags in the template will be replaced by these data.
                 *   For demonstrations, I have hardcoded the tesdt dataset
                 */
+                if (!this.resume) {
+                    return;
+                }
+
                 let dataset = {
-                "students": [
-                    {
-                    "first_name": "Udith",
-                    "last_name": "Indrakantha",
-                    "phone": "+94760000000"
-                    },
-                    {
-                    "first_name": "Chamal",
-                    "last_name": "Silva",
-                    "phone": "+94760000001"
-                    },
-                    {
-                    "first_name": "Tharindu",
-                    "last_name": "Jayasinghe",
-                    "phone": "+94760000002"
-                    },
-                    {
-                    "first_name": "Sanindu",
-                    "last_name": "Rathnayake",
-                    "phone": "+94760000003"
-                    },
-                    {
-                    "first_name": "Pramodi",
-                    "last_name": "Samaratunga",
-                    "phone": "+94760000004"
-                    },
-                    {
-                    "first_name": "Samanthika",
-                    "last_name": "Rajapaksha",
-                    "phone": "+94760000005"
-                    }
+                summary: [    
                 ],
-                creater_name: "Udith Gayan Indrakantha",
-                created_date: "22/12/2020",
-                header: "Some Students' Details"
+                workExperiences: [    
+                ],
+                educations: [    
+                ],
+                skills: [    
+                ],
+                hobbies: [    
+                ],
+                fullname: this.fullName,
+                street_1: this.street_2? this.street_2: "",
+                street_2: this.street_2? this.street_2: "",
+                city: this.street_2? this.street_2: "",
+                street_1: this.street_2? this.street_2: "",
+                street_1: this.street_2? this.street_2: "",
+                phone: this.phone? this.phone: "",
+                email: this.resume.email? this.resume.email: "",
+                linkedin: this.resume.linkedin_url? this.resume.linkedin_url: ""
                 };
+
+                this.resume.resume_summaries.forEach(summary => {
+                    dataset.summary.push({name:summary.name});
+                });
+                
+                this.resume.resume_work_experiences.forEach(work => {
+                     dataset.workExperiences.push(work);
+                });
+                
+                this.resume.resume_educations.forEach(education => {
+                     dataset.educations.push(education)
+                });
+
+                const skills = this.resume.resume_skill;
+                const count = skills.length;
+                for(let i = 0; i < count; i = i + 3) {
+                    let name1 = "", name2 = "", name3 = "";
+                    if (skills[i]) {
+                        name1 = skills[i].name;
+                    }
+                    if (skills[i+1]) {
+                        name2 = skills[i+1].name;
+                    }
+                    if (skills[i+2]) {
+                        name3 = skills[i+2].name;
+                    }
+                    dataset.skills.push({name1, name2, name3});
+                }
+               
+                this.resume.hobbies.forEach(hobby => {
+                     dataset.hobbies.push(hobby)
+                });
+                
+                let filename = "gold";
+                if (this.designType === 'Functional') {
+                    filename = "functional";
+                } else if (this.designType ==='Recruiter') {
+                    filename = "recruiter";
+                } else if (this.designType ==='Combination') {
+                    filename = "combination";
+                } else if (this.designType ==='Sidebar') {
+                    filename = "sidebar";
+                }
                 /* *
                 * The template's path must be passed as an arguement .
                 * This path can be either a URL(as  in the commented line) or a path relative to the Public folder
@@ -173,7 +212,7 @@
                 * template named "template1.docx" .
                 * */
                 // this.loadFile("https://docxtemplater.com/tag-example.docx",function(error: any,content : any){
-                this.loadFile('ResumeTemplates/functional.docx',function(error, content){
+                this.loadFile(`/ResumeTemplates/${filename}.docx`,function(error, content){
                     if (error) { 
                     throw error
                     };
