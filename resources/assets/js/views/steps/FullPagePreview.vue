@@ -9,7 +9,7 @@
             </el-link> -->
 
             <button class="button" @click="downloadPdf">Download as a pdf</button>
-            <button class="button word-button" @click="downloadWord">Download as a word</button>
+            <button class="button word-button" @click="downloadWord" v-if="designType==='Functional'">Download as a word</button>
         </div>
         <!-- <div v-if="resume.resume_design" class="resume-container" :style="scaleStylesObject">
             <golden-standard v-if="resume.resume_design.name === 'Golden Standard'"></golden-standard>
@@ -66,6 +66,7 @@
     import JSZip from 'jszip';
     import JSzipUtils from 'jszip-utils';
     import  saveAs  from 'file-saver';
+    import {convertDate} from "../../services/utility.js"
     export default {
         components: {Recruiter, GoldenStandard, Combination, Sidebar, Functional, VueHtml2pdf},
         data() {
@@ -163,9 +164,13 @@
                 linkedin: this.resume.linkedin_url? this.resume.linkedin_url: ""
                 };
 
-                this.resume.resume_summaries.forEach(summary => {
-                    dataset.summary.push({name:summary.name});
-                });
+                if (this.designType === "Sidebar") {
+                    dataset.summary = this.resume.resume_summaries[0].name;
+                } else {
+                    this.resume.resume_summaries.forEach(summary => {
+                        dataset.summary.push({name:summary.name});
+                    });
+                }
                 
                 this.resume.resume_work_experiences.forEach(work => {
                      dataset.workExperiences.push(work);
@@ -174,8 +179,38 @@
                 this.resume.resume_educations.forEach(education => {
                      dataset.educations.push(education)
                 });
-               
-                if (this.designType === "Combination") {
+                
+                if (this.designType === 'Sidebar') {
+                    dataset.educations = dataset.educations.map(education => {
+                        return {
+                            ...education,
+                            date: education.start_date&&education.start_date.substring(0,4) + "-" + education.end_date ? education.end_date.substring(0,4) : 'Present'
+                        }
+                    })
+                    dataset.workExperiences = dataset.workExperiences.map(work => {
+                        return {
+                            ...work,
+                            date: work.position_start_date&& work.position_start_date.substring(0,4) + "-" + work.position_end_date ? work.position_end_date.substring(0,4) : 'Present'
+                        }
+                    })   
+                } else if (this.designType !== 'Functional') {
+                     dataset.educations = dataset.educations.map(education => {
+                        return {
+                            ...education,
+                            start_date: this.dateFormat(education.start_date),
+                            end_date: this.dateFormat(education.end_date)
+                        }
+                    })
+                    dataset.workExperiences = dataset.workExperiences.map(work => {
+                        return {
+                            ...work,
+                            position_start_date: this.dateFormat(work.position_start_date),
+                            position_end_date: this.dateFormat(work.position_end_date)
+                        }
+                    })
+                }
+
+                if (this.designType === "Combination" || this.designType === "Sidebar") {
                     this.resume.resume_skill.forEach(skill => {
                         dataset.skills.push({name: skill.name})
                     });
@@ -211,7 +246,6 @@
                 } else if (this.designType ==='Sidebar') {
                     filename = "sidebar";
                 }
-                console.log({dataset})
                 /* *
                 * The template's path must be passed as an arguement .
                 * This path can be either a URL(as  in the commented line) or a path relative to the Public folder
@@ -272,7 +306,10 @@
                 if( document.querySelector('#iframe-resume-preview') ) {
                     document.querySelector('#iframe-resume-preview').src += ''
                 }
-            }
+            },
+            dateFormat(date){
+                return convertDate(date, this.resume.date_format);
+            },
         },
         watch: {
             toggleResumePreview: function() {

@@ -313,7 +313,6 @@
                 for(let i = 1; i < len; i ++) {
                     let element = childs[i];
                     {
-                        console.log({i, childs})
                         const top = element.getBoundingClientRect().top;
                         const bottom = element.getBoundingClientRect().bottom;
                         if ( ( top < page_bottom + start) && (bottom > page_bottom + offset) )
